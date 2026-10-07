@@ -1,0 +1,83 @@
+@font-face {
+  font-family: 'Bad Script';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/typography-0.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/typography-1.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/typography-2.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/typography-3.ttf) format('truetype');
+}
+
+
+:root { --script: "Bad Script", cursive; }
+body { font-family: "Montserrat", sans-serif; }
+.hero-names {
+  font-size: clamp(90px, 13.5vw, 220px);
+  line-height: 1.4;
+  margin: 24px 0 -38px;
+  transform: rotate(-3deg);
+}
+.hero-names em { font-family: var(--serif); font-size: .48em; }
+.scroll-note {
+  writing-mode: horizontal-tb;
+  top: auto; bottom: 28px; right: 7vw;
+  color: var(--paper); font-size: 28px;
+  padding: 10px 15px; line-height: 1; z-index: 2;
+}
+.story {
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(19px, 2vw, 27px);
+  font-weight: 400;
+  line-height: 1.65;
+  max-width: 620px;
+  margin: 0 auto 70px;
+}
+.date-composition { justify-content: center; }
+.date-composition time {
+  display: block;
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(48px, 10.6vw, 180px);
+  font-weight: 400;
+  letter-spacing: -.035em;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+.date-footer { justify-content: center; margin-top: 65px; }
+.date-footer p { font-family: "Montserrat", sans-serif; font-size: 18px; }
+.date-footer strong { font-style: normal; font-weight: 500; }
+.letter-names { font-size: clamp(35px, 6.2cqw, 65px); line-height: 1.65; }
+.letter-names span { font-family: var(--serif); font-size: .8em; }
+.letter-content .ink-button { margin-top: 5cqw; }
+.opening-bottom { justify-content: center; }
+.footer { justify-content: flex-end; }
+@media (max-width: 500px) {
+  .hero-names { font-size: 24vw; line-height: 1.35; margin: 25px 0 -28px; padding: 0 2vw; }
+  .hero-names span:last-child { padding: 0; }
+  .hero-names em { font-size: .5em; }
+  .scroll-note { right: 7vw; bottom: 18px; font-size: 26px; }
+  .story { font-size: 19px; line-height: 1.65; margin-bottom: 40px; }
+  .date-composition time { font-size: 10.4vw; width: auto; }
+  .date-footer { margin-top: 35px; }
+  .date-footer p { font-size: 16px; }
+  .letter-names { font-size: 30px; line-height: 1.8; }
+  .letter-content .ink-button { margin-top: 28px; }
+}

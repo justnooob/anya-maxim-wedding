@@ -1,0 +1,60 @@
+@font-face{font-family:'Royal Kaynin';src:url('/fonts/royal-kaynin.otf') format('opentype');font-display:swap;font-weight:400}
+@font-face{font-family:Montserrat;src:url('/fonts/montserrat-light.ttf') format('truetype');font-display:swap;font-weight:300}
+:root{--stationery-texture:url('/images/paper-grain.svg');--forest:url('/images/watercolor-forest.webp')}
+.watercolor{position:absolute;pointer-events:none;user-select:none;object-fit:contain;height:auto}
+.art-opening-left{width:clamp(180px,21vw,360px);left:-6%;bottom:-8%;opacity:.63;transform:rotate(16deg);z-index:-1}
+.art-opening-right{width:clamp(220px,27vw,440px);right:-10%;top:15%;opacity:.43;transform:rotate(-24deg);z-index:-1}
+.opening{background-image:var(--stationery-texture)}
+.opening-top .opening-signature{font-family:'Royal Kaynin',cursive;font-size:30px;letter-spacing:0}
+.envelope-back{background:var(--stationery-texture),linear-gradient(150deg,#c5b8a0,#e4dbc8 65%);border:1px solid #b9ab9160;box-shadow:inset 0 1px 4px #75644c30}
+.envelope-flap{background:var(--stationery-texture),linear-gradient(168deg,#f0e8d8,#d1c3aa);filter:drop-shadow(0 3px 2px #69563d55);clip-path:polygon(0 0,100% 0,51% 59%,49% 59%)}
+.envelope-front{background:var(--stationery-texture),linear-gradient(115deg,#e6dcc8,#f4eedf 48%,#d7c9af);box-shadow:inset 0 -2px 4px #87745b33}
+.envelope-front::before{content:"";position:absolute;inset:0;background:linear-gradient(31deg,transparent 49.5%,#9d896745 50%,#fff9e080 50.3%,transparent 50.7%),linear-gradient(-31deg,transparent 49.5%,#a38c6b38 50%,#fff9e080 50.3%,transparent 50.7%)}
+.envelope-front:after{background:var(--stationery-texture),linear-gradient(0deg,#e6dcc9,#f4eedf 92%);clip-path:polygon(0 100%,50% 49%,100% 100%);filter:drop-shadow(0 -2px 2px #76644833)}
+.envelope-stage .seal{width:clamp(60px,9cqw,90px);height:clamp(60px,9cqw,90px);left:50%;translate:-50% 0;top:46%;border:0;border-radius:43% 49% 45% 48% / 48% 44% 51% 43%;background:radial-gradient(ellipse at 31% 18%,#bd666b 0,#8b3445 30%,#681d30 70%,#9e4850 96%);box-shadow:inset 2px 3px 3px #e4968866,inset -3px -3px 4px #3b0d2466,2px 6px 8px #45202444;isolation:isolate}
+.seal::before{content:"";position:absolute;inset:10%;border-radius:50%;box-shadow:inset 2px 3px 3px #3e0f2866,inset -1px -1px 2px #ee9e7b70;border:1px solid #751f34}
+.seal svg{width:70%;height:70%;position:relative;fill:#6b2236;stroke:#bb6a66;stroke-width:.7;filter:drop-shadow(0 1px 1px #e69b7677)}
+.letter-rig{transform:translateY(0) scale(.65)}
+@keyframes letter-extract{0%,24%{transform:translateY(0) scale(.65);animation-timing-function:cubic-bezier(.3,.05,.2,1)}70%{transform:translateY(calc(var(--letter-rest) - 10px)) scale(1);animation-timing-function:ease-in-out}100%{transform:translateY(var(--letter-rest)) scale(1)}}
+.paper-body{background:var(--stationery-texture),linear-gradient(#fffaf1cc,#fffaf1cc),var(--forest) center bottom/100% 100% no-repeat,#faf5e9;clip-path:polygon(1.5% 0,98.5% 0,100% 1.5%,100% 98.5%,98.5% 100%,1.5% 100%,0 98.5%,0 1.5%)}
+.letter-decoration{inset:3.5%;clip-path:none;border-color:#a58c5850}
+.letter-decoration:before{border-color:#a58c5820}
+.letter-decoration span{font-size:18px;top:-10px;background:#faf5e9}
+.letter-content{padding:8cqw 6cqw 4cqw}
+.letter-number{text-transform:none;font-size:clamp(10px,1.55cqw,15px);letter-spacing:.04em;color:#726c5c}
+.letter-content p{font-family:Montserrat,sans-serif;font-size:clamp(18px,3cqw,27px);font-weight:400;line-height:1.45;max-width:390px;margin:3cqw auto 1cqw}
+.letter-names{font-family:'Royal Kaynin',cursive;font-size:clamp(48px,10cqw,90px);line-height:1.2;color:#776442;white-space:nowrap}
+.letter-names span{font-family:inherit;font-size:inherit}
+.letter-date{font-size:clamp(10px,1.65cqw,15px);margin:2cqw 0;letter-spacing:.13em}
+.letter-content .botanical-button{background:var(--stationery-texture),linear-gradient(115deg,#b49a61,#e4d3a2 38%,#c3a76a 67%,#e4d6b0);color:#493d27;border:1px solid #b19862;border-radius:12px;box-shadow:inset 0 1px 1px #fff8d7,0 5px 12px #86703d20;min-width:250px;min-height:55px;margin-top:3cqw;gap:20px;font-size:13px;z-index:1}
+.botanical-button::before{border-color:#fff7d466}
+.art-button-left{width:69px;height:auto;left:-23px;top:-27px;z-index:2;transform:rotate(-8deg)}
+.art-button-right{width:68px;height:auto;right:-22px;bottom:-25px;z-index:2;transform:rotate(-8deg)}
+.letter-content .botanical-button:not(:disabled):hover{background:var(--stationery-texture),linear-gradient(115deg,#c3a76a,#f1dfb2 40%,#c3a76a);color:#493d27;border-color:#967e4f;box-shadow:0 6px 18px #86703d33}
+.letter-callout{display:flex;align-items:center;justify-content:center;gap:4px;margin:10px auto 0;transform:rotate(-7deg);color:#796e51;font-family:'Bad Script',cursive;font-size:18px}
+.letter-callout svg{width:39px;height:34px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;transform:rotate(-15deg)}
+.opening-bottom span{max-width:none!important;text-align:center!important;letter-spacing:.05em;text-transform:none;font-size:11px}
+.paper-corner,.paper-wing,.paper-keel{background-image:var(--stationery-texture),linear-gradient(#fff9ed99,#fff9ed99),var(--forest);background-size:auto,auto,100% 100%}
+.paper-wing::after{content:'Anya & Maxim';position:absolute;left:39%;top:57%;font-family:'Royal Kaynin',cursive;font-size:4cqw;color:#99865f;transform:rotate(30deg);white-space:nowrap;opacity:.6}
+.envelope-stage[data-folded="true"] .letter-decoration{opacity:0}
+.hero{padding:32px max(5vw,24px) 0;background-image:var(--stationery-texture)}
+.hero-names{font-family:'Royal Kaynin',cursive;font-size:clamp(86px,11vw,176px);line-height:1.25;display:flex;gap:2vw;margin:12px 0 10px;padding:.23em .08em .08em;transform:rotate(-2deg);position:relative;z-index:3;color:#a38b53;background:var(--stationery-texture),linear-gradient(160deg,#94723a 12%,#c9ac6e 32%,#e5d3a3 45%,#a08346 54%,#cfb77b 76%,#94713b);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 1px 0 #fff8e5) drop-shadow(0 2px 1px #9c85502b)}
+.hero-names em{font-family:inherit;font-size:.8em;font-style:normal}
+.hero-photo{margin:0 auto;width:min(100%,1250px);height:clamp(580px,78svh,950px);min-height:0;border:8px solid #fffaf0;outline:1px solid #ab987643;box-shadow:0 12px 38px #57493320}
+.hero-photo img{object-position:50% 44%;filter:saturate(.75)}
+.art-hero{width:clamp(210px,25vw,420px);right:-6%;top:7%;opacity:.7;z-index:2;transform:rotate(-28deg)}
+.art-date{width:clamp(160px,19vw,300px);left:-5%;top:30px;opacity:.38;transform:rotate(24deg)}
+.date-section .story{max-width:660px;font-size:clamp(20px,2.2vw,30px);margin-bottom:65px}
+.date-composition time{font-weight:300;font-size:clamp(48px,10vw,155px);letter-spacing:.025em}
+.date-footer p{font-size:clamp(25px,3vw,40px);font-weight:300;letter-spacing:.01em}
+.date-footer strong{font-weight:400}
+@media(max-width:800px){.hero-names{font-size:13vw;margin:30px 0 12px}.hero-photo{height:72svh}.art-hero{width:230px;right:-14%}.letter-content .botanical-button{min-width:220px}.letter-content{padding-top:7cqw}}
+@media(max-width:500px){
+.envelope-stage{--letter-height:390px;--letter-rest:-86px;top:56%;height:390px;width:90vw}
+.letter-rig{top:95px;transform:translateY(0) scale(.46)}
+@keyframes letter-extract{0%,24%{transform:translateY(0) scale(.46)}70%{transform:translateY(calc(var(--letter-rest) - 8px)) scale(1)}100%{transform:translateY(var(--letter-rest)) scale(1)}}
+.letter-content{padding:45px 20px 16px}.letter-number{font-size:9px;letter-spacing:.015em}.letter-content p{font-size:18px;line-height:1.45;max-width:230px;margin:18px auto 6px}.letter-names{font-size:48px;line-height:1.25}.letter-date{font-size:10px;margin:15px 0}.letter-content .botanical-button{min-width:195px;min-height:48px;font-size:11px;margin-top:20px;padding:12px 25px}.letter-callout{font-size:16px;margin-top:12px}.art-button-left{width:53px;height:auto;left:-17px;top:-20px}.art-button-right{width:53px;height:auto;right:-16px;bottom:-19px}.opening-bottom span{font-size:9px}.opening-top .opening-signature{font-size:25px}.art-opening-left{width:180px;left:-24%;bottom:-3%}.art-opening-right{width:220px;right:-36%;top:25%;opacity:.3}.hero{padding:24px 18px 0}.hero-names{font-size:15vw;display:flex;line-height:1.4;gap:3px;margin:30px -8px 18px;transform:rotate(-2deg)}.hero-names span:first-child,.hero-names span:last-child{padding:0}.hero-names em{font-size:.75em}.hero-photo{width:100%;margin:0;height:68svh;min-height:450px;border-width:5px}.hero-photo img{object-position:51% 43%}.art-hero{width:160px;right:-23%;top:7%;opacity:.45}.date-section .story{font-size:20px;margin-bottom:40px}.date-composition time{font-size:10vw;letter-spacing:.005em}.date-footer p{font-size:26px}.art-date{width:150px;left:-25%;opacity:.3}.paper-wing::after{font-size:17px}
+}
+@media(prefers-reduced-motion:reduce){.letter-rig{transition:none}.seal:hover{transform:none}}
+.opening .opening-top span.opening-signature{font-family:'Royal Kaynin',cursive;font-size:30px;letter-spacing:0}
+@media(max-width:500px){.opening .opening-top span.opening-signature{font-size:25px}.letter-names{font-size:40px}.hero-names{gap:7px}.letter-callout{margin-top:8px}.letter-content p{max-width:245px}}

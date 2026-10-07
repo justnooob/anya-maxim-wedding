@@ -1,0 +1,69 @@
+# Dependencies and Next.js build output
+/node_modules/
+/.next/
+/out/
+/build/
+/dist/
+/coverage/
+*.tsbuildinfo
+
+# Environment and local configuration (example must contain placeholders only)
+.env*
+*.env
+!.env.example
+.npmrc
+.pypirc
+.netrc
+.envrc
+
+# Credentials, private keys and local secret stores
+/secrets/
+/credentials/
+/private/
+/.ssh/
+/.aws/
+credentials.json
+*credentials*.json
+secrets.json
+secrets.yaml
+secrets.yml
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa*
+id_ed25519*
+
+# Local databases, dumps and guest exports; keep future migrations in Git
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.sqlite3-*
+*.sql.gz
+/dumps/
+/backups/
+/local-db/
+/guest-exports/
+
+# Local tooling, generated previews, caches and logs
+/.tools/
+/.codex/
+/.cache/
+/tmp/
+/temp/
+/output/
+/artifacts/
+*.log
+
+# Editor and operating system files
+/.idea/
+/.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo

@@ -1,0 +1,56 @@
+/* Eucalyptus is a quiet part of the stationery, never an interactive or animated layer. */
+.eucalyptus { position: absolute; color: #77866a; pointer-events: none; user-select: none; }
+.botanical-opening-left { width: clamp(130px, 18vw, 300px); left: -4vw; bottom: -65px; transform: rotate(28deg); opacity: .36; z-index: -1; }
+.botanical-opening-right { width: clamp(110px, 14vw, 230px); right: -3vw; top: 13%; transform: rotate(-32deg); opacity: .27; z-index: -1; }
+.botanical-letter { width: 21%; height: auto; right: -2%; bottom: 4%; transform: rotate(-30deg); opacity: .38; transition: opacity .16s; }
+.envelope-stage[data-folded="true"] .botanical-letter { opacity: 0; }
+.botanical-hero { width: clamp(90px, 12vw, 200px); right: -2vw; bottom: 8%; transform: rotate(-25deg); opacity: .45; z-index: 2; }
+.hero { overflow: clip; }
+.date-section { position: relative; overflow: clip; }
+.botanical-date { width: clamp(120px, 16vw, 250px); left: -4vw; top: 20px; transform: rotate(38deg); opacity: .27; }
+.date-section .story, .date-composition, .date-footer { position: relative; z-index: 1; }
+.venue-preview { position: relative; overflow: clip; }
+.botanical-venue { color: #bec7a7; width: clamp(150px, 20vw, 340px); right: -3%; bottom: -80px; transform: rotate(-25deg); opacity: .21; }
+.venue-preview h2, .venue-preview p, .venue-line { position: relative; z-index: 1; }
+.letter-content .botanical-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  min-height: 54px;
+  min-width: 220px;
+  padding: 17px 30px;
+  border: 1px solid #8d956e;
+  border-radius: 50% / 90%;
+  background: #faf8f0;
+  color: #3d4931;
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(11px, 1.4cqw, 14px);
+  font-weight: 500;
+  letter-spacing: .015em;
+  transition: background .22s, color .22s, border-color .22s, box-shadow .22s;
+  isolation: isolate;
+}
+.botanical-button::before { content: ""; position: absolute; inset: 4px; border: 1px solid #a58c5840; border-radius: inherit; pointer-events: none; }
+.botanical-button-sprig { width: 48px; height: 100px; left: -15px; top: -28px; transform: rotate(-48deg); color: #788663; z-index: -1; }
+.botanical-button .button-arrow { font-size: 18px; transition: transform .22s; }
+@media (hover: hover) {
+  .letter-content .botanical-button:not(:disabled):hover { background: #424f37; color: #faf8f0; border-color: #424f37; box-shadow: 0 6px 16px #30382b14; }
+  .botanical-button:not(:disabled):hover .button-arrow { transform: translate(2px, -2px); }
+}
+.letter-content .botanical-button:focus-visible { outline: 2px solid var(--gold); outline-offset: 6px; }
+.letter-content .botanical-button:not(:disabled):active { background: #424f37; color: #faf8f0; }
+@media (max-width: 500px) {
+  .botanical-opening-left { width: 140px; left: -65px; bottom: 4%; opacity: .25; }
+  .botanical-opening-right { width: 105px; right: -50px; top: 17%; opacity: .22; }
+  .botanical-letter { width: 27%; right: -5%; bottom: 4%; opacity: .3; }
+  .letter-content .botanical-button { min-width: 200px; min-height: 48px; padding: 14px 26px; gap: 18px; font-size: 11px; margin-top: 22px; }
+  .botanical-button-sprig { width: 38px; height: 84px; top: -23px; left: -9px; }
+  .botanical-hero { width: 105px; right: -45px; bottom: 4%; opacity: .55; }
+  .botanical-date { width: 100px; left: -58px; top: 3px; opacity: .25; }
+  .botanical-venue { width: 170px; right: -65px; bottom: -55px; opacity: .16; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .letter-content .botanical-button, .botanical-button .button-arrow { transition: none; }
+}

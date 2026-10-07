@@ -1,0 +1,95 @@
+/* Photographic materials and the full-screen invitation chapter. */
+:root{--real-paper:url('/images/cotton-paper.webp');--calendar-olive:#303b2a}
+.envelope-back,.envelope-front,.envelope-front::after,.envelope-flap{background-image:linear-gradient(135deg,#f7edda30,#8d775523),var(--real-paper);background-size:100% 100%,580px auto;background-blend-mode:multiply,normal}
+.envelope-back{filter:brightness(.84)}
+.envelope-front::after{background-image:linear-gradient(0deg,#d6c8ad35,#fff9e930),var(--real-paper)}
+.envelope-stage .seal{width:clamp(78px,12cqw,112px);height:clamp(78px,12cqw,112px);top:43%;background:none;box-shadow:none;border:0;border-radius:0;padding:0;display:grid;place-items:center;filter:drop-shadow(1px 4px 3px #44251d40);transition:transform .2s}
+.envelope-stage .seal::before{display:none}
+.seal img{display:block;width:100%;height:100%;object-fit:contain}
+.paper-body{background:var(--real-paper) center/580px auto,#faf5e9}
+.paper-corner,.paper-wing,.paper-keel{background-image:linear-gradient(#fff9ed30,#b5a17e18),var(--real-paper);background-size:100% 100%,580px auto;background-blend-mode:multiply,normal}
+.paper-wing--right{filter:brightness(.94)}
+.paper-keel{filter:brightness(.8)}
+.letter-names{margin-top:3cqw;padding:.15em .02em .04em;background:var(--stationery-texture),linear-gradient(155deg,#8d6a2e 10%,#c5a057 30%,#f0d698 47%,#987232 56%,#d8b765 78%,#987039);background-clip:text;-webkit-background-clip:text;color:#ad8942;-webkit-text-fill-color:transparent;filter:drop-shadow(0 1px 0 #fff7d6) drop-shadow(0 0 7px #c7a45650)}
+.letter-content .botanical-button{overflow:hidden}
+.art-button-left{width:43px;left:3px;top:3px;opacity:.25;transform:rotate(-8deg)}
+.art-button-right{width:42px;right:3px;bottom:2px;opacity:.25;transform:rotate(-8deg)}
+.botanical-button>span{position:relative;z-index:3}
+.art-opening-left{width:clamp(180px,23vw,360px);left:-4%;bottom:-8%;transform:rotate(18deg);opacity:.6}
+.portrait-hero{position:relative;height:100svh;min-height:640px;isolation:isolate;overflow:hidden;background:#303b2a}
+.portrait-hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 38%;filter:saturate(.75)}
+.portrait-hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,#0c120b12 0%,#0c120b15 28%,#121b1555 68%,#1d271b80 85%,#f4f1e9 100%)}
+.portrait-hero-copy{position:absolute;left:50%;bottom:12%;transform:translateX(-50%);width:min(88%,680px);text-align:center;color:#fff8e8;text-shadow:0 2px 16px #13210e65}
+.portrait-names{margin:0;display:flex;flex-direction:column;align-items:center;gap:0;font-family:'Bad Script',cursive;font-size:clamp(62px,6.3vw,100px);font-weight:400;line-height:1.45;letter-spacing:.035em}
+.portrait-names>span{display:block;white-space:nowrap}
+.portrait-names .portrait-ampersand{display:flex;align-items:center;gap:28px;width:100%;font-size:.43em;line-height:1.3;margin:4px 0 6px}
+.portrait-ampersand i{height:1px;flex:1;background:#f5e9c784}
+.portrait-date{display:none}
+.portrait-scroll{position:absolute;bottom:4%;left:50%;transform:translateX(-50%);padding:8px 18px;font-size:24px;color:#394431;text-decoration:none}
+.wedding-date-section{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;background:#f4f1e9;padding:90px 6vw 110px;gap:5vw}
+.date-intro{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-width:0}
+.date-invitation{font-family:Montserrat,sans-serif;font-size:clamp(18px,1.6vw,27px);line-height:1.6;max-width:370px;margin:0 0 45px}
+.date-large{font-family:Montserrat,sans-serif;font-weight:300;font-size:clamp(40px,5vw,86px);white-space:nowrap;letter-spacing:-.025em;line-height:1.3}
+.date-start{font-family:Montserrat,sans-serif;font-size:clamp(23px,2.3vw,36px);font-weight:300;border-top:1px solid #8e917b45;padding-top:30px;margin:40px 0 0;width:100%}
+.date-start strong{font-weight:400}
+.wedding-calendar{position:relative;isolation:isolate;overflow:hidden;background:var(--stationery-texture),var(--calendar-olive);color:#f1efdc;padding:45px clamp(24px,4vw,75px) 48px;min-width:0}
+.calendar-ornament{display:flex;align-items:center;justify-content:center;gap:13px;color:#d9bf7b;font-size:26px;margin-bottom:17px}
+.calendar-ornament span{height:1px;background:#ad986450;width:58px}
+.wedding-calendar table{border-collapse:collapse;width:100%;table-layout:fixed;position:relative;z-index:1;font-family:Montserrat,sans-serif;text-align:center}
+.wedding-calendar caption{text-transform:uppercase;letter-spacing:.15em;font-size:clamp(16px,1.6vw,22px);font-weight:400;margin-bottom:28px;color:#f1efdf}
+.wedding-calendar th{font-size:10px;letter-spacing:.08em;font-weight:500;color:#cfbb85;padding-bottom:15px}
+.wedding-calendar td{padding:4px 0;font-size:clamp(14px,1.25vw,19px);font-weight:400;height:48px}
+.wedding-calendar td>span{display:inline-grid;place-items:center;width:39px;height:39px}
+.wedding-calendar .calendar-wedding-day{border-radius:50%;color:#4a3a1f;background:var(--stationery-texture),linear-gradient(135deg,#b5995d,#f2d79b 43%,#c5a268 76%,#e3c887);box-shadow:inset 0 1px 2px #fff2cc,inset 0 -1px 2px #82672a,0 2px 8px #0003;text-shadow:0 1px 0 #fbe7b2;font-weight:600}
+.calendar-leaves{z-index:0;opacity:.38;filter:brightness(1.5) saturate(.65);width:130px}
+.calendar-leaves--left{left:8px;top:6px;transform:rotate(-24deg);transform-origin:center}
+.calendar-leaves--right{right:5px;bottom:8px;transform:rotate(8deg);width:145px}
+@media(max-width:1000px) and (min-width:701px){.wedding-date-section{padding:70px 4vw;gap:3vw}.wedding-calendar{padding:35px 20px}.date-large{font-size:5vw}.wedding-calendar td>span{width:33px;height:33px}.date-invitation{font-size:19px}.calendar-leaves{width:95px;opacity:.25}}
+@media(max-width:700px){
+.portrait-hero{min-height:620px}.portrait-hero-photo{object-position:49% center}.portrait-hero-shade{background:linear-gradient(180deg,#0c120b08 0%,#0c120b18 30%,#15200f55 63%,#293521b0 87%,var(--calendar-olive) 100%)}
+.portrait-hero-copy{bottom:13%;width:86%;max-width:430px}.portrait-names{font-size:clamp(47px,12vw,76px);line-height:1.5;letter-spacing:.015em}.portrait-names .portrait-ampersand{gap:19px;margin:0;line-height:1.1}.portrait-date{display:block;margin-top:25px;font-family:Montserrat,sans-serif;font-size:13px;letter-spacing:.22em;color:#f3ecd9}.portrait-scroll{color:#d2c6a6;bottom:3%}
+.wedding-date-section{display:flex;flex-direction:column;padding:48px 23px 65px;gap:0;background:var(--stationery-texture),var(--calendar-olive);color:#f1efdc;position:relative;overflow:hidden}.date-intro{display:contents}.date-invitation{order:0;font-size:21px;line-height:1.55;text-align:center;margin:0 auto 28px;max-width:280px;z-index:1}.date-large{display:none}.wedding-calendar{order:1;padding:0 0 20px;overflow:visible;background:none;isolation:auto}.date-start{order:2;font-size:27px;text-align:center;padding-top:25px;margin:15px 0 0;border-color:#cbb67b35;z-index:1}.calendar-ornament{margin-bottom:20px}.wedding-calendar caption{font-size:18px;margin-bottom:25px}.wedding-calendar th{font-size:10px;padding-bottom:14px}.wedding-calendar td{height:46px;font-size:16px}.calendar-leaves--left{top:-104px;left:-12px;width:115px;opacity:.23;transform:rotate(4deg)}.calendar-leaves--right{right:-8px;bottom:-80px;width:140px;opacity:.25;transform:rotate(-12deg)}
+}
+@media(max-width:500px){.letter-names{margin-top:27px;padding-top:.12em}.letter-content{padding-top:35px}.letter-content p{margin-top:15px}.letter-date{margin:17px 0 12px}.letter-content .botanical-button{margin-top:18px}.art-button-left,.art-button-right{width:35px}.art-button-left{left:3px;top:3px}.art-button-right{right:3px;bottom:3px}.art-opening-left{width:190px;left:-22%;bottom:-5%}.envelope-stage .seal{width:76px;height:76px;top:42%}}
+@media(prefers-reduced-motion:reduce){.seal{transition:none}}
+/* Distinct paper planes keep the folds readable over the cotton fibers. */
+.envelope-back,.envelope-front,.envelope-front::after,.envelope-flap{background-size:100% 100%,360px auto}
+.envelope-flap{background-image:linear-gradient(180deg,#d7c6a620,#a68c5e55),var(--real-paper)}
+.envelope-front{background-image:linear-gradient(110deg,#d6c4a438,#fff9e90a 48%,#b6a07b42),var(--real-paper)}
+.envelope-front::after{background-image:linear-gradient(0deg,#d7c6a620,#fffdf240),var(--real-paper)}
+.paper-body{background-size:360px auto}
+.paper-corner,.paper-wing,.paper-keel{background-size:100% 100%,360px auto}
+
+/* Directional daylight, fine writing stock, and restrained moving foil. */
+@font-face{font-family:'Pitholica Delicate';src:url('/fonts/pitholica-delicate.otf') format('opentype');font-weight:400;font-display:swap}
+:root{--date-stone:#d7d4c9;--writing-paper:url('/images/writing-paper.webp')}
+.opening-message-mobile{display:none}
+.envelope-back{background-image:linear-gradient(180deg,#fff8e920,#8e77554a),var(--real-paper)}
+.envelope-flap{background-image:linear-gradient(180deg,#fff8e90a,#b39c7245),var(--real-paper)}
+.envelope-front{background-image:linear-gradient(180deg,#fff8e910,#99805d4d),var(--real-paper)}
+.envelope-front::after{background-image:linear-gradient(180deg,#fff7e20a,#a18a613a),var(--real-paper)}
+.envelope-shell{filter:drop-shadow(0 22px 17px #453c262a)}
+.letter-decoration span{background:transparent}
+.paper-body{background:var(--writing-paper) center/480px auto,#f8f4eb}
+.paper-corner,.paper-wing,.paper-keel{background-image:linear-gradient(180deg,#fffaf010,#b5a17e15),var(--writing-paper);background-size:100% 100%,480px auto}
+.opening .opening-top span.opening-signature{font-family:'Pitholica Delicate',cursive;font-size:38px;line-height:1.4}
+.letter-names{display:block;font-family:'Pitholica Delicate',cursive;font-size:clamp(52px,10cqw,90px);line-height:1.3;padding:.18em .05em .07em;background-image:linear-gradient(110deg,#ae9155 0%,#cbb47b 29%,#e1ce9b 43%,#fff0bf 48%,#cbb47b 54%,#ad9056 78%,#d9c28b 100%);background-size:250% 100%;background-position:0% 50%;background-clip:text;-webkit-background-clip:text;color:#b59b64;-webkit-text-fill-color:transparent;filter:drop-shadow(0 1px 0 #fff3ce) drop-shadow(0 1px 1px #80643225)}
+.letter-names[data-shimmer="true"]{animation:name-foil-glint 1.5s ease-in-out}
+@keyframes name-foil-glint{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+.art-button-left,.art-button-right{transition:opacity .3s ease,filter .3s ease}
+@media(hover:hover){.botanical-button:not(:disabled):hover .art-button-left,.botanical-button:not(:disabled):hover .art-button-right{opacity:.8;filter:saturate(1.05)}.botanical-button:not(:disabled):hover .button-arrow{transform:translateX(5px)}}
+.botanical-button:focus-visible .art-button-left,.botanical-button:focus-visible .art-button-right{opacity:.8}
+.portrait-names{font-family:'Cormorant Garamond',Georgia,serif;line-height:1.04;letter-spacing:.075em;font-size:clamp(72px,7.2vw,116px)}
+.portrait-names .portrait-ampersand{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;letter-spacing:0;font-size:.48em;line-height:1.1;margin:14px 0}
+.wedding-calendar{background-image:var(--stationery-texture),linear-gradient(160deg,#ffffff05,#0000000a),var(--writing-paper);background-color:var(--calendar-olive);background-size:auto,100% 100%,400px auto;background-blend-mode:soft-light,normal,multiply;border:1px solid #d4d6b329;border-bottom-color:#17221075;box-shadow:0 2px 3px #19221526,3px 16px 24px -15px #19221570,inset 0 1px 0 #ffffe415;transform:rotate(-.45deg)}
+.wedding-calendar::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(178deg,#fffde008,transparent 18%,transparent 88%,#00000010);border-radius:0 0 4px 2px}
+.wedding-calendar .calendar-wedding-day{position:relative;overflow:hidden;isolation:isolate}
+.calendar-wedding-day::after{content:"";position:absolute;inset:-25% -70%;background:linear-gradient(105deg,transparent 38%,#fff7daab 49%,transparent 61%);transform:translateX(-70%);opacity:0;pointer-events:none;mix-blend-mode:screen}
+.calendar-wedding-day[data-shimmer="true"]::after{animation:date-foil-glint 1.5s ease-in-out}
+@keyframes date-foil-glint{0%{transform:translateX(-70%);opacity:0}20%{opacity:.7}80%{opacity:.7}100%{transform:translateX(70%);opacity:0}}
+.calendar-leaves--left{left:10px;top:9px;width:160px;transform:none;opacity:.34}
+@media(min-width:701px){.art-opening-right{right:-4vw}.wedding-date-section{background:var(--date-stone)}.portrait-hero-shade{background:linear-gradient(180deg,#0c120b12 0%,#0c120b15 28%,#121b1555 68%,#1d271b80 85%,var(--date-stone) 100%)}}
+@media(min-width:701px) and (max-width:1000px){.calendar-leaves--left{width:115px;opacity:.28}}
+@media(max-width:700px){.opening-message-desktop{display:none}.opening-message-mobile{display:inline}.portrait-names{font-size:clamp(49px,13.5vw,88px);line-height:1.07;letter-spacing:.055em}.portrait-names .portrait-ampersand{margin:12px 0;line-height:1.05}.wedding-calendar{border:0;box-shadow:none;transform:none;background:none}.wedding-calendar::after{display:none}.wedding-date-section{background-image:var(--stationery-texture),var(--writing-paper);background-color:var(--calendar-olive);background-size:auto,400px auto;background-blend-mode:soft-light,multiply}.calendar-leaves--left{width:145px;top:-110px;left:-8px;transform:none;opacity:.24}}
+@media(max-width:500px){.opening .opening-top span.opening-signature{font-size:30px}.letter-names{font-size:44px;margin-top:22px;padding-top:.15em;line-height:1.25}}
+@media(prefers-reduced-motion:reduce){.letter-names[data-shimmer="true"],.calendar-wedding-day[data-shimmer="true"]::after{animation:none}.art-button-left,.art-button-right{transition:none}}
