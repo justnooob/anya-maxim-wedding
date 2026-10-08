@@ -9,6 +9,7 @@ import { VenueSection } from "./VenueSection";
 import { DressCode } from "./DressCode";
 import { GuestList } from "./GuestList";
 import { Schedule } from "./Schedule";
+import { Questions } from "./Questions";
 import { RSVP } from "./RSVP";
 const seenKey = "anya-maxim-opening-v1";
 
@@ -46,7 +47,7 @@ export function InvitationExperience() {
     {opening === null && <div className="boot" aria-label="Загрузка приглашения">А & М</div>}
     {opening === true && <OpeningScene onComplete={complete} />}
     <main id="top" ref={mainRef} tabIndex={-1} hidden={opening !== false} className="invitation">
-      <Hero /><DateSection /><VenueSection /><DressCode /><GuestList /><Schedule /><RSVP />
+      <Hero /><DateSection /><VenueSection /><DressCode /><GuestList /><Schedule /><Questions /><RSVP />
       <footer className="footer"><button onClick={() => {setOpening(true); window.scrollTo({top: 0, behavior: "instant"});}}>Открыть письмо ещё раз ↗</button></footer>
     </main>
     <noscript><p className="noscript">Аня & Максим · {content.date} · Начало в {content.time}. Для интерактивного приглашения включите JavaScript.</p></noscript>

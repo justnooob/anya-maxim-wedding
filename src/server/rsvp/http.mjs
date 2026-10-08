@@ -2,7 +2,7 @@ import {transaction} from '../db/index.mjs';
 import {parseAllowedUserIds} from '../telegram/access.mjs';
 import {validateRsvp,InputError} from './validation.mjs';
 import {cookieHeader,requestToken,hash,newSession,sessionAge,csrfFor,equalSecret,trustedOrigin,limitedJson} from './session.mjs';
-import {activeSession,ownRsvp,saveRsvp,publicRsvp,allowRate} from './repository.mjs';
+import {activeSession,ownRsvps,saveRsvp,publicRsvp,allowRate} from './repository.mjs';
 const reply=(body,status=200,headers={})=>Response.json(body,{status,headers:{'Cache-Control':'no-store',...headers}});
 export async function getRsvp(request,source){
   try{
@@ -16,7 +16,8 @@ export async function getRsvp(request,source){
         token=newSession();setCookie=true;sessionId=hash(token);
         await client.query("INSERT INTO guest_sessions(id,expires_at) VALUES($1,now()+($2 * interval '1 second'))",[sessionId,sessionAge]);
       }
-      return {csrf:csrfFor(token),rsvp:publicRsvp(await ownRsvp(client,sessionId))};
+      const rows=(await ownRsvps(client,sessionId)).map(publicRsvp);
+      return {csrf:csrfFor(token),rsvps:rows,rsvp:rows.at(-1)||null,remaining:Math.max(0,2-rows.length)};
     },source);
     if(!result)return reply({error:'Слишком много запросов. Попробуй позже.'},429);
     return reply(result,200,setCookie?{'Set-Cookie':cookieHeader(token)}:{});
@@ -34,10 +35,12 @@ export async function postRsvp(request,source){
     const result=await transaction(async client=>{
       const sessionId=await activeSession(client,token);if(!sessionId)return {expired:true};
       if(!await allowRate(client,'submit:'+sessionId,20))return {limited:true};
-      return saveRsvp(client,sessionId,data,recipients);
+      const saved=await saveRsvp(client,sessionId,data,recipients);
+      return {...saved,rsvps:(await ownRsvps(client,sessionId)).map(publicRsvp)};
     },source);
     if(result.expired)return reply({error:'Сессия истекла. Обнови страницу.'},403);
     if(result.limited)return reply({error:'Слишком много запросов. Попробуй позже.'},429);
-    return reply({rsvp:publicRsvp(result.rsvp),created:result.created},result.created?201:200);
+    if(result.full)return reply({error:'На этом устройстве уже сохранены два ответа.',rsvps:result.rsvps,remaining:0},409);
+    return reply({rsvp:publicRsvp(result.rsvp),rsvps:result.rsvps,remaining:Math.max(0,2-result.rsvps.length),created:result.created},result.created?201:200);
   }catch{return reply({error:'Не удалось сохранить ответ. Попробуй ещё раз.'},503);}
 }

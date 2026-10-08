@@ -106,12 +106,12 @@ test('expired/cancelled confirmation cannot delete; missing row remains safe',as
 test('notification failure is durable and retry succeeds without losing RSVP',async()=>{
   const f=await fixture();try{
     await transaction(client=>saveRsvp(client,hash(f.token),validateRsvp(yes),new Set(['123'])),f.source);
-    await drainOutbox({source:f.source,allowedIds:new Set(['123']),api:async()=>{throw new Error('offline');}});
+    await drainOutbox({siteUrl:'https://example.com',source:f.source,allowedIds:new Set(['123']),api:async()=>{throw new Error('offline');}});
     const queued=(await f.db.query('SELECT * FROM telegram_outbox')).rows[0];assert.equal(queued.attempts,1);
     assert.equal((await f.db.query('SELECT count(*)::int n FROM rsvps')).rows[0].n,1);
     await f.db.query('UPDATE telegram_outbox SET available_at=now()');
     let delivered=0;
-    await drainOutbox({source:f.source,allowedIds:new Set(['123']),api:async(method,params)=>{assert.equal(method,'sendMessage');assert.equal(params.chat_id,'123');assert.equal(params.protect_content,true);assert.match(params.text,/Анна/);delivered++;}});
+    await drainOutbox({siteUrl:'https://example.com',source:f.source,allowedIds:new Set(['123']),api:async(method,params)=>{assert.equal(method,'sendMessage');assert.equal(params.chat_id,'123');assert.equal(params.protect_content,true);assert.equal(params.text,'Новый ответ от гостя "Анна"');assert.equal(params.reply_markup.inline_keyboard[0][0].text,'Открыть');assert.equal(params.reply_markup.inline_keyboard[0][0].web_app.url,'https://example.com/telegram');delivered++;}});
     assert.equal(delivered,1);assert.equal((await f.db.query('SELECT count(*)::int n FROM telegram_outbox')).rows[0].n,0);
   }finally{await f.close();}
 });
@@ -121,6 +121,9 @@ test('RSVP HTTP: cookie restore, server validation, CSRF, duplicate, expired ses
   try{
     const initial=await getRsvp(new Request('http://localhost:3000/api/rsvp'),f.source);
     assert.equal(initial.status,200);assert.match(initial.headers.get('set-cookie'),/HttpOnly/);
+    for(const value of ['corrupted','a'.repeat(64)]){
+      const recovery=await getRsvp(new Request('http://localhost:3000/api/rsvp',{headers:{cookie:cookieName+'='+value}}),f.source);assert.equal(recovery.status,200);assert.match(recovery.headers.get('set-cookie'),/HttpOnly/);assert.equal((await recovery.json()).rsvp,null);
+    }
     const cookie=initial.headers.get('set-cookie').split(';')[0];const csrf=(await initial.json()).csrf;
     const request=(body,origin='http://localhost:3000',csrfValue=csrf)=>new Request('http://localhost:3000/api/rsvp',{method:'POST',headers:{'content-type':'application/json',origin,cookie,'x-csrf-token':csrfValue},body:JSON.stringify(body)});
     assert.equal((await postRsvp(request(no,'https://attacker.example'),f.source)).status,403);
@@ -169,7 +172,7 @@ test('drinks persist in PostgreSQL and are included in admin details and notific
     assert.deepEqual(result.rsvp.alcohol_drinks,['red_wine','other']);assert.equal(result.rsvp.soft_other,'Морс');
     const detail=await transaction(client=>adminReply(client,'123','guest:'+result.rsvp.id),f.source);
     assert.match(detail.text,/Алкоголь: Вино красное, Свой вариант: Сидр/);assert.match(detail.text,/Сок яблочный, Свой вариант: Морс/);
-    assert.match(notificationText(result.rsvp),/Сидр/);
+    assert.equal(notificationText(result.rsvp),'Новый ответ от гостя "'+result.rsvp.guest_name+'"');
     await assert.rejects(f.db.query("UPDATE rsvps SET alcohol_drinks=ARRAY['none','red_wine'] WHERE id=$1",[result.rsvp.id]));
     await assert.rejects(f.db.query("UPDATE rsvps SET soft_drinks=ARRAY['unknown'] WHERE id=$1",[result.rsvp.id]));
     await assert.rejects(f.db.query("UPDATE rsvps SET alcohol_other='' WHERE id=$1",[result.rsvp.id]));
@@ -213,7 +216,7 @@ test('music persists and appears only for going guests in admin and notification
     const saved=await transaction(client=>saveRsvp(client,hash(f.token),validateRsvp({...yes,musicRequest:'ABBA\nQueen',food:''}),new Set()),f.source);
     assert.equal(saved.rsvp.music_request,'ABBA\nQueen');
     const detail=await transaction(client=>adminReply(client,'123','guest:'+saved.rsvp.id),f.source);
-    assert.match(detail.text,/Музыка: ABBA\nQueen/);assert.match(notificationText(saved.rsvp),/Музыка: ABBA/);
+    assert.match(detail.text,/Музыка: ABBA\nQueen/);assert.equal(notificationText(saved.rsvp),'Новый ответ от гостя "'+saved.rsvp.guest_name+'"');
     assert.match(detail.text,/Дресс-код: Подтверждён/);assert.doesNotMatch(detail.text,/Аллергии/);
     assert.doesNotMatch(notificationText({...saved.rsvp,attendance:'no'}),/Музыка|Алкоголь|Ночёвка|Дресс-код/);
     await assert.rejects(f.db.query("UPDATE rsvps SET music_request=$1 WHERE id=$2",['x'.repeat(1001),saved.rsvp.id]));

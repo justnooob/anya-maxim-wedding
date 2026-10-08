@@ -14,14 +14,15 @@ export function miniAppUser(raw,env=process.env,now=Math.floor(Date.now()/1000))
   const key=createHmac('sha256','WebAppData').update(env.TELEGRAM_BOT_TOKEN).digest();
   const expected=createHmac('sha256',key).update(check).digest();
   if(!timingSafeEqual(expected,Buffer.from(hash,'hex')))throw new Error('Denied');
-  const date=Number(values.get('auth_date'));
+  const authDate=values.get('auth_date');if(!/^[1-9][0-9]{0,9}$/.test(authDate||''))throw new Error('Denied');
+  const date=Number(authDate);
   if(!Number.isSafeInteger(date)||date>now+30||date<now-3600)throw new Error('Denied');
   const user=JSON.parse(values.get('user')||'null');
   if(!Number.isSafeInteger(user?.id)||user.id<=0||user.is_bot===true||!parseAllowedUserIds(env.TELEGRAM_ALLOWED_USER_IDS||'').has(String(user.id)))throw new Error('Denied');
   return String(user.id);
 }
 const uuid=value=>typeof value==='string'&&/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(value);
-const response=(body,status=200)=>Response.json(body,{status,headers:{'Cache-Control':'no-store','Vary':'X-Telegram-Init-Data'}});
+const response=(body,status=200)=>Response.json(body,{status,headers:{'Cache-Control':'private, no-store','Vary':'X-Telegram-Init-Data'}});
 export async function miniAppRequest(request,{source,env=process.env}={}){
   let userId;try{userId=miniAppUser(request.headers.get('x-telegram-init-data'),env);}catch{return response({error:'Открой приложение в Telegram с аккаунта организатора.'},403);}
   try{
@@ -39,7 +40,7 @@ export async function miniAppRequest(request,{source,env=process.env}={}){
     },source);
     if(request.method==='POST'){
       let input;try{input=await limitedJson(request,2048);}catch{return response({error:'Некорректный запрос.'},400);}
-      const command=input?.action==='delete'&&uuid(input.id)?'delete:'+input.id:input?.action==='confirm'&&typeof input.token==='string'&&/^[a-f0-9]{32}$/.test(input.token)?'confirm:'+input.token:null;
+      const command=input?.action==='delete'&&uuid(input.id)?'delete:'+input.id:['confirm','cancel'].includes(input?.action)&&typeof input.token==='string'&&/^[a-f0-9]{32}$/.test(input.token)?input.action+':'+input.token:null;
       if(!command)return response({error:'Некорректное действие.'},400);
       return await transaction(async client=>{
         const reply=await adminReply(client,userId,command);

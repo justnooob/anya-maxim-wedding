@@ -28,9 +28,15 @@ test('Mini App shows music without sessions and binds deletion confirmation to o
  const request=(body,user=123,path='')=>new Request('https://example.com/api/telegram/mini-app'+path,{method:body?'POST':'GET',headers:{'x-telegram-init-data':signed(user),...(body?{'content-type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{})});
  const list=await (await miniAppRequest(request(),{env,source})).json();assert.equal(list.guests[0].status,'GOING');assert.ok(list.guests[0].fields.some(field=>field.label==='Музыка'&&field.value==='ABBA'));assert.ok(!JSON.stringify(list).includes('session_id'));
  const detail=await (await miniAppRequest(request(null,123,'?id='+id),{env,source})).json();assert.equal(detail.guest.fields[0].value,'Гость');
+ const cancelled=await (await miniAppRequest(request({action:'delete',id}),{env,source})).json();
+ await miniAppRequest(request({action:'cancel',token:cancelled.confirmation}),{env,source});
+ await miniAppRequest(request({action:'confirm',token:cancelled.confirmation}),{env,source});assert.equal((await db.query('SELECT count(*)::int count FROM rsvps')).rows[0].count,1);
  const confirmation=await (await miniAppRequest(request({action:'delete',id}),{env,source})).json();assert.ok(confirmation.confirmation);
  await miniAppRequest(request({action:'confirm',token:confirmation.confirmation},456),{env,source});assert.equal((await db.query('SELECT count(*)::int count FROM rsvps')).rows[0].count,1);
  await miniAppRequest(request({action:'confirm',token:confirmation.confirmation}),{env,source});assert.equal((await db.query('SELECT count(*)::int count FROM rsvps')).rows[0].count,0);
  assert.equal((await db.query('SELECT count(*)::int count FROM guest_sessions')).rows[0].count,1);
+ await miniAppRequest(request({action:'confirm',token:confirmation.confirmation}),{env,source});
+ assert.equal((await miniAppRequest(request(null,123,'?id='+id),{env,source})).status,404);
+ const after=await (await miniAppRequest(request(),{env,source})).json();assert.equal(after.stats.total,0);assert.deepEqual(after.guests,[]);
  }finally{await db.close();}
 });

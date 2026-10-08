@@ -230,3 +230,15 @@
 .required-mark{color:#8f7138;font-size:.85em;font-weight:400}.rsvp-paper .required-hint{text-align:left;margin:0 0 24px}.music-field .quiet-note{display:block;text-align:left;font-weight:400;margin:10px 0 4px;line-height:1.7}
 
 .telegram-admin{max-width:760px;margin:auto;padding:calc(32px + env(safe-area-inset-top)) 24px calc(48px + env(safe-area-inset-bottom));color:#454b35}.telegram-admin h1,.telegram-admin h2{font-family:var(--font-editorial,Georgia);font-weight:400;font-size:clamp(32px,6vw,52px);margin:16px 0}.admin-counts{line-height:1.8;font-size:13px}.admin-filters{display:flex;flex-wrap:wrap;gap:16px;margin:24px 0}.admin-filters [aria-pressed=true]{color:#8f7138;border-bottom:1px solid currentColor}.admin-guests{border-top:1px solid #a798736e}.admin-guests button{display:grid;grid-template-columns:1fr auto;gap:8px;width:100%;text-align:left;padding:22px 0;border:0;border-bottom:1px solid #a798736e;background:transparent;color:inherit;font:inherit;cursor:pointer}.admin-guests small{opacity:.7}.admin-music{grid-column:1 / -1;white-space:pre-wrap;overflow-wrap:anywhere}.admin-detail dl>div{padding:12px 0;border-bottom:1px solid #a7987340}.admin-detail dt{font-size:11px;color:#8f7138}.admin-detail dd{margin:7px 0;white-space:pre-wrap;overflow-wrap:anywhere}.admin-detail .admin-delete{color:#6e293d;margin-right:20px}.telegram-admin .rsvp-paper{padding:clamp(22px,5vw,48px);margin:20px 0}
+
+/* Long answers remain readable; limits never silently truncate guest input. */
+.writing-field,.rsvp-paper,.admin-detail,.admin-guests button {min-width:0;}
+.rsvp-confirmation h3,.telegram-admin h1,.telegram-admin h2,.admin-guests span,.admin-detail dd {overflow-wrap:anywhere;}
+.admin-guests button {grid-template-columns:minmax(0,1fr) auto;}
+.text-counter {display:block;text-align:right;font:11px Montserrat,sans-serif;color:var(--olive);opacity:.65;margin-top:8px;}
+.text-counter.near-limit {color:#8c6d32;opacity:1;}
+.writing-field [aria-invalid="true"] {border-color:#875342;}
+.writing-field input,.writing-field textarea {min-width:0;}
+.telegram-admin {padding-top:calc(32px + max(env(safe-area-inset-top),var(--telegram-safe-top,0px)));padding-bottom:calc(48px + max(env(safe-area-inset-bottom),var(--telegram-safe-bottom,0px)));}
+
+.saved-guest {margin:24px 0;}.saved-guest h4{font-family:var(--serif);font-size:30px;font-weight:400;margin:0;overflow-wrap:anywhere}.saved-guest p{font-size:13px;margin-top:8px}.rsvp-confirmation .foil-button{margin-top:24px;width:100%;white-space:normal;}

@@ -44,8 +44,8 @@ export function OpeningScene({ onComplete }: { onComplete: () => void }) {
 
   return (
     <section className={"opening opening--" + stage} aria-label="Открыть приглашение">
-      <Watercolor kind="slender" className="art-opening-left" />
-      <Watercolor kind="spray" className="art-opening-right" />
+      <Watercolor eager kind="slender" className="art-opening-left" />
+      <Watercolor eager kind="spray" className="art-opening-right" />
       <div className="opening-top"><span className="opening-signature">Anya & Maxim</span><span>{content.date}</span></div>
       <div className="opening-title">
         <h1><span className="opening-message-desktop">{content.opening.desktopMessage}</span><span className="opening-message-mobile">{content.opening.message}</span></h1>
@@ -86,7 +86,7 @@ export function OpeningScene({ onComplete }: { onComplete: () => void }) {
         <div className="envelope-shell envelope-shell--front">
           <div className="envelope-front" aria-hidden="true" />
           {stage === "sealed" && (
-            <button className="seal" onClick={openEnvelope} aria-label="Открыть конверт"><img src="/images/wax-seal.webp" alt="" aria-hidden="true" /></button>
+            <button className="envelope-open" onClick={openEnvelope} aria-label="Открыть конверт"><span className="seal" aria-hidden="true"><img src="/images/wax-seal.webp" alt="" /></span></button>
           )}
         </div>
       </div>

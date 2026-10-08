@@ -1,0 +1,37 @@
+/* A printed questions sheet continuing the approved invitation materials. */
+.questions-chapter{padding:115px 7vw 105px;background:var(--writing-paper) center/650px auto,#f8f4eb;color:#3d4931;isolation:isolate}
+.questions-composition{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.35fr);gap:7vw;max-width:1320px;margin:0 auto;position:relative;z-index:1}
+.questions-heading{text-align:left;margin:0;max-width:430px}
+.questions-heading h2{font-size:clamp(48px,4.5vw,72px);line-height:1.08}
+.questions-list{border-top:1px solid #b49a6155;min-width:0}
+.question-item{border-bottom:1px solid #b49a6140}
+.question-title{margin:0;font-weight:400}
+.question-trigger{display:flex;align-items:center;justify-content:space-between;gap:24px;width:100%;min-height:88px;padding:24px 4px;border:0;background:none;color:inherit;text-align:left;font:500 17px/1.55 Montserrat,sans-serif;cursor:pointer;transition:color 240ms ease}
+.question-trigger:hover,.question-trigger[aria-expanded=true]{color:#8e733f}
+.question-sign{flex:0 0 30px;text-align:center;font:300 30px/1 Montserrat,sans-serif;color:#ad9056}
+.question-panel{display:grid;grid-template-rows:0fr;visibility:hidden;opacity:0;transition:grid-template-rows 420ms cubic-bezier(.2,.7,.2,1),opacity 240ms ease,visibility 0s 420ms}
+.question-panel[data-open=true]{grid-template-rows:1fr;visibility:visible;opacity:1;transition:grid-template-rows 420ms cubic-bezier(.2,.7,.2,1),opacity 300ms ease,visibility 0s}
+.question-panel-clip{min-height:0;overflow:hidden}
+.question-answer{margin:0;padding:0 45px 30px 4px;font:400 15px/1.85 Montserrat,sans-serif;color:#515a46}
+.question-link{color:#8e733f;text-decoration:underline;text-decoration-color:#b49a6180;text-decoration-thickness:1px;text-underline-offset:4px;font-weight:500;transition:color 240ms ease,text-decoration-color 240ms ease}
+.question-link[href]:hover{color:#5f6d49;text-decoration-color:#5f6d49}
+.question-link[href]:focus-visible{color:#5f6d49;outline:2px solid #b49a61;outline-offset:4px;border-radius:2px}
+.question-link-pending{cursor:default}
+.questions-watercolor{width:clamp(190px,22vw,315px);left:1vw;bottom:-30px;--motion-opacity:.16;opacity:.16;transform:rotate(-14deg);pointer-events:none;z-index:0}
+@media(max-width:900px){
+ .questions-chapter{padding:85px 5vw}
+ .questions-composition{grid-template-columns:1fr;gap:38px;max-width:740px}
+ .questions-heading{max-width:640px;text-align:center;margin:auto}
+ .questions-heading h2{font-size:54px;margin:0}
+ .questions-watercolor{left:-65px;bottom:-70px;--motion-opacity:.11;opacity:.11}
+}
+@media(max-width:600px){
+ .questions-chapter{padding:70px 24px}
+ .questions-composition{gap:32px}
+ .questions-heading h2{font-size:44px;line-height:1.08}
+ .question-trigger{font-size:16px;min-height:78px;padding:22px 0;gap:16px}
+ .question-sign{flex-basis:24px;font-size:28px}
+ .question-answer{font-size:15px;line-height:1.85;padding:0 8px 26px 0}
+ .questions-watercolor{width:210px;--motion-opacity:.09;opacity:.09}
+}
+@media(prefers-reduced-motion:reduce){.question-panel,.question-panel[data-open=true],.question-trigger,.question-link{transition:none}}

@@ -1,6 +1,7 @@
 "use client";
 import {RequiredMark} from "./RequiredMark";
 import {drinkChoices, toggleDrink} from "@/content/drinks.mjs";
+import {withinLimit} from '@/content/rsvp-limits.mjs';
 export function DrinkChoices({kind,selected,other,onSelect,onOther}:{kind:"alcohol"|"soft";selected:string[];other:string;onSelect:(value:string[])=>void;onOther:(value:string)=>void}) {
   const copy=drinkChoices[kind];
   return <fieldset className="paper-options drink-options">
@@ -12,7 +13,7 @@ export function DrinkChoices({kind,selected,other,onSelect,onOther}:{kind:"alcoh
       }}/><span>{option.label}</span>
     </label>)}</div>
     {selected.includes("other")&&<label className="writing-field drink-other"><span>{copy.otherLabel}<RequiredMark /></span>
-      <input name={kind+"Other"} value={other} onChange={event=>onOther(event.target.value)} maxLength={120} required placeholder="Напиши название напитка"/>
+      <input name={kind+"Other"} value={other} onChange={event=>onOther(event.target.value)} aria-invalid={!withinLimit(kind+"Other",other)} required aria-describedby={kind+"-other-limit"} placeholder="Напиши название напитка"/><small id={kind+"-other-limit"} className="quiet-note">Не больше 80 символов</small>
     </label>}
   </fieldset>;
 }

@@ -6,10 +6,13 @@ export const sessions = pgTable('guest_sessions', {
 }, table=>[check('session_id_shape',sql`${table.id} ~ '^[a-f0-9]{64}$'`),index('guest_sessions_expiry_idx').on(table.expiresAt)]);
 export const rsvps = pgTable('rsvps', {
   id:uuid('id').primaryKey(), sessionId:text('session_id').notNull().references(()=>sessions.id,{onDelete:'cascade'}),
-  guestName:text('guest_name').notNull(), attendance:text('attendance').notNull(), who:text('who').notNull().default(''),
+  submissionKey:uuid('submission_key').notNull().defaultRandom(),guestName:text('guest_name').notNull(), attendance:text('attendance').notNull(), who:text('who').notNull().default(''),
   food:text('food').notNull().default(''),musicRequest:text('music_request'),alcoholDrinks:text('alcohol_drinks').array().notNull().default(sql`'{}'`),alcoholOther:text('alcohol_other').notNull().default(''),softDrinks:text('soft_drinks').array().notNull().default(sql`'{}'`),softOther:text('soft_other').notNull().default(''),transfer:text('transfer'),overnight:text('overnight'),
   dressCode:boolean('dress_code').notNull().default(false),createdAt:time('created_at').notNull().defaultNow(),updatedAt:time('updated_at').notNull().defaultNow(),
-}, table=>[uniqueIndex('rsvp_session_unique').on(table.sessionId),index('rsvps_attendance_created_idx').on(table.attendance,table.createdAt,table.id),index('rsvps_created_idx').on(table.createdAt,table.id),
+}, table=>[uniqueIndex('rsvp_session_submission_unique').on(table.sessionId,table.submissionKey),index('rsvp_session_idx').on(table.sessionId),index('rsvps_attendance_created_idx').on(table.attendance,table.createdAt,table.id),index('rsvps_created_idx').on(table.createdAt,table.id),
+  // Migration 006 uses NOT VALID so historical answers are retained unchanged.
+  check('rsvp_text_limits_v2',sql`char_length(${table.guestName}) BETWEEN 1 AND 80 AND char_length(${table.who})<=120 AND char_length(${table.food})<=300 AND (${table.musicRequest} IS NULL OR char_length(${table.musicRequest})<=300) AND char_length(${table.alcoholOther})<=80 AND char_length(${table.softOther})<=80`),
+  check('rsvp_going_required_v2',sql`${table.attendance}='no' OR (char_length(btrim(${table.who}))>0 AND cardinality(${table.alcoholDrinks})>0 AND cardinality(${table.softDrinks})>0)`),
   check('rsvp_music_length',sql`${table.musicRequest} IS NULL OR char_length(${table.musicRequest})<=1000`),
   check('rsvp_no_music',sql`${table.attendance}='yes' OR ${table.musicRequest} IS NULL`),
   check('attendance_values',sql`${table.attendance} IN ('yes','no')`),

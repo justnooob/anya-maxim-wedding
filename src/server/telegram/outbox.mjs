@@ -1,11 +1,15 @@
-import {rsvpDetailText} from '../rsvp/detail.mjs';
 import {transaction} from '../db/index.mjs';
 import {createTelegramApi} from './api.mjs';
 import {parseAllowedUserIds} from './access.mjs';
 export function notificationText(row){
-  return 'Новый RSVP\n'+rsvpDetailText(row);
+  return 'Новый ответ от гостя "'+row.guest_name+'"';
 }
-export async function drainOutbox({source,api,allowedIds,signal}={}){
+export function notificationPayload(row,siteUrl=process.env.PUBLIC_SITE_URL){
+  const site=new URL(siteUrl);
+  if(site.protocol!=='https:'||site.username||site.password)throw new Error('Mini App requires HTTPS site URL');
+  return {text:notificationText(row),reply_markup:{inline_keyboard:[[{text:'Открыть',web_app:{url:new URL('/telegram',site).href}}]]}};
+}
+export async function drainOutbox({source,api,allowedIds,signal,siteUrl}={}){
   const allowed=allowedIds||parseAllowedUserIds(process.env.TELEGRAM_ALLOWED_USER_IDS||'');
   const request=api||createTelegramApi(process.env.TELEGRAM_BOT_TOKEN);
   for(let index=0;index<10&&!signal?.aborted;index++){
@@ -17,7 +21,7 @@ export async function drainOutbox({source,api,allowedIds,signal}={}){
       if(payload.notification){
         const row=(await client.query('SELECT * FROM rsvps WHERE id=$1',[job.rsvp_id])).rows[0];
         if(!row){await client.query('DELETE FROM telegram_outbox WHERE id=$1',[job.id]);return true;}
-        payload={text:notificationText(row),reply_markup:{inline_keyboard:[[{text:'Подробнее',callback_data:'guest:'+row.id}]]}};
+        payload=notificationPayload(row,siteUrl);
       }
       try{
         await request('sendMessage',{...payload,chat_id:job.recipient,protect_content:true},signal);
