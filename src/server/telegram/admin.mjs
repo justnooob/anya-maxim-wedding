@@ -1,4 +1,4 @@
-import {describeDrinks} from '../../content/drinks.mjs';
+import {rsvpDetailText} from '../rsvp/detail.mjs';
 import {randomBytes,randomUUID} from 'node:crypto';
 import {privateSender,assertTelegramAdmin} from './access.mjs';
 const uuid=value=>typeof value==='string'&&/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(value);
@@ -11,9 +11,12 @@ export function updateSender(update){
   return privateSender({from:callback.from,chat:callback.message?.chat});
 }
 export async function adminReply(client,userId,command){
+  const keyboard=menu.inline_keyboard.map(row=>[...row]);
+  try{const site=new URL(process.env.PUBLIC_SITE_URL);if(site.protocol==='https:'&&!site.username&&!site.password)keyboard.unshift([{text:'Открыть список гостей',web_app:{url:new URL('/telegram',site).href}}]);}catch{/* No public HTTPS URL configured. */}
+  const currentMenu={inline_keyboard:keyboard};
   if(command==='stats'||command==='/stats'){
     const result=await client.query("SELECT count(*)::int total,count(*) FILTER(WHERE attendance='yes')::int yes,count(*) FILTER(WHERE attendance='no')::int no,count(*) FILTER(WHERE transfer='needed')::int transfer,count(*) FILTER(WHERE overnight='stay')::int overnight FROM rsvps");
-    const s=result.rows[0];return {text:'Ответов: '+s.total+'\nПридут: '+s.yes+'\nНе придут: '+s.no+'\nНужен трансфер: '+s.transfer+'\nОстанутся на ночь: '+s.overnight,reply_markup:menu};
+    const s=result.rows[0];return {text:'Ответов: '+s.total+'\nПридут: '+s.yes+'\nНе придут: '+s.no+'\nНужен трансфер: '+s.transfer+'\nОстанутся на ночь: '+s.overnight,reply_markup:currentMenu};
   }
   const list=command.match(/^(?:list:|\/list(?:\s+|$))(all|yes|no|transfer|overnight)?(?::|\s+)?(\d+)?$/);
   if(list){
@@ -28,15 +31,14 @@ export async function adminReply(client,userId,command){
   const guest=command.match(/^(?:guest:|\/guest\s+)(.+)$/);
   if(guest&&uuid(guest[1])){
     const row=(await client.query('SELECT * FROM rsvps WHERE id=$1',[guest[1]])).rows[0];
-    if(!row)return {text:'Ответ уже удалён.',reply_markup:menu};
-    let text=row.guest_name+'\n'+(row.attendance==='yes'?'Придёт':'Не придёт');
-    if(row.attendance==='yes')text+='\nКто: '+(row.who||'Не указано')+'\nПитание: '+(row.food||'Без особенностей')+'\nАлкоголь: '+describeDrinks('alcohol',row.alcohol_drinks,row.alcohol_other)+'\nБезалкогольное: '+describeDrinks('soft',row.soft_drinks,row.soft_other)+'\nТрансфер: '+(row.transfer==='needed'?'Нужен':'Доедет самостоятельно')+'\nНочёвка: '+(row.overnight==='stay'?'Останется':'Уедет')+'\nДресс-код подтверждён';
+    if(!row)return {text:'Ответ уже удалён.',reply_markup:currentMenu};
+    const text=rsvpDetailText(row);
     return {text,reply_markup:{inline_keyboard:[[button('Удалить ответ','delete:'+row.id)],[button('Меню','menu')]]}};
   }
   const deletion=command.match(/^(?:delete:|\/delete\s+)(.+)$/);
   if(deletion&&uuid(deletion[1])){
     const row=(await client.query('SELECT id,guest_name FROM rsvps WHERE id=$1',[deletion[1]])).rows[0];
-    if(!row)return {text:'Ответ уже удалён.',reply_markup:menu};
+    if(!row)return {text:'Ответ уже удалён.',reply_markup:currentMenu};
     const token=randomBytes(16).toString('hex');
     await client.query("INSERT INTO delete_confirmations(token,rsvp_id,user_id,expires_at) VALUES($1,$2,$3,now()+interval '5 minutes')",[token,row.id,userId]);
     return {text:'Удалить ответ «'+row.guest_name+'»? После удаления гость сможет заполнить форму снова. Подтверждение действует 5 минут.',reply_markup:{inline_keyboard:[[button('Да, удалить','confirm:'+token),button('Отмена','cancel:'+token)]]}};
@@ -45,17 +47,17 @@ export async function adminReply(client,userId,command){
   if(confirmation){
     const token=confirmation[2];
     const pending=(await client.query('SELECT rsvp_id FROM delete_confirmations WHERE token=$1 AND user_id=$2 AND expires_at>now()',[token,userId])).rows[0];
-    if(!pending)return {text:'Подтверждение истекло или уже использовано.',reply_markup:menu};
-    if(confirmation[1]==='cancel'){await client.query('DELETE FROM delete_confirmations WHERE token=$1 AND user_id=$2',[token,userId]);return {text:'Удаление отменено.',reply_markup:menu};}
+    if(!pending)return {text:'Подтверждение истекло или уже использовано.',reply_markup:currentMenu};
+    if(confirmation[1]==='cancel'){await client.query('DELETE FROM delete_confirmations WHERE token=$1 AND user_id=$2',[token,userId]);return {text:'Удаление отменено.',reply_markup:currentMenu};}
     const row=(await client.query('SELECT session_id FROM rsvps WHERE id=$1',[pending.rsvp_id])).rows[0];
     if(row)await client.query('SELECT id FROM guest_sessions WHERE id=$1 FOR UPDATE',[row.session_id]);
     // Atomic consumption: another organizer/update cannot reuse this confirmation.
     const consumed=await client.query('DELETE FROM delete_confirmations WHERE token=$1 AND user_id=$2 AND expires_at>now() RETURNING rsvp_id',[token,userId]);
-    if(!consumed.rows.length)return {text:'Подтверждение уже использовано.',reply_markup:menu};
+    if(!consumed.rows.length)return {text:'Подтверждение уже использовано.',reply_markup:currentMenu};
     await client.query('DELETE FROM rsvps WHERE id=$1',[pending.rsvp_id]);
-    return {text:'Ответ удалён. Гость может снова заполнить форму.',reply_markup:menu};
+    return {text:'Ответ удалён. Гость может снова заполнить форму.',reply_markup:currentMenu};
   }
-  return {text:'Доступ организатора подтверждён.\n/stats: статистика\n/list: все ответы\n/list yes или /list no: по статусу\n/list transfer или /list overnight: логистика\nВыбери гостя в списке для деталей и удаления.',reply_markup:menu};
+  return {text:'Доступ организатора подтверждён.\nОткрой Mini App кнопкой ниже: там список гостей, ответы и удаление.\n/stats: быстрая статистика.',reply_markup:currentMenu};
 }
 export async function handleAdminUpdate(client,update,allowedIds){
   const userId=updateSender(update);

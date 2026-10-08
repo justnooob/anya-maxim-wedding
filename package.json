@@ -19,7 +19,8 @@
     "telegram:webhook": "node --env-file=.env.local scripts/telegram-webhook.mjs",
     "test": "node --test tests/*.test.mjs",
     "test:postgres": "node --env-file=.env.local tests/run-postgres.mjs",
-    "start:amvera": "npm run db:migrate && next start --hostname 0.0.0.0"
+    "start:amvera": "node scripts/start-amvera.mjs",
+    "telegram:production": "node scripts/telegram-production.mjs"
   },
   "dependencies": {
     "drizzle-orm": "^0.45.3",

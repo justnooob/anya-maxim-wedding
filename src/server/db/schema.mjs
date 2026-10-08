@@ -7,9 +7,11 @@ export const sessions = pgTable('guest_sessions', {
 export const rsvps = pgTable('rsvps', {
   id:uuid('id').primaryKey(), sessionId:text('session_id').notNull().references(()=>sessions.id,{onDelete:'cascade'}),
   guestName:text('guest_name').notNull(), attendance:text('attendance').notNull(), who:text('who').notNull().default(''),
-  food:text('food').notNull().default(''),alcoholDrinks:text('alcohol_drinks').array().notNull().default(sql`'{}'`),alcoholOther:text('alcohol_other').notNull().default(''),softDrinks:text('soft_drinks').array().notNull().default(sql`'{}'`),softOther:text('soft_other').notNull().default(''),transfer:text('transfer'),overnight:text('overnight'),
+  food:text('food').notNull().default(''),musicRequest:text('music_request'),alcoholDrinks:text('alcohol_drinks').array().notNull().default(sql`'{}'`),alcoholOther:text('alcohol_other').notNull().default(''),softDrinks:text('soft_drinks').array().notNull().default(sql`'{}'`),softOther:text('soft_other').notNull().default(''),transfer:text('transfer'),overnight:text('overnight'),
   dressCode:boolean('dress_code').notNull().default(false),createdAt:time('created_at').notNull().defaultNow(),updatedAt:time('updated_at').notNull().defaultNow(),
 }, table=>[uniqueIndex('rsvp_session_unique').on(table.sessionId),index('rsvps_attendance_created_idx').on(table.attendance,table.createdAt,table.id),index('rsvps_created_idx').on(table.createdAt,table.id),
+  check('rsvp_music_length',sql`${table.musicRequest} IS NULL OR char_length(${table.musicRequest})<=1000`),
+  check('rsvp_no_music',sql`${table.attendance}='yes' OR ${table.musicRequest} IS NULL`),
   check('attendance_values',sql`${table.attendance} IN ('yes','no')`),
   check('rsvp_name_length',sql`char_length(${table.guestName}) BETWEEN 1 AND 120`),
   check('rsvp_details_length',sql`char_length(${table.who}) <= 240 AND char_length(${table.food}) <= 600`),
@@ -27,3 +29,5 @@ export const updates=pgTable('telegram_updates',{id:bigint('id',{mode:'number'})
 export const outbox=pgTable('telegram_outbox',{id:uuid('id').primaryKey(),rsvpId:uuid('rsvp_id').references(()=>rsvps.id,{onDelete:'cascade'}),recipient:text('recipient').notNull(),payload:jsonb('payload').notNull(),attempts:integer('attempts').notNull().default(0),availableAt:time('available_at').notNull().defaultNow(),createdAt:time('created_at').notNull().defaultNow()},table=>[index('telegram_outbox_ready_idx').on(table.availableAt,table.createdAt),check('outbox_recipient_shape',sql`${table.recipient} ~ '^[1-9][0-9]*$'`),check('outbox_attempts_nonnegative',sql`${table.attempts} >= 0`)]);
 export const confirmations=pgTable('delete_confirmations',{token:text('token').primaryKey(),rsvpId:uuid('rsvp_id').notNull().references(()=>rsvps.id,{onDelete:'cascade'}),userId:text('user_id').notNull(),expiresAt:time('expires_at').notNull(),createdAt:time('created_at').notNull().defaultNow()},table=>[index('delete_confirmations_expiry_idx').on(table.expiresAt),check('confirmation_token_shape',sql`${table.token} ~ '^[a-f0-9]{32}$'`)]);
 export const rateLimits=pgTable('rate_limits',{key:text('key').notNull(),bucket:bigint('bucket',{mode:'number'}).notNull(),count:integer('count').notNull().default(1)},table=>[primaryKey({columns:[table.key,table.bucket]}),check('rate_count_positive',sql`${table.count} > 0`)]);
+
+export const pollingState=pgTable('telegram_polling_state',{botId:bigint('bot_id',{mode:'number'}).primaryKey(),nextOffset:bigint('next_offset',{mode:'number'}).notNull().default(0),updatedAt:time('updated_at').notNull().defaultNow()},table=>[check('telegram_polling_offset_nonnegative',sql`${table.nextOffset} >= 0`)]);

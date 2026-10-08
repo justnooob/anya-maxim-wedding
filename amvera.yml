@@ -1,3 +1,4 @@
+# Shared by website and bot. Runtime APP_ROLE=web (default) or bot.
 meta:
   environment: nodejs
   toolchain:

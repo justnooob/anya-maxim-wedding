@@ -1,117 +1,72 @@
-# Stage B: PostgreSQL, RSVP и Telegram
+# Production: два приложения Amvera, одна PostgreSQL
 
-Текущий production URL: https://anya-maxim-wedding-justnooob.amvera.io.
-Настройки аккаунта Amvera выполняет владелец вручную. Build: npm run build без подключения к БД. Runtime: npm run start:amvera сначала применяет pending migrations, затем запускает Next.js на порту 3000. Терминал контейнера не требуется.
+Один GitHub repository: justnooob/anya-maxim-wedding. Один amvera.yml.
+Новый repository, отдельная кодовая база и runtime-terminal не нужны.
 
-## Environment variables в Amvera
+## Роли и запуск
 
-Добавить именно в runtime Variables приложения, без NEXT_PUBLIC_:
+- anya-maxim-wedding: APP_ROLE=web. Next.js, RSVP API, Mini App /telegram. Записывает уведомления в PostgreSQL outbox, не запускает Telegram worker.
+- anya-maxim-wedding-bot: APP_ROLE=bot. Постоянный long polling и отправка outbox. Самостоятельная команда: npm run telegram:production.
+- Общее хранилище: существующая wedding-db, база wedding.
 
-| Переменная | Значение |
-| --- | --- |
-| DATABASE_URL | postgresql://weddinguser:<PASSWORD>@amvera-justnoob-cnpg-wedding-db-rw:5432/wedding |
-| PUBLIC_SITE_URL | https://anya-maxim-wedding-justnooob.amvera.io |
-| TELEGRAM_BOT_TOKEN | Реальный токен @amwed_bot, только в Variables |
-| TELEGRAM_ALLOWED_USER_IDS | Два ранее определённых числовых user ID, через запятую |
-| TELEGRAM_WEBHOOK_SECRET | Новый случайный секрет: минимум 32 символа, буквы/цифры/дефис/подчёркивание |
-| NODE_ENV | production, если платформа не выставляет автоматически |
+amvera.yml запускает npm run start:amvera. Dispatcher выбирает роль только в runtime. По умолчанию web, чтобы сохранить существующий запуск сайта. Для bot он запускает тот же entrypoint scripts/telegram-production.mjs, что npm run telegram:production. Next.js в bot-процессе не запускается. containerPort остаётся 3000: в bot это только /healthz, не webhook и не admin API. Публичный домен для worker не нужен.
 
-PASSWORD выше является заглушкой. Пароль URL-encode, если есть @, :, /, %, # и другие специальные символы. Не помещать реальное значение в Git, чат, скриншот или команды. Для internal PostgreSQL использовать предоставленный internal host. SSL не отключается принудительно; если хостинг требует SSL, используйте соответствующие параметры в DATABASE_URL и доверенный CA, без rejectUnauthorized:false.
+Оба приложения собираются npm run build без secrets и DATABASE_URL. Оба применяют pending migrations при runtime startup: PostgreSQL advisory lock и checksum предотвращают конфликт и повторное применение. Существующие migration-файлы не изменены. Новая 005_telegram_polling.sql хранит durable offset. Reset не выполняется.
 
-Для создания webhook secret удобно использовать менеджер паролей. Его значение не нужно публиковать. DEV_POSTGRES_PASSWORD требуется только локальному Docker, в production не добавлять.
+## Runtime Variables / Secrets
 
-## Deployment без runtime-terminal Amvera
+| Переменная | Website | Bot worker |
+| --- | --- | --- |
+| APP_ROLE | web | bot |
+| NODE_ENV | production | production |
+| DATABASE_URL | существующая wedding-db | тот же URL wedding-db |
+| PUBLIC_SITE_URL | https://anya-maxim-wedding-justnooob.amvera.io | тот же URL сайта |
+| TELEGRAM_BOT_TOKEN | токен @amwed_bot | тот же токен |
+| TELEGRAM_ALLOWED_USER_IDS | два числовых ID через запятую | те же два ID |
 
-1. Локально выполнить проверки и подготовить commit:
+DATABASE_URL и TELEGRAM_BOT_TOKEN добавлять как secrets без NEXT_PUBLIC_. Website нужен токен для проверки подписанных Telegram initData; whitelist применяется при каждом Mini App запросе и при создании outbox. Worker также проверяет whitelist перед обработкой команд и перед отправкой.
 
-```sh
-npm run typecheck
-npm run lint
-npm test
-npm run build
-npm run check:secrets
-```
+Шаблон DATABASE_URL: postgresql://weddinguser:<PASSWORD>@amvera-justnoob-cnpg-wedding-db-rw:5432/wedding. Реальный пароль вносится только вручную в Variables/Secrets; специальные символы пароля URL-encode. SSL certificate verification не отключать.
+TELEGRAM_WEBHOOK_SECRET не нужен ни одному приложению, старую переменную можно удалить. DEV_POSTGRES_PASSWORD нужен только локальному Compose.
 
-2. В панели Amvera вручную добавить все runtime Variables из таблицы выше. Реальный DATABASE_URL нужен только приложению при старте. Build-stage не требует ни БД, ни Telegram secrets. Не добавлять db:migrate в build commands.
-3. Выполнить commit и push самостоятельно. В Amvera запустить обновление приложения из нового commit. Если в панели есть вручную заданная команда запуска, привести её к npm run start:amvera. amvera.yml уже содержит эту команду, containerPort остаётся 3000.
-4. При старте команда db:migrate сама применит только pending SQL migrations. Все миграции и журнал schema_migrations фиксируются одной транзакцией под PostgreSQL advisory lock. Повторный restart пропускает применённые файлы, сохраняет RSVP и не выполняет reset. Checksum запрещает изменение применённого файла. Если БД недоступна, конфигурация отсутствует или миграция не прошла, Next.js не запускается. Исправить Variables/доступность БД и перезапустить приложение через панель. Не редактировать старые migrations: изменения оформлять новым SQL-файлом.
-5. Проверить успешный старт в логах Amvera: Migrations completed, затем запуск Next.js. Открыть публичный сайт. Для новой схемы не нужна ручная команда в контейнере. При zero-downtime обновлении предыдущий процесс может оставаться доступным до готовности нового; будущие миграции должны быть совместимы с предыдущей версией приложения.
-6. Остановить локальный npm run telegram:dev через Ctrl+C. В локальном исключённом из Git .env.local оставить TELEGRAM_BOT_TOKEN и добавить тот же TELEGRAM_WEBHOOK_SECRET, что указан в Amvera. Задать:
+## Deployment без shell контейнера
 
-```dotenv
-PUBLIC_SITE_URL=https://anya-maxim-wedding-justnooob.amvera.io
-```
+1. Остановить локальный telegram:dev / telegram:setup, если запущен. Один токен не должен одновременно обслуживаться локальным и облачным poller.
+2. Добавить/проверить Variables существующего website, APP_ROLE=web. Пользователь самостоятельно делает commit/push после ревью. Обновить website новым commit: дождаться Migrations completed и старта Next.js. Старый /api/telegram/webhook теперь отвечает 410 без обработки данных.
+3. В Amvera создать ресурс типа Приложение с именем anya-maxim-wedding-bot. Выбрать постоянно работающий тариф и одну реплику, не cron job. Не создавать новую БД.
+4. Подключить то же GitHub repository и ту же production-ветку, что у website. Использовать существующий amvera.yml из репозитория, не создавать расходящиеся конфигурации/ветки. Во вкладке «Репозиторий» второго приложения выбрать GitHub, подключить доступ к justnooob/anya-maxim-wedding и выбрать текущую production-ветку. Настройка интеграции GitHub выполняется отдельно для второго приложения. Не удалять интеграцию website. GitHub deployment webhook относится только к доставке кода и не является Telegram webhook. Если панель предлагает создание собственного amvera.yml, использовать уже существующий файл.
+5. До запуска добавить bot Variables из таблицы, особенно APP_ROLE=bot. Без неё запустится website. Команда в общем файле остаётся npm run start:amvera и автоматически выбирает worker. При использовании ручной команды вместо общего dispatcher укажите npm run telegram:production.
+6. Собрать/запустить приложение. Проверить логи: Database connection established. Migrations completed.; затем Production bot polling started. Mini App: anya-maxim-wedding-justnooob.amvera.io/telegram.
+7. Worker сам вызывает deleteWebhook с drop_pending_updates=false. Не выполнять telegram:webhook: старая команда теперь безопасно отказывается регистрировать webhook. Настройки BotFather для polling не нужны.
+8. Оставить website, worker и PostgreSQL включёнными. Работа продолжается на серверах Amvera при выключенном компьютере. /healthz worker показывает starting / standby / polling / reconnecting / stopping, без данных гостей. HTTP 200 означает живой процесс, а не гарантию доступности Telegram; состояние polling и ответ на /stats проверять отдельно.
 
-DATABASE_URL для регистрации webhook не нужен. Не копировать внутренний production DATABASE_URL на локальный компьютер. PUBLIC_SITE_URL также используется локальным RSVP, поэтому при возврате к локальной разработке заменить его на http://localhost:3000; webhook на production этим не меняется.
+Официальная настройка GitHub: https://docs.amvera.ru/applications/git/webhooks.html. Концепция одного типа процесса на приложение: https://docs.amvera.ru/applications/configuration/heroku-migration.html.
 
-7. Из корня проекта **на своём компьютере**, с Node.js 20.9+ и установленными зависимостями, выполнить:
+## Mini App и BotFather
 
-```sh
-npm run telegram:webhook
-```
+URL Mini App: https://anya-maxim-wedding-justnooob.amvera.io/telegram.
+PUBLIC_SITE_URL задаётся как origin сайта без /telegram. Кнопка /start добавляет этот путь сама. Она открывает Mini App через Telegram web_app, а не обычную URL-кнопку. Обязательных дополнительных настроек BotFather нет.
+Опционально в BotFather через /setmenubutton выбрать @amwed_bot, указать этот HTTPS URL и подпись «Гости», чтобы Mini App открывался также из меню. Whitelist защищает API независимо от видимости кнопки. Посторонний /start игнорируется, данные не раскрываются.
+Telegram initData проверяются server-side: HMAC, срок до часа и whitelist. После часа закрыть и открыть Mini App заново. Открытие ссылки в обычном браузере не даёт admin-доступ.
 
-Команда загружает .env.local, проверяет HTTPS и identity @amwed_bot, затем регистрирует URL:
+## Надёжность
 
-```text
-https://anya-maxim-wedding-justnooob.amvera.io/api/telegram/webhook
-```
+getUpdates использует long polling timeout 20 секунд. Временные ошибки Telegram/сети повторяются с exponential backoff и jitter до примерно 30 секунд; сырые ошибки/URLs/secrets не печатаются. Ошибки конфигурации надо исправлять в Variables.
+Один production worker владеет session advisory lock PostgreSQL. Второй экземпляр ждёт standby; при завершении/потере соединения lock освобождается. Heartbeat потери БД прерывает polling и доставку перед переподключением. SIGTERM/SIGINT прерывают запросы и задержки, ожидают текущие транзакции, закрывают соединения; предельное завершение 25 секунд.
+Offset, admin-действие и ответ outbox сохраняются одной транзакцией. Повтор update не повторяет удаление или команду. Непрошедшие whitelist updates пропускаются с продвижением offset. Старый webhook endpoint больше не принимает команды.
+RSVP и outbox фиксируются вместе. Независимый delivery loop проверяет очередь примерно каждую секунду; ошибка доставки откладывает retry (30 секунд с ростом до часа). При остановленном worker RSVP сохраняются, очередь ждёт его возврата. Доставка at least once: при аварии после отправки Telegram, но до DB commit возможен повтор уведомления. Telegram хранит ещё не полученные updates не более 24 часов, поэтому длительная остановка может потерять старые команды, но не RSVP в PostgreSQL.
 
-Токен/secret не выводятся; ожидающие updates не удаляются. Команда требует исходящий HTTPS к Telegram, не доступ к Amvera shell или PostgreSQL. Повторная регистрация с теми же значениями допустима. При изменении secret обновить его и в Amvera, и локально, перезапустить приложение и повторить команду. После регистрации не запускать polling с этим же ботом.
-8. Endpoint принимает POST и проверяет X-Telegram-Bot-Api-Secret-Token до чтения payload или обращения к БД. Отсутствующий/неверный header даёт 403; отсутствующая/невалидная серверная настройка secret даёт 503. Обычное открытие URL через GET не является проверкой webhook.
-9. С обоих разрешённых аккаунтов отправить /start и /stats. Сделать тестовый RSVP на публичном сайте, проверить уведомления обоим организаторам и данные в боте. Удалить тестовую запись через подтверждение, обновить форму в той же вкладке со старой cookie и заполнить её снова. Проверить отказ от участия и недоступность admin для постороннего аккаунта.
+## End-to-end проверка
 
-## Development через Docker Compose
+1. С обоих whitelist аккаунтов отправить /start: есть кнопка Mini App; /stats отвечает.
+2. В Mini App проверить списки/фильтры/детали. Вне Telegram и с постороннего аккаунта доступ к данным закрыт.
+3. На публичном сайте отправить Приду со всеми обязательными полями, напитками и музыкой. Проверить уведомление обоим организаторам и запись в Mini App. Проверить также Не приду: только релевантные поля.
+4. Удалить тестовый RSVP с подтверждением. В том же браузере/со старой cookie снова заполнить форму.
+5. Перезапустить worker в Amvera. Проверить /stats и сохранность записей. Проверить отсутствие постоянного Telegram 409 (обычно второй poller).
+6. Временно остановить только worker, отправить RSVP на сайте, затем включить worker: уведомление из очереди должно прийти, запись уже есть в БД.
+7. Выключить локальный компьютер и с телефона повторить /stats, Mini App и тестовый RSVP. Всё работает через Amvera.
 
-Установить/запустить Docker Desktop с Linux containers. Создать .env.local из .env.example, сохранив существующие Telegram secrets и whitelist.
-Вручную установить DEV_POSTGRES_PASSWORD и DATABASE_URL для **локальной** БД:
+## Локальная разработка и проверки
 
-```text
-postgresql://weddinguser:<LOCAL_PASSWORD>@localhost:5432/wedding
-```
-
-PUBLIC_SITE_URL=http://localhost:3000. Пароли должны совпадать; специальные символы в URL кодировать.
-
-```sh
-docker compose --env-file .env.local up -d
-npm run db:migrate:dev
-npm run dev
-```
-
-В другом терминале npm run telegram:dev. Для определения новых ID команда telegram:setup работает без БД. Если у того же бота уже production webhook, используйте отдельного development-бота только после соответствующей настройки identity check; не удаляйте production webhook для локальных тестов.
-
-```sh
-npm run typecheck
-npm run lint
-npm test
-npm run test:postgres
-npm run check:secrets
-npm run build
-```
-
-npm test выполняет SQL и API-тесты на PGlite, PostgreSQL-движке WASM. npm run test:postgres выполняет те же интеграционные сценарии на настоящем локальном PostgreSQL через pg, в отдельной временной schema. Он запрещён для production и нелокального host, временная schema удаляется после теста. Docker test не меняет гостевые записи wedding.
-
-## Модель данных и гарантии
-
-SQL migrations являются источником DDL. Drizzle schema описывает те же таблицы; runtime-запросы параметризованы через pg, все связанные изменения транзакционные. Не запускать schema push поверх production.
-
-- guest_sessions: hash случайного токена, timestamps и expires_at. Cookie HttpOnly, SameSite=Lax, Secure и __Host- в production; не содержит имени гостя.
-- rsvps: явные ограничения attendance, длины текста, вариантов логистики и dress code. UNIQUE session_id предотвращает второй ответ из той же сессии. Повторная отправка возвращает первый ответ, не редактирует его и не дублирует уведомления.
-- После удаления rsvps cookie продолжает идентифицировать сессию, но больше не блокирует новую запись: сервер проверяет существование RSVP в PostgreSQL при каждом обращении. Форма перепроверяет статус при возврате в вкладку и раз в 30 секунд на экране подтверждения.
-- CSRF требует разрешённый Origin и отдельный токен сессии; JSON ограничен по размеру. Rate limits хранятся в PostgreSQL, IP сохраняется только в виде hash.
-- telegram_updates предотвращает повторное выполнение одного update. delete_confirmations хранит одноразовые подтверждения; проверяется Telegram numeric from.id, private chat и whitelist, также для callbacks.
-- telegram_outbox фиксируется вместе с RSVP. Worker в процессе Next.js проверяет очередь каждые 10 секунд. Несколько экземпляров используют FOR UPDATE SKIP LOCKED. Ошибка Telegram не откатывает RSVP: уведомление повторяется с задержкой до часа. Отправленные payload удаляются. После удаления RSVP несостоявшиеся уведомления о нём удаляются каскадно.
-- Доставка Telegram имеет семантику at least once: при аварии после доставки, но до commit возможен повтор сообщения. Дубликат RSVP или повтор удаления при этом исключён.
-- Отправка требует разрешённых recipient IDs; при отзыве ID задания для него удаляются. Очередь, статистика и ответы не зависят от Telegram как хранилища.
-- Гость без существующей cookie может отправить новый ответ: это приглашение без guest accounts, не идентификация человека по имени. Уникальность относится к сессии браузера.
-
-## Границы проверки
-
-Docker Desktop в окружении реализации недоступен: npm run test:postgres и реальное соединение с Amvera выполняет владелец после настройки. Проверки PGlite не заменяют проверку PostgreSQL TCP, сети Amvera, SSL и production webhook. Настройки аккаунта, push/deploy, реальные миграции Amvera и webhook не выполнялись агентом. PDF не подключён.
-
-Протокол: https://core.telegram.org/bots/api#setwebhook, транзакции: https://node-postgres.com/features/transactions.
-
-## Напитки в RSVP
-Добавлена миграция 002_rsvp_drinks.sql. Миграции 002 и 003 применяются автоматически командой start:amvera при обновлении или перезапуске приложения. Старые ответы сохраняются с пустыми списками напитков. Выбор напитков необязателен; свой вариант требует названия до 120 символов. Отказ от алкоголя/безалкогольного исключает другие варианты своей группы. Значения видны в Telegram в деталях и уведомлениях.
-
-## Безопасная диагностика миграций
-Перед DDL выполняется SELECT 1. Успех: Database connection established. При ошибке выводятся name, code, message, stage и filename, если известен файл. Этапы: connection, metadata table, checksum, applying migration. Сообщение нормализуется по известным SQLSTATE/сетевым кодам: произвольный текст PostgreSQL не выводится, поскольку может содержать пароль или данные строк. Неизвестное сообщение скрывается; stack, detail, SQL, параметры и значения environment variables не печатаются. Ошибка checksum требует проверки версии файла, а не reset БД. Для диагностики следующего deployment достаточно этой безопасной строки лога.
+.env.local исключён из Git. Локальная PostgreSQL: docker compose --env-file .env.local up -d; затем npm run db:migrate:dev. Для production worker не используется --env-file: значения приходят от Amvera.
+Проверки: npm run typecheck, npm run lint, npm test, npm run build, npm run check:secrets. npm run test:postgres требует локальный Docker/PostgreSQL; PGlite тесты не проверяют реальную сеть Amvera. Реальный запуск двух облачных приложений и Telegram E2E выполняет владелец после deployment. Агент не меняет Amvera и не делает push.

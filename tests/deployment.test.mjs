@@ -8,7 +8,7 @@ import {webhook} from '../src/server/telegram/webhook.mjs';
 
 test('Amvera applies migrations at runtime only and local webhook loads ignored env file',()=>{
   const pkg=JSON.parse(fs.readFileSync('package.json','utf8'));
-  assert.equal(pkg.scripts['start:amvera'],'npm run db:migrate && next start --hostname 0.0.0.0');
+  assert.equal(pkg.scripts['start:amvera'],'node scripts/start-amvera.mjs');
   assert.equal(pkg.scripts.build,'next build');
   assert.equal(pkg.scripts['telegram:webhook'],'node --env-file=.env.local scripts/telegram-webhook.mjs');
   const config=fs.readFileSync('amvera.yml','utf8');

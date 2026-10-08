@@ -1,5 +1,4 @@
-import "server-only";
-import {webhook} from "@/server/telegram/webhook.mjs";
+// Retired: production uses long polling. Never accept updates here.
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-export const POST = webhook;
+export async function POST() { return new Response(null, {status: 410}); }

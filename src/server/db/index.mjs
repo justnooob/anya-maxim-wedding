@@ -6,7 +6,7 @@ let pool;
 export function database() {
   if(!process.env.DATABASE_URL) throw new Error('Database configuration missing');
   if(!pool) {
-    pool=new pg.Pool({connectionString:process.env.DATABASE_URL,max:5,connectionTimeoutMillis:5000,idleTimeoutMillis:30000,statement_timeout:10000});
+    pool=new pg.Pool({connectionString:process.env.DATABASE_URL,max:5,connectionTimeoutMillis:5000,idleTimeoutMillis:30000,statement_timeout:10000,query_timeout:15000,keepAlive:true,keepAliveInitialDelayMillis:10000});
     pool.on('error',()=>console.error('Database pool unavailable. Details hidden.'));
   }
   return pool;

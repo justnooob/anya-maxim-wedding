@@ -32,3 +32,6 @@ Polling не удаляет и не меняет webhook. Если webhook уж�
 Тесты автономные, используют синтетические значения и не обращаются к Telegram. Реальный token не требуется для тестов. Secret checker распознаёт также формат Telegram bot token. Полные Stage B проверки: npm test и npm run test:postgres (локальный Docker).
 
 Основание протокола: https://core.telegram.org/bots/api#getupdates и https://core.telegram.org/bots/api#user.
+
+## Production
+Постоянный бот работает в отдельном приложении Amvera с APP_ROLE=bot (npm run telegram:production). Не запускайте локальный poller с тем же токеном одновременно с production. Используйте отдельного тестового бота/окружение для дальнейшей разработки либо временно остановите production worker. Инструкция: STAGE_B_DEPLOYMENT.md. Webhook больше не нужен.

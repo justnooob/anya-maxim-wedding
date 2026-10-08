@@ -1,6 +1,2 @@
-export async function register() {
-  if (process.env.NEXT_RUNTIME === "nodejs") {
-    const { startOutboxWorker } = await import("./server/telegram/outbox.mjs");
-    startOutboxWorker();
-  }
-}
+// Telegram background jobs run in the separate bot worker.
+export async function register() {}

@@ -13,7 +13,7 @@ import {drinkChoices,toggleDrink,describeDrinks} from '../src/content/drinks.mjs
 import {drainOutbox,notificationText} from '../src/server/telegram/outbox.mjs';
 import {getRsvp,postRsvp} from '../src/server/rsvp/http.mjs';
 import {webhook} from '../src/server/telegram/webhook.mjs';
-const yes={guestName:'Анна',attendance:'yes',who:'Подруга',food:'Орехи',transfer:'needed',overnight:'stay',dressCode:true};
+const yes={guestName:'Анна',attendance:'yes',who:'Подруга',food:'Орехи',transfer:'needed',overnight:'stay',dressCode:true,alcoholDrinks:['none'],softDrinks:['none']};
 const no={guestName:'Максим',attendance:'no'};
 async function fixture(){
   if(process.env.TEST_POSTGRES==='1'){
@@ -198,4 +198,24 @@ assert.equal(drinkChoices.alcohol.options.at(-1).id,'other');assert.equal(drinkC
 assert.equal(describeDrinks('alcohol',['wine']),'Вино (цвет не указан)');
 assert.throws(()=>validateRsvp({...yes,alcoholDrinks:['wine']}),InputError);
 }finally{await f.close();}
+});
+
+test('new attendance requirements and optional music are validated server-side',()=>{
+  assert.equal(validateRsvp(yes).musicRequest,null);
+  assert.equal(validateRsvp({...yes,musicRequest:'  ABBA\nQueen  '}).musicRequest,'ABBA\nQueen');
+  assert.equal(validateRsvp({...yes,musicRequest:'   '}).musicRequest,null);
+  for(const invalid of [{who:''},{alcoholDrinks:[]},{softDrinks:[]},{alcoholDrinks:undefined},{softDrinks:undefined},{transfer:undefined},{overnight:undefined},{dressCode:false},{musicRequest:'x'.repeat(1001)},{musicRequest:42}])assert.throws(()=>validateRsvp({...yes,...invalid}),InputError);
+  const declined=validateRsvp({guestName:'Гость',attendance:'no'});assert.equal(declined.musicRequest,null);assert.equal(declined.attendance,'no');
+  assert.equal(validateRsvp({...yes,attendance:'no',musicRequest:'ignore'}).musicRequest,null);
+});
+test('music persists and appears only for going guests in admin and notifications',async()=>{
+  const f=await fixture();try{
+    const saved=await transaction(client=>saveRsvp(client,hash(f.token),validateRsvp({...yes,musicRequest:'ABBA\nQueen',food:''}),new Set()),f.source);
+    assert.equal(saved.rsvp.music_request,'ABBA\nQueen');
+    const detail=await transaction(client=>adminReply(client,'123','guest:'+saved.rsvp.id),f.source);
+    assert.match(detail.text,/Музыка: ABBA\nQueen/);assert.match(notificationText(saved.rsvp),/Музыка: ABBA/);
+    assert.match(detail.text,/Дресс-код: Подтверждён/);assert.doesNotMatch(detail.text,/Аллергии/);
+    assert.doesNotMatch(notificationText({...saved.rsvp,attendance:'no'}),/Музыка|Алкоголь|Ночёвка|Дресс-код/);
+    await assert.rejects(f.db.query("UPDATE rsvps SET music_request=$1 WHERE id=$2",['x'.repeat(1001),saved.rsvp.id]));
+  }finally{await f.close();}
 });
