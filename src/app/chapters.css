@@ -220,3 +220,9 @@
 .dress-guidance{min-height:156px}.dress-note{min-height:48px}
 @media(max-width:700px){.dress-guidance{min-height:390px}.dress-note{min-height:90px}}
 @media(prefers-reduced-motion:reduce){.look-frames--changing .look-incoming,.look-frames--changing .look-outgoing{animation:none}.look-frames--changing .look-outgoing{display:none}}
+
+.drink-options .drink-options-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 22px}.drink-options .paper-checkbox{margin-top:12px}.drink-options input[type=checkbox]{border-radius:2px;background:#f8f4eb55;box-shadow:none}.drink-options input[type=checkbox]:checked{background:#f8f4eb55;box-shadow:none}.drink-options .drink-hint{margin:9px 0 0;text-align:left}.drink-other{margin:22px 0 4px}.drink-options+.drink-options{margin-top:32px!important}@media(max-width:540px){.drink-options .drink-options-grid{grid-template-columns:1fr}}
+
+.drink-options .drink-other{display:block}.drink-options .drink-other input{width:100%;height:auto;flex:auto;margin:0;border:0;border-bottom:1px solid #a798736e;border-radius:0;padding:10px 0 12px;background:transparent;box-shadow:none;cursor:text}.drink-options .drink-other input:focus{border-color:#8f7138;box-shadow:0 1px 0 #8f7138}
+
+.drink-options .drink-option-other{grid-column:1 / -1}

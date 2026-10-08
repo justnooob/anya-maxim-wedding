@@ -9,6 +9,7 @@
 
 # Environment and local configuration (example must contain placeholders only)
 .env*
+env.*
 *.env
 !.env.example
 .npmrc

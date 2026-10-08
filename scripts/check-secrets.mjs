@@ -9,6 +9,7 @@ const paths = stagedOnly ? staged : [...new Set([...staged, ...git(['ls-files', 
 const rules = [
   ['private key', /-----BEGIN (?:RSA |EC |OPENSSH |DSA |ENCRYPTED )?PRIVATE KEY-----/],
   ['service token', /\b(?:sk-(?:proj-|svcacct-)?[A-Za-z0-9_-]{20,}|gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|(?:AKIA|ASIA)[A-Z0-9]{16})\b/],
+  ['Telegram bot token', /\b\d{5,20}:[A-Za-z0-9_-]{20,}\b/],
   ['database credentials', /(?:postgres(?:ql)?|mysql|mongodb(?:\+srv)?):\/\/[^\s/:]+:[^\s/@]+@/i],
   ['credential assignment', /(?:password|passwd|secret|api[_-]?key|access[_-]?token|database_url)["']?\s*[=:]\s*["'][^"'\r\n]{8,}["']/i],
   ['environment credential', /^\s*(?:[A-Z_]*(?:PASSWORD|SECRET|TOKEN|API_KEY)|DATABASE_URL)\s*=\s*[^\s#]+/],
@@ -25,7 +26,10 @@ function inspect(path, text, source) {
   checked++;
   text.split(/\r?\n/).forEach((line, index) => {
     for (const [kind, expression] of rules) {
-      if (expression.test(line) && !(path === '.env.example' && placeholder.test(line))) {
+      const match = line.match(expression);
+      // Exact documented password placeholders are not credentials; never ignore a whole line.
+      const documentedDbPlaceholder = kind === 'database credentials' && match && /:<(?:LOCAL_)?PASSWORD>@$/.test(match[0]);
+      if (match && !documentedDbPlaceholder && !(path === '.env.example' && placeholder.test(line))) {
         report(path, (index + 1) + ' (' + source + ')', kind);
         break;
       }

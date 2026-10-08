@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { publicSections as content } from "@/content/public-sections";
 import { Watercolor } from "./Watercolor";
 type Category = typeof content.dress.categories[number];
@@ -13,23 +13,23 @@ function Catalogue({category,previous,direction,revision}:{category:Category;pre
   const [atStart, setAtStart] = useState(true);
   const [dragging, setDragging] = useState(false);
   const dress=content.dress;
-  function measure() {
+  const measure = useCallback(() => {
     const el=strip.current;if(!el)return;
     setAtStart(el.scrollLeft<5);setAtEnd(el.scrollLeft+el.clientWidth>=el.scrollWidth-5);
     const item=el.querySelector("figure");const step=item?(item as HTMLElement).offsetWidth+parseFloat(getComputedStyle(el).gap):1;
     setPosition(Math.min(category.images.length-1,Math.round(el.scrollLeft/step)));
-  }
-  useEffect(()=>{const el=strip.current;if(!el)return;const observer=new ResizeObserver(measure);observer.observe(el);measure();return()=>observer.disconnect();},[]);
+  }, [category.images.length]);
+  useEffect(()=>{const el=strip.current;if(!el)return;const observer=new ResizeObserver(measure);observer.observe(el);measure();return()=>observer.disconnect();},[measure]);
   useLayoutEffect(()=>{
     const el=strip.current;if(!el)return;
     destination.current=null;el.scrollTo({left:0,top:0,behavior:"instant"});measure();
-  },[category.id]);
+  },[category.id,measure]);
   useEffect(()=>{
     const el=strip.current;if(!el)return;
     const settle=()=>{destination.current=null;measure();};
     el.addEventListener("scrollend",settle);
     return()=>el.removeEventListener("scrollend",settle);
-  },[category.id]);
+  },[category.id,measure]);
   function move(direction:number) {
     const el=strip.current;if(!el)return;
     const item=el.querySelector<HTMLElement>("figure");

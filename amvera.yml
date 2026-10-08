@@ -12,7 +12,7 @@ run:
   scriptName: null
   scriptArguments: null
   nodeArguments: null
-  command: npm run start
+  command: npm run start:amvera
   persistenceMount: /data
   containerPort: "3000"
   singleton: false
