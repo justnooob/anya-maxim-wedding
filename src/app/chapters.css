@@ -133,10 +133,10 @@
 @media(max-width:700px){.venue-gallery{height:420px}.venue-gallery-controls{bottom:20px;gap:12px;padding:4px 8px}.dress-catalogue{gap:20px;padding:6px 25px 25px}.dress-catalogue figure{flex-basis:78vw}.dress-catalogue figure:nth-child(3n+2){padding-top:0}.dress-palette{gap:25px;padding:0 20px;margin-bottom:30px}.dress-guidance{grid-template-columns:1fr;gap:25px;padding:0 25px;margin-top:25px}.dress-guidance p{font-size:13px}.dress-gallery-controls{margin-bottom:25px}.dress-catalogue .look-photo{aspect-ratio:1/1.55}}
 .dress-catalogue{scroll-padding-inline:6vw}.dress-catalogue.is-dragging{scroll-snap-type:none;user-select:none}@media(max-width:700px){.dress-catalogue{scroll-padding-inline:25px}}
 /* Scroll choreography: separate pieces of stationery, rather than a hidden long section. */
-.motion-ready{opacity:0;translate:0 46px;transition:opacity .85s cubic-bezier(.2,.7,.2,1),translate 1s cubic-bezier(.16,1,.3,1);transition-delay:var(--motion-delay,0ms)}
-.venue-gallery.motion-ready{translate:-65px 0}.venue-copy.motion-ready{translate:65px 20px}
-.guest-print.motion-ready{translate:0 55px}.schedule-spread li.motion-ready{translate:0 55px}
-.motion-ready.motion-visible,.motion-ready:focus-within{opacity:var(--motion-opacity,1);translate:0 0}
+
+
+
+
 .invitation:not([hidden]) .portrait-hero-photo{animation:hero-photograph 1.5s cubic-bezier(.16,1,.3,1) both}
 .invitation:not([hidden]) .portrait-names>span{animation:hero-words 1.1s cubic-bezier(.16,1,.3,1) .25s both}
 .invitation:not([hidden]) .portrait-names>span:nth-child(2){animation-delay:.43s}
@@ -150,7 +150,7 @@
 .venue-incoming-photo{animation:venue-frame-in .6s cubic-bezier(.22,.7,.25,1) both}
 @keyframes venue-frame-in{from{transform:translateX(calc(var(--frame-direction)*100%))}to{transform:translateX(0)}}
 @keyframes venue-frame-out{from{transform:translateX(0)}to{transform:translateX(calc(var(--frame-direction)*-100%))}}
-@media(prefers-reduced-motion:reduce){.motion-ready{opacity:1;translate:none;transition:none}.invitation:not([hidden]) .portrait-hero-photo,.invitation:not([hidden]) .portrait-names>span,.invitation:not([hidden]) .portrait-date,.invitation:not([hidden]) .portrait-scroll,.venue-incoming-photo,.venue-outgoing-photo{animation:none}.venue-outgoing-photo{display:none}}
+@media(prefers-reduced-motion:reduce){.invitation:not([hidden]) .portrait-hero-photo,.invitation:not([hidden]) .portrait-names>span,.invitation:not([hidden]) .portrait-date,.invitation:not([hidden]) .portrait-scroll,.venue-incoming-photo,.venue-outgoing-photo{animation:none}.venue-outgoing-photo{display:none}}
 
 .dress-catalogue .look-photo{aspect-ratio:4/5}
 
@@ -167,31 +167,31 @@
 .guest-watercolor-bottom{width:270px;left:-30px;bottom:8px;opacity:.2;z-index:-1}
 .schedule-watercolor{width:380px;right:-65px;top:auto;bottom:5px;transform:rotate(-8deg);opacity:.21}
 .rsvp-watercolor{width:130px;right:8px;top:10px;transform:none;opacity:.22}
-/* Paper arrives with weight and a gentle settling movement. Hero is unchanged. */
-.motion-ready{translate:0 62px;scale:.98;rotate:0deg;transition:opacity .65s ease-out,translate 1.15s cubic-bezier(.16,1,.3,1),scale 1.15s cubic-bezier(.16,1,.3,1),rotate 1.25s cubic-bezier(.16,1,.3,1);transition-delay:var(--motion-delay,0ms)}
-.chapter-heading.motion-ready{translate:0 54px;scale:.97}
-.venue-gallery.motion-ready{translate:-90px 25px;scale:.96}
-.venue-copy.motion-ready{translate:70px 35px;scale:1}
+/* Composition entrances are directed in polish.css. Hero is unchanged. */
 
 
-.guest-print.motion-ready{translate:-28px 70px;scale:.94;rotate:-4deg;transform-origin:50% 85%}
-.guest-print:nth-child(even).motion-ready{translate:30px 85px;rotate:4deg}
-.schedule-spread li.motion-ready{translate:-65px 40px;scale:.97}
-.schedule-spread li:nth-child(even).motion-ready{translate:65px 40px}
-.rsvp-paper.motion-ready{translate:0 75px;scale:.96;rotate:-1.2deg;transform-origin:50% 75%}
-.watercolor.motion-ready{translate:-20px 35px;scale:.87;rotate:-6deg;transition-duration:1s,1.5s,1.5s,1.65s;transform-origin:30% 80%}
-.motion-ready.motion-visible,.motion-ready:focus-within{opacity:var(--motion-opacity,1);translate:0 0;scale:1;rotate:0deg}
+
+
+
+
+
+
+
+
+
+
+
 @media(max-width:700px){
  .dress-catalogue figure:nth-child(even){padding-top:26px}
  .venue-watercolor{width:245px;bottom:0}.venue-watercolor-secondary{width:95px;top:12px;left:-30px;opacity:.12}
  .dress-watercolor{width:160px;left:-65px;top:35px;opacity:.2}.dress-watercolor-secondary{width:135px;right:-55px;bottom:15px;opacity:.16}
  .guest-watercolor-top{width:110px;right:-45px;top:25px;opacity:.18}.guest-watercolor-bottom{width:180px;left:-45px;opacity:.18}
  .schedule-watercolor{width:245px;right:-65px;opacity:.17}.rsvp-watercolor{width:95px;opacity:.18}
- .motion-ready{translate:0 42px}
- .schedule-spread li.motion-ready{translate:-30px 25px}.schedule-spread li:nth-child(even).motion-ready{translate:30px 25px}
- .motion-ready.motion-visible,.motion-ready:focus-within{translate:0 0}
+
+
+
 }
-@media(prefers-reduced-motion:reduce){.invitation .motion-ready{opacity:var(--motion-opacity,1);translate:none;scale:none;rotate:none;transition:none}}
+
 
 /* Decorative washes keep their material opacity after the reveal. */
 .calendar-leaves--left{--motion-opacity:.3}.calendar-leaves--right{--motion-opacity:.3}
@@ -201,9 +201,9 @@
 .schedule-watercolor{--motion-opacity:.21}.rsvp-watercolor{--motion-opacity:.22}
 @media(max-width:700px){.calendar-leaves--left,.calendar-leaves--right{--motion-opacity:.24}.venue-watercolor{--motion-opacity:.24}.venue-watercolor-secondary{--motion-opacity:.12;right:10px;width:65px}.dress-watercolor{--motion-opacity:.2}.dress-watercolor-secondary{--motion-opacity:.16}.guest-watercolor-top,.guest-watercolor-bottom,.rsvp-watercolor{--motion-opacity:.18}.schedule-watercolor{--motion-opacity:.17}}
 
-/* Settle every individual entrance, including alternating catalogue leaves. */
-#top .motion-ready.motion-visible,#top .motion-ready:focus-within{opacity:var(--motion-opacity,1);translate:0 0;scale:1;rotate:0deg}
-@media(prefers-reduced-motion:reduce){#top .motion-ready,#top .motion-ready.motion-visible,#top .motion-ready:focus-within{opacity:var(--motion-opacity,1);translate:none;scale:none;rotate:none;transition:none}}
+
+
+
 
 /* Catalogue geometry stays fixed while only photographs exchange places. */
 .dress-catalogue{overflow-y:hidden;overflow-anchor:none;align-items:flex-start;scroll-snap-align:none}

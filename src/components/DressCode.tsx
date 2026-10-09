@@ -45,7 +45,7 @@ function Catalogue({category,previous,direction,revision}:{category:Category;pre
       onPointerDown={event=>{destination.current=null;if(event.pointerType==="mouse"&&event.button===0){setDragging(true);drag.current={x:event.clientX,left:event.currentTarget.scrollLeft};event.currentTarget.setPointerCapture(event.pointerId);}}}
       onPointerMove={event=>{if(drag.current)event.currentTarget.scrollLeft=drag.current.left-(event.clientX-drag.current.x);}}
       onPointerUp={()=>{drag.current=null;setDragging(false);}} onPointerCancel={()=>{drag.current=null;setDragging(false);}}>
-      {category.images.map((look,index)=><figure key={index}>
+      {category.images.map((look,index)=><figure key={index} data-active={position===index}>
         <div className="look-photo">
           <div className={"look-frames"+(previous?" look-frames--changing":"")} key={revision} style={{"--look-direction":direction,"--look-delay":Math.min(index,3)*65+"ms"} as React.CSSProperties}>
             {previous?.images[index]&&<img className="look-outgoing" src={previous.images[index].src} alt="" aria-hidden="true" draggable={false}/>}
@@ -55,6 +55,7 @@ function Catalogue({category,previous,direction,revision}:{category:Category;pre
       </figure>)}
 
     </div>
+    <div className="dress-progress" aria-hidden="true"><span style={{width:((position+1)/category.images.length*100)+"%"}} /></div>
     <div className="dress-gallery-controls">
       <button type="button" aria-label={dress.previous} disabled={atStart} onClick={()=>move(-1)}>←</button>
       <span className="gallery-counter">{String(position+1).padStart(2,"0")} / {String(category.images.length).padStart(2,"0")}</span>

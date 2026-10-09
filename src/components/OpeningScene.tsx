@@ -58,7 +58,7 @@ export function OpeningScene({ onComplete }: { onComplete: () => void }) {
           <div className="envelope-flap" />
         </div>
 
-        <div className="letter-rig">
+        <div className="letter-rig" data-paper-airplane={folded || undefined}>
           <div className="letter-paper">
             <div className="paper-body" aria-hidden="true" />
             <div className="letter-decoration" aria-hidden="true"><span>✦</span></div>

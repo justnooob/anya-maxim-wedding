@@ -20,7 +20,10 @@
     "test": "node --test tests/*.test.mjs",
     "test:postgres": "node --env-file=.env.local tests/run-postgres.mjs",
     "start:amvera": "node scripts/start-amvera.mjs",
-    "telegram:production": "node scripts/telegram-production.mjs"
+    "telegram:production": "node scripts/telegram-production.mjs",
+    "test:browser": "npm run build && node node_modules/playwright/cli.js test",
+    "test:browser:update": "npm run build && node node_modules/playwright/cli.js test --update-snapshots",
+    "test:browser:report": "node node_modules/playwright/cli.js show-report"
   },
   "dependencies": {
     "drizzle-orm": "^0.45.3",
@@ -38,6 +41,7 @@
     "@typescript/native": "npm:typescript@^7.0.2",
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.3.8",
-    "typescript": "npm:@typescript/typescript6@^6.0.2"
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "playwright": "1.62.1"
   }
 }

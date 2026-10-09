@@ -24,18 +24,32 @@ export function InvitationExperience() {
     const main=mainRef.current;if(!main)return;
     const motion=window.matchMedia("(prefers-reduced-motion: reduce)");
     if(motion.matches)return;
-    const selector=".date-invitation,.date-large,.date-start,.wedding-calendar,.chapter-heading,.venue-gallery,.venue-copy,.page-switch,.dress-palette,.dress-pages,.dress-guidance,.dress-note,.guest-print,.guest-note,.schedule-spread li,.schedule-note,.rsvp-paper,.footer,.chapter .watercolor,.calendar-leaves";
+    const selector=".wedding-date-section,.wedding-calendar,.venue-chapter,.dress-chapter,.guest-album,.guest-chapter>.chapter-heading,.schedule-chapter>.chapter-heading,.schedule-spread li,.questions-heading,.rsvp-paper,.chapter .watercolor";
     const seen=new WeakSet<Element>();
     const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
-      if(entry.isIntersecting){entry.target.classList.add("motion-visible");observer.unobserve(entry.target);}
-    }),{threshold:0,rootMargin:"0px 0px -8% 0px"});
-    function register(){main!.querySelectorAll<HTMLElement>(selector).forEach((el,index)=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("motion-visible");
+        const row=entry.target as HTMLElement;
+        if(row.matches(".schedule-spread li")){
+          const list=row.parentElement!;
+          const progress=row===list.lastElementChild?1:Math.min(1,(row.offsetTop+26)/Math.max(1,list.offsetHeight-60));
+          const previous=Number(list.dataset.lineProgress||0);
+          list.dataset.lineProgress=String(Math.max(previous,progress));
+          list.style.setProperty("--line-progress",String(Math.max(previous,progress)));
+        }
+        observer.unobserve(entry.target);
+      }
+    }),{threshold:0,rootMargin:"0px 0px 4% 0px"});
+    function register(){if(motion.matches)return;main!.querySelectorAll<HTMLElement>(selector).forEach(el=>{
       if(seen.has(el))return;seen.add(el);el.classList.remove("motion-visible");el.classList.add("motion-ready");
-      el.style.setProperty("--motion-delay",(index%4)*85+"ms");observer.observe(el);
+      if(el.matches(".schedule-spread li"))el.parentElement!.classList.add("timeline-ready");
+      observer.observe(el);
     });}
     register();
     const changes=new MutationObserver(register);changes.observe(main,{childList:true,subtree:true});
-    return()=>{observer.disconnect();changes.disconnect();};
+    const reduce = () => {if(motion.matches){main.querySelectorAll(".motion-ready,.timeline-ready").forEach(el=>el.classList.remove("motion-ready","timeline-ready"));observer.disconnect();}};
+    motion.addEventListener("change",reduce);
+    return()=>{observer.disconnect();changes.disconnect();motion.removeEventListener("change",reduce);};
   }, [opening]);
   function complete() {
     try { sessionStorage.setItem(seenKey, "yes"); } catch {}
@@ -46,7 +60,7 @@ export function InvitationExperience() {
   return <>
     {opening === null && <div className="boot" aria-label="Загрузка приглашения">А & М</div>}
     {opening === true && <OpeningScene onComplete={complete} />}
-    <main id="top" ref={mainRef} tabIndex={-1} hidden={opening !== false} className="invitation">
+    <main id="top" ref={mainRef} tabIndex={-1} hidden={opening !== false} inert={opening !== false} className="invitation">
       <Hero /><DateSection /><VenueSection /><DressCode /><GuestList /><Schedule /><Questions /><RSVP />
       <footer className="footer"><button onClick={() => {setOpening(true); window.scrollTo({top: 0, behavior: "instant"});}}>Открыть письмо ещё раз ↗</button></footer>
     </main>

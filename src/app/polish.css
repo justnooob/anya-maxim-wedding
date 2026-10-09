@@ -1,0 +1,183 @@
+/* Public invitation polish. Deliberately scoped away from Telegram/admin. */
+:root {
+ --invite-body:18px; --invite-detail:16px; --invite-form:18px;
+ --invite-label:15px; --invite-small:13px; --invite-faq:17px;
+ --invite-ease:cubic-bezier(.22,.7,.25,1); --invite-reveal:620ms;
+}
+#top .chapter-heading>p {font-size:var(--invite-body);line-height:1.75;}
+#top .venue-address {font-size:var(--invite-faq);line-height:1.8;max-width:390px;}
+#top .venue-arrival {font-size:var(--invite-label);line-height:1.75;}
+#top .dress-guidance p,#top .dress-note {font-size:var(--invite-detail);line-height:1.8;}
+#top .guest-print p {font-size:var(--invite-small);line-height:1.75;}
+#top .question-answer {font-size:var(--invite-faq);line-height:1.8;}
+#top .writing-field>span,#top .rsvp-paper legend {font-size:var(--invite-label);line-height:1.6;}
+#top .writing-field input,#top .writing-field textarea {font-size:var(--invite-form);line-height:1.65;}
+#top .paper-options label,#top .paper-checkbox {font-size:var(--invite-label);line-height:1.7;}
+#top .rsvp-confirmation>p {font-size:var(--invite-body);line-height:1.75;}
+#top .saved-guest p {font-size:var(--invite-label);line-height:1.7;}
+/* The restored paper airplane completes before the polished Hero entrance. */
+#top .portrait-hero {background:var(--date-stone);}
+#top:not([hidden]) .portrait-hero-photo {animation:invite-hero-photo 1500ms var(--invite-ease) both;}
+#top:not([hidden]) .portrait-names>span {animation:invite-hero-text 800ms var(--invite-ease) 420ms both;}
+#top:not([hidden]) .portrait-names>.portrait-ampersand {animation-delay:540ms;}
+#top:not([hidden]) .portrait-names>span:last-child {animation-delay:660ms;}
+#top:not([hidden]) .portrait-date,#top:not([hidden]) .portrait-scroll {animation:invite-hero-text 700ms var(--invite-ease) 780ms both;}
+@keyframes invite-hero-photo {from{opacity:0;scale:1.03}to{opacity:1;scale:1}}
+@keyframes invite-hero-text {from{opacity:0;translate:0 20px}to{opacity:1;translate:0 0}}
+/* Date typography becomes an anchor without adding another sheet. */
+@media(min-width:701px) {
+ #top .date-invitation {font-size:clamp(18px,1.45vw,23px);max-width:310px;margin-bottom:32px;}
+ #top .date-large {font-size:clamp(44px,5.5vw,90px);font-weight:400;letter-spacing:-.045em;line-height:1.2;}
+ #top .date-start {width:auto;min-width:62%;border-top:1px solid #ad905680;margin-top:32px;padding-top:25px;font-size:clamp(22px,2vw,30px);position:relative;}
+ #top .date-start::before {content:'✦';position:absolute;top:-9px;left:50%;translate:-50% 0;background:var(--date-stone);color:#ad9056;font:13px/1.2 Montserrat,sans-serif;padding:0 10px;}
+}
+/* Gallery frames keep their direction, with a very restrained change of distance. */
+#top .venue-incoming-photo {animation:invite-frame-in 720ms var(--invite-ease) both;}
+#top .venue-outgoing-photo {animation:invite-frame-out 720ms var(--invite-ease) both;}
+@keyframes invite-frame-in {from{transform:translateX(calc(var(--frame-direction)*100%)) scale(1.025)}to{transform:translateX(0) scale(1)}}
+@keyframes invite-frame-out {from{transform:translateX(0) scale(1)}to{transform:translateX(calc(var(--frame-direction)*-100%)) scale(1.015)}}
+#top .venue-gallery-controls button,#top .dress-gallery-controls button {transition:background 220ms,color 220ms,translate 220ms var(--invite-ease);}
+#top .page-switch button {transition:color 240ms,border-color 240ms;}
+#top .look-photo {transition:filter 300ms var(--invite-ease);}
+#top .dress-catalogue figure:not([data-active=true]) .look-photo {filter:saturate(.88);}
+#top .dress-progress {max-width:120px;height:1px;margin:8px auto 0;background:#b49a6133;overflow:hidden;}
+#top .dress-progress>span {display:block;height:100%;background:#ad9056;transition:width 450ms var(--invite-ease);}
+/* Preserve every album rotation and position; scale is independent and cannot shift siblings. */
+#top .guest-print {transition:scale 220ms var(--invite-ease),box-shadow 220ms var(--invite-ease);}
+/* An editorial running order. The fine stem sits between time and event on desktop. */
+#top .schedule-spread {display:block;position:relative;max-width:900px;margin:64px auto 0;padding:0;}
+#top .schedule-spread::before {content:'';position:absolute;left:190px;top:12px;bottom:48px;width:1px;background:linear-gradient(#d8c28b80,#b49a6140);transform-origin:50% 0;scale:1 1;transition:scale 1100ms var(--invite-ease);}
+#top .schedule-spread.motion-ready {opacity:1;translate:none;scale:1;}
+#top .schedule-spread.motion-ready::before {scale:1 0;}
+#top .schedule-spread.motion-visible::before {scale:1 1;}
+#top .schedule-spread li {display:grid;grid-template-columns:160px minmax(0,1fr);gap:60px;position:relative;margin:0!important;padding:0 0 64px;border:0;min-width:0;}
+#top .schedule-spread li:last-child {padding-bottom:0;}
+#top .schedule-spread li::before {content:'';position:absolute;left:186px;top:25px;width:9px;height:1px;background:#d8c28b;}
+#top .schedule-time {font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(46px,4.5vw,64px);letter-spacing:-.025em;font-weight:400;line-height:1;}
+#top .schedule-spread h3 {font-size:clamp(29px,3vw,40px);margin:2px 0 14px;line-height:1.2;}
+#top .schedule-spread p {font-size:var(--invite-detail);line-height:1.8;max-width:470px;}
+#top .schedule-watercolor {width:320px;left:-105px;right:auto;top:35%;bottom:auto;transform:rotate(90deg);opacity:.16;--motion-opacity:.16;}
+#top .questions-watercolor {width:180px;left:1vw;bottom:38px;transform:none;opacity:.13;--motion-opacity:.13;}
+#top .rsvp-watercolor {top:auto;bottom:35px;right:-15px;width:165px;opacity:.13;--motion-opacity:.13;}
+#top .question-trigger {transition:color 240ms,background 240ms;}
+#top .question-sign {transition:rotate 300ms var(--invite-ease);}
+#top .question-trigger[aria-expanded=true] .question-sign {rotate:180deg;}
+#top .question-panel,#top .question-panel[data-open=true] {transition-duration:460ms,260ms,0s;}
+#top .foil-button {transition:filter 220ms,box-shadow 220ms,translate 180ms var(--invite-ease);}
+#top .foil-button:active:not(:disabled) {translate:0 1px;filter:brightness(.98);}
+#top .venue-gallery-controls button:active,#top .dress-gallery-controls button:active:not(:disabled) {translate:0 1px;}
+@media(hover:hover) and (pointer:fine) {
+ #top .guest-print.motion-visible:hover,#top .guest-print:not(.motion-ready):hover {scale:1.02;box-shadow:0 1px 2px #76634218,0 15px 24px -18px #453c2670;}
+ #top .venue-gallery-controls button:hover {background:#e4d3a21a;color:#e4d3a2;}
+ #top .dress-gallery-controls button:hover:not(:disabled) {background:#b49a6110;color:#8e733f;}
+ #top .page-switch button:hover {color:#8e733f;}
+ #top .question-trigger:hover {background:#b49a6108;}
+}
+@media(max-width:700px) {
+ :root {--invite-body:17px;--invite-detail:15px;--invite-small:12px;--invite-label:14px;--invite-faq:17px;--invite-form:18px;}
+
+ #top:not([hidden]) .portrait-hero-photo {animation-duration:1100ms;}
+ #top:not([hidden]) .portrait-names>span {animation-duration:650ms;animation-delay:240ms;}
+ #top:not([hidden]) .portrait-names>.portrait-ampersand {animation-delay:330ms;}
+ #top:not([hidden]) .portrait-names>span:last-child {animation-delay:420ms;}
+ #top:not([hidden]) .portrait-date,#top:not([hidden]) .portrait-scroll {animation-delay:520ms;}
+
+
+ #top .schedule-spread {margin-top:44px;}
+ #top .schedule-spread::before {left:0;top:8px;bottom:48px;}
+ #top .schedule-spread li {grid-template-columns:74px minmax(0,1fr);gap:18px;padding-left:22px;padding-bottom:44px;}
+ #top .schedule-spread li::before {left:-4px;top:16px;}
+ #top .schedule-time {font-size:34px;}
+ #top .schedule-spread li:last-child .schedule-time {font-size:29px;}
+ #top .schedule-spread h3 {font-size:27px;margin:0 0 12px;}
+ #top .schedule-watercolor {width:190px;left:auto;right:-123px;top:25%;opacity:.08;--motion-opacity:.08;}
+ #top .questions-watercolor {width:115px;left:-65px;bottom:24px;opacity:.09;--motion-opacity:.09;}
+ #top .rsvp-watercolor {width:120px;right:-15px;bottom:30px;opacity:.09;--motion-opacity:.09;}
+ #top .dress-guidance {min-height:400px;}
+ #top .dress-note {min-height:105px;}
+}
+@media(prefers-reduced-motion:reduce) {
+ #top:not([hidden]) .portrait-hero-photo,#top:not([hidden]) .portrait-names>span,#top:not([hidden]) .portrait-date,#top:not([hidden]) .portrait-scroll,#top .venue-incoming-photo,#top .venue-outgoing-photo {animation:none;}
+ #top .venue-outgoing-photo {display:none;}
+ #top .motion-ready,#top .motion-ready.motion-visible,#top .motion-ready:focus-within {opacity:var(--motion-opacity,1);translate:none;scale:none;rotate:none;transition:none;}
+ #top .schedule-spread::before {scale:1 1;transition:none;}
+ #top .guest-print,#top .foil-button,#top .question-panel,#top .question-panel[data-open=true],#top .question-sign,#top .question-trigger,#top .dress-progress>span,#top .look-photo,#top .venue-gallery-controls button,#top .dress-gallery-controls button {transition:none;}
+ #top .guest-print:hover,#top .foil-button:active,#top .venue-gallery-controls button:active,#top .dress-gallery-controls button:active {scale:none;translate:none;}
+}
+/* Motion direction: composition first. No universal travelling reveal. */
+#top .motion-ready {opacity:1;translate:none;scale:1;rotate:none;transition:none;}
+#top .motion-ready.motion-visible,#top .motion-ready:focus-within {translate:none;rotate:none;}
+#top :is(.chapter-heading,.questions-heading).motion-ready {opacity:0;transition:opacity 480ms var(--invite-ease);}
+#top :is(.chapter-heading,.questions-heading).motion-visible {opacity:1;}
+/* Date: two sides unfold, then the quiet time signature. */
+#top .wedding-date-section.motion-ready .date-large {clip-path:inset(0 100% 0 0);transition:clip-path 750ms var(--invite-ease);}
+#top .wedding-date-section.motion-visible .date-large {clip-path:inset(0);}
+#top .wedding-date-section.motion-ready .date-invitation {opacity:0;transition:opacity 500ms var(--invite-ease);}
+#top .wedding-date-section.motion-visible .date-invitation {opacity:1;}
+#top .wedding-date-section.motion-ready .date-start {opacity:0;clip-path:inset(0 100% 0 0);transition:clip-path 650ms var(--invite-ease) 200ms,opacity 450ms ease 350ms;}
+#top .wedding-date-section.motion-visible .date-start {opacity:1;clip-path:inset(0);}
+#top .wedding-calendar.motion-ready {opacity:.15;translate:26px 0;transition:translate 650ms var(--invite-ease) 100ms,opacity 500ms ease 100ms;}
+#top .wedding-calendar.motion-visible,#top .wedding-calendar:focus-within {opacity:1;translate:none;}
+/* Venue: photograph leads, copy arrives as one quiet panel. */
+#top .venue-chapter.motion-ready .venue-gallery {clip-path:polygon(0 0,0 0,0 100%,0 100%);scale:1.03;transition:clip-path 800ms var(--invite-ease),scale 800ms var(--invite-ease);}
+#top .venue-chapter.motion-visible .venue-gallery {clip-path:polygon(0 0,100% 0,100% 100%,0 100%);scale:1;}
+#top .venue-chapter.motion-ready .venue-copy {opacity:0;transition:opacity 550ms ease 250ms;}
+#top .venue-chapter.motion-visible .venue-copy,#top .venue-chapter:focus-within :is(.venue-copy,.venue-gallery) {opacity:1;clip-path:inset(0);scale:1;}
+/* Album: existing printed rotations remain untouched. Only three small directions. */
+#top .guest-album.motion-ready .guest-print {opacity:0;translate:-12px 0;transition:opacity 450ms ease,translate 600ms var(--invite-ease),scale 220ms var(--invite-ease),box-shadow 220ms;}
+#top .guest-album.motion-ready .guest-print:nth-child(3n+2) {translate:0 10px;transition-delay:70ms;}
+#top .guest-album.motion-ready .guest-print:nth-child(3n) {translate:12px 0;transition-delay:140ms;}
+#top .guest-album.motion-visible .guest-print,#top .guest-album:focus-within .guest-print {opacity:1;translate:none;}
+/* Lookbook: palette, primary photograph, neighbours, one lower composition. */
+#top .dress-chapter.motion-ready :is(.chapter-heading,.page-switch) {opacity:0;transition:opacity 450ms ease;}
+#top .dress-chapter.motion-ready .dress-palette>span {opacity:0;scale:.96;transition:opacity 450ms ease,scale 450ms var(--invite-ease);}
+#top .dress-chapter.motion-ready .dress-palette>span:nth-child(2) {transition-delay:80ms;}
+#top .dress-chapter.motion-ready .look-photo {clip-path:inset(0 0 100% 0);scale:.985;transition:clip-path 750ms var(--invite-ease) 120ms,scale 650ms var(--invite-ease) 120ms,filter 300ms;}
+#top .dress-chapter.motion-ready figure:first-child .look-photo {transition-delay:0ms;}
+#top .dress-chapter.motion-ready :is(.dress-guidance,.dress-note) {opacity:0;transition:opacity 500ms ease 220ms;}
+#top .dress-chapter.motion-visible :is(.chapter-heading,.page-switch,.dress-palette>span,.dress-guidance,.dress-note) {opacity:1;scale:1;}
+#top .dress-chapter.motion-visible .look-photo,#top .dress-chapter:focus-within .look-photo {clip-path:inset(0);scale:1;}
+#top .dress-chapter:focus-within :is(.page-switch,.dress-guidance,.dress-note,.dress-palette>span) {opacity:1;}
+/* Program: line reaches each marker as its event enters the reading window. */
+#top .schedule-spread.timeline-ready::before {scale:1 var(--line-progress,0);transition:scale 850ms var(--invite-ease);}
+#top .schedule-spread li.motion-ready {opacity:1;translate:none;}
+#top .schedule-spread li.motion-ready::before {scale:0 1;transition:scale 200ms ease 180ms;}
+#top .schedule-spread li.motion-ready .schedule-time {clip-path:inset(0 100% 0 0);transition:clip-path 600ms var(--invite-ease) 120ms;}
+#top .schedule-spread li.motion-ready>div {opacity:0;translate:10px 0;transition:opacity 450ms ease 200ms,translate 550ms var(--invite-ease) 200ms;}
+#top .schedule-spread li.motion-visible::before {scale:1;}
+#top .schedule-spread li.motion-visible .schedule-time {clip-path:inset(0);}
+#top .schedule-spread li.motion-visible>div {opacity:1;translate:none;}
+/* FAQ rows stay present. Interaction carries the rhythm. */
+#top .question-item {position:relative;}
+#top .question-item::after {content:'';position:absolute;left:0;bottom:0;width:100%;height:1px;background:#ad905660;scale:0 1;transform-origin:left;transition:scale 240ms ease;pointer-events:none;}
+#top .question-item:has([aria-expanded=true])::after,#top .question-item:focus-within::after {scale:1;}
+/* RSVP is a single sheet; fields have no stagger. */
+#top .rsvp-paper.motion-ready {opacity:0;scale:.985;translate:0 4px;transition:opacity 500ms ease,scale 650ms var(--invite-ease),translate 650ms var(--invite-ease);}
+#top .rsvp-paper.motion-visible,#top .rsvp-paper:focus-within {opacity:1;scale:1;translate:none;}
+/* Botanical materials: broad masks, small accents and quiet background washes. */
+#top .watercolor.motion-ready {opacity:var(--motion-opacity,1);translate:none;rotate:none;scale:1;clip-path:inset(100% 0 0 0);transition:clip-path 800ms var(--invite-ease);}
+#top :is(.venue-watercolor-secondary,.guest-watercolor-top,.rsvp-watercolor).motion-ready {clip-path:none;opacity:0;scale:.97;transition:opacity 550ms ease 180ms,scale 550ms var(--invite-ease) 180ms;}
+#top :is(.questions-watercolor,.schedule-watercolor).motion-ready {clip-path:none;opacity:calc(var(--motion-opacity,.15)*.65);transition:opacity 600ms ease;}
+#top .watercolor.motion-visible {clip-path:inset(0);opacity:var(--motion-opacity,1);scale:1;}
+@media(max-width:700px) {
+ #top .wedding-calendar.motion-ready {translate:12px 0;transition-duration:500ms;transition-delay:60ms;}
+ #top .wedding-calendar.motion-visible {translate:none;}
+ #top .guest-album.motion-ready .guest-print {translate:-5px 0;transition-duration:400ms,480ms,220ms,220ms;}
+ #top .guest-album.motion-ready .guest-print:nth-child(3n+2) {translate:0 5px;transition-delay:40ms;}
+ #top .guest-album.motion-ready .guest-print:nth-child(3n) {translate:5px 0;transition-delay:80ms;}
+ #top .guest-album.motion-visible .guest-print {translate:none;}
+ #top .venue-chapter.motion-ready .venue-gallery,#top .dress-chapter.motion-ready .look-photo {transition-duration:650ms;}
+ #top .venue-chapter.motion-ready .venue-copy {transition-duration:450ms;transition-delay:180ms;}
+ #top .schedule-spread li.motion-ready>div {translate:5px 0;transition-duration:400ms,450ms;transition-delay:120ms;}
+ #top .schedule-spread li.motion-visible>div {translate:none;}
+ #top .rsvp-paper.motion-ready {translate:0 2px;transition-duration:450ms,520ms,520ms;}
+ #top .rsvp-paper.motion-visible {translate:none;}
+}
+@media(prefers-reduced-motion:reduce) {
+ #top .motion-ready,#top .motion-ready * {clip-path:none!important;translate:none!important;scale:1!important;transition:none!important;}
+ #top .motion-ready,#top .motion-ready :is(.date-invitation,.date-start,.venue-copy,.guest-print,.chapter-heading,.page-switch,.dress-palette>span,.dress-guidance,.dress-note),#top .schedule-spread li.motion-ready>div {opacity:1!important;}
+ #top .watercolor.motion-ready {opacity:var(--motion-opacity,1)!important;}
+ #top .schedule-spread.timeline-ready::before,#top .schedule-spread li::before {scale:1;transition:none;}
+}
+/* The album placement replaces its former container fade-up. */
+#top .guest-album.page-enter {animation:none;}

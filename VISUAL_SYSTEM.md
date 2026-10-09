@@ -56,3 +56,33 @@ Mobile: отдельная композиция. Hero повторяет дат�
 
 ### Дресс-код: стабильный каталог
 Карточки имеют постоянные размеры и чередование высот. Их индивидуальные scroll-reveal движения отключены: при входе появляется каталог целиком. Листание только по горизонтали, без внутреннего вертикального scroll. При смене категории фотографии заменяются внутри постоянных бумажных рамок: к женским слева направо, к мужским справа налево, 620 ms cubic-bezier(.22,.7,.25,1), stagger 65 ms (максимум 195 ms). Reduced motion заменяет кадры сразу.
+## Visual + motion polish, 9 октября 2026
+
+Это дополнение заменяет прежние экспериментальные правила motion для публичных секций. Структуры Hero, даты, места и дресс-кода сохраняются. Конверт и письмо до ухода сцены не меняются.
+
+- Text reveal: opacity + translateY 22 px, 620 ms; mobile 18 px / 520 ms. Large visual: opacity + scale 1.025 → 1 и 12 px; mobile 1.02 / 8 px. Декор: opacity + 10 px, 780 ms, задержка 120 ms. Общий easing cubic-bezier(.22,.7,.25,1), обычный stagger 0–120 ms. Нет поворотов и bounce при появлении текста, постоянного parallax и shimmer Hero.
+- Письмо → Hero: crossfade 1400 ms desktop / 950 ms mobile, письмо scale 1 → .94. Фото Hero scale 1.03 → 1, 1500/1100 ms. Имена имеют перекрывающиеся задержки 420/540/660 ms desktop и 240/330/420 ms mobile; после входа статичны. Во время перехода main inert; затем фокус передаётся main.
+- Desktop дата: вводный текст спокойнее, дата крупнее и плотнее, тонкая золотая линия с одним знаком над временем. Календарь сохранён. Mobile сохраняет утверждённый оливковый блок и порядок элементов.
+- Программа: согласованное исключение из старого запрета timeline. Используется вертикальная тонкая золотая линия, короткие marks без круглых dots, отдельные колонки времени и события. Desktop интервал 64 px, mobile 44 px. Линия проявляется сверху вниз, события отдельно при scroll.
+- Tokens polish.css: body 18/17 px desktop/mobile, details 16/15, form 18/18, labels 15/14, guest captions 13/12, FAQ 17/17. Счётчики, calendar numbers, pagination, кнопки и technical microcopy не увеличиваются.
+- 11 разных акварельных композиций публичных секций: atelier-01…10 и mini для FAQ. Каждая используется один раз; atelier-09 в программе ориентирована вертикально. RSVP декор перенесён вниз, opacity .13 desktop / .09 mobile. Новых ассетов и тяжёлых библиотек нет.
+- Guests desktop hover: scale 1.02 / 220 ms, без изменения layout и с сохранением наклона бумажных фотографий. Только hover + fine pointer. На touch и reduced motion увеличения нет.
+- Reduced motion отключает cinematic/entrance/scale/hover movement и анимации переключения, контент доступен сразу. Ниже fold ботаника остаётся lazy-loaded. Нет video или parallax loops.
+## Восстановление самолётика, 9 октября 2026
+
+По уточнению арт-директора crossfade письма отменён. Восстановлена исходная реализация из Git commit 78cf31f, без новой механики и без изменений opening-scene.css: letter → folding 1800 ms → flight 1050 ms → смена сцены через 1150 ms от начала flight → новый polished Hero entrance. Hero остаётся hidden/inert до завершения сцены; затем передаётся фокус main. Mobile сохраняет тот же самолётик и исходный тайминг, без подмены fade. Reduced motion использует исходный короткий путь 200 ms. Все остальные typography, Date/Program/FAQ/botanical/hover/motion изменения сохранены.
+
+## Motion art direction, October 2026
+
+Entrance works at composition level; individual paragraphs and form fields are not staggered. Hero and letter → airplane → Hero are preserved.
+
+- Date: horizontal date mask, time signature last, calendar slides inward by 26px (12px mobile).
+- Venue: photograph mask and restrained 1.03 scale; the complete information panel fades afterward. Gallery interactions retain their direction.
+- Guests: three small placement directions, existing paper rotations intact; 70/140ms capped stagger (40/80ms mobile), existing fine-pointer hover 1.02.
+- Dress: calm heading, palette sequence, primary photograph clip then neighbours; lower copy arrives together. Category transitions unchanged.
+- Program: once-only progressive line follows encountered events. Markers, masked times and small horizontal text displacement belong to the same sequence.
+- FAQ: rows are static. Heading is quiet; accordion and divider interactions carry the motion.
+- RSVP: single paper sheet, scale .985 to 1 with 4px settling (2px mobile); no field entrances.
+- Botanicals: broad directional masks, small accent opacity/scale, background washes strengthen gently. No leaf-by-leaf growth.
+
+Typical durations: 450–650ms; image masks 650–800ms; timeline 850ms. IntersectionObserver starts at the lower viewport boundary plus 4%, threshold zero, and unobserves each revealed composition. Reduced motion leaves content and timeline immediately visible and removes entrance clips/transforms. No new animation dependencies.

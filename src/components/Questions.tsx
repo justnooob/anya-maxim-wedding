@@ -37,6 +37,6 @@ export function Questions() {
         })}
       </div>
     </div>
-    <Watercolor kind="spray" className="questions-watercolor" />
+    <Watercolor kind="mini" className="questions-watercolor" />
   </section>;
 }

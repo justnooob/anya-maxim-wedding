@@ -9,17 +9,25 @@ import {getRsvp,postRsvp} from '../../src/server/rsvp/http.mjs';
 import {miniAppRequest} from '../../src/server/telegram/mini-app.mjs';
 import {saveRsvp} from '../../src/server/rsvp/repository.mjs';
 import {validateRsvp} from '../../src/server/rsvp/validation.mjs';
-const origin='http://localhost:3100';process.env.PUBLIC_SITE_URL=origin;process.env.TELEGRAM_ALLOWED_USER_IDS='123';
+import {transaction} from '../../src/server/db/index.mjs';
+const port=Number(process.env.QA_PORT||3100),upstreamPort=Number(process.env.QA_UPSTREAM_PORT||3000);
+if(!Number.isInteger(port)||!Number.isInteger(upstreamPort)||port<1024||port>65535||upstreamPort<1024||upstreamPort>65535)throw new Error('Invalid local QA ports');
+const origin='http://localhost:'+port;process.env.PUBLIC_SITE_URL=origin;process.env.TELEGRAM_ALLOWED_USER_IDS='123';
 const env={TELEGRAM_BOT_TOKEN:randomBytes(32).toString('hex'),TELEGRAM_ALLOWED_USER_IDS:'123'};
 const db=new PGlite();await db.exec(fs.readdirSync('migrations').filter(n=>n.endsWith('.sql')).sort().map(n=>fs.readFileSync('migrations/'+n,'utf8')).join('\n'));
 let tail=Promise.resolve();const source={async connect(){const prior=tail;let unlock;tail=new Promise(resolve=>unlock=resolve);await prior;return {query:async(sql,args)=>{const r=await db.query(sql,args);return {...r,rowCount:r.affectedRows};},release:unlock};}};
-const session='f'.repeat(64);await db.query("INSERT INTO guest_sessions(id,expires_at) VALUES($1,now()+interval '1 year')",[session]);
-await saveRsvp({query:(sql,args)=>db.query(sql,args)},session,validateRsvp({guestName:'Ж'.repeat(78)+'😀😀',attendance:'yes',who:'Я'.repeat(120),food:'А'.repeat(300),musicRequest:'М'.repeat(300),transfer:'needed',overnight:'stay',dressCode:true,alcoholDrinks:['red_wine','white_wine','cognac','vodka','whisky','rum','gin','jagermeister','other'],alcoholOther:'С'.repeat(80),softDrinks:['cola','sprite','fanta','tonic','apple_juice','multifruit_juice','orange_juice','tomato_juice','sparkling_water','still_water','other'],softOther:'Б'.repeat(80)}),new Set());
+async function seed(client={query:(sql,args)=>db.query(sql,args)}){
+const session='f'.repeat(64);await client.query("INSERT INTO guest_sessions(id,expires_at) VALUES($1,now()+interval '1 year')",[session]);
+await saveRsvp(client,session,validateRsvp({guestName:'Ж'.repeat(78)+'😀😀',attendance:'yes',who:'Я'.repeat(120),food:'А'.repeat(300),musicRequest:'М'.repeat(300),transfer:'needed',overnight:'stay',dressCode:true,alcoholDrinks:['red_wine','white_wine','cognac','vodka','whisky','rum','gin','jagermeister','other'],alcoholOther:'С'.repeat(80),softDrinks:['cola','sprite','fanta','tonic','apple_juice','multifruit_juice','orange_juice','tomato_juice','sparkling_water','still_water','other'],softOther:'Б'.repeat(80)}),new Set());
+}
+await seed();
 function initData(){const data=new URLSearchParams({auth_date:String(Math.floor(Date.now()/1000)),user:JSON.stringify({id:123,first_name:'QA'})});const key=createHmac('sha256','WebAppData').update(env.TELEGRAM_BOT_TOKEN).digest();data.set('hash',createHmac('sha256',key).update([...data.entries()].sort(([a],[b])=>a<b?-1:1).map(([k,v])=>k+'='+v).join('\n')).digest('hex'));return data.toString();}
 let status=0,delay=0;
 const server=createServer(async(req,res)=>{try{
  if(!['127.0.0.1','::1','::ffff:127.0.0.1'].includes(req.socket.remoteAddress)){res.writeHead(403);res.end();return;}
  const url=new URL(req.url,origin);
+ if(url.pathname==='/qa/health'){res.end('isolated-browser-fixture');return;}
+ if(url.pathname==='/qa/reset'&&process.env.QA_BROWSER==='1'&&req.method==='POST'){await transaction(async client=>{await client.query('TRUNCATE guest_sessions CASCADE');await client.query('TRUNCATE rate_limits');await seed(client);},source);status=0;delay=0;res.end('reset synthetic fixtures');return;}
  if(url.pathname==='/qa/config'){status=Number(url.searchParams.get('status')||0);delay=Number(url.searchParams.get('delay')||0);res.end('configured');return;}
  if(url.pathname==='/qa/count'){res.setHeader('Content-Type','application/json');res.end(JSON.stringify((await db.query('SELECT count(*)::int total FROM rsvps')).rows[0]));return;}
  if(url.pathname==='/qa-sdk.js'){res.setHeader('Content-Type','application/javascript');res.end('window.Telegram={WebApp:{initData:'+JSON.stringify(initData())+',ready(){},expand(){},safeAreaInset:{top:24,bottom:20},contentSafeAreaInset:{top:12,bottom:0}}};');return;}
@@ -30,11 +38,11 @@ const server=createServer(async(req,res)=>{try{
   else {const request=new Request(url,{method:req.method,headers:req.headers,...(body.length?{body}:{})});reply=url.pathname==='/api/rsvp'?(req.method==='GET'?await getRsvp(request,source):await postRsvp(request,source)):url.pathname==='/api/telegram/mini-app'?await miniAppRequest(request,{source,env}):new Response(null,{status:404});}
   res.writeHead(reply.status,Object.fromEntries(reply.headers));res.end(Buffer.from(await reply.arrayBuffer()));return;
  }
- const upstream=await fetch(new URL(req.url,'http://localhost:3000'),{headers:{'accept-encoding':'identity'}});
+ const upstream=await fetch(new URL(req.url,'http://127.0.0.1:'+upstreamPort),{headers:{'accept-encoding':'identity'}});
  let bytes=Buffer.from(await upstream.arrayBuffer());const headers=Object.fromEntries(upstream.headers);delete headers['content-encoding'];delete headers['content-length'];delete headers['transfer-encoding'];
  if(url.pathname.endsWith('.js'))bytes=Buffer.from(bytes.toString().replaceAll('https://telegram.org/js/telegram-web-app.js',origin+'/qa-sdk.js'));
  res.writeHead(upstream.status,headers);res.end(bytes);
  }catch{res.writeHead(503);res.end('Isolated QA unavailable');}});
-server.on('upgrade',(req,socket,head)=>{if(!['127.0.0.1','::1','::ffff:127.0.0.1'].includes(req.socket.remoteAddress)){socket.destroy();return;}const upstream=net.connect(3000,'127.0.0.1',()=>{upstream.write(req.method+' '+req.url+' HTTP/1.1\r\n'+Object.entries(req.headers).map(([k,v])=>k+': '+v).join('\r\n')+'\r\n\r\n');if(head.length)upstream.write(head);socket.pipe(upstream);upstream.pipe(socket);});upstream.on('error',()=>socket.destroy());socket.on('error',()=>upstream.destroy());});
-server.listen(3100,'::',()=>console.log('Isolated QA on http://localhost:3100 (synthetic data only)'));
+server.on('upgrade',(req,socket,head)=>{if(!['127.0.0.1','::1','::ffff:127.0.0.1'].includes(req.socket.remoteAddress)){socket.destroy();return;}const upstream=net.connect(upstreamPort,'127.0.0.1',()=>{upstream.write(req.method+' '+req.url+' HTTP/1.1\r\n'+Object.entries(req.headers).map(([k,v])=>k+': '+v).join('\r\n')+'\r\n\r\n');if(head.length)upstream.write(head);socket.pipe(upstream);upstream.pipe(socket);});upstream.on('error',()=>socket.destroy());socket.on('error',()=>upstream.destroy());});
+server.listen(port,'::',()=>console.log('Isolated QA on '+origin+' (synthetic data only)'));
 for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>server.close(async()=>{await db.close();process.exit(0);}));

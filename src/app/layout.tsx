@@ -7,6 +7,7 @@ import "./stationery.css";
 import "./editorial.css";
 import "./chapters.css";
 import "./questions.css";
+import "./polish.css";
 export const metadata: Metadata = {
   title: "Аня & Максим, 17 июля 2027",
   description: "Личное приглашение. Один особенный день, и ты, его часть.",

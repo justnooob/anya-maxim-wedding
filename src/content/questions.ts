@@ -1,7 +1,7 @@
 // TODO: replace null with the real wishlist URL when it is available.
 export const WISHLIST_URL: string | null = null;
 export const questions = {
-  title: "У вас могут возникнуть эти вопросы",
+  title: "И еще пару моментиков",
   items: [
     { id: "flowers", question: "Дарить ли цветы?", answer: [
       { text: "Мы настоятельно просим не дарить нам цветы, потому что знаем, что для некоторых гостей эта просьба всё равно будет неактуальна. Но если вы решите, что цветы подарить обязательно нужно, пожалуйста, заранее проверьте, какие из них безопасны для нашего третьего члена семьи — кота Моти." },
