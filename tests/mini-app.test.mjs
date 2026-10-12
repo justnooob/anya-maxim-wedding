@@ -40,3 +40,18 @@ test('Mini App shows music without sessions and binds deletion confirmation to o
  const after=await (await miniAppRequest(request(),{env,source})).json();assert.equal(after.stats.total,0);assert.deepEqual(after.guests,[]);
  }finally{await db.close();}
 });
+
+test('Mini App station statistics, exact filters and legacy answers without overnight UI',async()=>{
+ const db=new PGlite();const source={async connect(){return {query:(sql,args)=>db.query(sql,args),release(){}};}};
+ try{
+ await db.exec(fs.readdirSync('migrations').filter(n=>n.endsWith('.sql')).sort().map(n=>fs.readFileSync('migrations/'+n,'utf8')).join('\n'));
+ const sid='b'.repeat(64);await db.query("INSERT INTO guest_sessions(id,expires_at) VALUES($1,now()+interval '1 year')",[sid]);
+ for(const [i,transfer] of ['self','kupchino','pavlovsk','needed'].entries())await db.query("INSERT INTO rsvps(id,session_id,guest_name,attendance,who,transfer,overnight,dress_code,alcohol_drinks,soft_drinks) VALUES($1,$2,'Гость Иванов','yes','Друг',$3,'stay',true,ARRAY['none'],ARRAY['none'])",['00000000-0000-4000-8000-00000000000'+i,sid,transfer]);
+ const get=async(filter)=>await (await miniAppRequest(new Request('https://example.com/api/telegram/mini-app?filter='+filter,{headers:{'x-telegram-init-data':signed()}}),{env,source})).json();
+ const all=await get('all');assert.equal(all.stats.transfer,3);assert.equal(all.stats.kupchino,1);assert.equal(all.stats.pavlovsk,1);assert.ok(!('overnight' in all.stats));
+ assert.equal((await get('transfer')).guests.length,3);
+ for(const filter of ['kupchino','pavlovsk']){const result=await get(filter);assert.equal(result.guests.length,1);assert.match(result.guests[0].fields.find(f=>f.label==='Трансфер').value,filter==='kupchino'?/Купчино/:/Павловска/);}
+ assert.ok(all.guests.every(g=>!g.fields.some(f=>f.label==='Ночёвка')));
+ assert.equal((await miniAppRequest(new Request('https://example.com/api/telegram/mini-app?filter=overnight',{headers:{'x-telegram-init-data':signed()}}),{env,source})).status,400);
+ }finally{await db.close();}
+});

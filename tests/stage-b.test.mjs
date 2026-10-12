@@ -13,8 +13,8 @@ import {drinkChoices,toggleDrink,describeDrinks} from '../src/content/drinks.mjs
 import {drainOutbox,notificationText} from '../src/server/telegram/outbox.mjs';
 import {getRsvp,postRsvp} from '../src/server/rsvp/http.mjs';
 import {webhook} from '../src/server/telegram/webhook.mjs';
-const yes={guestName:'Анна',attendance:'yes',who:'Подруга',food:'Орехи',transfer:'needed',overnight:'stay',dressCode:true,alcoholDrinks:['none'],softDrinks:['none']};
-const no={guestName:'Максим',attendance:'no'};
+const yes={guestName:'Анна Иванова',attendance:'yes',who:'Подруга',food:'Орехи',transfer:'kupchino',overnight:'stay',dressCode:true,alcoholDrinks:['none'],softDrinks:['none']};
+const no={guestName:'Максим Иванов',attendance:'no'};
 async function fixture(){
   if(process.env.TEST_POSTGRES==='1'){
     const url=new URL(process.env.DATABASE_URL);
@@ -40,9 +40,9 @@ async function fixture(){
   return {db,source,token,close:()=>db.close()};
 }
 test('server validation accepts both attendance paths; strips no-attendance details; rejects malformed input',()=>{
-  assert.equal(validateRsvp(yes).transfer,'needed');
+  assert.equal(validateRsvp(yes).transfer,'kupchino');
   assert.deepEqual(validateRsvp({...no,who:'ignored',food:'ignored',dressCode:true}).who,'');
-  for(const input of [null,[],{}, {...yes,guestName:' '},{...yes,guestName:'x'.repeat(121)},{...yes,attendance:'maybe'},{...yes,dressCode:'true'},{...yes,transfer:'0'},{...yes,overnight:'other'},{...yes,food:'x'.repeat(601)},{...yes,who:'x\u0000'}])assert.throws(()=>validateRsvp(input),InputError);
+  for(const input of [null,[],{}, {...yes,guestName:' '},{...yes,guestName:'x'.repeat(121)},{...yes,attendance:'maybe'},{...yes,dressCode:'true'},{...yes,transfer:'0'},{...yes,food:'x'.repeat(601)},{...yes,who:'x\u0000'}])assert.throws(()=>validateRsvp(input),InputError);
 });
 test('opaque cookies carry no names; CSRF is separate and incoming body is bounded',async()=>{
   const token=newSession();assert.equal(token.length,64);assert.notEqual(hash(token),token);assert.notEqual(csrfFor(token),token);
@@ -111,7 +111,7 @@ test('notification failure is durable and retry succeeds without losing RSVP',as
     assert.equal((await f.db.query('SELECT count(*)::int n FROM rsvps')).rows[0].n,1);
     await f.db.query('UPDATE telegram_outbox SET available_at=now()');
     let delivered=0;
-    await drainOutbox({siteUrl:'https://example.com',source:f.source,allowedIds:new Set(['123']),api:async(method,params)=>{assert.equal(method,'sendMessage');assert.equal(params.chat_id,'123');assert.equal(params.protect_content,true);assert.equal(params.text,'Новый ответ от гостя "Анна"');assert.equal(params.reply_markup.inline_keyboard[0][0].text,'Открыть');assert.equal(params.reply_markup.inline_keyboard[0][0].web_app.url,'https://example.com/telegram');delivered++;}});
+    await drainOutbox({siteUrl:'https://example.com',source:f.source,allowedIds:new Set(['123']),api:async(method,params)=>{assert.equal(method,'sendMessage');assert.equal(params.chat_id,'123');assert.equal(params.protect_content,true);assert.equal(params.text,'Новый ответ от гостя "Анна Иванова"');assert.equal(params.reply_markup.inline_keyboard[0][0].text,'Открыть');assert.equal(params.reply_markup.inline_keyboard[0][0].web_app.url,'https://example.com/telegram');delivered++;}});
     assert.equal(delivered,1);assert.equal((await f.db.query('SELECT count(*)::int n FROM telegram_outbox')).rows[0].n,0);
   }finally{await f.close();}
 });
@@ -131,7 +131,7 @@ test('RSVP HTTP: cookie restore, server validation, CSRF, duplicate, expired ses
     assert.equal((await postRsvp(request({...yes,dressCode:false}),f.source)).status,400);
     const saved=await postRsvp(request(no),f.source);assert.equal(saved.status,201);
     const again=await postRsvp(request(yes),f.source);assert.equal(again.status,200);assert.equal((await again.json()).rsvp.attendance,'no');
-    const restored=await getRsvp(new Request('http://localhost:3000/api/rsvp',{headers:{cookie}}),f.source);assert.equal((await restored.json()).rsvp.guestName,'Максим');
+    const restored=await getRsvp(new Request('http://localhost:3000/api/rsvp',{headers:{cookie}}),f.source);assert.equal((await restored.json()).rsvp.guestName,'Максим Иванов');
     await f.db.query('DELETE FROM rsvps');assert.equal((await postRsvp(request(yes),f.source)).status,201);
     const token=cookie.slice(cookieName.length+1);
     await f.db.query("UPDATE guest_sessions SET expires_at=now()-interval '1 minute' WHERE id=$1",[hash(token)]);
@@ -207,8 +207,8 @@ test('new attendance requirements and optional music are validated server-side',
   assert.equal(validateRsvp(yes).musicRequest,null);
   assert.equal(validateRsvp({...yes,musicRequest:'  ABBA\nQueen  '}).musicRequest,'ABBA\nQueen');
   assert.equal(validateRsvp({...yes,musicRequest:'   '}).musicRequest,null);
-  for(const invalid of [{who:''},{alcoholDrinks:[]},{softDrinks:[]},{alcoholDrinks:undefined},{softDrinks:undefined},{transfer:undefined},{overnight:undefined},{dressCode:false},{musicRequest:'x'.repeat(1001)},{musicRequest:42}])assert.throws(()=>validateRsvp({...yes,...invalid}),InputError);
-  const declined=validateRsvp({guestName:'Гость',attendance:'no'});assert.equal(declined.musicRequest,null);assert.equal(declined.attendance,'no');
+  for(const invalid of [{who:''},{alcoholDrinks:[]},{softDrinks:[]},{alcoholDrinks:undefined},{softDrinks:undefined},{transfer:undefined},{dressCode:false},{musicRequest:'x'.repeat(1001)},{musicRequest:42}])assert.throws(()=>validateRsvp({...yes,...invalid}),InputError);
+  const declined=validateRsvp({guestName:'Гость Иванов',attendance:'no'});assert.equal(declined.musicRequest,null);assert.equal(declined.attendance,'no');
   assert.equal(validateRsvp({...yes,attendance:'no',musicRequest:'ignore'}).musicRequest,null);
 });
 test('music persists and appears only for going guests in admin and notifications',async()=>{

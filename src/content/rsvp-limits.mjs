@@ -4,11 +4,12 @@ export const fieldLabels=Object.freeze({guestName:'Имя',who:'Кто вы',foo
 export function cleanText(value){return value.trim().normalize('NFC');}
 export function textLength(value){return [...cleanText(value)].length;}
 export function withinLimit(key,value){return typeof value==='string'&&textLength(value)<=rsvpLimits[key];}
+export function validGuestName(value){return typeof value==='string'&&cleanText(value).split(/\s+/).filter(Boolean).length>=2&&withinLimit('guestName',value);}
 export function rsvpReady(data){
- if(!data.guestName.trim()||!withinLimit('guestName',data.guestName)||!['yes','no'].includes(data.attendance))return false;
+ if(!validGuestName(data.guestName)||!['yes','no'].includes(data.attendance))return false;
  if(data.attendance==='no')return true;
  return !!data.who.trim()&&withinLimit('who',data.who)&&withinLimit('food',data.food)&&withinLimit('musicRequest',data.musicRequest)&&
- data.alcoholDrinks.length>0&&data.softDrinks.length>0&&['needed','self'].includes(data.transfer)&&['stay','leave'].includes(data.overnight)&&data.dressCode===true&&
+ data.alcoholDrinks.length>0&&data.softDrinks.length>0&&['self','kupchino','pavlovsk'].includes(data.transfer)&&data.dressCode===true&&
  (!data.alcoholDrinks.includes('other')||(!!data.alcoholOther.trim()&&withinLimit('alcoholOther',data.alcoholOther)))&&
  (!data.softDrinks.includes('other')||(!!data.softOther.trim()&&withinLimit('softOther',data.softOther)));
 }

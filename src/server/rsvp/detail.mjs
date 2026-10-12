@@ -6,9 +6,8 @@ export function rsvpDetail(row){
     fields.push({label:'Кто',value:row.who||'Не указано'},
       {label:'Алкоголь',value:describeDrinks('alcohol',row.alcohol_drinks,row.alcohol_other)},
       {label:'Безалкогольное',value:describeDrinks('soft',row.soft_drinks,row.soft_other)},
-      {label:'Трансфер',value:row.transfer==='needed'?'Нужен':'Доедет самостоятельно'});
+      {label:'Трансфер',value:({needed:'Нужен (место отправления не указано)',kupchino:'Нужен трансфер от Купчино',pavlovsk:'Нужен трансфер от Павловска',self:'Доеду сам/а'})[row.transfer]||'Не указано'});
     if(row.music_request)fields.push({label:'Музыка',value:row.music_request});
-    fields.push({label:'Ночёвка',value:row.overnight==='stay'?'Останется':'Уедет'});
     if(row.food)fields.push({label:'Аллергии / особенности питания',value:row.food});
     fields.push({label:'Дресс-код',value:row.dress_code?'Подтверждён':'Не подтверждён'});
   }

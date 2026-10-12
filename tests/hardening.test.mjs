@@ -6,12 +6,12 @@ import {validateRsvp,InputError} from '../src/server/rsvp/validation.mjs';
 import {rsvpLimits,textLength,rsvpReady,attendancePayload} from '../src/content/rsvp-limits.mjs';
 import {boundedFetch,requestMessage} from '../src/client/requests.mjs';
 import {renderRsvp} from './helpers/render-rsvp.mjs';
-const yes={guestName:'Гость',attendance:'yes',who:'Друг',food:'',musicRequest:'',transfer:'self',overnight:'leave',dressCode:true,alcoholDrinks:['none'],softDrinks:['none'],alcoholOther:'',softOther:''};
+const yes={guestName:'Гость Иванов',attendance:'yes',who:'Друг',food:'',musicRequest:'',transfer:'self',overnight:'leave',dressCode:true,alcoholDrinks:['none'],softDrinks:['none'],alcoholOther:'',softOther:''};
 test('shared limits accept every exact maximum, reject maximum+1 without truncation, count Unicode consistently',()=>{
  for(const [field,max] of Object.entries(rsvpLimits)){
   const base={...yes,...(field==='alcoholOther'?{alcoholDrinks:['other']}:field==='softOther'?{softDrinks:['other']}:{})};
   for(const char of ['я','a','😀']){
-   const valid={...base,[field]:char.repeat(max)};assert.equal(textLength(valid[field]),max);assert.ok(rsvpReady(valid));assert.equal(validateRsvp(valid)[field],valid[field]);
+   const valid={...base,[field]:field==='guestName'?char.repeat(max-2)+' '+char:char.repeat(max)};assert.equal(textLength(valid[field]),max);assert.ok(rsvpReady(valid));assert.equal(validateRsvp(valid)[field],valid[field]);
    const invalid={...base,[field]:char.repeat(max+1)};assert.equal(rsvpReady(invalid),false);assert.throws(()=>validateRsvp(invalid),error=>error instanceof InputError&&error.message.includes(String(max)));
   }
  }
@@ -27,9 +27,9 @@ test('strange input remains plain trimmed text and control characters/whitespace
 });
 test('attendance state machine: initial disabled, optional values, going requirements and no hidden payload',()=>{
  assert.equal(rsvpReady({...yes,attendance:null}),false);assert.ok(rsvpReady(yes));assert.ok(rsvpReady({...yes,musicRequest:'ABBA'}));
- for(const patch of [{who:''},{alcoholDrinks:[]},{softDrinks:[]},{transfer:null},{overnight:null},{dressCode:false},{alcoholDrinks:['other'],alcoholOther:' '},{softDrinks:['other'],softOther:' '}]){assert.equal(rsvpReady({...yes,...patch}),false);assert.throws(()=>validateRsvp({...yes,...patch}),InputError);}
+ for(const patch of [{who:''},{alcoholDrinks:[]},{softDrinks:[]},{transfer:null},{dressCode:false},{alcoholDrinks:['other'],alcoholOther:' '},{softDrinks:['other'],softOther:' '}]){assert.equal(rsvpReady({...yes,...patch}),false);assert.throws(()=>validateRsvp({...yes,...patch}),InputError);}
  const declined=attendancePayload({...yes,attendance:'no',musicRequest:'ignored',alcoholOther:'ignored'});
- assert.deepEqual(declined,{guestName:'Гость',attendance:'no'});assert.ok(rsvpReady(declined));assert.equal(validateRsvp(declined).musicRequest,null);
+ assert.deepEqual(declined,{guestName:'Гость Иванов',attendance:'no'});assert.ok(rsvpReady(declined));assert.equal(validateRsvp(declined).musicRequest,null);
  assert.equal(rsvpReady({...declined,attendance:'yes',who:'',food:'',musicRequest:'',alcoholDrinks:[],softDrinks:[]}),false);
  const initial=renderRsvp({sent:false,attendance:null});assert.match(initial,/type="submit" disabled/);assert.ok(initial.includes('0 / 300'));
 });

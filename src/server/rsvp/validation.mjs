@@ -1,5 +1,5 @@
 import {drinkChoices} from '../../content/drinks.mjs';
-import {rsvpLimits,fieldLabels,cleanText,textLength} from '../../content/rsvp-limits.mjs';
+import {rsvpLimits,fieldLabels,cleanText,textLength,validGuestName} from '../../content/rsvp-limits.mjs';
 export class InputError extends Error {constructor(message='Проверь имя и обязательные ответы.'){super(message);this.name='InputError';}}
 export function validateRsvp(input){
   if(!input || typeof input!=='object'||Array.isArray(input))throw new InputError();
@@ -20,9 +20,10 @@ export function validateRsvp(input){
     return {selected:choices.filter(id=>values.includes(id)),other:values.includes('other')?str(kind+'Other',true):''};
   };
   const guestName=str('guestName',true).replace(/\s+/g,' ');
+  if(!validGuestName(guestName))throw new InputError('Укажи имя и фамилию.');
   if(!['yes','no'].includes(input.attendance))throw new InputError();
   if(input.attendance==='no')return {...submission,guestName,attendance:'no',who:'',food:'',transfer:null,overnight:null,dressCode:false,alcoholDrinks:[],alcoholOther:'',softDrinks:[],softOther:'',musicRequest:null};
-  if(!['needed','self'].includes(input.transfer)||!['stay','leave'].includes(input.overnight)||input.dressCode!==true)throw new InputError();
+  if(!['self','kupchino','pavlovsk'].includes(input.transfer)||input.dressCode!==true)throw new InputError();
   const alcohol=drinks('alcohol'),soft=drinks('soft');
-  return {...submission,guestName,attendance:'yes',who:str('who',true),food:str('food'),musicRequest:str('musicRequest')||null,transfer:input.transfer,overnight:input.overnight,dressCode:true,alcoholDrinks:alcohol.selected,alcoholOther:alcohol.other,softDrinks:soft.selected,softOther:soft.other};
+  return {...submission,guestName,attendance:'yes',who:str('who',true),food:str('food'),musicRequest:str('musicRequest')||null,transfer:input.transfer,overnight:null,dressCode:true,alcoholDrinks:alcohol.selected,alcoholOther:alcohol.other,softDrinks:soft.selected,softOther:soft.other};
 }

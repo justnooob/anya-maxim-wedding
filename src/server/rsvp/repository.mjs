@@ -14,7 +14,6 @@ export async function saveRsvp(client,sessionId,data,recipients){
   // Older deployed clients without a key retain their original idempotent behavior.
   const existing=data.submissionKey?rows.find(row=>row.submission_key===data.submissionKey):rows[0];
   if(existing)return {rsvp:existing,created:false};
-  if(rows.length>=2)return {full:true};
   const id=randomUUID();
   const result=await client.query('INSERT INTO rsvps(id,session_id,guest_name,attendance,who,food,transfer,overnight,dress_code,alcohol_drinks,alcohol_other,soft_drinks,soft_other,music_request,submission_key) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING *',
     [id,sessionId,data.guestName,data.attendance,data.who,data.food,data.transfer,data.overnight,data.dressCode,data.alcoholDrinks,data.alcoholOther,data.softDrinks,data.softOther,data.musicRequest,data.submissionKey||randomUUID()]);

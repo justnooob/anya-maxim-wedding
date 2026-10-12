@@ -86,3 +86,7 @@ Entrance works at composition level; individual paragraphs and form fields are n
 - Botanicals: broad directional masks, small accent opacity/scale, background washes strengthen gently. No leaf-by-leaf growth.
 
 Typical durations: 450–650ms; image masks 650–800ms; timeline 850ms. IntersectionObserver starts at the lower viewport boundary plus 4%, threshold zero, and unobserves each revealed composition. Reduced motion leaves content and timeline immediately visible and removes entrance clips/transforms. No new animation dependencies.
+
+## Lookbook, 12 октября 2026
+
+Внутри каждой gender-категории: крупные мягкие swatches, материалы, короткая рекомендация и два отдельных фото-led lookbook. Фото и пояснение меняются вместе, directional slide 620ms / 480ms mobile. Placeholder использует тот же материал бумаги и спокойное золото; не вводит error-red или SaaS-карточки. Мужские allowed slots ожидают фото, соответствующие новым правилам оливкового пиджака и аксессуара. Конверт, письмо, самолётик, Hero, Date и Program motion сохранены.

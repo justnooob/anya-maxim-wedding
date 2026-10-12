@@ -16,6 +16,8 @@ const seenKey = "anya-maxim-opening-v1";
 export function InvitationExperience() {
   const [opening, setOpening] = useState<boolean | null>(null);
   const mainRef = useRef<HTMLElement>(null);
+  const focusAfterOpening=useRef(false);
+  useEffect(()=>{if(opening===false&&focusAfterOpening.current){focusAfterOpening.current=false;mainRef.current?.focus({preventScroll:true});}},[opening]);
   useEffect(() => {
     try { setOpening(sessionStorage.getItem(seenKey) !== "yes"); } catch { setOpening(true); }
   }, []);
@@ -53,9 +55,9 @@ export function InvitationExperience() {
   }, [opening]);
   function complete() {
     try { sessionStorage.setItem(seenKey, "yes"); } catch {}
+    focusAfterOpening.current=true;
     setOpening(false);
     window.scrollTo({top: 0, behavior: "instant"});
-    requestAnimationFrame(() => mainRef.current?.focus({preventScroll: true}));
   }
   return <>
     {opening === null && <div className="boot" aria-label="Загрузка приглашения">А & М</div>}

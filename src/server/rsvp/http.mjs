@@ -17,7 +17,7 @@ export async function getRsvp(request,source){
         await client.query("INSERT INTO guest_sessions(id,expires_at) VALUES($1,now()+($2 * interval '1 second'))",[sessionId,sessionAge]);
       }
       const rows=(await ownRsvps(client,sessionId)).map(publicRsvp);
-      return {csrf:csrfFor(token),rsvps:rows,rsvp:rows.at(-1)||null,remaining:Math.max(0,2-rows.length)};
+      return {csrf:csrfFor(token),rsvps:rows,rsvp:rows.at(-1)||null};
     },source);
     if(!result)return reply({error:'Слишком много запросов. Попробуй позже.'},429);
     return reply(result,200,setCookie?{'Set-Cookie':cookieHeader(token)}:{});
@@ -40,7 +40,6 @@ export async function postRsvp(request,source){
     },source);
     if(result.expired)return reply({error:'Сессия истекла. Обнови страницу.'},403);
     if(result.limited)return reply({error:'Слишком много запросов. Попробуй позже.'},429);
-    if(result.full)return reply({error:'На этом устройстве уже сохранены два ответа.',rsvps:result.rsvps,remaining:0},409);
-    return reply({rsvp:publicRsvp(result.rsvp),rsvps:result.rsvps,remaining:Math.max(0,2-result.rsvps.length),created:result.created},result.created?201:200);
+    return reply({rsvp:publicRsvp(result.rsvp),rsvps:result.rsvps,created:result.created},result.created?201:200);
   }catch{return reply({error:'Не удалось сохранить ответ. Попробуй ещё раз.'},503);}
 }

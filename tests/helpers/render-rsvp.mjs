@@ -7,9 +7,9 @@ import {renderToStaticMarkup} from 'react-dom/server';
 const require=createRequire(import.meta.url);
 // Render the actual component in a restored/submitted guest-session state.
 // Effects are intentionally disabled: this fixture never calls a real database or Telegram.
-export function renderRsvp({sent=true,attendance='yes',name='Сергей',error='',saved}={}){
+export function renderRsvp({sent=true,attendance='yes',name='Сергей Иванов',error='',saved}={}){
  let stateIndex=0;
- const states={0:attendance,1:name,10:sent,13:error,...(saved?{16:saved}:{})};
+ const states={0:attendance,1:name,9:sent,12:error,...(saved?{15:saved}:{})};
  const hooks={...React,useState:initial=>{const index=stateIndex++;return [Object.hasOwn(states,index)?states[index]:initial,()=>{}];},useEffect:()=>{},useCallback:fn=>fn,useRef:()=>({current:null})};
  const cache=new Map();
  function load(filename){

@@ -28,4 +28,4 @@ Built-in imagegen, 7 October 2026. Optimized WebP derivatives in public/images; 
 - guest-1.jpg through guest-22.jpg: local placeholder portraits from https://i.pravatar.cc/300?img=11 through img=32. Replace with real guest photographs before release. They are fictional mock identities.
 
 Additional male placeholder portraits: guest-23.jpg img=33; guest-24.jpg img=51; guest-25.jpg img=52. Only 22 portraits are used by the mock guest configuration.
-Venue photographs venue-mariage-1..5.webp and dress references dress-women-reference-1..6.webp / dress-men-reference-1..6.webp supplied by the art director. Originals preserved in clipboard attachments; derivatives resized and encoded to WebP without generative editing.
+Venue photographs venue/pushkinskaya-01..02.webp and dress references dress-women-reference-1..6.webp / dress-men-reference-1..6.webp supplied by the art director. Originals preserved in clipboard attachments; derivatives resized and encoded to WebP without generative editing.

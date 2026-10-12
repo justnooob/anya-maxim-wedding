@@ -1,86 +1,47 @@
 "use client";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { publicSections as content } from "@/content/public-sections";
-import { Watercolor } from "./Watercolor";
-type Category = typeof content.dress.categories[number];
+import {useEffect,useRef,useState,type CSSProperties} from "react";
+import {publicSections as content} from "@/content/public-sections";
+import {type LookExample} from "@/content/dress-code";
+import {Watercolor} from "./Watercolor";
 
-function Catalogue({category,previous,direction,revision}:{category:Category;previous:Category|null;direction:number;revision:number}) {
-  const strip = useRef<HTMLDivElement>(null);
-  const destination = useRef<number|null>(null);
-  const drag = useRef<{x:number;left:number}|null>(null);
-  const [position, setPosition] = useState(0);
-  const [atEnd, setAtEnd] = useState(false);
-  const [atStart, setAtStart] = useState(true);
-  const [dragging, setDragging] = useState(false);
-  const dress=content.dress;
-  const measure = useCallback(() => {
-    const el=strip.current;if(!el)return;
-    setAtStart(el.scrollLeft<5);setAtEnd(el.scrollLeft+el.clientWidth>=el.scrollWidth-5);
-    const item=el.querySelector("figure");const step=item?(item as HTMLElement).offsetWidth+parseFloat(getComputedStyle(el).gap):1;
-    setPosition(Math.min(category.images.length-1,Math.round(el.scrollLeft/step)));
-  }, [category.images.length]);
-  useEffect(()=>{const el=strip.current;if(!el)return;const observer=new ResizeObserver(measure);observer.observe(el);measure();return()=>observer.disconnect();},[measure]);
-  useLayoutEffect(()=>{
-    const el=strip.current;if(!el)return;
-    destination.current=null;el.scrollTo({left:0,top:0,behavior:"instant"});measure();
-  },[category.id,measure]);
-  useEffect(()=>{
-    const el=strip.current;if(!el)return;
-    const settle=()=>{destination.current=null;measure();};
-    el.addEventListener("scrollend",settle);
-    return()=>el.removeEventListener("scrollend",settle);
-  },[category.id,measure]);
-  function move(direction:number) {
-    const el=strip.current;if(!el)return;
-    const item=el.querySelector<HTMLElement>("figure");
-    const step=item?item.offsetWidth+parseFloat(getComputedStyle(el).gap):el.clientWidth;
-    const base=destination.current??Math.round(el.scrollLeft/step)*step;
-    destination.current=Math.max(0,Math.min(el.scrollWidth-el.clientWidth,base+direction*step));
-    el.scrollTo({left:destination.current,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});
-  }
-  return <div className="dress-pages" id="dress-examples">
-    <div className={"dress-catalogue"+(dragging?" is-dragging":"")} ref={strip} tabIndex={0} role="region" aria-label={dress.galleryLabel} onScroll={measure}
-      onKeyDown={event=>{if(event.key==="ArrowRight"||event.key==="ArrowLeft"){event.preventDefault();move(event.key==="ArrowRight"?1:-1);}}}
-      onWheel={()=>{destination.current=null;}}
-      onPointerDown={event=>{destination.current=null;if(event.pointerType==="mouse"&&event.button===0){setDragging(true);drag.current={x:event.clientX,left:event.currentTarget.scrollLeft};event.currentTarget.setPointerCapture(event.pointerId);}}}
-      onPointerMove={event=>{if(drag.current)event.currentTarget.scrollLeft=drag.current.left-(event.clientX-drag.current.x);}}
-      onPointerUp={()=>{drag.current=null;setDragging(false);}} onPointerCancel={()=>{drag.current=null;setDragging(false);}}>
-      {category.images.map((look,index)=><figure key={index} data-active={position===index}>
-        <div className="look-photo">
-          <div className={"look-frames"+(previous?" look-frames--changing":"")} key={revision} style={{"--look-direction":direction,"--look-delay":Math.min(index,3)*65+"ms"} as React.CSSProperties}>
-            {previous?.images[index]&&<img className="look-outgoing" src={previous.images[index].src} alt="" aria-hidden="true" draggable={false}/>}
-            <img className="look-incoming" src={look.src} alt={look.alt} loading={previous?"eager":"lazy"} draggable={false}/>
-          </div>
-        </div>
-      </figure>)}
-
-    </div>
-    <div className="dress-progress" aria-hidden="true"><span style={{width:((position+1)/category.images.length*100)+"%"}} /></div>
-    <div className="dress-gallery-controls">
-      <button type="button" aria-label={dress.previous} disabled={atStart} onClick={()=>move(-1)}>←</button>
-      <span className="gallery-counter">{String(position+1).padStart(2,"0")} / {String(category.images.length).padStart(2,"0")}</span>
-      <button type="button" aria-label={dress.next} disabled={atEnd} onClick={()=>move(1)}>→</button>
-    </div>
-  </div>;
+function ExampleCarousel({examples,title,id,direction}:{examples:LookExample[];title:string;id:string;direction:number}){
+ const [index,setIndex]=useState(0),[previous,setPrevious]=useState<LookExample|null>(null),[travel,setTravel]=useState(direction),[revision,setRevision]=useState(0);
+ const timer=useRef<ReturnType<typeof setTimeout>|null>(null),gesture=useRef<{x:number;y:number}|null>(null);
+ useEffect(()=>()=>{if(timer.current)clearTimeout(timer.current);},[]);
+ function move(delta:number){const next=(index+delta+examples.length)%examples.length;if(timer.current)clearTimeout(timer.current);setPrevious(examples[index]);setTravel(delta);setIndex(next);setRevision(v=>v+1);timer.current=setTimeout(()=>setPrevious(null),750);}
+ const copy=content.dress;
+ function frame(item:LookExample,kind:string){return <div className={"lookbook-frame "+kind}>
+  <div className="lookbook-photo">{item.image?<img src={item.image} alt={item.title} loading="lazy" draggable={false}/>:<div className="lookbook-placeholder"><span aria-hidden="true">А & М</span><p>{copy.placeholder}</p></div>}</div>
+  <div className="lookbook-description"><span className="chapter-kicker">{title}</span><h4>{item.title}</h4><p>{item.description}</p></div>
+ </div>;}
+ return <section id={id} className="lookbook" aria-labelledby={id+"-title"}>
+  <h3 id={id+"-title"}>{title}</h3>
+  <div className="lookbook-stage" tabIndex={0} role="region" aria-label={title+": "+copy.galleryLabel} style={{"--look-direction":travel} as CSSProperties}
+   onKeyDown={e=>{if(e.target===e.currentTarget&&(e.key==='ArrowLeft'||e.key==='ArrowRight')){e.preventDefault();move(e.key==='ArrowRight'?1:-1);}}}
+   onPointerDown={e=>{gesture.current={x:e.clientX,y:e.clientY};e.currentTarget.setPointerCapture(e.pointerId);}}
+   onPointerUp={e=>{const start=gesture.current;gesture.current=null;if(start&&Math.abs(e.clientX-start.x)>40&&Math.abs(e.clientX-start.x)>Math.abs(e.clientY-start.y))move(e.clientX<start.x?1:-1);}}
+   onPointerCancel={()=>{gesture.current=null;}}>
+   <div className="lookbook-frames" key={revision}>
+    {previous&&<div aria-hidden="true" inert>{frame(previous,"lookbook-outgoing")}</div>}
+    {frame(examples[index],"lookbook-incoming")}
+   </div>
+  </div>
+  <div className="dress-gallery-controls"><button type="button" aria-label={title+": "+copy.previous} onClick={()=>move(-1)}>←</button><span className="gallery-counter" aria-live="polite">{String(index+1).padStart(2,'0')} / {String(examples.length).padStart(2,'0')}</span><button type="button" aria-label={title+": "+copy.next} onClick={()=>move(1)}>→</button></div>
+ </section>;
 }
-export function DressCode() {
-  const [page,setPage]=useState(0);
-  const [previous,setPrevious]=useState<Category|null>(null);
-  const [revision,setRevision]=useState(0);
-  const [direction,setDirection]=useState(1);
-  const dress=content.dress;const selected=dress.categories[page];
-  function changePage(index:number){
-    if(index===page)return;
-    setPrevious(selected);setDirection(index===0?-1:1);setRevision(value=>value+1);setPage(index);
-  }
-  return <section className="dress-chapter chapter" id="dress-code" aria-labelledby="dress-title">
-    <header className="chapter-heading"><h2 id="dress-title">{dress.title}</h2><p>{dress.intro}</p></header>
-    <div className="page-switch" aria-label="Примеры дресс-кода">{dress.categories.map((category,index)=><button key={category.id} type="button" aria-pressed={page===index} aria-controls="dress-examples" onClick={()=>changePage(index)}>{category.label}</button>)}</div>
-    <div className="dress-palette" aria-label="Цвета дресс-кода">{selected.palette.map(color=><span key={color.name}><i style={{backgroundColor:color.color}} aria-hidden="true"/>{color.name}</span>)}</div>
-    <Catalogue category={selected} previous={previous} direction={direction} revision={revision}/>
-    <div className="dress-guidance" aria-live="polite">{selected.details.map(detail=><p key={detail.title}><strong>{detail.title}</strong>{detail.text}</p>)}</div>
-    <p className="dress-note">{selected.note}</p>
-    <Watercolor kind="atelier-05" className="dress-watercolor"/>
-    <Watercolor kind="atelier-06" className="dress-watercolor-secondary"/>
-  </section>;
+export function DressCode(){
+ const [page,setPage]=useState(0),[direction,setDirection]=useState(1);
+ const dress=content.dress,selected=dress.categories[page];
+ return <section className="dress-chapter chapter" id="dress-code" aria-labelledby="dress-title">
+  <header className="chapter-heading"><h2 id="dress-title">{dress.title}</h2><p>{dress.intro}</p></header>
+  <div className="page-switch" aria-label="Примеры дресс-кода">{dress.categories.map((category,i)=><button key={category.id} type="button" aria-pressed={page===i} aria-controls="dress-examples" onClick={()=>{if(i!==page){setDirection(i===0?-1:1);setPage(i);}}}>{category.label}</button>)}</div>
+  <div id="dress-examples" className="dress-lookbook" key={selected.id}>
+   <h3 className="palette-title">{dress.paletteTitle}</h3>
+   <div className="dress-palette">{selected.palette.map(color=><span key={color.name}><i style={{backgroundColor:color.color}} aria-hidden="true"/><strong>{color.name}</strong><small>{color.example}</small></span>)}</div>
+   <div className="lookbook-guidance"><div><h3>{dress.materialsTitle}</h3><p>{selected.materials}</p></div><p>{selected.explanation}</p></div>
+   <ExampleCarousel examples={selected.allowed} title={dress.allowedTitle} id="dress-allowed" direction={direction}/>
+   <ExampleCarousel examples={selected.avoid} title={dress.avoidTitle} id="dress-avoid" direction={direction}/>
+  </div>
+  <Watercolor kind="atelier-05" className="dress-watercolor"/><Watercolor kind="atelier-06" className="dress-watercolor-secondary"/>
+ </section>;
 }

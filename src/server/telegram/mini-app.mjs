@@ -31,10 +31,10 @@ export async function miniAppRequest(request,{source,env=process.env}={}){
       const id=url.searchParams.get('id');
       if(id){if(!uuid(id))return response({error:'Некорректный ответ.'},400);const row=(await client.query('SELECT * FROM rsvps WHERE id=$1',[id])).rows[0];return row?response({guest:{id:row.id,...rsvpDetail(row)}}):response({error:'Ответ уже удалён.'},404);}
       const filter=url.searchParams.get('filter')||'all';
-      const predicates={all:'TRUE',yes:"attendance='yes'",no:"attendance='no'",transfer:"transfer='needed'",overnight:"overnight='stay'"};
+      const predicates={all:'TRUE',yes:"attendance='yes'",no:"attendance='no'",transfer:"transfer IN ('needed','kupchino','pavlovsk')",kupchino:"transfer='kupchino'",pavlovsk:"transfer='pavlovsk'"};
       if(!Object.hasOwn(predicates,filter))return response({error:'Некорректный фильтр.'},400);
       const offset=Number(url.searchParams.get('offset')||0);if(!Number.isSafeInteger(offset)||offset<0||offset>10000)return response({error:'Некорректная страница.'},400);
-      const stats=(await client.query("SELECT count(*)::int total,count(*) FILTER(WHERE attendance='yes')::int going,count(*) FILTER(WHERE attendance='no')::int not_going,count(*) FILTER(WHERE transfer='needed')::int transfer,count(*) FILTER(WHERE overnight='stay')::int overnight FROM rsvps")).rows[0];
+      const stats=(await client.query("SELECT count(*)::int total,count(*) FILTER(WHERE attendance='yes')::int going,count(*) FILTER(WHERE attendance='no')::int not_going,count(*) FILTER(WHERE transfer IN ('needed','kupchino','pavlovsk'))::int transfer,count(*) FILTER(WHERE transfer='kupchino')::int kupchino,count(*) FILTER(WHERE transfer='pavlovsk')::int pavlovsk FROM rsvps")).rows[0];
       const rows=(await client.query('SELECT * FROM rsvps WHERE '+predicates[filter]+' ORDER BY created_at,id LIMIT 21 OFFSET $1',[offset])).rows;
       return response({stats,guests:rows.slice(0,20).map(row=>({id:row.id,...rsvpDetail(row)})),hasMore:rows.length>20});
     },source);

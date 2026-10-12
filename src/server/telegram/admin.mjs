@@ -3,7 +3,7 @@ import {randomBytes,randomUUID} from 'node:crypto';
 import {privateSender,assertTelegramAdmin} from './access.mjs';
 const uuid=value=>typeof value==='string'&&/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(value);
 const button=(text,data)=>({text,callback_data:data});
-const menu={inline_keyboard:[[button('Статистика','stats'),button('Все ответы','list:all:0')],[button('Придут','list:yes:0'),button('Не придут','list:no:0')],[button('Трансфер','list:transfer:0'),button('Ночёвка','list:overnight:0')]]};
+const menu={inline_keyboard:[[button('Статистика','stats'),button('Все ответы','list:all:0')],[button('Придут','list:yes:0'),button('Не придут','list:no:0')],[button('Трансфер','list:transfer:0'),button('Купчино','list:kupchino:0'),button('Павловск','list:pavlovsk:0')]]};
 export function updateSender(update){
   if(update?.message)return privateSender(update.message);
   const callback=update?.callback_query;
@@ -15,13 +15,13 @@ export async function adminReply(client,userId,command){
   try{const site=new URL(process.env.PUBLIC_SITE_URL);if(site.protocol==='https:'&&!site.username&&!site.password)keyboard.unshift([{text:'Открыть список гостей',web_app:{url:new URL('/telegram',site).href}}]);}catch{/* No public HTTPS URL configured. */}
   const currentMenu={inline_keyboard:keyboard};
   if(command==='stats'||command==='/stats'){
-    const result=await client.query("SELECT count(*)::int total,count(*) FILTER(WHERE attendance='yes')::int yes,count(*) FILTER(WHERE attendance='no')::int no,count(*) FILTER(WHERE transfer='needed')::int transfer,count(*) FILTER(WHERE overnight='stay')::int overnight FROM rsvps");
-    const s=result.rows[0];return {text:'Ответов: '+s.total+'\nПридут: '+s.yes+'\nНе придут: '+s.no+'\nНужен трансфер: '+s.transfer+'\nОстанутся на ночь: '+s.overnight,reply_markup:currentMenu};
+    const result=await client.query("SELECT count(*)::int total,count(*) FILTER(WHERE attendance='yes')::int yes,count(*) FILTER(WHERE attendance='no')::int no,count(*) FILTER(WHERE transfer IN ('needed','kupchino','pavlovsk'))::int transfer,count(*) FILTER(WHERE transfer='kupchino')::int kupchino,count(*) FILTER(WHERE transfer='pavlovsk')::int pavlovsk FROM rsvps");
+    const s=result.rows[0];return {text:'Ответов: '+s.total+'\nПридут: '+s.yes+'\nНе придут: '+s.no+'\nНужен трансфер: '+s.transfer+'\nТрансфер от Купчино: '+s.kupchino+'\nТрансфер от Павловска: '+s.pavlovsk,reply_markup:currentMenu};
   }
-  const list=command.match(/^(?:list:|\/list(?:\s+|$))(all|yes|no|transfer|overnight)?(?::|\s+)?(\d+)?$/);
+  const list=command.match(/^(?:list:|\/list(?:\s+|$))(all|yes|no|transfer|kupchino|pavlovsk)?(?::|\s+)?(\d+)?$/);
   if(list){
     const filter=list[1]||'all',offset=Number(list[2]||0);if(!Number.isSafeInteger(offset)||offset>10000)return {text:'Некорректная страница.'};
-    const predicates={all:'TRUE',yes:"attendance='yes'",no:"attendance='no'",transfer:"transfer='needed'",overnight:"overnight='stay'"};
+    const predicates={all:'TRUE',yes:"attendance='yes'",no:"attendance='no'",transfer:"transfer IN ('needed','kupchino','pavlovsk')",kupchino:"transfer='kupchino'",pavlovsk:"transfer='pavlovsk'"};
     const rows=(await client.query('SELECT id,guest_name,attendance FROM rsvps WHERE '+predicates[filter]+' ORDER BY created_at,id LIMIT 9 OFFSET $1',[offset])).rows;
     const shown=rows.slice(0,8),keyboard=shown.map(row=>[button(row.guest_name.slice(0,60),'guest:'+row.id)]);
     const navigation=[];if(offset>0)navigation.push(button('Назад','list:'+filter+':'+Math.max(0,offset-8)));if(rows.length>8)navigation.push(button('Дальше','list:'+filter+':'+(offset+8)));

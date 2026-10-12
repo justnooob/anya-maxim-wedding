@@ -3,7 +3,7 @@ import { execFileSync } from 'node:child_process';
 
 // Local heuristic check, without printing matched values or sending files anywhere.
 const stagedOnly = process.argv.includes('--staged');
-const git = (args, options = {}) => execFileSync('git', args, { encoding: 'utf8', ...options });
+const git = (args, options = {}) => {try{return execFileSync('git', args, {encoding:'utf8',maxBuffer:64*1024*1024,...options});}catch(error){const safe=new Error('Local Git secret check failed. Raw output hidden.');safe.status=Number.isInteger(error.status)?error.status:null;throw safe;}};
 const staged = git(['ls-files', '--cached', '-z']).split('\0').filter(Boolean);
 const paths = stagedOnly ? staged : [...new Set([...staged, ...git(['ls-files', '--others', '--exclude-standard', '-z']).split('\0').filter(Boolean)])];
 const rules = [
@@ -23,6 +23,7 @@ function report(path, location, kind) {
 }
 function inspect(path, text, source) {
   if (text.includes('\0')) return;
+  if(Buffer.isBuffer(text))text=text.toString('utf8');
   checked++;
   text.split(/\r?\n/).forEach((line, index) => {
     for (const [kind, expression] of rules) {
@@ -42,8 +43,8 @@ try { ignored = git(['check-ignore', '--no-index', '--stdin', '-z'], { input: st
 catch (error) { if (error.status !== 1) throw error; }
 for (const path of ignored.split('\0').filter(Boolean)) report(path, 'index', 'ignored file is staged; remove it from the index');
 for (const path of paths) {
-  if (!stagedOnly && fs.existsSync(path) && fs.statSync(path).isFile()) inspect(path, fs.readFileSync(path, 'utf8'), 'working tree');
-  if (staged.includes(path)) inspect(path, git(['show', ':' + path]), 'staged');
+  if (!stagedOnly && fs.existsSync(path) && fs.statSync(path).isFile()) inspect(path, fs.readFileSync(path), 'working tree');
+  if (staged.includes(path)) inspect(path, git(['show', ':' + path],{encoding:null}), 'staged');
 }
 if (failures) {
   console.error('Secret check failed: ' + failures + ' finding(s). Values are intentionally hidden.');

@@ -181,3 +181,57 @@
 }
 /* The album placement replaces its former container fade-up. */
 #top .guest-album.page-enter {animation:none;}
+/* Data-driven fashion lookbook, within the same paper chapter. */
+#top .dress-lookbook {max-width:1120px;margin:auto;padding:0 48px;}
+#top .palette-title {font:32px/1.2 'Cormorant Garamond',serif;text-align:center;margin:0 0 32px;}
+#top .dress-palette {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:30px;max-width:960px;margin:0 auto 48px;padding:0;}
+#top .dress-palette>span {display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;min-width:0;}
+#top .dress-palette i {width:85px;height:85px;box-shadow:inset 0 2px 4px #fff7,0 3px 8px #76634215;}
+#top .dress-palette strong {font-weight:400;font-size:15px;}
+#top .dress-palette small {font-size:12px;line-height:1.6;}
+#top .dress-palette>span:nth-child(3) {transition-delay:120ms;}
+#top .dress-palette>span:nth-child(4) {transition-delay:180ms;}
+#top .lookbook-guidance {display:grid;grid-template-columns:1fr 1fr;gap:64px;border-top:1px solid #ad905640;padding-top:32px;margin-bottom:64px;}
+#top .lookbook-guidance h3 {font:32px/1.2 'Cormorant Garamond',serif;margin:0 0 16px;}
+#top .lookbook-guidance p,#top .lookbook-description p {font-size:var(--invite-detail);line-height:1.8;margin:0;overflow-wrap:anywhere;}
+#top .lookbook {margin:0 0 72px;}
+#top .lookbook>h3 {font:42px/1.2 'Cormorant Garamond',serif;margin:0 0 28px;}
+#top .lookbook-stage {overflow:hidden;touch-action:pan-y;outline-offset:6px;}
+#top .lookbook-frames {position:relative;}
+#top .lookbook-frame {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center;min-height:590px;}
+#top .lookbook-outgoing {position:absolute;inset:0;}
+#top .lookbook-photo {overflow:hidden;padding:9px;background:#eee4cf60;}
+#top .lookbook-photo img {display:block;width:100%;height:570px;object-fit:cover;}
+#top .lookbook-description {padding:24px 0;}
+#top .lookbook-description h4 {font:36px/1.2 'Cormorant Garamond',serif;margin:14px 0 24px;}
+#top .lookbook-placeholder {height:570px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:#e8dfcb;box-shadow:inset 0 0 65px #faf6e760;}
+#top .lookbook-placeholder>span {font:44px/1.3 'Cormorant Garamond',serif;color:#9e8757;}
+#top .lookbook-placeholder p {font-size:13px;color:#777560;}
+#top .lookbook-incoming {animation:lookbook-in 620ms var(--invite-ease) both;}
+#top .lookbook-outgoing {animation:lookbook-out 620ms var(--invite-ease) both;}
+@keyframes lookbook-in {from{opacity:.3;translate:calc(var(--look-direction)*100%) 0}to{opacity:1;translate:0 0}}
+@keyframes lookbook-out {from{opacity:1;translate:0 0}to{opacity:.3;translate:calc(var(--look-direction)*-100%) 0}}
+#top .dress-chapter.motion-ready .lookbook-photo {clip-path:inset(0 0 100% 0);transition:clip-path 750ms var(--invite-ease);}
+#top .dress-chapter.motion-visible .lookbook-photo,#top .dress-chapter:focus-within .lookbook-photo {clip-path:inset(0);}
+#top .dress-chapter.motion-ready .lookbook-guidance {opacity:0;transition:opacity 500ms ease 180ms;}
+#top .dress-chapter.motion-visible .lookbook-guidance {opacity:1;}
+@media(max-width:700px){
+ #top .dress-lookbook {padding:0 25px;}
+ #top .dress-palette {grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 18px;}
+ #top .dress-palette i {width:70px;height:70px;}
+ #top .dress-palette strong {font-size:14px;}
+ #top .dress-palette small {font-size:12px;}
+ #top .lookbook-guidance {grid-template-columns:1fr;gap:25px;margin-bottom:48px;}
+ #top .lookbook-frame {grid-template-columns:1fr;gap:0;min-height:720px;align-items:start;}
+ #top .lookbook-photo img,#top .lookbook-placeholder {height:440px;}
+ #top .lookbook-description {min-height:260px;padding:26px 0 0;}
+ #top .lookbook-description h4 {font-size:29px;margin:10px 0 16px;}
+ #top .lookbook>h3 {font-size:36px;}
+ #top .lookbook-incoming,#top .lookbook-outgoing {animation-duration:480ms;}
+}
+@media(prefers-reduced-motion:reduce){
+ #top .lookbook-incoming,#top .lookbook-outgoing {animation:none;}
+ #top .lookbook-outgoing {display:none;}
+ #top .dress-chapter .lookbook-photo {clip-path:none;transition:none;}
+ #top .dress-chapter .lookbook-guidance {opacity:1;transition:none;}
+}
