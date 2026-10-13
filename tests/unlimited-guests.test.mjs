@@ -40,7 +40,7 @@ test('compact success for ten guests always offers another clean submission',()=
 });
 
 test('full names, optional overnight and all exact transfer values validate on both sides',()=>{
- const yes={guestName:'Анна Иванова',attendance:'yes',who:'Подруга',food:'',musicRequest:'',dressCode:true,alcoholDrinks:['none'],alcoholOther:'',softDrinks:['none'],softOther:''};
+ const yes={guestName:'Анна Иванова',attendance:'yes',hotAppetizer:'hot_meat',mainCourse:'main_fish',who:'Подруга',food:'',musicRequest:'',dressCode:true,alcoholDrinks:['none'],alcoholOther:'',softDrinks:['none'],softOther:''};
  for(const transfer of ['self','kupchino','pavlovsk']){assert.ok(rsvpReady({...yes,transfer}));assert.equal(validateRsvp({...yes,transfer}).transfer,transfer);assert.equal(validateRsvp({...yes,transfer}).overnight,null);}
  for(const transfer of ['needed','unknown',null])assert.throws(()=>validateRsvp({...yes,transfer}),InputError);
  for(const guestName of ['Анна Иванова','Анна-Мария Иванова',"Anne O'Connor",'Анна Мария Иванова']){assert.ok(rsvpReady({...yes,guestName,transfer:'self'}));assert.equal(validateRsvp({guestName,attendance:'no'}).guestName,guestName);}

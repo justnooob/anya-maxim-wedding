@@ -15,8 +15,8 @@ export async function saveRsvp(client,sessionId,data,recipients){
   const existing=data.submissionKey?rows.find(row=>row.submission_key===data.submissionKey):rows[0];
   if(existing)return {rsvp:existing,created:false};
   const id=randomUUID();
-  const result=await client.query('INSERT INTO rsvps(id,session_id,guest_name,attendance,who,food,transfer,overnight,dress_code,alcohol_drinks,alcohol_other,soft_drinks,soft_other,music_request,submission_key) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING *',
-    [id,sessionId,data.guestName,data.attendance,data.who,data.food,data.transfer,data.overnight,data.dressCode,data.alcoholDrinks,data.alcoholOther,data.softDrinks,data.softOther,data.musicRequest,data.submissionKey||randomUUID()]);
+  const result=await client.query('INSERT INTO rsvps(id,session_id,guest_name,attendance,who,food,transfer,overnight,dress_code,alcohol_drinks,alcohol_other,soft_drinks,soft_other,music_request,submission_key,hot_appetizer_choice,main_course_choice) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17) RETURNING *',
+    [id,sessionId,data.guestName,data.attendance,data.who,data.food,data.transfer,data.overnight,data.dressCode,data.alcoholDrinks,data.alcoholOther,data.softDrinks,data.softOther,data.musicRequest,data.submissionKey||randomUUID(),data.hotAppetizer??null,data.mainCourse??null]);
   for(const recipient of recipients)await client.query('INSERT INTO telegram_outbox(id,rsvp_id,recipient,payload) VALUES($1,$2,$3,$4)',[randomUUID(),id,recipient,JSON.stringify({notification:true})]);
   return {rsvp:result.rows[0],created:true};
 }

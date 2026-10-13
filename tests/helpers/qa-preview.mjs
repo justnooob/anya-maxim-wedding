@@ -1,7 +1,7 @@
 // Isolated local QA harness: real components/API handlers, in-memory PostgreSQL,
 // synthetic Telegram authentication. Never loads .env.local or contacts Telegram.
 import {createServer} from 'node:http';
-import {createHmac,randomBytes} from 'node:crypto';
+import {createHmac,randomBytes,randomUUID} from 'node:crypto';
 import fs from 'node:fs';
 import net from 'node:net';
 import {PGlite} from '@electric-sql/pglite';
@@ -18,7 +18,7 @@ const db=new PGlite();await db.exec(fs.readdirSync('migrations').filter(n=>n.end
 let tail=Promise.resolve();const source={async connect(){const prior=tail;let unlock;tail=new Promise(resolve=>unlock=resolve);await prior;return {query:async(sql,args)=>{const r=await db.query(sql,args);return {...r,rowCount:r.affectedRows};},release:unlock};}};
 async function seed(client={query:(sql,args)=>db.query(sql,args)}){
 const session='f'.repeat(64);await client.query("INSERT INTO guest_sessions(id,expires_at) VALUES($1,now()+interval '1 year')",[session]);
-await saveRsvp(client,session,validateRsvp({guestName:'Ж'.repeat(77)+' 😀😀',attendance:'yes',who:'Я'.repeat(120),food:'А'.repeat(300),musicRequest:'М'.repeat(300),transfer:'kupchino',dressCode:true,alcoholDrinks:['red_wine','white_wine','cognac','vodka','whisky','rum','gin','jagermeister','other'],alcoholOther:'С'.repeat(80),softDrinks:['cola','sprite','fanta','tonic','apple_juice','multifruit_juice','orange_juice','tomato_juice','sparkling_water','still_water','other'],softOther:'Б'.repeat(80)}),new Set());
+await saveRsvp(client,session,validateRsvp({guestName:'Ж'.repeat(77)+' 😀😀',attendance:'yes',hotAppetizer:'hot_meat',mainCourse:'main_fish',who:'Я'.repeat(120),food:'А'.repeat(300),musicRequest:'М'.repeat(300),transfer:'kupchino',dressCode:true,alcoholDrinks:['red_wine','white_wine','cognac','vodka','whisky','rum','gin','jagermeister','other'],alcoholOther:'С'.repeat(80),softDrinks:['cola','sprite','fanta','tonic','apple_juice','multifruit_juice','orange_juice','tomato_juice','sparkling_water','still_water','other'],softOther:'Б'.repeat(80)}),new Set());
 }
 await seed();
 function initData(){const data=new URLSearchParams({auth_date:String(Math.floor(Date.now()/1000)),user:JSON.stringify({id:123,first_name:'QA'})});const key=createHmac('sha256','WebAppData').update(env.TELEGRAM_BOT_TOKEN).digest();data.set('hash',createHmac('sha256',key).update([...data.entries()].sort(([a],[b])=>a<b?-1:1).map(([k,v])=>k+'='+v).join('\n')).digest('hex'));return data.toString();}
@@ -28,6 +28,18 @@ const server=createServer(async(req,res)=>{try{
  const url=new URL(req.url,origin);
  if(url.pathname==='/qa/health'){res.end('isolated-browser-fixture');return;}
  if(url.pathname==='/qa/reset'&&process.env.QA_BROWSER==='1'&&req.method==='POST'){await transaction(async client=>{await client.query('TRUNCATE guest_sessions CASCADE');await client.query('TRUNCATE rate_limits');await seed(client);},source);status=0;delay=0;res.end('reset synthetic fixtures');return;}
+ if(url.pathname==='/qa/admin-fixtures'&&process.env.QA_BROWSER==='1'&&req.method==='POST'){
+  await transaction(async client=>{
+   await client.query('TRUNCATE guest_sessions CASCADE');const session='e'.repeat(64);
+   await client.query("INSERT INTO guest_sessions(id,expires_at) VALUES($1,now()+interval '1 year')",[session]);
+   let fixtureIndex=0;for(const input of [
+    {guestName:'Сергей Иванов',who:'Друг Максима. За хороший плейлист.',transfer:'kupchino',musicRequest:'Queen — Don’t Stop Me Now\nABBA — Dancing Queen',food:'Аллергия на орехи',alcoholDrinks:['red_wine','whisky'],softDrinks:['cola','tonic']},
+    {guestName:'Мария Петрова',hotAppetizer:'hot_fish',mainCourse:'main_meat',who:'Подруга Ани',transfer:'pavlovsk',musicRequest:'Земфира — Хочешь?',alcoholDrinks:['white_wine'],softDrinks:['orange_juice']},
+    {guestName:'Александр Смирнов',who:'Брат',transfer:'self',food:'Без мяса',alcoholDrinks:['other'],alcoholOther:'Сидр',softDrinks:['other'],softOther:'Холодный чай'},
+    {guestName:'Елена Соколова',attendance:'no'}
+   ]){const saved=await saveRsvp(client,session,validateRsvp({attendance:'yes',dressCode:true,hotAppetizer:'hot_meat',mainCourse:'main_fish',...input,submissionKey:randomUUID()}),new Set());await client.query('UPDATE rsvps SET created_at=$2 WHERE id=$1',[saved.rsvp.id,new Date(Date.UTC(2026,0,++fixtureIndex))]);}
+  },source);res.end('synthetic organizer fixtures');return;
+ }
  if(url.pathname==='/qa/config'){status=Number(url.searchParams.get('status')||0);delay=Number(url.searchParams.get('delay')||0);res.end('configured');return;}
  if(url.pathname==='/qa/count'){res.setHeader('Content-Type','application/json');res.end(JSON.stringify((await db.query('SELECT count(*)::int total FROM rsvps')).rows[0]));return;}
  if(url.pathname==='/qa-sdk.js'){res.setHeader('Content-Type','application/javascript');res.end('window.Telegram={WebApp:{initData:'+JSON.stringify(initData())+',ready(){},expand(){},safeAreaInset:{top:24,bottom:20},contentSafeAreaInset:{top:12,bottom:0}}};');return;}

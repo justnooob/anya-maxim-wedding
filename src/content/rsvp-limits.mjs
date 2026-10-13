@@ -1,3 +1,4 @@
+import {validMenuChoice} from './menu.mjs';
 // One character means one Unicode code point after NFC normalization (emoji count as one).
 export const rsvpLimits=Object.freeze({guestName:80,who:120,food:300,musicRequest:300,alcoholOther:80,softOther:80});
 export const fieldLabels=Object.freeze({guestName:'Имя',who:'Кто вы',food:'Особенности питания',musicRequest:'Музыка',alcoholOther:'Свой вариант алкоголя',softOther:'Свой вариант безалкогольного'});
@@ -8,7 +9,7 @@ export function validGuestName(value){return typeof value==='string'&&cleanText(
 export function rsvpReady(data){
  if(!validGuestName(data.guestName)||!['yes','no'].includes(data.attendance))return false;
  if(data.attendance==='no')return true;
- return !!data.who.trim()&&withinLimit('who',data.who)&&withinLimit('food',data.food)&&withinLimit('musicRequest',data.musicRequest)&&
+ return validMenuChoice('hotAppetizer',data.hotAppetizer)&&validMenuChoice('mainCourse',data.mainCourse)&&!!data.who.trim()&&withinLimit('who',data.who)&&withinLimit('food',data.food)&&withinLimit('musicRequest',data.musicRequest)&&
  data.alcoholDrinks.length>0&&data.softDrinks.length>0&&['self','kupchino','pavlovsk'].includes(data.transfer)&&data.dressCode===true&&
  (!data.alcoholDrinks.includes('other')||(!!data.alcoholOther.trim()&&withinLimit('alcoholOther',data.alcoholOther)))&&
  (!data.softDrinks.includes('other')||(!!data.softOther.trim()&&withinLimit('softOther',data.softOther)));

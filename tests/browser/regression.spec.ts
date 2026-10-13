@@ -21,6 +21,7 @@ async function going(page:Page,name='Сергей Иванов 😀'){
  await page.locator('input[name=guestName]').fill(name);
  await page.getByRole('button',{name:'Приду',exact:true}).click();
  await page.locator('input[name=who]').fill('Друг семьи');
+ await page.locator('input[name=hotAppetizer][value=hot_meat]').check();await page.locator('input[name=mainCourse][value=main_fish]').check();
  await page.locator('input[name=alcoholDrinks][value=none]').check();
  await page.locator('input[name=softDrinks][value=cola]').check();
  await page.locator('input[name=transfer][value="kupchino"]').check();
@@ -73,7 +74,7 @@ test('RSVP going, not going, five clean submissions and restored session',async(
  await food.fill('А'.repeat(300));await music.fill('М'.repeat(301));await expect(submit).toBeDisabled();
  await music.fill('М'.repeat(300));await expect(submit).toBeEnabled();
  await page.locator('input[name=who]').fill('Я'.repeat(120));
- await image(page,page.locator('#rsvp'),'rsvp-going.png');
+ await image(page,page.locator('#rsvp'),'rsvp-going.png');await image(page,page.locator('.rsvp-food-block'),'rsvp-food-block.png');
  await page.getByRole('button',{name:'Не приду',exact:true}).click();await expect(page.locator('.rsvp-details')).toHaveCount(0);await expect(submit).toBeEnabled();
  await image(page,page.locator('#rsvp'),'rsvp-not-going.png');
  const sent=page.waitForRequest(req=>req.url().endsWith('/api/rsvp')&&req.method()==='POST');await submit.click();
@@ -87,15 +88,43 @@ test('RSVP going, not going, five clean submissions and restored session',async(
  await expect(page.locator('.saved-guest')).toHaveCount(1);await expect(page.getByRole('button',{name:'Добавить ещё гостя',exact:true})).toBeVisible();await expect(page.locator('#rsvp form')).toHaveCount(0);
  await image(page,page.locator('#rsvp'),'rsvp-success-second.png');
  for(let i=3;i<=5;i++){await page.getByRole('button',{name:'Добавить ещё гостя',exact:true}).click();await expect(page.locator('input[name=guestName]')).toHaveValue('');await page.locator('input[name=guestName]').fill('Гость Номер'+i);await page.getByRole('button',{name:'Не приду',exact:true}).click();await submit.click();await expect(page.locator('.rsvp-confirmation')).toContainText(i+' гостей');}
- await page.reload();await expect(page.locator('.rsvp-confirmation')).toContainText('5 гостей');await expect(page.locator('.saved-guest')).toHaveCount(1);await image(page,page.locator('#rsvp'),'rsvp-session-multiple.png');expect(submissions.length).toBe(5);expect(new Set(submissions.map(s=>s.submissionKey)).size).toBe(5);expect(submissions.every(s=>!('overnight' in s))).toBeTruthy();await overflow(page);
+ await page.reload();await expect(page.locator('.rsvp-confirmation')).toContainText('5 гостей');await expect(page.locator('.saved-guest')).toHaveCount(1);await image(page,page.locator('#rsvp'),'rsvp-session-multiple.png');expect(submissions.length).toBe(5);expect(new Set(submissions.map(s=>s.submissionKey)).size).toBe(5);expect(submissions.every(s=>!('overnight' in s))).toBeTruthy();expect(submissions.filter(s=>s.attendance==='no').every(s=>!('hotAppetizer' in s)&&!('mainCourse' in s))).toBeTruthy();await overflow(page);
 });
 
-test('Telegram list and maximum-length guest detail',async({page})=>{
- await page.goto('/telegram');await expect(page.locator('.admin-guests button')).toHaveCount(1);await expect(page.locator('.admin-counts')).toContainText('Ответов 1');
- await image(page,page,'telegram-list.png');
- await page.locator('.admin-guests button').click();await expect(page.locator('.admin-detail dd')).toHaveCount(7);
- await image(page,page,'telegram-detail-long.png');
- for(const width of [320,430,768]){await page.setViewportSize({width,height:932});await overflow(page);expect(await page.locator('.admin-detail').evaluate(el=>el.scrollWidth<=el.clientWidth+1)).toBeTruthy();}
+test('Telegram navigation, analytics, filtering, copy and long detail on mobile',async({page})=>{
+ test.setTimeout(120000);
+ await page.goto('/telegram');await expect(page.locator('.organizer-kpis')).toBeVisible();await image(page,page,'telegram-summary.png');
+ const nav=page.getByRole('navigation',{name:'Основная навигация'});await expect(nav.getByRole('button')).toHaveCount(5);
+ await nav.getByRole('button',{name:'Гости',exact:true}).click();await expect(page.locator('.organizer-guest')).toHaveCount(1);await image(page,page,'telegram-list.png');
+ await page.getByRole('button',{name:'Фильтры',exact:true}).click();await expect(page.getByRole('dialog')).toBeVisible();await image(page,page,'telegram-filters.png');
+ await page.getByRole('dialog').getByLabel('Трансфер',{exact:true}).selectOption('pavlovsk');await page.getByRole('button',{name:'Применить',exact:true}).click();await expect(page.locator('.organizer-guest')).toHaveCount(0);
+ await page.getByRole('button',{name:'Убрать фильтр: Павловск'}).click();await expect(page.locator('.organizer-guest')).toHaveCount(1);
+ await page.getByLabel('Поиск по имени',{exact:true}).fill('Неизвестный');await expect(page.locator('.organizer-guest')).toHaveCount(0);await page.getByLabel('Поиск по имени',{exact:true}).fill('');await expect(page.locator('.organizer-guest')).toHaveCount(1);
+ await page.locator('.organizer-guest').click();await expect(page.locator('.admin-detail')).toContainText('Безалкогольное');await image(page,page,'telegram-detail-long.png');
+ await page.getByRole('button',{name:'Назад',exact:true}).click();
+ await page.evaluate(()=>Object.defineProperty(navigator,'clipboard',{value:{writeText:async(text:string)=>{(window as unknown as {copied:string}).copied=text;}}}));
+ for(const [screen,file] of [['Трансфер','telegram-transfer.png'],['Музыка','telegram-music.png'],['Банкет','telegram-more.png']]){await nav.getByRole('button',{name:screen,exact:true}).click();await image(page,page,file);}
+ await nav.getByRole('button',{name:'Музыка',exact:true}).click();await page.getByRole('button',{name:'Скопировать всё',exact:true}).click();expect(await page.evaluate(()=>(window as unknown as {copied:string}).copied)).toContain('М'.repeat(300));
+ await nav.getByRole('button',{name:'Трансфер',exact:true}).click();await page.getByRole('button',{name:'Скопировать список',exact:true}).click();expect(await page.evaluate(()=>(window as unknown as {copied:string}).copied)).toContain('Купчино — 1 гость');
+ for(const width of [320,375,390,430]){await page.setViewportSize({width,height:932});for(const label of ['Сводка','Гости','Трансфер','Музыка','Банкет']){await nav.getByRole('button',{name:label,exact:true}).click();await overflow(page);const last=page.locator('.organizer-group').last();if(await last.count())expect(await last.evaluate(el=>el.scrollWidth<=el.clientWidth+1)).toBeTruthy();}await nav.getByRole('button',{name:'Гости',exact:true}).click();await page.locator('.organizer-guest').click();await overflow(page);await expect(page.locator('.admin-detail')).toBeVisible();await page.getByRole('button',{name:'Назад',exact:true}).click();if(width===320){await nav.getByRole('button',{name:'Сводка',exact:true}).click();await image(page,page,'telegram-summary-320.png');}}
+});
+
+test('Telegram operational screens with representative synthetic guests',async({page,request})=>{
+ const seeded=await request.post('/qa/admin-fixtures');expect(seeded.ok()).toBeTruthy();await page.goto('/telegram');await expect(page.locator('.organizer-kpis')).toBeVisible();
+ const nav=page.getByRole('navigation',{name:'Основная навигация'});
+ for(const [label,file] of [['Сводка','telegram-review-summary.png'],['Гости','telegram-review-guests.png'],['Трансфер','telegram-review-transfer.png'],['Музыка','telegram-review-music.png'],['Банкет','telegram-review-more.png']]){await nav.getByRole('button',{name:label,exact:true}).click();await ready(page);await expect.soft(page).toHaveScreenshot(file,{fullPage:true});await overflow(page);}
+ await nav.getByRole('button',{name:'Гости',exact:true}).click();await page.locator('.organizer-guest').filter({hasText:'Сергей Иванов'}).click();await image(page,page,'telegram-review-detail.png');
+ await page.getByRole('button',{name:'Назад',exact:true}).click();await nav.getByRole('button',{name:'Банкет',exact:true}).click();
+ await page.getByRole('button',{name:/Мясная горячая закуска/}).click();await expect(page.locator('.organizer-heading')).toContainText('Мясная горячая закуска');await expect(page.locator('.organizer-transfer-name')).toHaveCount(2);await image(page,page,'telegram-food-drill.png');
+ await page.evaluate(()=>Object.defineProperty(navigator,'clipboard',{value:{writeText:async(text:string)=>{(window as unknown as {copied:string}).copied=text;}}}));await page.getByRole('button',{name:'Скопировать список',exact:true}).click();expect(await page.evaluate(()=>(window as unknown as {copied:string}).copied)).toContain('Мясная горячая закуска — 2 гостя');await page.locator('.organizer-transfer-name').filter({hasText:'Сергей Иванов'}).click();await expect(page.locator('.admin-detail h3')).toContainText(['Основное','Трансфер','Напитки','Еда','Музыка']);await page.getByRole('button',{name:'Назад',exact:true}).click();
+ await page.getByRole('button',{name:'К банкету',exact:true}).click();await page.getByRole('button',{name:/Вино красное/}).click();await expect(page.locator('.organizer-transfer-name')).toHaveCount(1);await image(page,page,'telegram-drink-drill.png');await page.getByRole('button',{name:'Скопировать список',exact:true}).click();expect(await page.evaluate(()=>(window as unknown as {copied:string}).copied)).toContain('Вино красное — 1 гость');
+ await page.setViewportSize({width:320,height:812});await overflow(page);await page.getByRole('button',{name:'К банкету',exact:true}).click();await image(page,page,'telegram-banquet-320.png');
+});
+
+test('Telegram delete refreshes overview and operational sections',async({page})=>{
+ await page.goto('/telegram');await expect(page.locator('.organizer-kpis')).toBeVisible();const nav=page.getByRole('navigation',{name:'Основная навигация'});
+ await nav.getByRole('button',{name:'Гости',exact:true}).click();await page.locator('.organizer-guest').click();await page.getByRole('button',{name:'Удалить ответ',exact:true}).click();await page.getByRole('button',{name:'Подтвердить удаление',exact:true}).click();await expect(page.locator('.admin-detail')).toHaveCount(0);await expect(page.locator('.organizer-empty')).toContainText('Нет ответов');
+ for(const [label,text] of [['Сводка','Нет ответов'],['Трансфер','Никому пока не нужен трансфер'],['Музыка','Музыкальных пожеланий пока нет'],['Банкет','Нет ответов']]){await nav.getByRole('button',{name:label,exact:true}).click();await expect(page.locator('.organizer-empty')).toContainText(text);}
 });
 
 test('normal motion survives fast scroll, accordion and resize',async({page})=>{

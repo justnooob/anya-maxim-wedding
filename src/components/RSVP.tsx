@@ -8,6 +8,7 @@ import { Watercolor } from "./Watercolor";
 
 import {rsvpReady,attendancePayload,withinLimit,validGuestName} from '@/content/rsvp-limits.mjs';
 import {boundedJson,requestMessage} from '@/client/requests.mjs';
+import {banquetMenu,menuHint} from '@/content/menu.mjs';
 import {TextCounter} from './TextCounter';
 type TransferChoice="self"|"kupchino"|"pavlovsk";
 type SavedGuest={id?:string;guestName:string;attendance:"yes"|"no"};
@@ -29,11 +30,13 @@ export function RSVP() {
   const [food,setFood]=useState('');
   const [musicRequest,setMusicRequest]=useState('');
   const [saved,setSaved]=useState<SavedGuest[]>([]);
+  const [hotAppetizer,setHotAppetizer]=useState('');
+  const [mainCourse,setMainCourse]=useState('');
   const adding=useRef(false);
   const submissionKey=useRef<string>("");
   const lastSavedCount=useRef(0);
   const requestVersion=useRef(0);
-  const clearFields=useCallback(()=>{setName('');setAttendance(null);setWho('');setFood('');setMusicRequest('');setTransfer('');setAlcoholDrinks([]);setAlcoholOther('');setSoftDrinks([]);setSoftOther('');setDress(false);setError('');},[]);
+  const clearFields=useCallback(()=>{setHotAppetizer('');setMainCourse('');setName('');setAttendance(null);setWho('');setFood('');setMusicRequest('');setTransfer('');setAlcoholDrinks([]);setAlcoholOther('');setSoftDrinks([]);setSoftOther('');setDress(false);setError('');},[]);
   const submitting=useRef(false);
   const successRef = useRef<HTMLDivElement>(null);
   const refreshing = useRef(false);
@@ -66,7 +69,7 @@ export function RSVP() {
     const timer = setInterval(() => { void refresh(); }, 30000);
     return () => clearInterval(timer);
   }, [sent, refresh]);
-  const payload=attendancePayload({guestName:name,attendance,who,food,musicRequest,transfer:transfer||null,dressCode:dress,alcoholDrinks,alcoholOther,softDrinks,softOther});
+  const payload=attendancePayload({guestName:name,attendance,who,hotAppetizer,mainCourse,food,musicRequest,transfer:transfer||null,dressCode:dress,alcoholDrinks,alcoholOther,softDrinks,softOther});
   const valid=rsvpReady({...payload,food,musicRequest});
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -107,7 +110,10 @@ export function RSVP() {
         <fieldset className="attendance-choice"><legend>{copy.attendance}<RequiredMark /></legend><div className="attendance-buttons"><button type="button" disabled={busy} aria-pressed={attendance === "yes"} onClick={() => setAttendance("yes")}>{copy.yes}</button><button type="button" disabled={busy} aria-pressed={attendance === "no"} onClick={() => setAttendance("no")}>{copy.no}</button></div></fieldset>
         {attendance !== "no" && <fieldset className="rsvp-details page-enter" disabled={attendance !== "yes" || busy}><legend className="sr-only">{copy.details}</legend>
           <label className="writing-field"><span>{copy.who}<RequiredMark /></span><input name="who" placeholder={copy.whoPlaceholder} aria-invalid={!withinLimit("who",who)} value={who} onChange={event=>setWho(event.target.value)} required={attendance === "yes"} aria-describedby="who-limit" /><small id="who-limit" className="quiet-note">Не больше 120 символов</small></label>
+          <div className="rsvp-food-block">
+          {(['hotAppetizer','mainCourse'] as const).map(kind=><fieldset className="paper-options menu-choice" key={kind}><legend>{banquetMenu[kind].title}<RequiredMark /></legend><p className="quiet-note">{menuHint}</p><div>{banquetMenu[kind].options.map(option=><label key={option.id}><input type="radio" name={kind} value={option.id} checked={(kind==='hotAppetizer'?hotAppetizer:mainCourse)===option.id} onChange={()=>{(kind==='hotAppetizer'?setHotAppetizer:setMainCourse)(option.id);}} required={attendance==='yes'}/><span>{option.label}</span></label>)}</div></fieldset>)}
           <label className="writing-field"><span>{copy.food}</span><textarea name="food" placeholder={copy.foodPlaceholder} value={food} onChange={event=>setFood(event.target.value)} aria-invalid={!withinLimit("food",food)} aria-describedby="food-counter" rows={2} /><TextCounter field="food" value={food} /></label>
+          </div>
           <DrinkChoices kind="alcohol" selected={alcoholDrinks} other={alcoholOther} onSelect={setAlcoholDrinks} onOther={setAlcoholOther} />
           <DrinkChoices kind="soft" selected={softDrinks} other={softOther} onSelect={setSoftDrinks} onOther={setSoftOther} />
           <fieldset className="paper-options"><legend>{copy.transfer}<RequiredMark /></legend>{copy.transferOptions.map(option => <label key={option.value}><input type="radio" name="transfer" value={option.value} checked={transfer === option.value} onChange={() => setTransfer(option.value)} required={attendance === "yes"} /><span>{option.label}</span></label>)}</fieldset>

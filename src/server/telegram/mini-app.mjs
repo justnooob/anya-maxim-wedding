@@ -2,7 +2,7 @@ import {createHmac,timingSafeEqual} from 'node:crypto';
 import {parseAllowedUserIds} from './access.mjs';
 import {transaction} from '../db/index.mjs';
 import {adminReply} from './admin.mjs';
-import {rsvpDetail} from '../rsvp/detail.mjs';
+import {adminGuest,adminAnalytics,guestQuery} from './analytics.mjs';
 import {limitedJson} from '../rsvp/session.mjs';
 export function miniAppUser(raw,env=process.env,now=Math.floor(Date.now()/1000)){
   if(typeof raw!=='string'||!raw||raw.length>8192||!env.TELEGRAM_BOT_TOKEN)throw new Error('Denied');
@@ -29,14 +29,17 @@ export async function miniAppRequest(request,{source,env=process.env}={}){
     const url=new URL(request.url);
     if(request.method==='GET')return await transaction(async client=>{
       const id=url.searchParams.get('id');
-      if(id){if(!uuid(id))return response({error:'Некорректный ответ.'},400);const row=(await client.query('SELECT * FROM rsvps WHERE id=$1',[id])).rows[0];return row?response({guest:{id:row.id,...rsvpDetail(row)}}):response({error:'Ответ уже удалён.'},404);}
-      const filter=url.searchParams.get('filter')||'all';
-      const predicates={all:'TRUE',yes:"attendance='yes'",no:"attendance='no'",transfer:"transfer IN ('needed','kupchino','pavlovsk')",kupchino:"transfer='kupchino'",pavlovsk:"transfer='pavlovsk'"};
-      if(!Object.hasOwn(predicates,filter))return response({error:'Некорректный фильтр.'},400);
-      const offset=Number(url.searchParams.get('offset')||0);if(!Number.isSafeInteger(offset)||offset<0||offset>10000)return response({error:'Некорректная страница.'},400);
-      const stats=(await client.query("SELECT count(*)::int total,count(*) FILTER(WHERE attendance='yes')::int going,count(*) FILTER(WHERE attendance='no')::int not_going,count(*) FILTER(WHERE transfer IN ('needed','kupchino','pavlovsk'))::int transfer,count(*) FILTER(WHERE transfer='kupchino')::int kupchino,count(*) FILTER(WHERE transfer='pavlovsk')::int pavlovsk FROM rsvps")).rows[0];
-      const rows=(await client.query('SELECT * FROM rsvps WHERE '+predicates[filter]+' ORDER BY created_at,id LIMIT 21 OFFSET $1',[offset])).rows;
-      return response({stats,guests:rows.slice(0,20).map(row=>({id:row.id,...rsvpDetail(row)})),hasMore:rows.length>20});
+      if(id){if(!uuid(id))return response({error:'Некорректный ответ.'},400);const row=(await client.query('SELECT * FROM rsvps WHERE id=$1',[id])).rows[0];return row?response({guest:adminGuest(row)}):response({error:'Ответ уже удалён.'},404);}
+      const action=url.searchParams.get('action');
+      if(action==='analytics'){
+        const rows=(await client.query('SELECT * FROM rsvps ORDER BY created_at DESC,id DESC')).rows;
+        return response(adminAnalytics(rows));
+      }
+      if(action)return response({error:'Некорректное действие.'},400);
+      let query;try{query=guestQuery(url.searchParams);}catch{return response({error:'Некорректный фильтр.'},400);}
+      const stats=(await client.query("SELECT count(*)::int total,count(*) FILTER(WHERE attendance='yes')::int going,count(*) FILTER(WHERE attendance='no')::int not_going,count(*) FILTER(WHERE transfer IN ('needed','kupchino','pavlovsk'))::int transfer,count(*) FILTER(WHERE transfer='kupchino')::int kupchino,count(*) FILTER(WHERE transfer='pavlovsk')::int pavlovsk,count(*) FILTER(WHERE attendance='yes' AND length(trim(coalesce(music_request,'')))>0)::int music,count(*) FILTER(WHERE attendance='yes' AND length(trim(coalesce(food,'')))>0)::int diet FROM rsvps")).rows[0];
+      const rows=(await client.query(query.sql,query.args)).rows;
+      return response({stats,guests:rows.slice(0,20).map(adminGuest),hasMore:rows.length>20});
     },source);
     if(request.method==='POST'){
       let input;try{input=await limitedJson(request,2048);}catch{return response({error:'Некорректный запрос.'},400);}

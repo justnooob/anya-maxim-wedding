@@ -1,3 +1,4 @@
+import {menuLabel} from '../../content/menu.mjs';
 import {describeDrinks} from '../../content/drinks.mjs';
 // One presentation model for Telegram details and the authenticated Mini App.
 export function rsvpDetail(row){
@@ -7,6 +8,7 @@ export function rsvpDetail(row){
       {label:'Алкоголь',value:describeDrinks('alcohol',row.alcohol_drinks,row.alcohol_other)},
       {label:'Безалкогольное',value:describeDrinks('soft',row.soft_drinks,row.soft_other)},
       {label:'Трансфер',value:({needed:'Нужен (место отправления не указано)',kupchino:'Нужен трансфер от Купчино',pavlovsk:'Нужен трансфер от Павловска',self:'Доеду сам/а'})[row.transfer]||'Не указано'});
+    fields.push({label:'Горячая закуска',value:menuLabel('hotAppetizer',row.hot_appetizer_choice)},{label:'Основное блюдо',value:menuLabel('mainCourse',row.main_course_choice)});
     if(row.music_request)fields.push({label:'Музыка',value:row.music_request});
     if(row.food)fields.push({label:'Аллергии / особенности питания',value:row.food});
     fields.push({label:'Дресс-код',value:row.dress_code?'Подтверждён':'Не подтверждён'});

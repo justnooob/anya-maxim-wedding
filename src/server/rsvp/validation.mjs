@@ -1,3 +1,4 @@
+import {validMenuChoice} from '../../content/menu.mjs';
 import {drinkChoices} from '../../content/drinks.mjs';
 import {rsvpLimits,fieldLabels,cleanText,textLength,validGuestName} from '../../content/rsvp-limits.mjs';
 export class InputError extends Error {constructor(message='Проверь имя и обязательные ответы.'){super(message);this.name='InputError';}}
@@ -22,8 +23,9 @@ export function validateRsvp(input){
   const guestName=str('guestName',true).replace(/\s+/g,' ');
   if(!validGuestName(guestName))throw new InputError('Укажи имя и фамилию.');
   if(!['yes','no'].includes(input.attendance))throw new InputError();
-  if(input.attendance==='no')return {...submission,guestName,attendance:'no',who:'',food:'',transfer:null,overnight:null,dressCode:false,alcoholDrinks:[],alcoholOther:'',softDrinks:[],softOther:'',musicRequest:null};
+  if(input.attendance==='no')return {...submission,guestName,attendance:'no',who:'',food:'',transfer:null,overnight:null,dressCode:false,alcoholDrinks:[],alcoholOther:'',softDrinks:[],softOther:'',musicRequest:null,hotAppetizer:null,mainCourse:null};
   if(!['self','kupchino','pavlovsk'].includes(input.transfer)||input.dressCode!==true)throw new InputError();
+  if(!validMenuChoice('hotAppetizer',input.hotAppetizer)||!validMenuChoice('mainCourse',input.mainCourse))throw new InputError('Выбери горячую закуску и основное блюдо.');
   const alcohol=drinks('alcohol'),soft=drinks('soft');
-  return {...submission,guestName,attendance:'yes',who:str('who',true),food:str('food'),musicRequest:str('musicRequest')||null,transfer:input.transfer,overnight:null,dressCode:true,alcoholDrinks:alcohol.selected,alcoholOther:alcohol.other,softDrinks:soft.selected,softOther:soft.other};
+  return {...submission,guestName,attendance:'yes',hotAppetizer:input.hotAppetizer,mainCourse:input.mainCourse,who:str('who',true),food:str('food'),musicRequest:str('musicRequest')||null,transfer:input.transfer,overnight:null,dressCode:true,alcoholDrinks:alcohol.selected,alcoholOther:alcohol.other,softDrinks:soft.selected,softOther:soft.other};
 }

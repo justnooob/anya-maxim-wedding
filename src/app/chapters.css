@@ -242,3 +242,9 @@
 .telegram-admin {padding-top:calc(32px + max(env(safe-area-inset-top),var(--telegram-safe-top,0px)));padding-bottom:calc(48px + max(env(safe-area-inset-bottom),var(--telegram-safe-bottom,0px)));}
 
 .saved-guest {margin:24px 0;}.saved-guest h4{font-family:var(--serif);font-size:30px;font-weight:400;margin:0;overflow-wrap:anywhere}.saved-guest p{font-size:13px;margin-top:8px}.rsvp-confirmation .foil-button{margin-top:24px;width:100%;white-space:normal;}
+.rsvp-food-block{border-top:1px solid #a798733d;border-bottom:1px solid #a798733d;margin:26px 0;padding:0 0 10px}
+.rsvp-food-block .menu-choice{margin-bottom:28px}
+.menu-choice>div{display:grid;gap:4px}
+.menu-choice label{min-height:44px;align-items:center}
+.menu-choice .quiet-note{margin:10px 0 6px}
+@media(min-width:700px){.menu-choice>div{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}}
