@@ -1,0 +1,893 @@
+{
+  "date": "2026-10-25",
+  "portraits": [
+    {
+      "id": "family-0",
+      "name": "Ольга",
+      "role": "Мама жениха",
+      "source": "codex-clipboard-e3b5158a-c380-440c-8f4c-4321c7c343b8.png",
+      "file": "public/images/guests/olga.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 84768,
+      "processing": "Resize to 800×1000, WebP quality 90; no face editing, crop, color filter or retouch. Position 50% 50%, frame 4:5."
+    },
+    {
+      "id": "family-1",
+      "name": "Владислав",
+      "role": "Папа жениха",
+      "source": "codex-clipboard-1cdfa7f5-e248-4e60-b1b4-1f58a45351ee.png",
+      "file": "public/images/guests/vladislav.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 117564,
+      "processing": "Resize to 800×1000, WebP quality 90; no face editing, crop, color filter or retouch. Position 50% 50%, frame 4:5."
+    },
+    {
+      "id": "family-6",
+      "name": "Галина Николаевна",
+      "role": "Бабушка жениха",
+      "source": "codex-clipboard-2b254588-fcb4-467c-9efd-8aa4647f5ad3.png",
+      "file": "public/images/guests/galina-nikolaevna.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 152788,
+      "processing": "Resize to 800×1000, WebP quality 90; no face editing, crop, color filter or retouch. Position 50% 50%, frame 4:5."
+    },
+    {
+      "id": "family-5",
+      "name": "Сергей Иванович",
+      "role": "Дедушка жениха",
+      "source": "codex-clipboard-21bddf78-8d03-4e26-bfc6-5559c0aac855.png",
+      "file": "public/images/guests/sergey-ivanovich.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 121420,
+      "processing": "Resize to 800×1000, WebP quality 90; no face editing, crop, color filter or retouch. Position 50% 50%, frame 4:5."
+    },
+    {
+      "id": "family-12",
+      "name": "Наталья",
+      "role": "Тетя жениха",
+      "source": "codex-clipboard-e154243e-7dff-4ae2-a257-26a10965c308.png",
+      "file": "public/images/guests/natalya.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 82998,
+      "processing": "Resize to 800×1000, WebP quality 90; no face editing, crop, color filter or retouch. Position 50% 50%, frame 4:5."
+    },
+    {
+      "id": "family-4",
+      "name": "Лидия Васильевна",
+      "role": "Бабушка жениха",
+      "source": "codex-clipboard-195d7352-4a2e-4951-84fd-cfaf6ae7b653.png",
+      "file": "public/images/guests/lidia-vasilyevna.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 68216,
+      "processing": "Resize to 800×1000, WebP quality 90; no face editing, crop, color filter or retouch. Position 50% 50%, frame 4:5."
+    },
+    {
+      "id": "family-11",
+      "name": "Олег",
+      "role": "Дядя жениха",
+      "source": "codex-clipboard-e90bfd93-4cfe-40eb-b649-cd6e25e18fc4.png",
+      "file": "public/images/guests/oleg.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 83096,
+      "processing": "Resize to 800×1000, WebP quality 90; no face editing, crop, color filter or retouch. Position 50% 50%, frame 4:5."
+    },
+    {
+      "id": "family-14",
+      "name": "Мария",
+      "role": "Тетя невесты",
+      "source": "codex-clipboard-7183c136-2ccf-4796-8001-f6b2a3f447ec.png",
+      "file": "public/images/guests/maria.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 57270,
+      "processing": "Resize to 800×1000, WebP quality 90; no face editing, crop, color filter or retouch. Position 50% 50%, frame 4:5."
+    },
+    {
+      "id": "family-8",
+      "name": "Надежда Константиновна",
+      "role": "Бабушка невесты",
+      "source": "codex-clipboard-72e00544-cd74-4550-a79b-2ca4bee84655.png",
+      "file": "public/images/guests/nadezhda-konstantinovna.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 118784,
+      "processing": "Resize to 800×1000, WebP quality 90; no face editing, crop, color filter or retouch. Position 50% 50%, frame 4:5."
+    },
+    {
+      "id": "family-9",
+      "name": "Анатолий",
+      "role": "Отчим невесты",
+      "source": "codex-clipboard-7b3d8b45-5ece-477b-b8f0-dc30c5978ecf.png",
+      "file": "public/images/guests/anatoly.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 80512,
+      "processing": "Resize to 800×1000, WebP quality 90; no face editing, crop, color filter or retouch. Position 50% 50%, frame 4:5."
+    },
+    {
+      "id": "family-3",
+      "name": "Вячеслав",
+      "role": "Папа невесты",
+      "source": "codex-clipboard-35d26a7c-8cc3-41b9-93b9-4af053c0213e.png",
+      "file": "public/images/guests/vyacheslav.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 117432,
+      "processing": "Resize to 800×1000, WebP quality 90; no face editing, crop, color filter or retouch. Position 50% 50%, frame 4:5."
+    },
+    {
+      "id": "family-2",
+      "name": "Дарья",
+      "role": "Мама невесты",
+      "source": "codex-clipboard-41db4e47-9a4e-4d78-be5a-bd2de5da8424.png",
+      "file": "public/images/guests/darya.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 78398,
+      "processing": "Resize to 800×1000, WebP quality 90; no face editing, crop, color filter or retouch. Position 50% 50%, frame 4:5."
+    },
+    {
+      "id": "family-7",
+      "name": "Галина Ивановна",
+      "role": "Бабушка невесты",
+      "source": "codex-clipboard-34412626-d645-4311-98d6-483b1bbd895c.png",
+      "file": "public/images/guests/galina-ivanovna.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 124600,
+      "processing": "Resize to 800×1000, WebP quality 90; no face editing, crop, color filter or retouch. Position 50% 50%, frame 4:5."
+    },
+    {
+      "id": "family-10",
+      "name": "Ангелина",
+      "role": "Сестра невесты",
+      "source": "codex-clipboard-06024f7c-da8c-4a53-b25d-0fa07db5dc55.png",
+      "file": "public/images/guests/angelina.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 78076,
+      "processing": "Resize to 800×1000, WebP quality 90; no face editing, crop, color filter or retouch. Position 50% 50%, frame 4:5."
+    },
+    {
+      "id": "family-13",
+      "name": "Екатерина",
+      "role": "Двоюродная сестра жениха",
+      "source": "codex-clipboard-c50e2692-673b-49da-b071-928cfb10afe8.png",
+      "file": "public/images/guests/ekaterina.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 128516,
+      "processing": "800×1000 WebP quality 90; center cover crop about 5 source pixels at each side to reach 4:5. No face editing, retouch or color filter. Position 50% 50%."
+    },
+    {
+      "id": "friends-2",
+      "name": "Карина",
+      "source": "codex-clipboard-d41b1003-bf37-4bbc-9780-d5823e11d319.png",
+      "file": "public/images/guests/friends/karina.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 157654,
+      "processing": "800×1000 WebP quality 90, center crop to 4:5. No image generation, face editing, retouch or color filter. Position 50% 50%."
+    },
+    {
+      "id": "friends-7",
+      "name": "Асель",
+      "source": "codex-clipboard-54b553a5-79c3-4ba7-aae1-225a4197b4a6.png",
+      "file": "public/images/guests/friends/asel.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 182324,
+      "processing": "800×1000 WebP quality 90, center crop to 4:5. No image generation, face editing, retouch or color filter. Position 50% 50%."
+    },
+    {
+      "id": "friends-5",
+      "name": "Александра",
+      "source": "codex-clipboard-ed586598-1511-44f5-b8b2-a72c5abef67f.png",
+      "file": "public/images/guests/friends/alexandra.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 141088,
+      "processing": "800×1000 WebP quality 90, center crop to 4:5. No image generation, face editing, retouch or color filter. Position 50% 50%."
+    },
+    {
+      "id": "friends-9",
+      "name": "Ирина",
+      "source": "codex-clipboard-bcbc6b04-1290-4ab8-a944-45337cc6e933.png",
+      "file": "public/images/guests/friends/irina.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 77526,
+      "processing": "800×1000 WebP quality 90, center crop to 4:5. No image generation, face editing, retouch or color filter. Position 50% 50%."
+    },
+    {
+      "id": "friends-4",
+      "name": "Илья",
+      "source": "codex-clipboard-871178c9-a547-4638-8128-bf3795b4f90c.png",
+      "file": "public/images/guests/friends/ilya.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 64656,
+      "processing": "800×1000 WebP quality 90, center crop to 4:5. No image generation, face editing, retouch or color filter. Position 50% 50%."
+    },
+    {
+      "id": "friends-8",
+      "name": "Даниил",
+      "source": "codex-clipboard-c28ba58b-de8f-45b1-9085-4c6a713b93ef.png",
+      "file": "public/images/guests/friends/daniil.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 109816,
+      "processing": "800×1000 WebP quality 90, center crop to 4:5. No image generation, face editing, retouch or color filter. Position 50% 50%."
+    },
+    {
+      "id": "friends-10",
+      "name": "Анастасия",
+      "source": "codex-clipboard-5fadbe69-dbd9-476a-94dc-a0dacc5c9d55.png",
+      "file": "public/images/guests/friends/anastasia.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 111874,
+      "processing": "800×1000 WebP quality 90, center crop to 4:5. No image generation, face editing, retouch or color filter. Position 50% 50%."
+    },
+    {
+      "id": "friends-0",
+      "name": "Виктория",
+      "source": "codex-clipboard-cc3c99de-9abc-4ac7-9a5c-817680b65a1b.png",
+      "file": "public/images/guests/friends/viktoria.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 198454,
+      "processing": "800×1000 WebP quality 90, center crop to 4:5. No image generation, face editing, retouch or color filter. Position 50% 50%."
+    },
+    {
+      "id": "friends-1",
+      "name": "Сергей",
+      "source": "codex-clipboard-01fcbf38-cf2f-4fb2-8018-d0562ea470aa.png",
+      "file": "public/images/guests/friends/sergey.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 57878,
+      "processing": "800×1000 WebP quality 90, center crop to 4:5. No image generation, face editing, retouch or color filter. Position 50% 50%."
+    },
+    {
+      "id": "friends-3",
+      "name": "Денис",
+      "source": "codex-clipboard-48cbf13c-58c9-460b-b710-22d44cc7c6cb.png",
+      "file": "public/images/guests/friends/denis.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 75024,
+      "processing": "Latest user-selected Denis photo; 800×1000 WebP quality 90, center crop to 4:5. No face retouch or color editing.",
+      "previousSource": "codex-clipboard-0ec5d4f9-2680-491a-90ee-62afe6653abc.png"
+    },
+    {
+      "id": "friends-6",
+      "name": "Андрей",
+      "source": "codex-clipboard-6fb684d1-d263-4be2-b208-a7f8717fa422.png",
+      "file": "public/images/guests/friends/andrey.webp",
+      "width": 800,
+      "height": 1000,
+      "bytes": 113548,
+      "processing": "800×1000 WebP quality 90, center crop to 4:5. No image generation, face editing, retouch or color filter. Position 50% 50%."
+    }
+  ],
+  "audio": [
+    {
+      "file": "public/audio/motya-meow-1.mp3",
+      "bytes": 10391,
+      "sha256": "247441bb6a3a3ca422b2f5085c7f1cccc666869cc76d0b1209df1e27bad7bd9f",
+      "duration": 0.95,
+      "channels": 1,
+      "sampleRate": 48000,
+      "peak": 0.05569249391555786,
+      "rms": 0.01373284453432296,
+      "source": "User-supplied final Desktop/motya-meow-1.mp3",
+      "usage": "Supplied and explicitly approved by user for this site. No independent CC0/public-domain license assertion.",
+      "processing": "Copied byte-for-byte; no pitch, timing, trim or volume edits to source file. Playback volume 0.7."
+    },
+    {
+      "file": "public/audio/motya-meow-2.mp3",
+      "bytes": 10629,
+      "sha256": "a7693462155e3395fa06a345ca41e98e231df476d5dc08778bc9184c671a7099",
+      "duration": 0.95,
+      "channels": 1,
+      "sampleRate": 48000,
+      "peak": 0.04703058302402496,
+      "rms": 0.01242948331373454,
+      "source": "User-supplied final Desktop/motya-meow-2.mp3",
+      "usage": "Supplied and explicitly approved by user for this site. No independent CC0/public-domain license assertion.",
+      "processing": "Copied byte-for-byte; no pitch, timing, trim or volume edits to source file. Playback volume 0.7."
+    },
+    {
+      "file": "public/audio/motya-meow-3.mp3",
+      "bytes": 11020,
+      "sha256": "b620ea706003341e8f949aff836b466c0be4ddbb7ed23b95281a98b368ac1c6c",
+      "duration": 0.95,
+      "channels": 1,
+      "sampleRate": 48000,
+      "peak": 0.04348768666386604,
+      "rms": 0.011554667383192985,
+      "source": "User-supplied final Desktop/motya-meow-3.mp3",
+      "usage": "Supplied and explicitly approved by user for this site. No independent CC0/public-domain license assertion.",
+      "processing": "Copied byte-for-byte; no pitch, timing, trim or volume edits to source file. Playback volume 0.7."
+    }
+  ],
+  "cleanup": {
+    "deletedBytes": 5729260,
+    "deleted": [
+      {
+        "path": "public/images/botanical-review.jpg",
+        "bytes": 100996,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Unused botanical review contact sheet"
+      },
+      {
+        "path": "public/images/dress-lookbook/men-blue.webp",
+        "bytes": 110204,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [
+          "DRESS_CODE_IMAGES.json",
+          "DRESS_CODE_REVIEW.md"
+        ],
+        "reason": "Retired v1; replaced by lookbook-v2 and women-clothing-v3"
+      },
+      {
+        "path": "public/images/dress-lookbook/men-casual.webp",
+        "bytes": 114024,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [
+          "DRESS_CODE_IMAGES.json",
+          "DRESS_CODE_REVIEW.md"
+        ],
+        "reason": "Retired v1; replaced by lookbook-v2 and women-clothing-v3"
+      },
+      {
+        "path": "public/images/dress-lookbook/men-milk.webp",
+        "bytes": 106204,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [
+          "DRESS_CODE_IMAGES.json",
+          "DRESS_CODE_REVIEW.md"
+        ],
+        "reason": "Retired v1; replaced by lookbook-v2 and women-clothing-v3"
+      },
+      {
+        "path": "public/images/dress-lookbook/men-moss.webp",
+        "bytes": 107680,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [
+          "DRESS_CODE_IMAGES.json",
+          "DRESS_CODE_REVIEW.md"
+        ],
+        "reason": "Retired v1; replaced by lookbook-v2 and women-clothing-v3"
+      },
+      {
+        "path": "public/images/dress-lookbook/men-muted.webp",
+        "bytes": 112818,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [
+          "DRESS_CODE_IMAGES.json",
+          "DRESS_CODE_REVIEW.md"
+        ],
+        "reason": "Retired v1; replaced by lookbook-v2 and women-clothing-v3"
+      },
+      {
+        "path": "public/images/dress-lookbook/men-neon.webp",
+        "bytes": 115872,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [
+          "DRESS_CODE_IMAGES.json",
+          "DRESS_CODE_REVIEW.md"
+        ],
+        "reason": "Retired v1; replaced by lookbook-v2 and women-clothing-v3"
+      },
+      {
+        "path": "public/images/dress-lookbook/men-neutral.webp",
+        "bytes": 119016,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [
+          "DRESS_CODE_IMAGES.json",
+          "DRESS_CODE_REVIEW.md"
+        ],
+        "reason": "Retired v1; replaced by lookbook-v2 and women-clothing-v3"
+      },
+      {
+        "path": "public/images/dress-lookbook/women-butter.webp",
+        "bytes": 106256,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [
+          "DRESS_CODE_IMAGES.json",
+          "DRESS_CODE_REVIEW.md"
+        ],
+        "reason": "Retired v1; replaced by lookbook-v2 and women-clothing-v3"
+      },
+      {
+        "path": "public/images/dress-lookbook/women-fuchsia.webp",
+        "bytes": 108568,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [
+          "DRESS_CODE_IMAGES.json",
+          "DRESS_CODE_REVIEW.md"
+        ],
+        "reason": "Retired v1; replaced by lookbook-v2 and women-clothing-v3"
+      },
+      {
+        "path": "public/images/dress-lookbook/women-ivory.webp",
+        "bytes": 98120,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [
+          "DRESS_CODE_IMAGES.json",
+          "DRESS_CODE_REVIEW.md"
+        ],
+        "reason": "Retired v1; replaced by lookbook-v2 and women-clothing-v3"
+      },
+      {
+        "path": "public/images/dress-lookbook/women-neon.webp",
+        "bytes": 120060,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [
+          "DRESS_CODE_IMAGES.json",
+          "DRESS_CODE_REVIEW.md"
+        ],
+        "reason": "Retired v1; replaced by lookbook-v2 and women-clothing-v3"
+      },
+      {
+        "path": "public/images/dress-lookbook/women-olive.webp",
+        "bytes": 108828,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [
+          "DRESS_CODE_IMAGES.json",
+          "DRESS_CODE_REVIEW.md"
+        ],
+        "reason": "Retired v1; replaced by lookbook-v2 and women-clothing-v3"
+      },
+      {
+        "path": "public/images/dress-lookbook/women-print.webp",
+        "bytes": 173754,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [
+          "DRESS_CODE_IMAGES.json",
+          "DRESS_CODE_REVIEW.md"
+        ],
+        "reason": "Retired v1; replaced by lookbook-v2 and women-clothing-v3"
+      },
+      {
+        "path": "public/images/dress-lookbook/women-sage.webp",
+        "bytes": 104884,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [
+          "DRESS_CODE_IMAGES.json",
+          "DRESS_CODE_REVIEW.md"
+        ],
+        "reason": "Retired v1; replaced by lookbook-v2 and women-clothing-v3"
+      },
+      {
+        "path": "public/images/dress-men-1.webp",
+        "bytes": 96854,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired initial dress photos; replaced by v2/v3"
+      },
+      {
+        "path": "public/images/dress-men-2.webp",
+        "bytes": 92098,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired initial dress photos; replaced by v2/v3"
+      },
+      {
+        "path": "public/images/dress-men-3.webp",
+        "bytes": 90028,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired initial dress photos; replaced by v2/v3"
+      },
+      {
+        "path": "public/images/dress-men-reference-1.webp",
+        "bytes": 102662,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired initial dress photos; replaced by v2/v3"
+      },
+      {
+        "path": "public/images/dress-men-reference-2.webp",
+        "bytes": 99048,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired initial dress photos; replaced by v2/v3"
+      },
+      {
+        "path": "public/images/dress-men-reference-3.webp",
+        "bytes": 121014,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired initial dress photos; replaced by v2/v3"
+      },
+      {
+        "path": "public/images/dress-men-reference-4.webp",
+        "bytes": 105996,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired initial dress photos; replaced by v2/v3"
+      },
+      {
+        "path": "public/images/dress-men-reference-5.webp",
+        "bytes": 107410,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired initial dress photos; replaced by v2/v3"
+      },
+      {
+        "path": "public/images/dress-men-reference-6.webp",
+        "bytes": 111544,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired initial dress photos; replaced by v2/v3"
+      },
+      {
+        "path": "public/images/dress-women-1.webp",
+        "bytes": 103704,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired initial dress photos; replaced by v2/v3"
+      },
+      {
+        "path": "public/images/dress-women-2.webp",
+        "bytes": 76052,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired initial dress photos; replaced by v2/v3"
+      },
+      {
+        "path": "public/images/dress-women-3.webp",
+        "bytes": 93782,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired initial dress photos; replaced by v2/v3"
+      },
+      {
+        "path": "public/images/dress-women-reference-1.webp",
+        "bytes": 102020,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired initial dress photos; replaced by v2/v3"
+      },
+      {
+        "path": "public/images/dress-women-reference-2.webp",
+        "bytes": 98956,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired initial dress photos; replaced by v2/v3"
+      },
+      {
+        "path": "public/images/dress-women-reference-3.webp",
+        "bytes": 96386,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired initial dress photos; replaced by v2/v3"
+      },
+      {
+        "path": "public/images/dress-women-reference-4.webp",
+        "bytes": 105202,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired initial dress photos; replaced by v2/v3"
+      },
+      {
+        "path": "public/images/dress-women-reference-5.webp",
+        "bytes": 106904,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired initial dress photos; replaced by v2/v3"
+      },
+      {
+        "path": "public/images/dress-women-reference-6.webp",
+        "bytes": 109790,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired initial dress photos; replaced by v2/v3"
+      },
+      {
+        "path": "public/images/guest-1.jpg",
+        "bytes": 20051,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [
+          "STATIONERY_ASSETS.md"
+        ],
+        "reason": "Replaced relative placeholders or unassigned placeholders; dynamic family/friends mapping checked"
+      },
+      {
+        "path": "public/images/guest-14.jpg",
+        "bytes": 15969,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Replaced relative placeholders or unassigned placeholders; dynamic family/friends mapping checked"
+      },
+      {
+        "path": "public/images/guest-15.jpg",
+        "bytes": 14405,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Replaced relative placeholders or unassigned placeholders; dynamic family/friends mapping checked"
+      },
+      {
+        "path": "public/images/guest-16.jpg",
+        "bytes": 13521,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Replaced relative placeholders or unassigned placeholders; dynamic family/friends mapping checked"
+      },
+      {
+        "path": "public/images/guest-19.jpg",
+        "bytes": 20242,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Replaced relative placeholders or unassigned placeholders; dynamic family/friends mapping checked"
+      },
+      {
+        "path": "public/images/guest-20.jpg",
+        "bytes": 17666,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Replaced relative placeholders or unassigned placeholders; dynamic family/friends mapping checked"
+      },
+      {
+        "path": "public/images/guest-21.jpg",
+        "bytes": 17657,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Replaced relative placeholders or unassigned placeholders; dynamic family/friends mapping checked"
+      },
+      {
+        "path": "public/images/guest-22.jpg",
+        "bytes": 12534,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [
+          "STATIONERY_ASSETS.md"
+        ],
+        "reason": "Replaced relative placeholders or unassigned placeholders; dynamic family/friends mapping checked"
+      },
+      {
+        "path": "public/images/guest-7.jpg",
+        "bytes": 14703,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Replaced relative placeholders or unassigned placeholders; dynamic family/friends mapping checked"
+      },
+      {
+        "path": "public/images/guest-8.jpg",
+        "bytes": 16976,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Replaced relative placeholders or unassigned placeholders; dynamic family/friends mapping checked"
+      },
+      {
+        "path": "public/images/venue-mariage-1.webp",
+        "bytes": 371550,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired venue; current two Pushkinskaya photos retained"
+      },
+      {
+        "path": "public/images/venue-mariage-2.webp",
+        "bytes": 375168,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired venue; current two Pushkinskaya photos retained"
+      },
+      {
+        "path": "public/images/venue-mariage-3.webp",
+        "bytes": 285812,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired venue; current two Pushkinskaya photos retained"
+      },
+      {
+        "path": "public/images/venue-mariage-4.webp",
+        "bytes": 177944,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired venue; current two Pushkinskaya photos retained"
+      },
+      {
+        "path": "public/images/venue-mariage-5.webp",
+        "bytes": 129452,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Retired venue; current two Pushkinskaya photos retained"
+      },
+      {
+        "path": "public/images/venue-mock.webp",
+        "bytes": 465142,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [
+          "STATIONERY_ASSETS.md"
+        ],
+        "reason": "Retired venue; current two Pushkinskaya photos retained"
+      },
+      {
+        "path": "public/images/guest-3.jpg",
+        "bytes": 16762,
+        "refs": [],
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Second approved family portrait pack; replaced by vyacheslav/darya/galina-ivanovna/angelina. guest-17 remains for Екатерина; friends unchanged."
+      },
+      {
+        "path": "public/images/guest-4.jpg",
+        "bytes": 12458,
+        "refs": [],
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Second approved family portrait pack; replaced by vyacheslav/darya/galina-ivanovna/angelina. guest-17 remains for Екатерина; friends unchanged."
+      },
+      {
+        "path": "public/images/guest-11.jpg",
+        "bytes": 24450,
+        "refs": [],
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Second approved family portrait pack; replaced by vyacheslav/darya/galina-ivanovna/angelina. guest-17 remains for Екатерина; friends unchanged."
+      },
+      {
+        "path": "public/images/guest-17.jpg",
+        "bytes": 13149,
+        "runtimeOrTestRefs": [],
+        "historicalRefs": [],
+        "reason": "Last family placeholder replaced by approved Екатерина portrait. No remaining dynamic family placeholder mapping; friends do not use guest-17."
+      },
+      {
+        "path": "public/images/guest-2.jpg",
+        "bytes": 13809,
+        "runtimeOrTestRefs": [],
+        "reason": "Friend placeholder replaced by approved portrait; numeric placeholder mapping removed."
+      },
+      {
+        "path": "public/images/guest-5.jpg",
+        "bytes": 13539,
+        "runtimeOrTestRefs": [],
+        "reason": "Friend placeholder replaced by approved portrait; numeric placeholder mapping removed."
+      },
+      {
+        "path": "public/images/guest-6.jpg",
+        "bytes": 18679,
+        "runtimeOrTestRefs": [],
+        "reason": "Friend placeholder replaced by approved portrait; numeric placeholder mapping removed."
+      },
+      {
+        "path": "public/images/guest-9.jpg",
+        "bytes": 15154,
+        "runtimeOrTestRefs": [],
+        "reason": "Friend placeholder replaced by approved portrait; numeric placeholder mapping removed."
+      },
+      {
+        "path": "public/images/guest-10.jpg",
+        "bytes": 15134,
+        "runtimeOrTestRefs": [],
+        "reason": "Friend placeholder replaced by approved portrait; numeric placeholder mapping removed."
+      },
+      {
+        "path": "public/images/guest-12.jpg",
+        "bytes": 22914,
+        "runtimeOrTestRefs": [],
+        "reason": "Friend placeholder replaced by approved portrait; numeric placeholder mapping removed."
+      },
+      {
+        "path": "public/images/guest-13.jpg",
+        "bytes": 7679,
+        "runtimeOrTestRefs": [],
+        "reason": "Friend placeholder replaced by approved portrait; numeric placeholder mapping removed."
+      },
+      {
+        "path": "public/images/guest-18.jpg",
+        "bytes": 13461,
+        "runtimeOrTestRefs": [],
+        "reason": "Friend placeholder replaced by approved portrait; numeric placeholder mapping removed."
+      },
+      {
+        "path": "public/images/guest-23.jpg",
+        "bytes": 14633,
+        "runtimeOrTestRefs": [],
+        "reason": "Friend placeholder replaced by approved portrait; numeric placeholder mapping removed."
+      },
+      {
+        "path": "public/images/guest-24.jpg",
+        "bytes": 15733,
+        "runtimeOrTestRefs": [],
+        "reason": "Friend placeholder replaced by approved portrait; numeric placeholder mapping removed."
+      },
+      {
+        "path": "public/images/guest-25.jpg",
+        "bytes": 16180,
+        "runtimeOrTestRefs": [],
+        "reason": "Friend placeholder replaced by approved portrait; numeric placeholder mapping removed."
+      }
+    ]
+  },
+  "verification": {
+    "unitTests": 98,
+    "browserTests": 31,
+    "typecheck": "passed",
+    "lint": "passed",
+    "build": "passed",
+    "secrets": "passed",
+    "diffCheck": "passed",
+    "reviewWidths": [
+      320,
+      375,
+      390,
+      430,
+      768,
+      1440
+    ],
+    "duplicates": [],
+    "manualAudioListening": "Not confirmed; final recordings explicitly selected and supplied by user.",
+    "snapshotsChanged": [
+      "homepage-375x812.png",
+      "homepage-430x932.png",
+      "homepage-1440x900.png",
+      "guests-relatives-375.png",
+      "guests-relatives-1440.png"
+    ]
+  },
+  "latestUpdate": "All 26 relatives/friends now have user-approved portraits. Friend order preserves both requested pair swaps.",
+  "latestPackVerification": {
+    "unitTests": 98,
+    "scopedBrowserTests": 5,
+    "reviewWidths": [
+      320,
+      375,
+      390,
+      430,
+      768,
+      1440
+    ],
+    "build": "passed",
+    "typecheck": "passed",
+    "lint": "passed",
+    "snapshotScope": "Exactly three homepage and two guests-relatives baselines; other baselines unchanged",
+    "approvedRelativeCount": 15
+  },
+  "venueFacadeReplacement": {
+    "file": "public/images/venue/pushkinskaya-01.webp",
+    "source": "codex-clipboard-e40ddd24-3db5-4c1b-a21e-4527706b9f84.png",
+    "width": 1402,
+    "height": 1122,
+    "bytes": 287646,
+    "processing": "WebP quality 90, no crop, upscaling or colour correction; second gallery image."
+  },
+  "couplePlaceholders": [
+    {
+      "id": "couple-maxim",
+      "name": "Максим",
+      "role": "Жених",
+      "source": "codex-clipboard-67560c14-131c-4938-bc01-f0e9903e3d1a.png",
+      "file": "public/images/guests/couple/maxim-placeholder.webp",
+      "width": 544,
+      "height": 800,
+      "bytes": 21140,
+      "sha256": "c8db9131d45903b4fa555b5986e303042917d8b2973b8f083653c854fcc5cf7d",
+      "processing": "Supplied placeholder, WebP q90, original dimensions; no AI retouching or upscaling."
+    },
+    {
+      "id": "couple-anya",
+      "name": "Аня",
+      "role": "Невеста",
+      "source": "codex-clipboard-865c6512-bb2e-42a3-8d08-b1c05f8366d0.png",
+      "file": "public/images/guests/couple/anya-placeholder.webp",
+      "width": 115,
+      "height": 115,
+      "bytes": 2994,
+      "sha256": "467542bb6b0d0a065b7bc29e6d4e761a4508dfde012b2aba2b91652addf7c6a2",
+      "processing": "Supplied placeholder, WebP q90, original dimensions; no AI retouching or upscaling."
+    }
+  ]
+}

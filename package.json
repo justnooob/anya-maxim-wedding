@@ -22,13 +22,19 @@
     "start:amvera": "node scripts/start-amvera.mjs",
     "telegram:production": "node scripts/telegram-production.mjs",
     "test:browser": "npm run build && node node_modules/playwright/cli.js test",
-    "test:browser:update": "npm run build && node node_modules/playwright/cli.js test --update-snapshots",
-    "test:browser:report": "node node_modules/playwright/cli.js show-report"
+    "test:browser:update": "npm run build && node node_modules/playwright/cli.js test --update-snapshots=all",
+    "test:browser:report": "node node_modules/playwright/cli.js show-report",
+    "test:release:browser": "node node_modules/playwright/cli.js test --config playwright.release.config.mjs",
+    "test:qa": "npm run build && node node_modules/playwright/cli.js test --config playwright.qa.config.mjs",
+    "db:seed:wishlist": "node scripts/seed-wishlist.mjs",
+    "db:seed:wishlist:dev": "node --env-file=.env.local scripts/seed-wishlist.mjs"
   },
   "dependencies": {
     "drizzle-orm": "^0.45.3",
-    "next": "16.3.8",
+    "next": "16.4.3",
+    "pdfkit": "^0.20.2",
     "pg": "^8.23.1",
+    "qrcode": "^1.5.4",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "server-only": "^0.0.1"
@@ -36,12 +42,16 @@
   "devDependencies": {
     "@electric-sql/pglite": "^0.5.8",
     "@types/node": "26.6.4",
+    "@types/pdfkit": "^0.17.7",
+    "@types/qrcode": "^1.5.6",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "@typescript/native": "npm:typescript@^7.0.2",
     "eslint": "^9.39.4",
-    "eslint-config-next": "^16.3.8",
-    "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "playwright": "1.62.1"
+    "eslint-config-next": "16.4.3",
+    "jsqr": "^1.4.0",
+    "pdfjs-dist": "^6.4.299",
+    "playwright": "1.62.1",
+    "typescript": "npm:@typescript/typescript6@^6.0.2"
   }
 }

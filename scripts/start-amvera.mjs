@@ -10,5 +10,11 @@ if(role==='bot')process.exitCode=await run(['scripts/telegram-production.mjs']);
 else if(role==='web'){
   const code=await run(['scripts/migrate.mjs']);
   if(code!==0)process.exitCode=code;
-  else if(!stopping)process.exitCode=await run(['node_modules/next/dist/bin/next','start','--hostname','0.0.0.0']);
+  else if(!stopping){
+    // Explicit opt-in after the production database/backup review. Never seed
+    // in build or in request handlers; the existing importer is idempotent.
+    const seedCode=process.env.WISHLIST_IMPORT_ON_START==='1'?await run(['scripts/seed-wishlist.mjs']):0;
+    if(seedCode!==0)process.exitCode=seedCode;
+    else if(!stopping)process.exitCode=await run(['node_modules/next/dist/bin/next','start','--hostname','0.0.0.0']);
+  }
 }else{console.error('Invalid APP_ROLE. Use web or bot.');process.exitCode=1;}

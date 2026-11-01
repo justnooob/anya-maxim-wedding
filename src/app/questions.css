@@ -7,13 +7,18 @@
 .question-item{border-bottom:1px solid #b49a6140}
 .question-title{margin:0;font-weight:400}
 .question-trigger{display:flex;align-items:center;justify-content:space-between;gap:24px;width:100%;min-height:88px;padding:24px 4px;border:0;background:none;color:inherit;text-align:left;font:500 17px/1.55 Montserrat,sans-serif;cursor:pointer;transition:color 240ms ease}
-.question-trigger:hover,.question-trigger[aria-expanded=true]{color:#8e733f}
+.question-trigger:hover,.question-trigger[aria-expanded=true]{color:#846b3b}
 .question-sign{flex:0 0 30px;text-align:center;font:300 30px/1 Montserrat,sans-serif;color:#ad9056}
+/* The component preserves the clicked row itself. Native anchoring must not
+   compete with that compensation while a long preceding answer collapses. */
+.questions-chapter{overflow-anchor:none}
+html[data-faq-reading-anchor=true]{overflow-anchor:none}
 .question-panel{display:grid;grid-template-rows:0fr;visibility:hidden;opacity:0;transition:grid-template-rows 420ms cubic-bezier(.2,.7,.2,1),opacity 240ms ease,visibility 0s 420ms}
 .question-panel[data-open=true]{grid-template-rows:1fr;visibility:visible;opacity:1;transition:grid-template-rows 420ms cubic-bezier(.2,.7,.2,1),opacity 300ms ease,visibility 0s}
 .question-panel-clip{min-height:0;overflow:hidden}
 .question-answer{margin:0;padding:0 45px 30px 4px;font:400 15px/1.85 Montserrat,sans-serif;color:#515a46}
-.question-link{color:#8e733f;text-decoration:underline;text-decoration-color:#b49a6180;text-decoration-thickness:1px;text-underline-offset:4px;font-weight:500;transition:color 240ms ease,text-decoration-color 240ms ease}
+.question-answer:not(:last-child){padding-bottom:18px}
+.question-link{color:#846b3b;text-decoration:underline;text-decoration-color:#b49a6180;text-decoration-thickness:1px;text-underline-offset:4px;font-weight:500;transition:color 240ms ease,text-decoration-color 240ms ease}
 .question-link[href]:hover{color:#5f6d49;text-decoration-color:#5f6d49}
 .question-link[href]:focus-visible{color:#5f6d49;outline:2px solid #b49a61;outline-offset:4px;border-radius:2px}
 .question-link-pending{cursor:default}
@@ -35,3 +40,8 @@
  .questions-watercolor{width:210px;--motion-opacity:.09;opacity:.09}
 }
 @media(prefers-reduced-motion:reduce){.question-panel,.question-panel[data-open=true],.question-trigger,.question-link{transition:none}}
+.motya-link{display:inline;border:0;padding:0;background:none;font:inherit;font-weight:500;cursor:pointer;vertical-align:baseline}
+.motya-link:hover{color:#5f6d49;text-decoration-color:#5f6d49}.motya-link:focus-visible{color:#5f6d49;outline:2px solid #b49a61;outline-offset:4px;border-radius:2px}
+.motya-toast{position:fixed;z-index:1000;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);max-width:calc(100vw - 32px);width:max-content;padding:15px 24px;border:1px solid #b49a6160;border-radius:12px;background:var(--writing-paper) center/400px auto,#f8f4eb;box-shadow:0 8px 30px #303b2a25;color:#3d4931;font:500 14px/1.6 Montserrat,sans-serif;text-align:center;pointer-events:none;animation:motya-toast 5s ease both}
+@keyframes motya-toast{0%{opacity:0;translate:0 8px}8%,94%{opacity:1;translate:0 0}100%{opacity:0;translate:0 2px}}
+@media(prefers-reduced-motion:reduce){.motya-toast{animation:none}}

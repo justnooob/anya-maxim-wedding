@@ -1,0 +1,174 @@
+/* Composition entrances only. Geometry, carousel state and UI interactions stay separate. */
+@media(prefers-reduced-motion:no-preference){
+ #top{--scene-ease:cubic-bezier(.22,1,.36,1)}
+ #top .motion-ready{--scene-rise:28px;--scene-side:24px}
+ /* Hero runs only once main is actually uncovered by the paper airplane. */
+ #top:not([hidden]) .portrait-hero-photo{animation:scene-hero-photo 1200ms var(--scene-ease) both}
+ #top:not([hidden]) .portrait-names>span{animation:scene-hero-copy 750ms var(--scene-ease) 900ms both}
+ #top:not([hidden]) .portrait-names>.portrait-ampersand{animation-delay:990ms}
+ #top:not([hidden]) .portrait-names>span:last-child{animation-delay:1080ms}
+ #top:not([hidden]) .portrait-date{animation:scene-hero-copy 600ms var(--scene-ease) 1300ms both}
+ #top:not([hidden]) .portrait-scroll,#top:not([hidden]) .portrait-ampersand i{animation:scene-hero-detail 500ms var(--scene-ease) 1480ms both}
+
+ /* Contextual headings: shared rhythm, different composition directions. */
+ #top .chapter-heading.motion-ready h2{opacity:0;translate:0 var(--scene-rise);transition:opacity 700ms var(--scene-ease),translate 850ms var(--scene-ease)}
+ #top .chapter-heading.motion-ready>p{opacity:0;translate:0 22px;transition:opacity 700ms var(--scene-ease) 140ms,translate 800ms var(--scene-ease) 140ms}
+ #top .dress-chapter>.chapter-heading.motion-ready h2{clip-path:inset(0 0 100%);transition:opacity 750ms var(--scene-ease),translate 850ms var(--scene-ease),clip-path 850ms var(--scene-ease)}
+ #top .guest-chapter>.chapter-heading.motion-ready h2{translate:-24px 0}
+ #top .schedule-chapter>.chapter-heading.motion-ready h2{translate:0 24px;clip-path:inset(0 100% 0 0);transition:opacity 750ms var(--scene-ease),translate 850ms var(--scene-ease),clip-path 850ms var(--scene-ease)}
+ #top .questions-heading.motion-ready h2{translate:-24px 0;clip-path:inset(0 100% 0 0);transition:opacity 750ms var(--scene-ease),translate 850ms var(--scene-ease),clip-path 850ms var(--scene-ease)}
+ #top .chapter-heading.motion-ready.motion-visible h2,#top .chapter-heading.motion-ready.motion-visible>p{opacity:1;translate:none;clip-path:inset(-.2em)}
+
+ /* Date and calendar: the heading leads, handwritten date and paper follow. */
+ #top .wedding-date-section.motion-ready .date-invitation{opacity:0;translate:0 26px;transition:opacity 700ms var(--scene-ease),translate 800ms var(--scene-ease)}
+ #top .wedding-date-section.motion-ready .date-large{clip-path:none}
+ #top .wedding-date-section.motion-ready .date-large>span{opacity:0;translate:0 28px;scale:.985;transition:opacity 750ms var(--scene-ease),translate 850ms var(--scene-ease),scale 850ms var(--scene-ease);transition-delay:200ms}
+ #top .wedding-date-section.motion-ready .date-large>span:nth-child(2){transition-delay:300ms}
+ #top .wedding-date-section.motion-ready .date-large>span:nth-child(3){transition-delay:400ms}
+ #top .wedding-date-section.motion-ready .date-start{opacity:0;translate:0 24px;transition:opacity 700ms var(--scene-ease) 520ms,translate 800ms var(--scene-ease) 520ms}
+ #top .wedding-date-section.motion-visible :is(.date-invitation,.date-large>span,.date-start){opacity:1;translate:none;scale:1}
+ #top .wedding-calendar.motion-ready{opacity:0;translate:var(--scene-side) 0;transition:opacity 850ms var(--scene-ease),translate 1000ms var(--scene-ease)}
+ #top .wedding-calendar.motion-ready :is(.calendar-ornament,caption,thead,tbody){opacity:0;transition:opacity 700ms var(--scene-ease)}
+ #top .wedding-calendar.motion-ready .calendar-ornament{transition-delay:100ms}
+ #top .wedding-calendar.motion-ready caption{transition-delay:180ms}
+ #top .wedding-calendar.motion-ready thead{transition-delay:260ms}
+ #top .wedding-calendar.motion-ready tbody{transition-delay:360ms}
+ #top .calendar-reminder.motion-ready{opacity:0;translate:0 18px;transition:opacity 550ms var(--scene-ease),translate 650ms var(--scene-ease)}
+ #top .calendar-reminder.motion-visible{opacity:1;translate:none}
+ #top .wedding-calendar.motion-ready .calendar-leaves{opacity:0;transition:opacity 900ms var(--scene-ease) 180ms}
+ #top .wedding-calendar.motion-visible,#top .wedding-calendar.motion-visible :is(.calendar-ornament,caption,thead,tbody){opacity:1;translate:none}
+ #top .wedding-calendar.motion-visible .calendar-leaves--left{opacity:.34}
+ #top .wedding-calendar.motion-visible .calendar-leaves--right{opacity:.38}
+ #top .wedding-countdown.motion-ready .countdown-heading{opacity:0;translate:0 20px;transition:opacity 650ms var(--scene-ease),translate 750ms var(--scene-ease)}
+ #top .wedding-countdown.motion-ready :is(.countdown-number,.countdown-unit){opacity:0;translate:0 24px;transition:opacity 750ms var(--scene-ease),translate 800ms var(--scene-ease);transition-delay:calc(160ms + var(--unit-order)*100ms)}
+ #top .wedding-countdown.motion-ready .countdown-unit{translate:0 16px;transition-duration:650ms,700ms;transition-delay:calc(340ms + var(--unit-order)*100ms)}
+ #top .wedding-countdown.motion-visible :is(.countdown-heading,.countdown-number,.countdown-unit){opacity:1;translate:none}
+
+ /* Venue: backing never animates its blur; the panel and each content group do. */
+ #top .venue-chapter.motion-ready .venue-gallery{opacity:0;clip-path:inset(0 100% 0 0);scale:1.025;transition:opacity 900ms var(--scene-ease),clip-path 1050ms var(--scene-ease),scale 1050ms var(--scene-ease)}
+ #top .venue-copy.motion-ready{opacity:0;translate:28px 0;transition:opacity 800ms var(--scene-ease) 250ms,translate 900ms var(--scene-ease) 250ms}
+ #top .venue-copy.motion-ready>:is(.chapter-kicker,h2,p,.foil-button){opacity:0;translate:0 20px;transition:opacity 650ms var(--scene-ease),translate 750ms var(--scene-ease);transition-delay:400ms}
+ #top .venue-chapter.motion-ready .venue-name{transition-delay:520ms}
+ #top .venue-chapter.motion-ready .venue-address{transition-delay:650ms}
+ #top .venue-copy.motion-ready>.foil-button{transition-delay:760ms;transition-duration:600ms,650ms}
+ #top .venue-chapter.motion-visible .venue-gallery,#top .venue-copy.motion-visible,#top .venue-copy.motion-visible>:is(.chapter-kicker,h2,p,.foil-button){opacity:1;translate:none;scale:1;clip-path:inset(0)}
+
+ /* Dress intro, original tabs and information are real participants. */
+ #top .dress-notices.motion-ready>p{opacity:0;translate:0 28px;transition:opacity 700ms var(--scene-ease),translate 850ms var(--scene-ease)}
+ #top .dress-notices.motion-ready>p:nth-child(2){transition-delay:140ms}
+ #top .dress-notices.motion-visible>p{opacity:1;translate:none}
+ #top .dress-original-tabs.motion-ready>.page-switch{opacity:0;translate:0 24px;transition:opacity 650ms var(--scene-ease),translate 750ms var(--scene-ease)}
+ #top .dress-original-tabs.motion-ready>.dress-section-switch{transition-delay:110ms}
+ #top .dress-original-tabs.motion-visible>.page-switch{opacity:1;translate:none}
+ #top .dress-palette-heading.motion-ready>*{opacity:0;translate:0 24px;transition:opacity 700ms var(--scene-ease),translate 800ms var(--scene-ease)}
+ #top .dress-palette-heading.motion-ready>p{transition-delay:140ms}
+ #top .dress-palette-heading.motion-visible>*{opacity:1;translate:none}
+ #top .palette-family.motion-ready :is(.palette-family-title,small){opacity:0;translate:0 24px;transition:opacity 700ms var(--scene-ease),translate 800ms var(--scene-ease)}
+ #top .palette-family.motion-ready small{transition-delay:120ms}
+ #top .palette-family.motion-ready .palette-fan i{opacity:0;scale:.96;transition:opacity 750ms var(--scene-ease),scale 850ms var(--scene-ease);transition-delay:calc(260ms + var(--shade-order)*110ms)}
+ #top .palette-family.motion-visible :is(.palette-family-title,small,.palette-fan i){opacity:1;translate:none;scale:1}
+ #top :is(.dress-palette-hint,.lookbook-guidance,.material-notes,.dress-materials>h3).motion-ready{opacity:0;translate:0 26px;transition:opacity 700ms var(--scene-ease),translate 850ms var(--scene-ease)}
+ #top :is(.dress-palette-hint,.lookbook-guidance,.material-notes,.dress-materials>h3).motion-visible{opacity:1;translate:none}
+ #top .material-group.motion-ready>h4{opacity:0;translate:0 24px;transition:opacity 700ms var(--scene-ease),translate 850ms var(--scene-ease)}
+ #top .material-group.motion-ready .material-photo{opacity:0;translate:-24px 0;clip-path:inset(0 0 100%);transition:opacity 750ms var(--scene-ease),translate 900ms var(--scene-ease),clip-path 900ms var(--scene-ease);transition-delay:180ms}
+ #top .material-group.motion-ready:nth-child(2) .material-photo{translate:24px 0}
+ #top .material-group.motion-ready .material-card:nth-child(2) .material-photo{transition-delay:280ms}
+ #top .material-group.motion-ready .material-card:nth-child(3) .material-photo{transition-delay:380ms}
+ #top .material-group.motion-visible>h4,#top .material-group.motion-visible .material-photo,#top .material-group.motion-visible:nth-child(2) .material-photo{opacity:1;translate:none;clip-path:inset(0)}
+
+ /* Lookbooks: heading, cream frame, photograph, badge, caption, then controls. */
+ #top .lookbook.motion-ready>h3{opacity:0;translate:0 24px;transition:opacity 700ms var(--scene-ease),translate 800ms var(--scene-ease)}
+ #top .lookbook.motion-ready .lookbook-photo{opacity:0;translate:0 30px;transition:opacity 750ms var(--scene-ease) 160ms,translate 850ms var(--scene-ease) 160ms}
+ #top .lookbook.motion-ready .lookbook-open>img{clip-path:inset(0 0 100%);transition:clip-path 1000ms var(--scene-ease) 300ms}
+ #top #dress-avoid.motion-ready .lookbook-open>img{clip-path:inset(0 0 0 100%);transition-delay:350ms}
+ #top .lookbook.motion-ready .look-status{opacity:0;scale:.96;transition:opacity 550ms var(--scene-ease) 650ms,scale 650ms var(--scene-ease) 650ms}
+ #top .lookbook-description.motion-ready>:is(.chapter-kicker,h4,p){opacity:0;translate:0 24px;transition:opacity 700ms var(--scene-ease),translate 800ms var(--scene-ease);transition-delay:480ms}
+ #top .lookbook-description.motion-ready>h4{transition-delay:580ms}
+ #top .lookbook-description.motion-ready>p{transition-delay:700ms}
+ #top .lookbook.motion-ready .dress-gallery-controls{opacity:0;transition:opacity 550ms var(--scene-ease) 920ms}
+ #top .lookbook.motion-visible>h3,#top .lookbook.motion-visible :is(.lookbook-photo,.look-status,.dress-gallery-controls),#top .lookbook-description.motion-visible>:is(.chapter-kicker,h4,p){opacity:1;translate:none;scale:1}
+ #top .lookbook.motion-visible .lookbook-open>img,#top #dress-avoid.motion-visible .lookbook-open>img{clip-path:inset(0)}
+
+ /* Guests: never leave a static empty card with an animated portrait inside. */
+ #top :is(.guest-chapter>.page-switch,.family-switch,.family-side-title).motion-ready{opacity:0;translate:0 24px;transition:opacity 700ms var(--scene-ease),translate 800ms var(--scene-ease)}
+ #top :is(.guest-chapter>.page-switch,.family-switch,.family-side-title).motion-visible{opacity:1;translate:none}
+ #top :is(.family-anchor-card,.guest-album .guest-print).motion-ready{--card-delay:0ms;opacity:0;translate:-24px 24px;transition:opacity 750ms var(--scene-ease),translate 850ms var(--scene-ease),scale 220ms var(--scene-ease),box-shadow 220ms;transition-delay:var(--card-delay)}
+ #top .family-side:nth-child(2) :is(.family-anchor-card,.guest-album .guest-print).motion-ready{translate:24px 24px}
+ #top .guest-album .guest-print.motion-ready:nth-child(3n+2){--card-delay:100ms}
+ #top .guest-album .guest-print.motion-ready:nth-child(3n){--card-delay:200ms}
+ #top :is(.family-anchor-card,.guest-album .guest-print).motion-ready .guest-photo{clip-path:inset(0 0 100%);transition:clip-path 850ms var(--scene-ease);transition-delay:calc(var(--card-delay) + 160ms)}
+ #top :is(.family-anchor-card,.guest-album .guest-print).motion-ready figcaption>:is(h3,p){opacity:0;translate:0 16px;transition:opacity 650ms var(--scene-ease),translate 750ms var(--scene-ease);transition-delay:calc(var(--card-delay) + 260ms)}
+ #top :is(.family-anchor-card,.guest-album .guest-print).motion-ready figcaption>p{transition-delay:calc(var(--card-delay) + 340ms)}
+ #top :is(.family-anchor-card,.guest-album .guest-print).motion-visible,#top .family-side:nth-child(2) :is(.family-anchor-card,.guest-album .guest-print).motion-visible{opacity:1;translate:none}
+ #top :is(.family-anchor-card,.guest-album .guest-print).motion-visible .guest-photo{clip-path:inset(0)}
+ #top :is(.family-anchor-card,.guest-album .guest-print).motion-visible figcaption>:is(h3,p){opacity:1;translate:none}
+
+ /* Program keeps one progressive stem, with independently gated event scenes. */
+ #top .schedule-spread.timeline-ready::before{scale:1 var(--line-progress,0);transition:scale 1100ms var(--scene-ease)}
+ #top .schedule-spread li.motion-ready::before{scale:0 1;transition:scale 450ms var(--scene-ease) 160ms}
+ #top .schedule-spread li.motion-ready .schedule-time{opacity:0;translate:-24px 0;transition:opacity 750ms var(--scene-ease),translate 850ms var(--scene-ease)}
+ #top .schedule-spread li.motion-ready h3{opacity:0;translate:0 24px;transition:opacity 700ms var(--scene-ease) 160ms,translate 850ms var(--scene-ease) 160ms}
+ #top .schedule-spread li.motion-ready p{opacity:0;translate:0 24px;transition:opacity 700ms var(--scene-ease) 300ms,translate 850ms var(--scene-ease) 300ms}
+ #top .schedule-spread li.motion-visible::before{scale:1}
+ #top .schedule-spread li.motion-visible :is(.schedule-time,h3,p){opacity:1;translate:none}
+ #top .schedule-note.motion-ready{opacity:0;translate:0 20px;transition:opacity 700ms var(--scene-ease),translate 800ms var(--scene-ease)}
+ #top .schedule-note.motion-visible{opacity:1;translate:none}
+ #top .question-item.motion-ready{opacity:0;translate:0 22px;transition:opacity 650ms var(--scene-ease),translate 750ms var(--scene-ease);transition-delay:calc(mod(var(--faq-order),3)*85ms)}
+ #top .question-item.motion-visible{opacity:1;translate:none}
+
+ /* Form: semantic groups, never individual radio buttons. */
+ #top .rsvp-paper.motion-ready{opacity:0;translate:0 28px;transition:opacity 750ms var(--scene-ease),translate 850ms var(--scene-ease);transition-delay:var(--rsvp-motion-delay,100ms)}
+ #top .rsvp-paper.motion-visible{opacity:1;translate:none}
+ #top .rsvp-paper form .motion-ready{opacity:0;translate:0 22px;transition:opacity 650ms var(--scene-ease),translate 750ms var(--scene-ease);transition-delay:var(--rsvp-motion-delay,185ms)}
+ #top .rsvp-paper form .motion-visible{opacity:1;translate:none}
+ #top .rsvp-details.page-enter{animation:none}
+ #top .rsvp-confirmation{animation:quiet-success 450ms var(--scene-ease) both}
+ #top .footer.motion-ready{opacity:0;translate:0 24px;transition:opacity 650ms var(--scene-ease),translate 750ms var(--scene-ease)}
+ #top .footer.motion-visible{opacity:1;translate:none}
+ #top .watercolor.motion-ready{opacity:0;scale:.98;transition:opacity 900ms var(--scene-ease) 180ms,scale 1000ms var(--scene-ease) 180ms}
+ #top .watercolor.motion-visible{opacity:var(--motion-opacity,1);scale:1}
+ /* Instant bypass lasts two frames, so later hover/swipe interactions are not disabled. */
+ #top [data-motion-instant=true],#top [data-motion-instant=true] *{transition-duration:0s!important;transition-delay:0s!important}
+ .lookbook-dialog[open],.venue-lightbox[open],.lookbook-dialog[open]::backdrop,.venue-lightbox[open]::backdrop{animation:dialog-enter 240ms ease both}
+ .lookbook-dialog[open] img,.venue-lightbox[open] .venue-lightbox-photo{animation:dialog-photo-enter 300ms var(--scene-ease) both}
+ .lookbook-dialog-copy{animation:quiet-success 260ms 60ms ease both}
+ .lookbook-dialog[data-closing=true],.venue-lightbox[data-closing=true],.lookbook-dialog[data-closing=true]::backdrop,.venue-lightbox[data-closing=true]::backdrop{animation:dialog-leave 180ms ease both;pointer-events:none}
+ @media(max-width:1000px){
+  #top .wedding-calendar.motion-visible .calendar-leaves--left{opacity:.28}
+  #top .wedding-calendar.motion-visible .calendar-leaves--right{opacity:.25}
+  #top :is(.family-anchor-card,.guest-album .guest-print).motion-ready,#top .family-side:nth-child(2) :is(.family-anchor-card,.guest-album .guest-print).motion-ready{translate:0 20px}
+  #top .guest-album .guest-print.motion-ready:nth-child(3n+2){--card-delay:70ms}
+  #top .guest-album .guest-print.motion-ready:nth-child(3n){--card-delay:140ms}
+  #top :is(.family-anchor-card,.guest-album .guest-print).motion-visible,#top .family-side:nth-child(2) :is(.family-anchor-card,.guest-album .guest-print).motion-visible{translate:none}
+ }
+ @media(max-width:700px){
+  #top .wedding-calendar.motion-visible .calendar-leaves--left{opacity:.24}
+  #top .motion-ready{--scene-rise:22px;--scene-side:18px}
+  #top:not([hidden]) .portrait-hero-photo{animation-duration:1100ms}
+  #top:not([hidden]) .portrait-names>span{animation-duration:700ms;animation-delay:800ms}
+  #top:not([hidden]) .portrait-names>.portrait-ampersand{animation-delay:900ms}
+  #top:not([hidden]) .portrait-names>span:last-child{animation-delay:1000ms}
+  #top .guest-chapter>.chapter-heading.motion-ready h2,#top .questions-heading.motion-ready h2{translate:-18px 0}
+  #top .guest-chapter>.chapter-heading.motion-visible h2,#top .questions-heading.motion-visible h2{translate:none}
+  #top .venue-copy.motion-ready{translate:0 22px}
+  #top .venue-copy.motion-visible{translate:none}
+  #top .material-group.motion-ready .material-photo,#top .material-group.motion-ready:nth-child(2) .material-photo{translate:0 18px;transition-duration:750ms,800ms,850ms}
+  #top .material-group.motion-visible .material-photo,#top .material-group.motion-visible:nth-child(2) .material-photo{translate:none}
+  #top .lookbook.motion-ready .lookbook-photo{translate:0 22px}
+  #top .lookbook.motion-visible .lookbook-photo{translate:none}
+  #top .lookbook.motion-ready .lookbook-open>img{transition-duration:850ms}
+  #top .schedule-spread li.motion-ready .schedule-time{translate:-16px 0}
+  #top .schedule-spread li.motion-visible .schedule-time{translate:none}
+ }
+}
+@keyframes scene-hero-photo{from{opacity:0;scale:1.035}to{opacity:1;scale:1}}
+@keyframes scene-hero-copy{from{opacity:0;translate:0 28px}to{opacity:1;translate:none}}
+@keyframes scene-hero-detail{from{opacity:0}to{opacity:1}}
+@keyframes quiet-success{from{opacity:0}to{opacity:1}}
+@keyframes dialog-enter{from{opacity:0}to{opacity:1}}
+@keyframes dialog-photo-enter{from{scale:.985;opacity:.6}to{scale:1;opacity:1}}
+@keyframes dialog-leave{from{opacity:1}to{opacity:0}}
+@media(prefers-reduced-motion:reduce){
+ #top .motion-ready,#top .motion-ready *{transition:none!important;translate:none!important;clip-path:none!important}
+ #top .schedule-spread::before{scale:1;transition:none}
+}

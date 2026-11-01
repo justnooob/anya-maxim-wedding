@@ -2,6 +2,7 @@ import { event } from "@/content/calendar";
 import { GoldFoil } from "./GoldFoil";
 import { Watercolor } from "./Watercolor";
 import { invitation as content } from "@/content/invitation";
+import { Countdown } from './Countdown';
 
 export function DateSection() {
   const weddingDate = new Date(content.dateISO + "T12:00:00Z");
@@ -21,7 +22,7 @@ export function DateSection() {
     <section className="wedding-date-section" id="date" aria-label="Дата свадьбы">
       <div className="date-intro">
         <p className="date-invitation">{content.story}</p>
-        <time className="date-large" dateTime={content.dateISO}>{content.date}</time>
+        <time className="date-large" dateTime={content.dateISO}>{content.date.split('.').map((part,index)=><span key={index}>{part}{index<2?'.':''}</span>)}</time>
         <p className="date-start">Начало в <strong>{content.time}</strong></p>
       </div>
       <div className="wedding-calendar">
@@ -35,6 +36,7 @@ export function DateSection() {
         </table>
         <a className="calendar-reminder foil-button" href="/calendar.ics"><span>{event.reminderLabel}</span><span aria-hidden="true">→</span></a>
       </div>
+      <Countdown targetISO={`${content.dateISO}T${content.time}:00+03:00`}/>
     </section>
   );
 }

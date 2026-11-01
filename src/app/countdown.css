@@ -1,0 +1,8 @@
+.wedding-countdown{--count-gap:clamp(8px,2.5vw,30px);grid-column:1/-1;order:4;width:min(100%,680px);min-width:0;margin:0 auto;text-align:center;color:inherit;position:relative;z-index:1}
+.countdown-heading{font:400 17px/1.6 Montserrat,sans-serif;min-height:1.6em;margin:0 0 24px}
+.wedding-countdown ol{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--count-gap);list-style:none;padding:0;margin:0}
+.wedding-countdown li{flex:0 1 calc((100% - 4*var(--count-gap))/5);min-width:max-content;display:flex;flex-direction:column;align-items:center;gap:8px}
+.countdown-number{font:500 clamp(36px,3.8vw,54px)/1.15 'Cormorant Garamond',Georgia,serif;font-variant-numeric:tabular-nums;min-width:2ch}
+.countdown-unit{font:400 13px/1.5 Montserrat,sans-serif;min-height:1.5em;white-space:nowrap}
+@media(max-width:700px){.wedding-countdown{margin-top:36px}.countdown-heading{font-size:16px;margin-bottom:20px}.countdown-unit{font-size:12px}.wedding-countdown li{gap:5px}}
+@media(max-width:340px){.wedding-countdown ol{row-gap:20px}.wedding-countdown li{flex-basis:calc((100% - 2*var(--count-gap))/3)}}

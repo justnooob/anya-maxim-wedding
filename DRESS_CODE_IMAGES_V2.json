@@ -1,0 +1,232 @@
+{
+  "generator": "built-in imagegen",
+  "reference": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-3d5dd4c9-da76-4729-849b-8f4c0c7ff17f.png",
+  "basePrompt": "Use case: photorealistic-natural. Single editorial fashion photograph, portrait 4:5. Premium quiet cream Parisian atelier, cream paneled wall, soft window daylight from left, pale stone floor, small gold side table, discreet botanical artwork on right. Camera eye-level 50mm full-length centered dressmaker mannequin on brass stand, consistent straight-on perspective with generous room for shoes at base. Subject: elegant fluid silk evening dress in muted light olive sage #909B7D, warm neutral undertone, not icy or mint. Ivory heels and small pearl detail. Real satin, sophisticated subtle sheen. No text, no logos, no people, no collage. The outfit is main subject.",
+  "assets": [
+    {
+      "id": "women-clothes-sage",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-3d5dd4c9-da76-4729-849b-8f4c0c7ff17f.png",
+      "file": "public/images/dress-lookbook-v2/women-clothes-sage.webp",
+      "prompt": "Use case: photorealistic-natural. Single editorial fashion photograph, portrait 4:5. Premium quiet cream Parisian atelier, cream paneled wall, soft window daylight from left, pale stone floor, small gold side table, discreet botanical artwork on right. Camera eye-level 50mm full-length centered dressmaker mannequin on brass stand, consistent straight-on perspective with generous room for shoes at base. Subject: elegant fluid silk evening dress in muted light olive sage #909B7D, warm neutral undertone, not icy or mint. Ivory heels and small pearl detail. Real satin, sophisticated subtle sheen. No text, no logos, no people, no collage. The outfit is main subject.",
+      "title": "Светлый шалфей",
+      "description": "Мягкий sage остаётся в оливковой гамме. Спокойный блеск шёлка и светлая обувь делают образ лёгким."
+    },
+    {
+      "id": "women-clothes-olive",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-ce29ce41-ca29-4f7c-9870-b6ec23e2625a.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: medium warm muted olive satin evening dress #788064, milk heels. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/women-clothes-olive.webp",
+      "title": "Спокойный оливковый",
+      "description": "Средний оливковый с тёплым подтоном и мягким переливом атласа. Молочная обувь может отличаться от платья."
+    },
+    {
+      "id": "women-clothes-moss",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-0dc028f3-e3b3-4a24-828c-2b9bcf64ea08.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: muted moss olive evening dress #626B4F, distinctly olive not forest dark, matte flowing fabric. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/women-clothes-moss.webp",
+      "title": "На границе мшистого",
+      "description": "Мшистый остаётся приглушённым и достаточно светлым. Более тёмный, холодный или грязный зелёный уже не подойдёт."
+    },
+    {
+      "id": "women-clothes-butter",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-c49cfa6c-1192-4f52-99a1-08e940a336c0.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: warm butter yellow vanilla satin evening dress #E4D3A0 with soft pale golden highlights, not white or ivory. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/women-clothes-butter.webp",
+      "title": "Сливочное масло",
+      "description": "Тёплый масляный оттенок может уходить в шампань и мягкое золото. Без холодного белого и резкого металлического блеска."
+    },
+    {
+      "id": "women-clothes-neon",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-8e06de7e-d8e3-4c16-92fa-acdbc6ef0b4b.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: elegant neon lime green dress, genuinely quality realistic normal occasion outfit, not parody. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/women-clothes-neon.webp",
+      "title": "Слишком яркий зелёный",
+      "description": "Кислотный лайм красив для другого повода. Здесь нужен более спокойный шалфейный или оливковый."
+    },
+    {
+      "id": "women-clothes-dark",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-42fb44b9-b247-44dc-a7ed-bc70125be857.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: elegant very dark cold blue-green forest satin gown, not black. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/women-clothes-dark.webp",
+      "title": "Холодный тёмный зелёный",
+      "description": "Этот оттенок слишком холодный и тёмный для нашей оливковой гаммы. Лучше выбрать более тёплый и мягкий тон."
+    },
+    {
+      "id": "women-clothes-white",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-8425d5e1-fc34-4613-9d61-424c8a1a7109.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: elegant icy white satin evening dress with silver details. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/women-clothes-white.webp",
+      "title": "Холодный белый",
+      "description": "Холодный белый не заменяет сливочное масло. Для одежды ищем тёплые ванильные и сливочно-золотистые оттенки."
+    },
+    {
+      "id": "women-accessories-ivory",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-8a2b0323-b248-4c4a-b617-dc06017f2884.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: accessory still life on low cream pedestal: ivory elegant heels and milk small handbag, olive silk folded cloth, full arrangement fits portrait frame. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/women-accessories-ivory.webp",
+      "title": "Светлая обувь",
+      "description": "Молочные туфли и небольшая сумка мягко дополняют оливковую ткань. Обувь не обязана повторять цвет одежды."
+    },
+    {
+      "id": "women-accessories-pearl",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-a6e7fa89-5d84-46e3-8b53-2842a8ea9fc5.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: accessory still life on low cream pedestal: white petite handbag, pearl necklace earrings, cream heels, warm butter silk folded cloth. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/women-accessories-pearl.webp",
+      "title": "Жемчуг и белая сумка",
+      "description": "Белый и молочный допустимы в аксессуарах. Жемчуг поддерживает мягкую тёплую композицию."
+    },
+    {
+      "id": "women-accessories-gold",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-dc386cfc-77fa-4aaa-a5fe-3987d237a3c0.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: accessory still life on low cream pedestal: fine warm gold earrings bracelet, light beige clutch and heels, olive silk cloth. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/women-accessories-gold.webp",
+      "title": "Тёплое золото",
+      "description": "Деликатное золото и светлый беж сочетаются с обеими женскими гаммами. Пусть металл остаётся небольшим акцентом."
+    },
+    {
+      "id": "women-accessories-cream",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-4982292e-3ee7-49dd-9224-61ace27d6803.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: accessory still life on low cream pedestal: light beige elegant sandals, cream woven evening clutch, warm neutral natural stone jewelry and butter silk. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/women-accessories-cream.webp",
+      "title": "Кремовые и природные детали",
+      "description": "Сливочный, светлый беж и тёплые природные материалы дают свободу в деталях. Не нужно собирать всё оттенок в оттенок."
+    },
+    {
+      "id": "women-accessories-neon",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-5f41e210-b86e-4d56-a9b1-d4679685d798.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: accessory still life on low cream pedestal: premium neon yellow heels and acid green clutch, olive silk cloth. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/women-accessories-neon.webp",
+      "title": "Кислотные акценты",
+      "description": "Неоновые детали слишком сильно перетягивают внимание. Лучше взять светлую обувь и спокойную сумку."
+    },
+    {
+      "id": "women-accessories-black",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-79ba7b15-ed21-428e-8c11-8d2b0a67e1c1.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: accessory still life on low cream pedestal: large heavy black leather handbag with chunky black shoes, butter silk cloth, high quality realistic. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/women-accessories-black.webp",
+      "title": "Тяжёлый чёрный акцент",
+      "description": "Крупная чёрная сумка и тяжёлая обувь спорят с лёгкостью палитры. Светлые аксессуары будут мягче."
+    },
+    {
+      "id": "women-accessories-silver",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-93c691b1-a251-472a-80ce-30592f3788a6.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: accessory still life on low cream pedestal: icy mirror silver clutch shoes and large chrome jewelry, butter silk cloth. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/women-accessories-silver.webp",
+      "title": "Ледяной металлик",
+      "description": "Холодное зеркальное серебро выбивается из тёплой композиции. Предпочтительнее жемчуг и деликатное золото."
+    },
+    {
+      "id": "men-clothes-milk",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-03e8996a-f451-4b13-9924-8ff5d505509f.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: male dressmaker mannequin full length olive tailored jacket and olive tie, milk shirt, ivory trousers, beige dress shoes. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/men-clothes-milk.webp",
+      "title": "Оливковый и молочный",
+      "description": "Оливковые пиджак и галстук, молочная рубашка. Светлые брюки и бежевая обувь дают образу больше воздуха."
+    },
+    {
+      "id": "men-clothes-moss",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-e5b883a7-bc0a-4a3b-93ca-87f8fe61ed8e.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: male dressmaker mannequin full length muted moss olive tailored jacket and olive bow tie, milk shirt, cream trousers, warm brown dress shoes. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/men-clothes-moss.webp",
+      "title": "Мох и тёплый коричневый",
+      "description": "Приглушённый мшистый пиджак остаётся в оливковой семье. Молочная рубашка и коричневая обувь сохраняют тёплую гамму."
+    },
+    {
+      "id": "men-clothes-sage",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-38e0512c-eba2-4476-a75a-65189df89b88.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: male dressmaker mannequin full length muted sage olive jacket, darker olive tie and olive trousers, warm milk shirt, milk dress shoes. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/men-clothes-sage.webp",
+      "title": "Разные оливковые",
+      "description": "Пиджак, галстук и брюки могут различаться по тону. Молочная рубашка связывает спокойные оттенки."
+    },
+    {
+      "id": "men-clothes-neutral",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-7b45bc39-e7eb-42fd-afd4-74ce11cdaf62.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: male dressmaker mannequin full length muted khaki olive tailored jacket, olive bow tie, ivory shirt, light warm beige trousers, brown loafers. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/men-clothes-neutral.webp",
+      "title": "Светлые нейтральные брюки",
+      "description": "Пиджак и бабочка остаются оливковыми. Тёплый беж брюк и коричневая обувь добавляют вариативности без ухода в золото."
+    },
+    {
+      "id": "men-clothes-neon",
+      "path": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-f070ec2a-9dc0-4d22-b86a-9092f97a2d11.png",
+      "prompt": "Edit this exact male mannequin photograph. Keep camera, atelier, full male outfit, male mannequin, ivory shirt, men's beige lace-up dress shoes, and all scene details unchanged. ONLY recolor jacket, trousers and necktie to very bright saturated acid neon lime #B9EF20, unmistakably vivid yellow-green, far brighter than sage or olive. This is a high-quality anti-example. Absolutely no women's shoes, no high heels, no dresses. No text or logos.",
+      "file": "public/images/dress-lookbook-v2/men-clothes-neon.webp",
+      "title": "Слишком яркая зелень",
+      "description": "Кислотный зелёный не входит в приглушённую гамму. Выбирайте более мягкий оливковый пиджак.",
+      "reference": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-03e8996a-f451-4b13-9924-8ff5d505509f.png"
+    },
+    {
+      "id": "men-clothes-blue",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-e7dd37a0-eb90-41e6-b01a-73a3952ce063.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: male dressmaker mannequin full length elegant bright royal blue suit and tie, milk shirt. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/men-clothes-blue.webp",
+      "title": "Синий вместо оливкового",
+      "description": "Качественный синий костюм подходит для другого случая. На нашей свадьбе ориентиром остаётся оливковый пиджак."
+    },
+    {
+      "id": "men-clothes-sport",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-d37dea79-abac-4f1d-b988-4ab5c0316961.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: male dressmaker mannequin full length olive polo, cream casual chinos, white athletic sneakers, tasteful everyday style. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/men-clothes-sport.webp",
+      "title": "Повседневные фактуры",
+      "description": "Поло и кроссовки создают спортивное настроение. Пиджак, рубашка и оливковый галстук сделают образ праздничным."
+    },
+    {
+      "id": "men-accessories-tie",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-396dcf9f-b8d3-424a-bc7a-aaaf6ba2de09.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: accessory still life on low cream pedestal: muted olive silk tie, cream pocket square, milk dress shoes, folded milk shirt and olive wool cloth. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/men-accessories-tie.webp",
+      "title": "Оливковый галстук",
+      "description": "Галстук может быть чуть светлее или темнее пиджака. Молочный платок и обувь поддерживают светлую часть образа."
+    },
+    {
+      "id": "men-accessories-bow",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-3ec43767-d9a5-4637-b6a9-73ed79014bae.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: accessory still life on low cream pedestal: sage olive bow tie, beige dress shoes and matching belt, ivory pocket square, olive wool cloth. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/men-accessories-bow.webp",
+      "title": "Бабочка и светлый беж",
+      "description": "Приглушённая оливковая бабочка, бежевая обувь и ремень. Спокойная фурнитура не перетягивает внимание."
+    },
+    {
+      "id": "men-accessories-brown",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-7aae107f-90fd-4cbf-b241-e9485b3b1e5b.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: accessory still life on low cream pedestal: warm brown leather dress shoes and belt, muted olive tie, cream pocket square, milk cotton shirt fabric. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/men-accessories-brown.webp",
+      "title": "Тёплый коричневый",
+      "description": "Коричневые обувь и ремень хорошо сочетаются с оливковым. Важно сохранить тёплый тон и аккуратную фактуру."
+    },
+    {
+      "id": "men-accessories-olive",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-698f23d4-d0f2-44a4-827f-366d5a0af06f.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: accessory still life on low cream pedestal: subdued olive leather loafers and belt, olive bow tie, milk pocket square and milk shirt cloth. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/men-accessories-olive.webp",
+      "title": "Спокойные оливковые детали",
+      "description": "Оливковая обувь допустима, если органично вписывается в образ. Платок и фурнитура остаются сдержанными."
+    },
+    {
+      "id": "men-accessories-neon",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-9de9342d-d74d-4fd1-b0cb-d6d6c36680e6.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: accessory still life on low cream pedestal: acid lime tie, bright blue dress shoes, olive suit cloth. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/men-accessories-neon.webp",
+      "title": "Кислотные и яркие акценты",
+      "description": "Неоновый галстук и контрастная обувь спорят с палитрой. Лучше выбрать оливковые и тёплые нейтральные детали."
+    },
+    {
+      "id": "men-accessories-print",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-35cfea4a-e5cc-4e34-87f3-0a4e3a4d7a27.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: accessory still life on low cream pedestal: bright red and blue large print tie, red pocket square, black dress shoes, olive wool cloth. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/men-accessories-print.webp",
+      "title": "Крупный яркий принт",
+      "description": "Красно-синий рисунок становится главным цветовым акцентом. Однотонный оливковый будет спокойнее."
+    },
+    {
+      "id": "men-accessories-sport",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-1bc89e2c-6222-421f-95c1-bcc0bba58f83.png",
+      "prompt": "Use case: photorealistic-natural. A single editorial photograph for a wedding fashion lookbook, portrait 4:5. Reference image establishes the EXACT SAME cream atelier interior, perspective, window daylight, camera distance, botanical art, quiet refined mood. Replace only subject with: accessory still life on low cream pedestal: bulky black athletic sneakers, heavy black belt with oversized shiny chrome buckle, olive suit cloth. Clothes on dressmaker mannequin, full outfit including shoes at base; accessories arranged on low cream display pedestal centered in same atelier, enough negative space, no crop. Realistic fine material textures, soft daylight, warm-neutral color accuracy. No people, no text, no logos, no collage. Anti examples remain tasteful high-quality objects; no parody.",
+      "file": "public/images/dress-lookbook-v2/men-accessories-sport.webp",
+      "title": "Спорт и тяжёлая фурнитура",
+      "description": "Спортивная обувь и крупный холодный металл выбиваются из праздничного образа. Подойдут аккуратные туфли и спокойная пряжка."
+    }
+  ]
+}

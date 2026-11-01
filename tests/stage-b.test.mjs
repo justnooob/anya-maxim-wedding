@@ -13,7 +13,7 @@ import {drinkChoices,toggleDrink,describeDrinks} from '../src/content/drinks.mjs
 import {drainOutbox,notificationText} from '../src/server/telegram/outbox.mjs';
 import {getRsvp,postRsvp} from '../src/server/rsvp/http.mjs';
 import {webhook} from '../src/server/telegram/webhook.mjs';
-const yes={guestName:'Анна Иванова',attendance:'yes',hotAppetizer:'hot_meat',mainCourse:'main_fish',who:'Подруга',food:'Орехи',transfer:'kupchino',overnight:'stay',dressCode:true,alcoholDrinks:['none'],softDrinks:['none']};
+const yes={returnTransfer:'not_needed',guestName:'Анна Иванова',attendance:'yes',congratulationChoice:'public',hotAppetizer:'hot_meat',mainCourse:'main_fish',who:'Подруга',food:'Орехи',transfer:'kupchino',overnight:'stay',venueRulesAccepted:true,dressCode:true,alcoholDrinks:['none'],softDrinks:['none']};
 const no={guestName:'Максим Иванов',attendance:'no'};
 async function fixture(){
   if(process.env.TEST_POSTGRES==='1'){
@@ -41,7 +41,7 @@ async function fixture(){
 }
 test('server validation accepts both attendance paths; strips no-attendance details; rejects malformed input',()=>{
   assert.equal(validateRsvp(yes).transfer,'kupchino');
-  assert.deepEqual(validateRsvp({...no,who:'ignored',food:'ignored',dressCode:true}).who,'');
+  assert.deepEqual(validateRsvp({...no,who:'ignored',food:'ignored',venueRulesAccepted:true,dressCode:true}).who,'');
   for(const input of [null,[],{}, {...yes,guestName:' '},{...yes,guestName:'x'.repeat(121)},{...yes,attendance:'maybe'},{...yes,dressCode:'true'},{...yes,transfer:'0'},{...yes,food:'x'.repeat(601)},{...yes,who:'x\u0000'}])assert.throws(()=>validateRsvp(input),InputError);
 });
 test('opaque cookies carry no names; CSRF is separate and incoming body is bounded',async()=>{

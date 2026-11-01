@@ -1,0 +1,14 @@
+/* One local Regular face, scoped exclusively to the English name signatures. */
+@font-face{font-family:'Bickham Script Pro';src:url('/fonts/bickham-script-pro/bickham-script-pro-regular.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
+:root{--english-signature-font:'Bickham Script Pro','Pitholica Delicate',cursive}
+.opening .opening-top span.opening-signature,.opening .letter-names,.opening .paper-wing::after,.organizer-brand>.english-signature{font-family:var(--english-signature-font);font-style:normal;font-weight:400;letter-spacing:0;font-kerning:normal;font-variant-ligatures:common-ligatures contextual;white-space:nowrap}
+/* Keep the established line boxes while allowing the long y/& descenders. */
+.opening .opening-top span.opening-signature{font-size:44px;line-height:53.2px}
+.opening .letter-names{font-size:clamp(58px,12cqw,108px);line-height:1.05;padding:.12em .08em .12em;overflow:visible}
+.opening .letter-names span{font-family:inherit;font-size:inherit;font-style:inherit}
+.organizer-brand>.english-signature{font-size:30px;line-height:22px;color:inherit;overflow:visible}
+@media(max-width:500px){
+ .opening .opening-top span.opening-signature{font-size:36px;line-height:42px}
+ .opening .letter-names{font-size:52px;line-height:1;padding:.12em .08em .124em}
+}
+@media(max-width:360px){.opening .letter-names{font-size:36px;padding:.09em .08em .09em}}

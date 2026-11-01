@@ -72,3 +72,9 @@ Desktop.ini
 # Playwright local reports, traces and actual/diff captures (baselines stay tracked)
 /test-results/
 /playwright-report/
+
+# Local full UI/UX audit captures and traces
+/qa-artifacts/
+
+# Generated local PDF examples and inspection renders (synthetic data only)
+/qa/pdf-examples/

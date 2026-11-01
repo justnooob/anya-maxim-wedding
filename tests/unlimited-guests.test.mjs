@@ -11,7 +11,7 @@ import {renderRsvp} from './helpers/render-rsvp.mjs';
 import {validateRsvp,InputError} from '../src/server/rsvp/validation.mjs';
 import {rsvpReady} from '../src/content/rsvp-limits.mjs';
 
-test('unlimited session: 1, 2, 3, 5 answers, retry deduplication, deletion, restore and independent cookies',async()=>{
+test('five-guest session: 1, 2, 3, 5 answers, retry deduplication, deletion, restore and independent cookies',async()=>{
  const db=new PGlite();let tail=Promise.resolve();const source={async connect(){const prior=tail;let unlock;tail=new Promise(r=>unlock=r);await prior;return {query:async(sql,args)=>{const r=await db.query(sql,args);return {...r,rowCount:r.affectedRows};},release:unlock};}};
  const oldSite=process.env.PUBLIC_SITE_URL;process.env.PUBLIC_SITE_URL='http://localhost:3000';
  try{
@@ -34,13 +34,10 @@ test('unlimited session: 1, 2, 3, 5 answers, retry deduplication, deletion, rest
  }finally{if(oldSite===undefined)delete process.env.PUBLIC_SITE_URL;else process.env.PUBLIC_SITE_URL=oldSite;await db.close();}
 });
 
-test('compact success for ten guests always offers another clean submission',()=>{
- const html=renderRsvp({saved:Array.from({length:10},(_,i)=>({id:String(i),guestName:'Гость '+i,attendance:'no'}))});
- assert.match(html,/10 гостей/);assert.match(html,/Добавить ещё гостя/);assert.equal((html.match(/class="saved-guest"/g)||[]).length,1);assert.doesNotMatch(html,/<form|Обновить статус ответа/);
-});
+test('success lists all five saved guests and stops offering more',()=>{const html=renderRsvp({sent:true,saved:Array.from({length:5},(_,i)=>({guestName:'Гость '+i,attendance:'no'}))});assert.match(html,/Скачать приглашение/);assert.match(html,/5 ответов/);assert.doesNotMatch(html,/Добавить ещё гостя/);assert.equal((html.match(/class="saved-guest"/g)||[]).length,5);});
 
 test('full names, optional overnight and all exact transfer values validate on both sides',()=>{
- const yes={guestName:'Анна Иванова',attendance:'yes',hotAppetizer:'hot_meat',mainCourse:'main_fish',who:'Подруга',food:'',musicRequest:'',dressCode:true,alcoholDrinks:['none'],alcoholOther:'',softDrinks:['none'],softOther:''};
+ const yes={returnTransfer:'not_needed',guestName:'Анна Иванова',attendance:'yes',congratulationChoice:'public',hotAppetizer:'hot_meat',mainCourse:'main_fish',who:'Подруга',food:'',musicRequest:'',venueRulesAccepted:true,dressCode:true,alcoholDrinks:['none'],alcoholOther:'',softDrinks:['none'],softOther:''};
  for(const transfer of ['self','kupchino','pavlovsk']){assert.ok(rsvpReady({...yes,transfer}));assert.equal(validateRsvp({...yes,transfer}).transfer,transfer);assert.equal(validateRsvp({...yes,transfer}).overnight,null);}
  for(const transfer of ['needed','unknown',null])assert.throws(()=>validateRsvp({...yes,transfer}),InputError);
  for(const guestName of ['Анна Иванова','Анна-Мария Иванова',"Anne O'Connor",'Анна Мария Иванова']){assert.ok(rsvpReady({...yes,guestName,transfer:'self'}));assert.equal(validateRsvp({guestName,attendance:'no'}).guestName,guestName);}

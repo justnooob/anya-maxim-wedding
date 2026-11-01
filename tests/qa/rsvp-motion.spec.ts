@@ -1,0 +1,20 @@
+import {test,expect} from 'playwright/test';
+for(const width of [375,768,1440])test('RSVP intro starts the complete offscreen field sequence '+width,async({page,request})=>{
+ await request.post('/qa/reset');await page.setViewportSize({width,height:812});await page.emulateMedia({reducedMotion:'no-preference'});await page.addInitScript(()=>sessionStorage.setItem('anya-maxim-opening-v1','yes'));await page.goto('/');await page.evaluate(()=>document.fonts.ready);
+ const intro=page.locator('#rsvp>.chapter-heading'),fields=page.locator('[data-motion-trigger-selector="#rsvp>.chapter-heading"]');
+ await expect(intro).toHaveAttribute('data-motion-state','pending');expect(await fields.count()).toBeGreaterThan(10);
+ const top=await intro.evaluate(el=>el.getBoundingClientRect().top+scrollY);
+ await page.evaluate(y=>scrollTo({top:y,behavior:'instant'}),top-812*1.15);
+ await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
+ await page.mouse.wheel(0,812*.25);
+ await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));await expect(intro).toHaveAttribute('data-motion-state','pending');
+ await page.mouse.wheel(0,812*.20);await expect(intro).toHaveAttribute('data-motion-state','visible');
+ await expect.poll(()=>fields.evaluateAll(els=>els.every(el=>el.getAttribute('data-motion-state')==='visible'))).toBe(true);
+ const state=await fields.evaluateAll(els=>els.map(el=>({below:el.getBoundingClientRect().top>innerHeight,delay:parseFloat(getComputedStyle(el).getPropertyValue('--rsvp-motion-delay'))})));
+ expect(state.some(el=>el.below),'Fields below the viewport must join immediately').toBe(true);for(let i=1;i<state.length;i++)expect(state[i].delay).toBeGreaterThan(state[i-1].delay);
+ await page.locator('#rsvp').evaluate(async el=>{await Promise.all(el.getAnimations({subtree:true}).map(a=>a.finished.catch(()=>{})));});
+ for(const field of await fields.all())await expect(field).toHaveCSS('opacity','1');
+ await page.locator('#rsvp').screenshot({path:`qa-artifacts/rsvp-sequence-${width}.png`,animations:'disabled'});
+ await page.getByRole('button',{name:'Приду',exact:true}).click();await expect(page.locator('.rsvp-details')).toBeVisible();
+ await page.emulateMedia({reducedMotion:'reduce'});await expect(page.locator('#rsvp .motion-ready')).toHaveCount(0);
+});

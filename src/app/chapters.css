@@ -22,8 +22,6 @@
 .venue-copy h2{max-width:480px}
 .venue-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;margin:12px 0 14px;color:#d8c28b}
 .venue-address{font-size:15px;line-height:1.8;max-width:350px;margin:0 0 34px}
-.venue-arrival{display:flex;gap:18px;align-items:center;border-top:1px solid #cbb47b38;padding-top:25px;margin:0 0 35px;font-size:13px;line-height:1.8;flex-wrap:wrap}
-.venue-arrival p{margin:0}.venue-arrival>span{color:#b49a61}
 .venue-watercolor{width:240px;bottom:-12px;right:-20px;opacity:.26;filter:brightness(1.4) saturate(.6);z-index:-1;transform:rotate(15deg)}
 .venue-copy>.quiet-note{margin:16px 0 0}
 .dress-chapter{padding:105px 6vw 100px;background:var(--writing-paper) center/500px auto,#f8f4eb;isolation:isolate}
@@ -52,6 +50,10 @@
 .guest-photo{aspect-ratio:4/5;overflow:hidden;background:#d7d4c9}
 .guest-print--1 .guest-photo,.guest-print--3 .guest-photo{aspect-ratio:1/1}
 .guest-photo img{width:100%;height:100%;object-fit:cover;filter:saturate(.55) sepia(.12)}
+.guest-print--approved .guest-photo{aspect-ratio:4/5}
+.guest-print--approved .guest-photo img{filter:none}
+@media(max-width:350px){.guest-print.guest-print--approved h3{font-size:clamp(20px,6.5vw,23px)}}
+@media(min-width:701px) and (max-width:1200px){.guest-print--approved .guest-name-tail{display:block;font-size:clamp(16px,1.7vw,20px);line-height:1.3}}
 .guest-print h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:29px;font-weight:400;line-height:1.1;margin:16px 2px 9px}
 .guest-print p{font-size:11px;line-height:1.65;margin:0 2px;color:#6a6d5d}
 .guest-note{text-align:center;margin:40px 0 0}
@@ -90,11 +92,11 @@
 .paper-link{border:0;border-bottom:1px solid #a998704a;background:none;color:#6a7759;font:12px Montserrat,sans-serif;padding:10px 0;cursor:pointer}
 .form-error{color:#681d30;font-size:13px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
 .footer{background:var(--date-stone);padding:35px 6vw!important}
-@media(max-width:1000px){.venue-chapter{min-height:680px;grid-template-columns:1fr 1fr}.venue-photo{min-height:680px}.venue-copy{padding:75px 4vw}.venue-arrival{gap:12px}.look-photo{height:380px}.dress-catalogue{gap:20px}.guest-album{column-gap:24px}.guest-print h3{font-size:26px}.rsvp-paper{padding:55px}}
+@media(max-width:1000px){.venue-chapter{min-height:680px;grid-template-columns:1fr 1fr}.venue-photo{min-height:680px}.venue-copy{padding:75px 4vw}.look-photo{height:380px}.dress-catalogue{gap:20px}.guest-album{column-gap:24px}.guest-print h3{font-size:26px}.rsvp-paper{padding:55px}}
 @media(max-width:700px){
 .chapter h2{font-size:47px;margin-bottom:20px}.chapter-heading{margin-bottom:32px}.chapter-heading>p{font-size:14px;line-height:1.8}.chapter-kicker{font-size:10px;margin-bottom:18px}.foil-button{font-size:12px;min-height:49px;padding:14px 18px;gap:14px}
 .calendar-reminder{font-size:10px;min-height:44px;margin-top:22px;padding:12px 15px}.wedding-calendar{padding-bottom:18px}.calendar-leaves--right{bottom:-85px}
-.venue-chapter{display:flex;flex-direction:column;min-height:0}.venue-photo{height:450px;min-height:0}.venue-copy{padding:55px 25px 65px}.venue-name{font-size:27px;margin-top:5px}.venue-address{font-size:14px}.venue-arrival{font-size:12px;gap:14px;padding-top:22px;margin-bottom:28px}.venue-watercolor{width:185px;opacity:.24;right:-25px;bottom:-10px}.venue-copy>.foil-button{width:100%}
+.venue-chapter{display:flex;flex-direction:column;min-height:0}.venue-photo{height:450px;min-height:0}.venue-copy{padding:55px 25px 65px}.venue-name{font-size:27px;margin-top:5px}.venue-address{font-size:14px}.venue-watercolor{width:185px;opacity:.24;right:-25px;bottom:-10px}.venue-copy>.foil-button{width:100%}
 .dress-chapter{padding:65px 0}.dress-chapter .chapter-heading,.dress-note{padding:0 25px}.dress-palette{gap:20px;font-size:10px;margin-bottom:30px}.dress-palette i{width:17px;height:17px}.page-switch{gap:30px;margin-bottom:35px}.page-switch button{font-size:25px}.dress-catalogue{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:20px;padding:5px 25px 25px;max-width:none}.dress-catalogue figure{flex:0 0 78vw;scroll-snap-align:center}.dress-catalogue figure:nth-child(2){padding-top:0}.look-photo{height:440px}.dress-note{font-size:13px;margin-top:15px}.dress-watercolor{width:140px;left:-30px;opacity:.14}
 .guest-chapter{padding:65px 25px}.guest-album{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 18px}.guest-print{padding:6px 6px 13px}.guest-print--1,.guest-print--3{margin-top:25px}.guest-print h3{font-size:25px;margin:13px 2px 7px}.guest-print p{font-size:10px;line-height:1.7}.guest-note{font-size:10px;margin-top:30px}
 .schedule-chapter{padding:70px 25px}.schedule-spread{display:block;margin-top:38px}.schedule-spread li{display:grid;grid-template-columns:125px 1fr;gap:18px;padding-top:23px;margin:0 0 30px!important}.schedule-time{font-size:40px;line-height:1.4;letter-spacing:-.04em}.schedule-spread h3{font-size:25px;margin:5px 0 9px}.schedule-spread p{font-size:11px;line-height:1.8}.schedule-note{font-size:20px;margin-top:35px}.schedule-watercolor{width:165px;right:-80px;opacity:.1}
@@ -108,9 +110,7 @@
 /* Real venue photographs and invitation catalogue pages. */
 .venue-gallery{position:relative;touch-action:pan-y;outline:none;min-width:0;background:#242c20}
 .venue-gallery .venue-current-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:none;user-select:none}
-.venue-gallery .venue-preload{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
-.venue-gallery-controls{position:absolute;bottom:27px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:18px;padding:7px 14px;background:#303b2aeb;color:#f8f4eb;border:1px solid #cbb47b77;box-shadow:0 4px 15px #17221030;white-space:nowrap}
-.venue-gallery-controls button,.dress-gallery-controls button{display:grid;place-items:center;width:44px;height:44px;background:transparent;border:0;color:inherit;font:25px/1 Montserrat,sans-serif;cursor:pointer}
+.venue-gallery .venue-preload{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}.dress-gallery-controls button{display:grid;place-items:center;width:44px;height:44px;background:transparent;border:0;color:inherit;font:25px/1 Montserrat,sans-serif;cursor:pointer}
 .gallery-counter{font:400 11px/1.5 Montserrat,sans-serif;letter-spacing:.12em;font-variant-numeric:tabular-nums}
 .venue-gallery:focus-visible,.dress-catalogue:focus-visible{outline:2px solid #b49a61;outline-offset:-5px}
 .dress-chapter{padding-left:0;padding-right:0}
@@ -130,7 +130,7 @@
 .dress-guidance strong{display:block;font:400 28px/1.4 'Cormorant Garamond',Georgia,serif;color:#3d4931;margin-bottom:10px}
 .dress-note{padding:0 25px;max-width:750px}
 @media(max-width:1000px) and (min-width:701px){.dress-catalogue{gap:24px}.dress-catalogue figure{flex-basis:calc((100% - 24px)/2)}}
-@media(max-width:700px){.venue-gallery{height:420px}.venue-gallery-controls{bottom:20px;gap:12px;padding:4px 8px}.dress-catalogue{gap:20px;padding:6px 25px 25px}.dress-catalogue figure{flex-basis:78vw}.dress-catalogue figure:nth-child(3n+2){padding-top:0}.dress-palette{gap:25px;padding:0 20px;margin-bottom:30px}.dress-guidance{grid-template-columns:1fr;gap:25px;padding:0 25px;margin-top:25px}.dress-guidance p{font-size:13px}.dress-gallery-controls{margin-bottom:25px}.dress-catalogue .look-photo{aspect-ratio:1/1.55}}
+@media(max-width:700px){.venue-gallery{height:420px}.dress-catalogue{gap:20px;padding:6px 25px 25px}.dress-catalogue figure{flex-basis:78vw}.dress-catalogue figure:nth-child(3n+2){padding-top:0}.dress-palette{gap:25px;padding:0 20px;margin-bottom:30px}.dress-guidance{grid-template-columns:1fr;gap:25px;padding:0 25px;margin-top:25px}.dress-guidance p{font-size:13px}.dress-gallery-controls{margin-bottom:25px}.dress-catalogue .look-photo{aspect-ratio:1/1.55}}
 .dress-catalogue{scroll-padding-inline:6vw}.dress-catalogue.is-dragging{scroll-snap-type:none;user-select:none}@media(max-width:700px){.dress-catalogue{scroll-padding-inline:25px}}
 /* Scroll choreography: separate pieces of stationery, rather than a hidden long section. */
 
@@ -248,3 +248,15 @@
 .menu-choice label{min-height:44px;align-items:center}
 .menu-choice .quiet-note{margin:10px 0 6px}
 @media(min-width:700px){.menu-choice>div{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}}
+.wishlist-teaser{position:relative;text-align:center;padding:clamp(64px,8vw,112px) 24px;max-width:920px;margin:0 auto;overflow-wrap:anywhere}
+.wishlist-teaser::before{content:'';display:block;width:80px;height:1px;background:#b49a6166;margin:0 auto 30px}
+.wishlist-teaser h2{font:400 clamp(36px,4.3vw,60px)/1.12 'Cormorant Garamond',serif;max-width:760px;margin:20px auto}
+.wishlist-teaser p{max-width:590px;margin:0 auto 24px;font-size:15px;line-height:1.8;color:#71765e}
+.wishlist-teaser a{display:inline-flex;gap:18px;align-items:center;min-height:48px;padding:8px 0;color:#92783e;border-bottom:1px solid #b49a6166;text-decoration:none;font-size:14px}
+.wishlist-teaser a span{transition:translate 250ms ease}.wishlist-teaser a:hover span{translate:4px -4px}.wishlist-teaser a:focus-visible{outline:2px solid #9b7f45;outline-offset:6px}
+@media(prefers-reduced-motion:no-preference){.wishlist-teaser.motion-ready>*{opacity:0;translate:0 14px;transition:opacity 700ms ease,translate 850ms cubic-bezier(.22,1,.36,1)}.wishlist-teaser.motion-ready h2{transition-delay:80ms}.wishlist-teaser.motion-ready p{transition-delay:170ms}.wishlist-teaser.motion-ready a{transition-delay:260ms}.wishlist-teaser.motion-visible>*{opacity:1;translate:none}}
+
+/* Session confirmation stays in the existing paper composition. */
+.saved-guests-heading{margin:28px 0 12px;font-size:14px;letter-spacing:.06em}.rsvp-confirmation .saved-guest{margin:12px auto;max-width:100%;overflow-wrap:anywhere}.rsvp-confirmation .saved-guest h4{margin:0;font-size:clamp(22px,5vw,30px);font-weight:400}.rsvp-confirmation .saved-guest p{margin:4px 0;font-size:14px}.ticket-download{display:inline-flex;max-width:100%;text-align:center;margin:16px 0;white-space:normal}.cancel-guest{display:block;margin:0 0 24px;min-height:44px}.rsvp-confirmation{overflow-wrap:anywhere}
+
+.rsvp-chapter{overflow-anchor:none}.cancel-guest{scroll-margin-block:80px}

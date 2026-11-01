@@ -5,7 +5,7 @@ const filled=value=>typeof value==='string'&&value.trim().length>0;
 export function adminGuest(row){
  const going=row.attendance==='yes';
  return {id:row.id,...rsvpDetail(row),name:row.guest_name,who:going?row.who||'':'',
-  hotAppetizer:going?row.hot_appetizer_choice:null,mainCourse:going?row.main_course_choice:null,transfer:going?row.transfer:null,music:going&&filled(row.music_request)?row.music_request:'',
+  hotAppetizer:going?row.hot_appetizer_choice:null,mainCourse:going?row.main_course_choice:null,transfer:going?row.transfer:null,returnTransfer:going?row.return_transfer:null,music:going&&filled(row.music_request)?row.music_request:'',
   diet:going&&filled(row.food)?row.food:'',createdAt:row.created_at};
 }
 export function adminAnalytics(rows){

@@ -12,6 +12,13 @@ export function OpeningScene({ onComplete }: { onComplete: () => void }) {
   const [stage, setStage] = useState<Stage>("sealed");
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const locked = useRef(false);
+  const scene = useRef<HTMLElement>(null);
+
+  // Reopening from the footer must move focus out of the now-hidden main.
+  useEffect(() => {
+    const selector = stage === 'sealed' ? '.envelope-open' : stage === 'letter' ? '.letter-content button' : null;
+    if (selector) scene.current?.querySelector<HTMLButtonElement>(selector)?.focus({preventScroll:true});
+  }, [stage]);
 
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
 
@@ -39,11 +46,24 @@ export function OpeningScene({ onComplete }: { onComplete: () => void }) {
     later(onComplete, reduced ? 200 : timing.folding + timing.flight);
   }
 
+  // Native buttons keep their own activation; the scene shortcut handles unfocused keyboard use.
+  useEffect(() => {
+    const key = (event: KeyboardEvent) => {
+      if (event.repeat || event.altKey || event.ctrlKey || event.metaKey || !['Enter',' '].includes(event.key)) return;
+      if (event.target instanceof Element && event.target.closest('button,a,input,textarea,select,[contenteditable=true]')) return;
+      if (stage !== 'sealed' && stage !== 'letter') return;
+      event.preventDefault();
+      if(stage === 'sealed') openEnvelope(); else foldLetter();
+    };
+    window.addEventListener('keydown',key);
+    return () => window.removeEventListener('keydown',key);
+  });
+
   const unfolded = stage === "extracting" || stage === "letter";
   const folded = stage === "folding" || stage === "flight";
 
   return (
-    <section className={"opening opening--" + stage} aria-label="Открыть приглашение">
+    <section ref={scene} className={"opening opening--" + stage} aria-label="Открыть приглашение">
       <Watercolor eager kind="slender" className="art-opening-left" />
       <Watercolor eager kind="spray" className="art-opening-right" />
       <div className="opening-top"><span className="opening-signature">Anya & Maxim</span><span>{content.date}</span></div>

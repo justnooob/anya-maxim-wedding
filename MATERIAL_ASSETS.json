@@ -1,0 +1,458 @@
+[
+  {
+    "reference": 1,
+    "id": "women-clothing-silk-olive",
+    "title": "Шёлк",
+    "state": "women-clothes",
+    "group": "olive",
+    "kind": "macro",
+    "colors": [
+      "#5B6745",
+      "#829264"
+    ],
+    "image": "/images/dress-materials/women-clothing-silk-olive.webp",
+    "destination": "public/images/dress-materials/women-clothing-silk-olive.webp",
+    "referenceFile": "1.jpg",
+    "prompt": "Create one NEW photorealistic editorial macro photograph for a refined wedding fabric guide. Reference image is composition/material inspiration only, not an asset to reproduce. Asset 01: natural fine silk in deep warm muted olive, base colour #5B6745, lifted natural reflected light #829264. Rich flowing soft folds and deep OLIVE shadows, subtle satin-like natural silk lustre, clearly fine pliable fabric with micro weave and soft highlights; never plastic or metallic. Fresh arrangement of folds with a diagonal fold across frame. Edge-to-edge fabric only, no objects, text, logos, white or black surfaces. Soft natural window light from upper left, tactile depth, quiet editorial photograph. Square 1:1 crop. This will be one image in a consistent 24-image materials series. Generate a standalone single photograph, never a collage.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-3b1e3176-f2be-4dad-baa3-3c37d7c14f0a.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 2,
+    "id": "women-clothing-satin-olive",
+    "title": "Атлас",
+    "state": "women-clothes",
+    "group": "olive",
+    "kind": "macro",
+    "colors": [
+      "#B5C29D",
+      "#829264"
+    ],
+    "image": "/images/dress-materials/women-clothing-satin-olive.webp",
+    "destination": "public/images/dress-materials/women-clothing-satin-olive.webp",
+    "referenceFile": "2.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 2. Smooth satin, broad draping waves, stronger glossy light reflection than natural silk, gentle pale warm olive. Not plastic. Target base colours #B5C29D and #829264.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-c26334b2-8bf7-4619-a03f-a3a214bc644b.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 3,
+    "id": "women-clothing-tulle-olive",
+    "title": "Фатин",
+    "state": "women-clothes",
+    "group": "olive",
+    "kind": "macro",
+    "colors": [
+      "#B5C29D",
+      "#D1D9C2"
+    ],
+    "image": "/images/dress-materials/women-clothing-tulle-olive.webp",
+    "destination": "public/images/dress-materials/women-clothing-tulle-olive.webp",
+    "referenceFile": "3.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 3. Airy fine net tulle: visibly tiny hexagonal mesh, several translucent loose layers, delicate folds. NOT smooth shiny organza, NOT solid fabric. Target base colours #B5C29D and #D1D9C2.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-a90487af-276d-44a0-81d7-a83fbfd55766.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 4,
+    "id": "women-clothing-silk-cream",
+    "title": "Шёлк",
+    "state": "women-clothes",
+    "group": "cream-gold",
+    "kind": "macro",
+    "colors": [
+      "#E8E4CD",
+      "#E2DAAC"
+    ],
+    "image": "/images/dress-materials/women-clothing-silk-cream.webp",
+    "destination": "public/images/dress-materials/women-clothing-silk-cream.webp",
+    "referenceFile": "4.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 4. Warm light cream natural silk, a large flowing diagonal fold, muted pearly soft lustre, NOT mirror gloss, never white. Target base colours #E8E4CD and #E2DAAC.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-9e294349-98fa-453d-994c-02b5e2f97f4e.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 5,
+    "id": "women-clothing-satin-champagne",
+    "title": "Атлас",
+    "state": "women-clothes",
+    "group": "cream-gold",
+    "kind": "macro",
+    "colors": [
+      "#D8CD90",
+      "#DBCE80"
+    ],
+    "image": "/images/dress-materials/women-clothing-satin-champagne.webp",
+    "destination": "public/images/dress-materials/women-clothing-satin-champagne.webp",
+    "referenceFile": "5.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 5. Smooth warm champagne satin with fluid waves and bright soft reflected highlights, visible tactile fabric not plastic. Target base colours #D8CD90 and #DBCE80.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-9522b730-69e9-4c31-8d67-f57d6e2152ec.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 6,
+    "id": "women-clothing-satin-gold",
+    "title": "Атлас",
+    "state": "women-clothes",
+    "group": "cream-gold",
+    "kind": "macro",
+    "colors": [
+      "#D4C158",
+      "#DBCE80"
+    ],
+    "image": "/images/dress-materials/women-clothing-satin-gold.webp",
+    "destination": "public/images/dress-materials/women-clothing-satin-gold.webp",
+    "referenceFile": "6.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 6. Rich dense festive golden satin, deeply draped valleys and strong golden highlights, warm soft yellow gold, no orange copper bronze or neon. Target base colours #D4C158 and #DBCE80.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-6c7f2410-7bad-4bde-ad06-c94a4b902a77.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 7,
+    "id": "men-clothing-linen-olive",
+    "title": "Лён",
+    "state": "men-clothes",
+    "group": "olive",
+    "kind": "macro",
+    "colors": [
+      "#B5C29D",
+      "#829264"
+    ],
+    "image": "/images/dress-materials/men-clothing-linen-olive.webp",
+    "destination": "public/images/dress-materials/men-clothing-linen-olive.webp",
+    "referenceFile": "7.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 7. Matte natural linen, prominently visible irregular flax weave and tiny slubs, relaxed creases, pale warm olive. Not smooth cotton or satin. Target base colours #B5C29D and #829264.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-00b54913-9ada-4a37-a61f-bbd48db0c5e9.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 8,
+    "id": "men-clothing-viscose-olive",
+    "title": "Вискоза",
+    "state": "men-clothes",
+    "group": "olive",
+    "kind": "macro",
+    "colors": [
+      "#829264",
+      "#77835F"
+    ],
+    "image": "/images/dress-materials/men-clothing-viscose-olive.webp",
+    "destination": "public/images/dress-materials/men-clothing-viscose-olive.webp",
+    "referenceFile": "8.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 8. Fluid viscose fabric draping in broad soft diagonal folds, smooth fine surface, understated low sheen, medium warm olive, no satin gloss. Target base colours #829264 and #77835F.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-ebc2510b-9c54-4c57-acfe-3b3d15af1fc8.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 9,
+    "id": "men-clothing-corduroy-olive",
+    "title": "Вельвет",
+    "state": "men-clothes",
+    "group": "olive",
+    "kind": "macro",
+    "colors": [
+      "#77835F",
+      "#5B6745"
+    ],
+    "image": "/images/dress-materials/men-clothing-corduroy-olive.webp",
+    "destination": "public/images/dress-materials/men-clothing-corduroy-olive.webp",
+    "referenceFile": "9.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 9. Clearly recognisable corduroy: parallel raised narrow wales, rich pile depth and finely ribbed structure, matte deep olive, slight folded wave. Not flat green cloth. Target base colours #77835F and #5B6745.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-2a22f149-a74c-4dbb-8694-21d6edf44880.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 10,
+    "id": "men-clothing-linen-milk",
+    "title": "Лён",
+    "state": "men-clothes",
+    "group": "milk",
+    "kind": "macro",
+    "colors": [
+      "#EDE7D2",
+      "#E8DFC2"
+    ],
+    "image": "/images/dress-materials/men-clothing-linen-milk.webp",
+    "destination": "public/images/dress-materials/men-clothing-linen-milk.webp",
+    "referenceFile": "10.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 10. Milk cream linen with unmistakable irregular natural flax weave, delicate creases and matte fibres. Clearly warm creamy colour not white. Target base colours #EDE7D2 and #E8DFC2.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-c1ea59b2-d860-457d-b920-d7b1d1452b64.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 11,
+    "id": "men-clothing-viscose-milk",
+    "title": "Вискоза",
+    "state": "men-clothes",
+    "group": "milk",
+    "kind": "macro",
+    "colors": [
+      "#E8DFC2",
+      "#FCF6E0"
+    ],
+    "image": "/images/dress-materials/men-clothing-viscose-milk.webp",
+    "destination": "public/images/dress-materials/men-clothing-viscose-milk.webp",
+    "referenceFile": "11.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 11. Warm milky viscose, flowing smooth lightweight fabric with gentle broad folds, subtle lustre NOT glossy satin. Clearly cream, not white. Target base colours #E8DFC2 and #FCF6E0.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-7123dc6c-2359-43f4-b51a-d23e2d7ae073.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 12,
+    "id": "men-clothing-cotton-milk",
+    "title": "Хлопок",
+    "state": "men-clothes",
+    "group": "milk",
+    "kind": "macro",
+    "colors": [
+      "#F8EEDA",
+      "#F8F3C3"
+    ],
+    "image": "/images/dress-materials/men-clothing-cotton-milk.webp",
+    "destination": "public/images/dress-materials/men-clothing-cotton-milk.webp",
+    "referenceFile": "12.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 12. Dense warm milk cotton twill, subtly structured weave, matte finish, natural creases with crisp yet soft edges. No satin sheen, not white. Target base colours #F8EEDA and #F8F3C3.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-8e4dfb52-0639-4eff-b9ca-3d432710953a.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 13,
+    "id": "women-accessories-leather-cream",
+    "title": "Кожа",
+    "state": "women-accessories",
+    "group": "materials",
+    "kind": "macro",
+    "colors": [
+      "#E8E2C7",
+      "#DED4B0"
+    ],
+    "image": "/images/dress-materials/women-accessories-leather-cream.webp",
+    "destination": "public/images/dress-materials/women-accessories-leather-cream.webp",
+    "referenceFile": "13.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 13. Quality supple warm milk cream leather for bag/gloves/shoes, a soft rounded fold, small natural pores and fine grain. Not synthetic plastic, no white. Target base colours #E8E2C7 and #DED4B0.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-902e06b9-9493-40d7-95e1-3259dd26cf52.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 14,
+    "id": "women-accessories-organza-gold",
+    "title": "Органза",
+    "state": "women-accessories",
+    "group": "materials",
+    "kind": "macro",
+    "colors": [
+      "#D8CD90",
+      "#E2DAAC"
+    ],
+    "image": "/images/dress-materials/women-accessories-organza-gold.webp",
+    "destination": "public/images/dress-materials/women-accessories-organza-gold.webp",
+    "referenceFile": "14.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 14. Sheer translucent golden cream organza, overlapping airy smooth layers, fine plain weave, lightly shimmering satin-like reflections, gauzy loops. Clearly different from hexagonal net tulle, no net mesh. Target base colours #D8CD90 and #E2DAAC.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-709058c3-652e-439c-862e-e20923d08b61.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 15,
+    "id": "women-accessories-velvet-olive",
+    "title": "Бархат",
+    "state": "women-accessories",
+    "group": "materials",
+    "kind": "macro",
+    "colors": [
+      "#829264",
+      "#5B6745"
+    ],
+    "image": "/images/dress-materials/women-accessories-velvet-olive.webp",
+    "destination": "public/images/dress-materials/women-accessories-velvet-olive.webp",
+    "referenceFile": "15.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 15. Rich warm olive velvet, highly visible fine short pile and brushed directional nap, soft light absorption, deep folds and luminous pile ridges. No satin mirror surface. Target base colours #829264 and #5B6745.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-cd270b40-ea6f-4d0d-970a-876a71def232.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 16,
+    "id": "women-accessories-pearl-jewelry",
+    "title": "Жемчуг",
+    "state": "women-accessories",
+    "group": "jewelry",
+    "kind": "object",
+    "colors": [
+      "#E8E2C7",
+      "#DED4B0"
+    ],
+    "image": "/images/dress-materials/women-accessories-pearl-jewelry.webp",
+    "destination": "public/images/dress-materials/women-accessories-pearl-jewelry.webp",
+    "referenceFile": "16.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 16. A real elegant wedding pearl jewellery set: one draped necklace of warm milky lustrous pearls plus matching pearl drop earrings with discreet warm gold fittings, on softly folded warm cream fabric. Recognisable finished jewellery, not loose beads, not one pearl, no feathers or other props. Target base colours #E8E2C7 and #DED4B0.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-d1599bbc-1e6e-42fb-85d4-ec4175fc877b.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 17,
+    "id": "women-accessories-gold-jewelry",
+    "title": "Золото",
+    "state": "women-accessories",
+    "group": "jewelry",
+    "kind": "object",
+    "colors": [
+      "#D4C158",
+      "#D8CD90"
+    ],
+    "image": "/images/dress-materials/women-accessories-gold-jewelry.webp",
+    "destination": "public/images/dress-materials/women-accessories-gold-jewelry.webp",
+    "referenceFile": "17.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 17. Real elegant warm gold jewellery: two delicate hoop earrings, one fine chain bracelet and a small ring, carefully arranged on warm cream folded fabric. Finished wearable jewellery, not bullion or raw metal, not excessive objects. Target base colours #D4C158 and #D8CD90.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-b8fa47e2-4fea-4a41-831d-b12dad5f997b.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 18,
+    "id": "women-accessories-olive-jewelry",
+    "title": "Бижутерия в цвет",
+    "state": "women-accessories",
+    "group": "jewelry",
+    "kind": "object",
+    "colors": [
+      "#839365",
+      "#D4C158"
+    ],
+    "image": "/images/dress-materials/women-accessories-olive-jewelry.webp",
+    "destination": "public/images/dress-materials/women-accessories-olive-jewelry.webp",
+    "referenceFile": "18.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 18. A real coordinated costume jewellery set: olive stone drop earrings, a delicate olive pendant and one ring, warm gold metal, muted olive stones. Three wearable coordinated pieces on warm cream cloth, no flowers or irrelevant props. Target base colours #839365 and #D4C158.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-548f1673-aa01-4dcf-b0eb-5253baae83a8.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 19,
+    "id": "men-accessories-leather-olive",
+    "title": "Кожа",
+    "state": "men-accessories",
+    "group": "materials",
+    "kind": "macro",
+    "colors": [
+      "#626B4F",
+      "#788064"
+    ],
+    "image": "/images/dress-materials/men-accessories-leather-olive.webp",
+    "destination": "public/images/dress-materials/men-accessories-leather-olive.webp",
+    "referenceFile": "19.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 19. Matte dark olive leather, strongly pronounced rounded pebbled grain and deep tiny creases, close macro with shallow supple fold. Olive not black, natural leather not smooth fabric. Target base colours #626B4F and #788064.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-af277c44-ecaa-4404-9977-40c1b7483f23.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 20,
+    "id": "men-accessories-suede-brown",
+    "title": "Замша",
+    "state": "men-accessories",
+    "group": "materials",
+    "kind": "macro",
+    "colors": [
+      "#B7A183",
+      "#96734F"
+    ],
+    "image": "/images/dress-materials/men-accessories-suede-brown.webp",
+    "destination": "public/images/dress-materials/men-accessories-suede-brown.webp",
+    "referenceFile": "20.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 20. Warm tan suede appropriate for wedding shoes/belt. Clearly visible fine short fuzzy nap with uneven brushed directions, matte velvety surface, a gentle curve. NOT black or very dark brown, NOT smooth grain leather. Target base colours #B7A183 and #96734F.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-aebbdc97-b03f-409c-b64f-9cb660f5d11f.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 21,
+    "id": "men-accessories-leather-milk",
+    "title": "Кожа",
+    "state": "men-accessories",
+    "group": "materials",
+    "kind": "macro",
+    "colors": [
+      "#E8DFC2",
+      "#DED4B0"
+    ],
+    "image": "/images/dress-materials/men-accessories-leather-milk.webp",
+    "destination": "public/images/dress-materials/men-accessories-leather-milk.webp",
+    "referenceFile": "21.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 21. Warm milk cream grained leather, noticeable natural small pebbled pores, soft curved crease. Cream, not white, no flat synthetic surface. Target base colours #E8DFC2 and #DED4B0.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-424b0974-faf3-43cd-868b-b3c7f1594ce8.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 22,
+    "id": "men-accessories-tie-flower",
+    "title": "Галстук и цветок",
+    "state": "men-accessories",
+    "group": "examples",
+    "kind": "object",
+    "colors": [
+      "#829264",
+      "#E8DFC2"
+    ],
+    "image": "/images/dress-materials/men-accessories-tie-flower.webp",
+    "destination": "public/images/dress-materials/men-accessories-tie-flower.webp",
+    "referenceFile": "22.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 22. Cropped realistic wedding menswear portrait, torso only, no face: warm olive suit jacket and olive tie, SMALL cream flower boutonniere with olive foliage. SHIRT MUST BE CLEARLY WARM MILK CREAM (#E8DFC2), NOT WHITE, visible generous shirt area distinctly cream even in highlights. Every jacket/lapel/pocket detail olive, no black or charcoal, no white flower (warm cream flower only). Shallow natural background in cream/olive. Target base colours #829264 and #E8DFC2.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-15e925c4-9119-41f2-a176-4329a89a5cb3.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 23,
+    "id": "men-accessories-bow-pocket",
+    "title": "Бабочка и платок",
+    "state": "men-accessories",
+    "group": "examples",
+    "kind": "object",
+    "colors": [
+      "#77835F",
+      "#E8DFC2"
+    ],
+    "image": "/images/dress-materials/men-accessories-bow-pocket.webp",
+    "destination": "public/images/dress-materials/men-accessories-bow-pocket.webp",
+    "referenceFile": "23.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 23. Cropped realistic wedding menswear torso, no face. Olive bow tie and coordinated olive pocket square, warm olive jacket. SHIRT MUST BE CLEARLY WARM MILK CREAM (#E8DFC2) NOT WHITE: collar and chest visibly buttery milk even under natural daylight, never pure white. No black, charcoal or blue clothing. Quiet olive/cream background. Target base colours #77835F and #E8DFC2.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-ac5a4d85-271a-44b1-b45c-37d8dbdb4b62.png",
+    "visualReview": "approved"
+  },
+  {
+    "reference": 24,
+    "id": "men-accessories-shoes",
+    "title": "Ботинки",
+    "state": "men-accessories",
+    "group": "examples",
+    "kind": "object",
+    "colors": [
+      "#DACCBA",
+      "#788064"
+    ],
+    "image": "/images/dress-materials/men-accessories-shoes.webp",
+    "destination": "public/images/dress-materials/men-accessories-shoes.webp",
+    "referenceFile": "24.jpg",
+    "prompt": "Use case: photorealistic-natural. Create one NEW standalone editorial photograph for a refined wedding materials guide. Reference is ONLY inspiration for material, folds and compositional principle; generate a new photograph, do not reproduce or simply recolour source pixels. Square 1:1 frame, edge-to-edge tactile subject, consistent close photographic density, soft natural window light from upper left, lifelike surface detail. NO text, watermark, logo, border, collage, irrelevant decorative props, sterile white packshot background, out-of-palette colours, pure white or black clothing/accessories. Fabric/leather material photographs contain only material. Jewellery/accessory examples show actual wearable objects. Deep shadows keep their warm olive or cream chroma. Asset 24. Editorial cropped lower-leg wedding outfit photograph, shoes resting naturally on warm cream stone steps in a fresh composition inspired by reference. Classic warm light beige leather lace-up dress shoes, visibly beige/cream NOT WHITE, olive trousers with olive socks if visible. NO black, navy or charcoal trousers, socks or shoes. All visible clothing follows olive/milk/cream/tan palette, not white. Rich natural leather, soft natural shadows. Target base colours #DACCBA and #788064.",
+    "status": "generated",
+    "generatedSource": "C:/Users/maks1/.codex/generated_images/01a11158-5c58-73e3-8d0e-9a7566318598/exec-7a172105-1ef1-49f1-8122-16dc22d5e20d.png",
+    "visualReview": "approved"
+  }
+]

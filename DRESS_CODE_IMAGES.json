@@ -1,0 +1,93 @@
+{
+  "status": "Historical v1 provenance. Retired public derivatives removed during October 25 media audit; current runtime uses dress-lookbook-v2 and dress-women-clothing-v3. Paths below record former assets, not required files.",
+  "generator": "Built-in image_gen",
+  "aspectRatio": "4:5",
+  "camera": "Straight-on, chest height, 50mm; full outfit occupies 80% of frame",
+  "basePrompt": "Use case: photorealistic-natural. One image in a coherent premium wedding guest atelier lookbook, portrait 4:5. Use the reference only for the cream paneled atelier, window on left, brass details, olive botanical artwork, soft neutral daylight, camera framing and headless mannequin product presentation. Keep consistent straight-on chest-height camera, 50mm lens, full outfit including shoes occupying 80% of frame, generous margins. No people, no text, no logos, no watermark, no collage. Clothes are the focus. Faithful fabric colors, no strong amber color cast. Replace the outfit with the specified new fashion look; make it realistic, beautiful, elegant, never a parody. Headless dressmaker mannequin with gold finial and gold stand. ",
+  "assets": [
+    {
+      "id": "women-olive",
+      "file": "public/images/dress-lookbook/women-olive.webp",
+      "referenceImage": null,
+      "prompt": "Use case: photorealistic-natural. Generate a portrait 4:5 full-length wedding guest fashion lookbook photograph. One headless cream fabric female dressmaker mannequin with a gold finial and slender gold stand, centered, wearing an elegant classical muted olive (#6A7759 family) floor-length silk evening gown with sculptural asymmetric draping. Full hem and ivory shoes visible, small ivory evening bag and restrained gold jewelry alongside. Same coherent premium atelier series: warm cream paneled Parisian atelier, ivory limestone floor, subdued brushed brass details, softly blurred olive botanical artwork in rear, no people. Soft neutral natural window light, faithful fabric colors without an amber color cast. Straight-on camera at chest height, 50mm lens, full outfit occupying 80% of frame, consistent generous margins. Elegant realistic fashion editorial, accurate fabric texture. No text, logos, collage, watermark, no neon or black accessories. This is a beautiful approved olive wedding guest look, not a bride."
+    },
+    {
+      "id": "women-sage",
+      "file": "public/images/dress-lookbook/women-sage.webp",
+      "referenceImage": "public/images/dress-lookbook/women-olive.webp",
+      "prompt": "Use case: photorealistic-natural. One image in a coherent premium wedding guest atelier lookbook, portrait 4:5. Use the reference only for the cream paneled atelier, window on left, brass details, olive botanical artwork, soft neutral daylight, camera framing and headless mannequin product presentation. Keep consistent straight-on chest-height camera, 50mm lens, full outfit including shoes occupying 80% of frame, generous margins. No people, no text, no logos, no watermark, no collage. Clothes are the focus. Faithful fabric colors, no strong amber color cast. Replace the outfit with the specified new fashion look; make it realistic, beautiful, elegant, never a parody. Headless dressmaker mannequin with gold finial and gold stand. Female mannequin: light muted sage/eucalyptus (#909B7D family) elegant minimalist midi column dress, clean square neck and refined soft matte crepe. Milk ivory low heel shoes, pearl earrings and a small champagne clutch. Clear light green, not saturated mint."
+    },
+    {
+      "id": "women-butter",
+      "file": "public/images/dress-lookbook/women-butter.webp",
+      "referenceImage": "public/images/dress-lookbook/women-olive.webp",
+      "prompt": "Use case: photorealistic-natural. One image in a coherent premium wedding guest atelier lookbook, portrait 4:5. Use the reference only for the cream paneled atelier, window on left, brass details, olive botanical artwork, soft neutral daylight, camera framing and headless mannequin product presentation. Keep consistent straight-on chest-height camera, 50mm lens, full outfit including shoes occupying 80% of frame, generous margins. No people, no text, no logos, no watermark, no collage. Clothes are the focus. Faithful fabric colors, no strong amber color cast. Replace the outfit with the specified new fashion look; make it realistic, beautiful, elegant, never a parody. Headless dressmaker mannequin with gold finial and gold stand. Female mannequin: soft butter/vanilla (#E9DFBC family) flowing floor-length satin gown with gentle gathered waist and a graceful skirt, warm light cream shoes and a pale beige evening bag. Delicate pearlescent satin, not bright yellow or orange."
+    },
+    {
+      "id": "women-ivory",
+      "file": "public/images/dress-lookbook/women-ivory.webp",
+      "referenceImage": "public/images/dress-lookbook/women-olive.webp",
+      "prompt": "Use case: photorealistic-natural. One image in a coherent premium wedding guest atelier lookbook, portrait 4:5. Use the reference only for the cream paneled atelier, window on left, brass details, olive botanical artwork, soft neutral daylight, camera framing and headless mannequin product presentation. Keep consistent straight-on chest-height camera, 50mm lens, full outfit including shoes occupying 80% of frame, generous margins. No people, no text, no logos, no watermark, no collage. Clothes are the focus. Faithful fabric colors, no strong amber color cast. Replace the outfit with the specified new fashion look; make it realistic, beautiful, elegant, never a parody. Headless dressmaker mannequin with gold finial and gold stand. Female mannequin: elegant warm ivory/cream women's tailored evening trouser suit, beautifully fitted double-breasted jacket over a silk cream camisole, fluid wide-leg matching trousers. Gold jewelry and subtle gold bag hardware. Light beige heels. Clearly a guest look, no bridal veil or bouquet."
+    },
+    {
+      "id": "men-milk",
+      "file": "public/images/dress-lookbook/men-milk.webp",
+      "referenceImage": "public/images/dress-lookbook/women-olive.webp",
+      "prompt": "Use case: photorealistic-natural. One image in a coherent premium wedding guest atelier lookbook, portrait 4:5. Use the reference only for the cream paneled atelier, window on left, brass details, olive botanical artwork, soft neutral daylight, camera framing and headless mannequin product presentation. Keep consistent straight-on chest-height camera, 50mm lens, full outfit including shoes occupying 80% of frame, generous margins. No people, no text, no logos, no watermark, no collage. Clothes are the focus. Faithful fabric colors, no strong amber color cast. Replace the outfit with the specified new fashion look; make it realistic, beautiful, elegant, never a parody. Headless dressmaker mannequin with gold finial and gold stand. Broad-shouldered headless MALE tailoring mannequin, masculine full outfit: classic muted olive tailored blazer (#6A7759), warm milk shirt, olive silk tie, milk straight tailored trousers, light beige leather loafers placed naturally by stand. No black shoes, no light tie, no milk jacket. Attractive refined men's wedding guest outfit."
+    },
+    {
+      "id": "men-moss",
+      "file": "public/images/dress-lookbook/men-moss.webp",
+      "referenceImage": "public/images/dress-lookbook/women-olive.webp",
+      "prompt": "Use case: photorealistic-natural. One image in a coherent premium wedding guest atelier lookbook, portrait 4:5. Use the reference only for the cream paneled atelier, window on left, brass details, olive botanical artwork, soft neutral daylight, camera framing and headless mannequin product presentation. Keep consistent straight-on chest-height camera, 50mm lens, full outfit including shoes occupying 80% of frame, generous margins. No people, no text, no logos, no watermark, no collage. Clothes are the focus. Faithful fabric colors, no strong amber color cast. Replace the outfit with the specified new fashion look; make it realistic, beautiful, elegant, never a parody. Headless dressmaker mannequin with gold finial and gold stand. Broad-shouldered headless MALE tailoring mannequin, masculine full outfit: deep moss/olive blazer (#555F46), warm ivory shirt, deep olive bow tie, cream tailored trousers, polished warm medium brown dress shoes. Men's guest attire, no black shoes, no milk jacket."
+    },
+    {
+      "id": "men-muted",
+      "file": "public/images/dress-lookbook/men-muted.webp",
+      "referenceImage": "public/images/dress-lookbook/women-olive.webp",
+      "prompt": "Use case: photorealistic-natural. One image in a coherent premium wedding guest atelier lookbook, portrait 4:5. Use the reference only for the cream paneled atelier, window on left, brass details, olive botanical artwork, soft neutral daylight, camera framing and headless mannequin product presentation. Keep consistent straight-on chest-height camera, 50mm lens, full outfit including shoes occupying 80% of frame, generous margins. No people, no text, no logos, no watermark, no collage. Clothes are the focus. Faithful fabric colors, no strong amber color cast. Replace the outfit with the specified new fashion look; make it realistic, beautiful, elegant, never a parody. Headless dressmaker mannequin with gold finial and gold stand. Broad-shouldered headless MALE tailoring mannequin, masculine full outfit: light muted olive/eucalyptus blazer (#909B7D but visibly green-grey), warm milk shirt, olive tie slightly darker than the blazer, classic olive tailored trousers (#6A7759), milk leather loafers. Elegant lightly textured linen blend, no light tie, no milk jacket."
+    },
+    {
+      "id": "men-neutral",
+      "file": "public/images/dress-lookbook/men-neutral.webp",
+      "referenceImage": "public/images/dress-lookbook/women-olive.webp",
+      "prompt": "Use case: photorealistic-natural. One image in a coherent premium wedding guest atelier lookbook, portrait 4:5. Use the reference only for the cream paneled atelier, window on left, brass details, olive botanical artwork, soft neutral daylight, camera framing and headless mannequin product presentation. Keep consistent straight-on chest-height camera, 50mm lens, full outfit including shoes occupying 80% of frame, generous margins. No people, no text, no logos, no watermark, no collage. Clothes are the focus. Faithful fabric colors, no strong amber color cast. Replace the outfit with the specified new fashion look; make it realistic, beautiful, elegant, never a parody. Headless dressmaker mannequin with gold finial and gold stand. Broad-shouldered headless MALE tailoring mannequin, masculine full outfit: muted olive blazer (#626B4F), ivory shirt, olive silk tie, warm light beige tailored trousers, warm tan leather dress shoes, matching subdued belt. No black shoes, no beige jacket, no light tie. Refined relaxed formal tailoring."
+    },
+    {
+      "id": "women-neon",
+      "file": "public/images/dress-lookbook/women-neon.webp",
+      "referenceImage": "public/images/dress-lookbook/women-olive.webp",
+      "prompt": "Use case: photorealistic-natural. One image in a coherent premium wedding guest atelier lookbook, portrait 4:5. Use the reference only for the cream paneled atelier, window on left, brass details, olive botanical artwork, soft neutral daylight, camera framing and headless mannequin product presentation. Keep consistent straight-on chest-height camera, 50mm lens, full outfit including shoes occupying 80% of frame, generous margins. No people, no text, no logos, no watermark, no collage. Clothes are the focus. Faithful fabric colors, no strong amber color cast. Replace the outfit with the specified new fashion look; make it realistic, beautiful, elegant, never a parody. Headless dressmaker mannequin with gold finial and gold stand. Female mannequin: beautiful fashion-forward floor-length bright acid lime green satin evening dress, refined draping, ivory shoes. Clearly highly saturated neon green, deliberately outside a muted olive wedding palette, yet a realistic expensive elegant outfit, not ugly or caricature."
+    },
+    {
+      "id": "women-fuchsia",
+      "file": "public/images/dress-lookbook/women-fuchsia.webp",
+      "referenceImage": "public/images/dress-lookbook/women-olive.webp",
+      "prompt": "Use case: photorealistic-natural. One image in a coherent premium wedding guest atelier lookbook, portrait 4:5. Use the reference only for the cream paneled atelier, window on left, brass details, olive botanical artwork, soft neutral daylight, camera framing and headless mannequin product presentation. Keep consistent straight-on chest-height camera, 50mm lens, full outfit including shoes occupying 80% of frame, generous margins. No people, no text, no logos, no watermark, no collage. Clothes are the focus. Faithful fabric colors, no strong amber color cast. Replace the outfit with the specified new fashion look; make it realistic, beautiful, elegant, never a parody. Headless dressmaker mannequin with gold finial and gold stand. Female mannequin: elegant vivid fuchsia floor-length evening gown with clean sculptural neckline and beautiful tailoring, pale beige evening shoes and clutch. Strong saturated fuchsia, clearly outside an olive/cream palette. Beautiful real fashion, no parody."
+    },
+    {
+      "id": "women-print",
+      "file": "public/images/dress-lookbook/women-print.webp",
+      "referenceImage": "public/images/dress-lookbook/women-olive.webp",
+      "prompt": "Use case: photorealistic-natural. One image in a coherent premium wedding guest atelier lookbook, portrait 4:5. Use the reference only for the cream paneled atelier, window on left, brass details, olive botanical artwork, soft neutral daylight, camera framing and headless mannequin product presentation. Keep consistent straight-on chest-height camera, 50mm lens, full outfit including shoes occupying 80% of frame, generous margins. No people, no text, no logos, no watermark, no collage. Clothes are the focus. Faithful fabric colors, no strong amber color cast. Replace the outfit with the specified new fashion look; make it realistic, beautiful, elegant, never a parody. Headless dressmaker mannequin with gold finial and gold stand. Female mannequin: elegant flowing full-length evening dress with a large active multicolor floral print in rich pink, blue, green and orange on a light base. Ivory evening shoes. Sophisticated expensive fashion, not gaudy parody; the busy multicolor print is clearly the reason it falls outside a calm olive/cream palette."
+    },
+    {
+      "id": "men-neon",
+      "file": "public/images/dress-lookbook/men-neon.webp",
+      "referenceImage": "public/images/dress-lookbook/women-olive.webp",
+      "prompt": "Use case: photorealistic-natural. One image in a coherent premium wedding guest atelier lookbook, portrait 4:5. Use the reference only for the cream paneled atelier, window on left, brass details, olive botanical artwork, soft neutral daylight, camera framing and headless mannequin product presentation. Keep consistent straight-on chest-height camera, 50mm lens, full outfit including shoes occupying 80% of frame, generous margins. No people, no text, no logos, no watermark, no collage. Clothes are the focus. Faithful fabric colors, no strong amber color cast. Replace the outfit with the specified new fashion look; make it realistic, beautiful, elegant, never a parody. Headless dressmaker mannequin with gold finial and gold stand. Broad-shouldered headless MALE tailoring mannequin: beautiful tailored acid-lime neon green blazer, ivory shirt, green tie, cream tailored trousers, tan leather shoes. Realistically stylish but the highly saturated blazer falls outside the muted olive palette. Never cartoonish."
+    },
+    {
+      "id": "men-blue",
+      "file": "public/images/dress-lookbook/men-blue.webp",
+      "referenceImage": "public/images/dress-lookbook/women-olive.webp",
+      "prompt": "Use case: photorealistic-natural. One image in a coherent premium wedding guest atelier lookbook, portrait 4:5. Use the reference only for the cream paneled atelier, window on left, brass details, olive botanical artwork, soft neutral daylight, camera framing and headless mannequin product presentation. Keep consistent straight-on chest-height camera, 50mm lens, full outfit including shoes occupying 80% of frame, generous margins. No people, no text, no logos, no watermark, no collage. Clothes are the focus. Faithful fabric colors, no strong amber color cast. Replace the outfit with the specified new fashion look; make it realistic, beautiful, elegant, never a parody. Headless dressmaker mannequin with gold finial and gold stand. Broad-shouldered headless MALE tailoring mannequin: elegant vivid royal/electric blue two-piece tailored suit, crisp white shirt and navy tie, polished dark blue leather dress shoes. Beautiful masculine formalwear, saturated blue is the reason it does not fit the olive/cream palette, not a bad suit."
+    },
+    {
+      "id": "men-casual",
+      "file": "public/images/dress-lookbook/men-casual.webp",
+      "referenceImage": "public/images/dress-lookbook/women-olive.webp",
+      "prompt": "Use case: photorealistic-natural. One image in a coherent premium wedding guest atelier lookbook, portrait 4:5. Use the reference only for the cream paneled atelier, window on left, brass details, olive botanical artwork, soft neutral daylight, camera framing and headless mannequin product presentation. Keep consistent straight-on chest-height camera, 50mm lens, full outfit including shoes occupying 80% of frame, generous margins. No people, no text, no logos, no watermark, no collage. Clothes are the focus. Faithful fabric colors, no strong amber color cast. Replace the outfit with the specified new fashion look; make it realistic, beautiful, elegant, never a parody. Headless dressmaker mannequin with gold finial and gold stand. Broad-shouldered headless MALE tailoring mannequin: tasteful premium casual outfit with a muted olive knitted polo, warm cream chinos and clean ivory low-top sneakers. No jacket, no tie, no bow tie. Beautiful realistic weekend look, but not formal tailoring for a wedding. Never sports costume or parody."
+    }
+  ]
+}

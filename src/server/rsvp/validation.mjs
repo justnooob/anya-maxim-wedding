@@ -1,6 +1,9 @@
+import {congratulationReady,congratulations,companionLimit} from '../../content/congratulations.mjs';
 import {validMenuChoice} from '../../content/menu.mjs';
+import {validReturnTransfer,returnTransferCopy} from '../../content/return-transfer.mjs';
 import {drinkChoices} from '../../content/drinks.mjs';
 import {rsvpLimits,fieldLabels,cleanText,textLength,validGuestName} from '../../content/rsvp-limits.mjs';
+import {venueConsentError} from '../../content/venue-consent.mjs';
 export class InputError extends Error {constructor(message='Проверь имя и обязательные ответы.'){super(message);this.name='InputError';}}
 export function validateRsvp(input){
   if(!input || typeof input!=='object'||Array.isArray(input))throw new InputError();
@@ -23,9 +26,15 @@ export function validateRsvp(input){
   const guestName=str('guestName',true).replace(/\s+/g,' ');
   if(!validGuestName(guestName))throw new InputError('Укажи имя и фамилию.');
   if(!['yes','no'].includes(input.attendance))throw new InputError();
-  if(input.attendance==='no')return {...submission,guestName,attendance:'no',who:'',food:'',transfer:null,overnight:null,dressCode:false,alcoholDrinks:[],alcoholOther:'',softDrinks:[],softOther:'',musicRequest:null,hotAppetizer:null,mainCourse:null};
-  if(!['self','kupchino','pavlovsk'].includes(input.transfer)||input.dressCode!==true)throw new InputError();
+  if(input.attendance==='no')return {...submission,guestName,attendance:'no',who:'',food:'',transfer:null,returnTransfer:null,overnight:null,dressCode:false,dressCodeConfirmed:false,venueRulesAccepted:false,alcoholDrinks:[],alcoholOther:'',softDrinks:[],softOther:'',musicRequest:null,hotAppetizer:null,mainCourse:null};
+  if(input.venueRulesAccepted!==true)throw new InputError(venueConsentError);
+  if(!validReturnTransfer(input.returnTransfer))throw new InputError(returnTransferCopy.error);
+  const dressCodeConfirmed=input.dressCodeConfirmed??input.dressCode;
+  if(!['self','kupchino','pavlovsk'].includes(input.transfer)||dressCodeConfirmed!==true)throw new InputError();
   if(!validMenuChoice('hotAppetizer',input.hotAppetizer)||!validMenuChoice('mainCourse',input.mainCourse))throw new InputError('Выбери горячую закуску и основное блюдо.');
+  if(input.congratulationChoice==='public_with_someone'&&typeof input.congratulationCompanion==='string'&&textLength(input.congratulationCompanion)>companionLimit)throw new InputError(congratulations.companionLabel+': не больше '+companionLimit+' символов.');
+  if(!congratulationReady(input.congratulationChoice,input.congratulationCompanion))throw new InputError(input.congratulationChoice==='public_with_someone'?congratulations.companionError:'Выбери вариант поздравления.');
+  const congratulation={congratulationChoice:input.congratulationChoice,congratulationCompanion:input.congratulationChoice==='public_with_someone'?cleanText(input.congratulationCompanion):null};
   const alcohol=drinks('alcohol'),soft=drinks('soft');
-  return {...submission,guestName,attendance:'yes',hotAppetizer:input.hotAppetizer,mainCourse:input.mainCourse,who:str('who',true),food:str('food'),musicRequest:str('musicRequest')||null,transfer:input.transfer,overnight:null,dressCode:true,alcoholDrinks:alcohol.selected,alcoholOther:alcohol.other,softDrinks:soft.selected,softOther:soft.other};
+  return {...submission,guestName,attendance:'yes',...congratulation,hotAppetizer:input.hotAppetizer,mainCourse:input.mainCourse,who:str('who',true),food:str('food'),musicRequest:str('musicRequest')||null,transfer:input.transfer,returnTransfer:input.returnTransfer,overnight:null,dressCode:true,dressCodeConfirmed:true,venueRulesAccepted:true,alcoholDrinks:alcohol.selected,alcoholOther:alcohol.other,softDrinks:soft.selected,softOther:soft.other};
 }

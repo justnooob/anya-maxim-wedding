@@ -1,0 +1,550 @@
+[
+  {
+    "title": "DeLonghi Magnifica Evo ECAM290.61.B",
+    "category": "tech",
+    "price": 42764,
+    "comment": "Автоматическая кофемашина для зернового и молотого кофе. Готовит эспрессо, латте и капучино, есть автоматическая молочная система.",
+    "priority": true,
+    "image": "/images/wishlist/gift-1.webp",
+    "isVisible": true,
+    "reservationMode": "single",
+    "links": [
+      {
+        "label": "",
+        "url": "https://www.ozon.ru/product/kofemashina-delonghi-magnifica-evo-ecam290-61-b-1450vt-chernyy-1637472422/"
+      }
+    ]
+  },
+  {
+    "title": "Яндекс Станция Макс с Zigbee, 65 Вт",
+    "category": "tech",
+    "price": 34938,
+    "comment": "Большая Яндекс Станция с мощностью 65 Вт и Zigbee. Маленькие станции у нас уже есть, поэтому в вишлист добавляем только Макс.",
+    "priority": true,
+    "image": "/images/wishlist/gift-2.webp",
+    "isVisible": true,
+    "reservationMode": "single",
+    "links": [
+      {
+        "label": "",
+        "url": "https://www.ozon.ru/product/umnaya-kolonka-yandeks-stantsiya-maks-zigbee-alisa-65w-1-0-bt-10m-grafit-1259349956/"
+      }
+    ]
+  },
+  {
+    "title": "Kärcher SC 3 Deluxe",
+    "category": "home",
+    "price": 21000,
+    "comment": "Пароочиститель для твёрдых поверхностей, кухни, ванной и уборки без большого количества бытовой химии.",
+    "priority": true,
+    "image": "/images/wishlist/gift-3.webp",
+    "isVisible": true,
+    "reservationMode": "single",
+    "links": [
+      {
+        "label": "",
+        "url": "https://www.ozon.ru/product/paroochistitel-karcher-sc-3-deluxe-1-513-430-0-s-nasadkami-dlya-doma-kerher-1351946433/"
+      }
+    ]
+  },
+  {
+    "title": "Tefal IXEO Power QT2020E0",
+    "category": "home",
+    "price": 29310,
+    "comment": "Паровая гладильная система 3 в 1. Подходит для одежды и домашнего текстиля, без необходимости постоянно доставать классическую гладильную доску.",
+    "priority": false,
+    "image": "/images/wishlist/gift-4.webp",
+    "isVisible": true,
+    "reservationMode": "single",
+    "links": [
+      {
+        "label": "",
+        "url": "https://www.ozon.ru/product/parovaya-gladilnaya-sistema-tefal-ixeo-power-qt2020e0-598218481/"
+      }
+    ]
+  },
+  {
+    "title": "KitchenAid Artisan 5KSM175, кремовый",
+    "category": "kitchen",
+    "price": 62679,
+    "comment": "Планетарный миксер 4,8 л для теста, кремов, выпечки и других кухонных задач. Кремовый вариант лучше подходит по стилю.",
+    "priority": true,
+    "image": "/images/wishlist/gift-5.webp",
+    "isVisible": true,
+    "reservationMode": "single",
+    "links": [
+      {
+        "label": "Ozon",
+        "url": "https://www.ozon.ru/product/planetarnyy-mikser-kitchenaid-artisan-5ksm175pseac-4-8-l-kremovyy-3246406705/"
+      },
+      {
+        "label": "",
+        "url": "https://www.mvideo.ru/products/20054180"
+      }
+    ]
+  },
+  {
+    "title": "Xiaomi Smart Air Purifier 4 Compact EU",
+    "category": "home",
+    "price": 9500,
+    "comment": "Компактный очиститель воздуха с фильтрацией пыли и аллергенов. Это именно очиститель, а не увлажнитель.",
+    "priority": false,
+    "image": "/images/wishlist/gift-6.webp",
+    "isVisible": true,
+    "reservationMode": "single",
+    "links": [
+      {
+        "label": "",
+        "url": "https://www.ozon.ru/product/ochistitel-vozduha-xiaomi-smart-air-purifier-4-compact-eu-bhr5860eu-belyy-4807528555/"
+      }
+    ]
+  },
+  {
+    "title": "Kärcher WV 6 Plus",
+    "category": "home",
+    "price": 8990,
+    "comment": "Аккумуляторный мойщик окон и зеркал. Удобен для больших стеклянных поверхностей и уборки без разводов.",
+    "priority": false,
+    "image": "/images/wishlist/gift-7.webp",
+    "isVisible": true,
+    "reservationMode": "single",
+    "links": [
+      {
+        "label": "",
+        "url": "https://www.ozon.ru/product/stekloochistitel-dlya-okon-karcher-wv-6-plus-1-633-741-0-ochistitel-dlya-okon-kerher-1387196614/"
+      }
+    ]
+  },
+  {
+    "title": "Frameo BX-101, 10.1\"",
+    "category": "home",
+    "price": 6000,
+    "comment": "Цифровая Wi-Fi фоторамка 10,1 дюйма. После свадьбы можно загрузить фотографии со свадьбы, путешествий и обычной жизни.",
+    "priority": false,
+    "image": "/images/wishlist/gift-8.webp",
+    "isVisible": true,
+    "reservationMode": "single",
+    "links": [
+      {
+        "label": "",
+        "url": "https://www.ozon.ru/product/sensornyy-zhk-ekran-a-klassa-tsifrovaya-fotoramka-frameo-bx-101-10-1-dyuymovaya-smart-wifi-1936701558/"
+      }
+    ]
+  },
+  {
+    "title": "Fujifilm Instax Mini Evo",
+    "category": "tech",
+    "price": 17400,
+    "comment": "Гибридная камера моментальной печати. Можно выбрать кадр перед печатью и использовать её в поездках и на встречах.",
+    "priority": false,
+    "image": "/images/wishlist/gift-9.webp",
+    "isVisible": true,
+    "reservationMode": "single",
+    "links": [
+      {
+        "label": "",
+        "url": "https://www.ozon.ru/product/fotoapparat-momentalnoy-pechati-fujifilm-instax-mini-evo-chernyy-1340541971/"
+      }
+    ]
+  },
+  {
+    "title": "Canon SELPHY CP1500",
+    "category": "tech",
+    "price": 18500,
+    "comment": "Компактный фотопринтер для печати фотографий со смартфона. Подойдёт для свадебных снимков, путешествий и домашних альбомов.",
+    "priority": false,
+    "image": "/images/wishlist/gift-10.webp",
+    "isVisible": true,
+    "reservationMode": "single",
+    "links": [
+      {
+        "label": "",
+        "url": "https://www.ozon.ru/product/canon-printer-struynyy-selphy-cp1500-russkaya-versiya-rarantiya-12-mesyatsev-chernyy-3450473905/"
+      }
+    ]
+  },
+  {
+    "title": "DJI Osmo Action 5 Pro Standard Combo",
+    "category": "travel",
+    "price": 36946,
+    "comment": "Компактная экшн-камера для путешествий, прогулок, поездок и съёмки видео в 4K.",
+    "priority": false,
+    "image": "/images/wishlist/gift-11.webp",
+    "isVisible": true,
+    "reservationMode": "single",
+    "links": [
+      {
+        "label": "",
+        "url": "https://www.ozon.ru/product/ekshn-kamera-dji-osmo-action-5-pro-standard-combo-1876428205/"
+      }
+    ]
+  },
+  {
+    "title": "Samsung HW-S60D/RU",
+    "category": "tech",
+    "price": 25000,
+    "comment": "Компактный 5-канальный саундбар с Wi-Fi и Bluetooth. Добавляем только если отдельная аудиосистема для телевизора нам действительно нужна.",
+    "priority": false,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": []
+  },
+  {
+    "title": "Tefal Ingenio, набор 8 предметов",
+    "category": "kitchen",
+    "price": 9500,
+    "comment": "Набор посуды со съёмной ручкой. Сковороды и ковш компактно складываются и занимают меньше места.",
+    "priority": false,
+    "image": "/images/wishlist/gift-13.webp",
+    "isVisible": true,
+    "reservationMode": "single",
+    "links": [
+      {
+        "label": "",
+        "url": "https://market.yandex.ru/card/nabor-posudy-dlya-prigotovleniya-ingenio-8-predmetov-skovorody-242628-sm-kovsh-16-aksessuary-syemnaya-ruchka-s-indikatorom-temperatury-antiprigarnym-pokrytiyem/4459938640"
+      }
+    ]
+  },
+  {
+    "title": "ZWILLING Gourmet, набор из 3 ножей",
+    "category": "kitchen",
+    "price": 14000,
+    "comment": "Три основных кухонных ножа из нержавеющей стали вместо большого набора из десятка редко используемых ножей.",
+    "priority": false,
+    "image": "/images/wishlist/gift-14.webp",
+    "isVisible": true,
+    "reservationMode": "single",
+    "links": [
+      {
+        "label": "",
+        "url": "https://www.ozon.ru/product/nabor-iz-3-h-kuhonnyh-nozhey-zwilling-gourmet-iz-nerzhaveyushchey-stali-36130-003-plastikovaya-1577660401/"
+      }
+    ]
+  },
+  {
+    "title": "Staub, круглый кокот 24 см",
+    "category": "kitchen",
+    "price": 39000,
+    "comment": "Тяжёлая чугунная кастрюля для тушения, запекания и блюд, которые готовятся долго и спокойно.",
+    "priority": false,
+    "image": "/images/wishlist/gift-15.webp",
+    "isVisible": true,
+    "reservationMode": "single",
+    "links": [
+      {
+        "label": "Ozon",
+        "url": "https://www.ozon.ru/product/kokot-staub-kruglyy-24-sm-3-8-l-belyy-tryufel-3788809313/"
+      },
+      {
+        "label": "",
+        "url": "https://zwilling.ru/catalog/posuda/chugunnye_kokoty_staub/kokot_kruglyy_24_sm_3_8_l_belyy_tryufel/"
+      }
+    ]
+  },
+  {
+    "title": "SMEG TSF01CREU, кремовый",
+    "category": "kitchen",
+    "price": 17500,
+    "comment": "Кремовый тостер SMEG на два ломтика. Выбираем его скорее как красивую и приятную вещь для кухни.",
+    "priority": false,
+    "image": "/images/wishlist/gift-16.webp",
+    "isVisible": true,
+    "reservationMode": "single",
+    "links": [
+      {
+        "label": "",
+        "url": "https://www.ozon.ru/product/toster-smeg-tsf01creu-159935531/"
+      }
+    ]
+  },
+  {
+    "title": "ECOTEX, комплект постельного белья евро, сатин",
+    "category": "cozy",
+    "price": 5100,
+    "comment": "Комплект евро из 100% хлопкового сатина. Желательно спокойный бежевый, молочный, серый или близкий оттенок.",
+    "priority": false,
+    "image": "/images/wishlist/gift-17.webp",
+    "isVisible": true,
+    "reservationMode": "single",
+    "links": [
+      {
+        "label": "",
+        "url": "https://www.wildberries.ru/catalog/1099459121/detail.aspx"
+      }
+    ]
+  },
+  {
+    "title": "ECOTEX, сатин-жаккард евро",
+    "category": "cozy",
+    "price": 7500,
+    "comment": "Более праздничный комплект постельного белья евро из сатина-жаккарда.",
+    "priority": false,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": [
+      {
+        "label": "",
+        "url": "https://www.wildberries.ru/catalog/264245986/detail.aspx"
+      }
+    ]
+  },
+  {
+    "title": "Набор качественных банных полотенец",
+    "category": "cozy",
+    "price": 5500,
+    "comment": "Набор больших однотонных хлопковых полотенец спокойных оттенков.",
+    "priority": false,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": []
+  },
+  {
+    "title": "Большой качественный плед",
+    "category": "cozy",
+    "price": 6000,
+    "comment": "Большой мягкий плед для дома в молочном, серо-бежевом или оливковом оттенке.",
+    "priority": false,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": []
+  },
+  {
+    "title": "Комплект чемоданов",
+    "category": "travel",
+    "price": 22500,
+    "comment": "Два нормальных чемодана для совместных поездок. Лучше один cabin size и один большой.",
+    "priority": true,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": []
+  },
+  {
+    "title": "Комплект travel-organizers",
+    "category": "travel",
+    "price": 3000,
+    "comment": "Компрессионные органайзеры для одежды, белья и мелочей в чемоданах.",
+    "priority": false,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": []
+  },
+  {
+    "title": "SPA-день для двоих WOWlife",
+    "category": "experiences",
+    "price": 37360,
+    "comment": "Большой SPA-день для двоих продолжительностью около четырёх часов.",
+    "priority": false,
+    "image": "/images/wishlist/gift-23.webp",
+    "isVisible": true,
+    "reservationMode": "single",
+    "links": [
+      {
+        "label": "",
+        "url": "https://wowlife.club/vpechatleniya/den-spa/"
+      }
+    ]
+  },
+  {
+    "title": "SPA для двоих Xpresent",
+    "category": "experiences",
+    "price": 4000,
+    "comment": "Сертификат на SPA-программу «Шоколадное волшебство» для двоих. При покупке выберите парную программу: массаж, скраб, шоколадное обёртывание и чаепитие. Цена зависит от выбранного варианта.",
+    "priority": false,
+    "image": "/images/wishlist/gift-24.webp",
+    "isVisible": true,
+    "reservationMode": "single",
+    "links": [
+      {
+        "label": "",
+        "url": "https://xpresent.ru/spb/sertificat/spa-programma-shokoladnoe-volshebstvo"
+      }
+    ]
+  },
+  {
+    "title": "Глэмпинг / необычный дом для двоих",
+    "category": "travel",
+    "price": 14000,
+    "comment": "Сертификат «Вдали от дел в глэмпинге» на одну ночь для двоих. Место и дату можно выбрать при активации; условия и возможную доплату нужно проверить у организатора впечатления.",
+    "priority": false,
+    "image": "/images/wishlist/gift-25.webp",
+    "isVisible": true,
+    "reservationMode": "single",
+    "links": [
+      {
+        "label": "",
+        "url": "https://xpresent.ru/spb/set/vdali-ot-del-v-gljempinge"
+      }
+    ]
+  },
+  {
+    "title": "Сертификат в ресторан",
+    "category": "experiences",
+    "price": 10000,
+    "comment": "Сертификат на хороший ужин в Санкт-Петербурге. Конкретный ресторан можно выбрать отдельно перед публикацией.",
+    "priority": false,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": []
+  },
+  {
+    "title": "SPA / массаж для двоих",
+    "category": "experiences",
+    "price": 11000,
+    "comment": "Парная SPA или массажная программа без привязки к конкретной дате.",
+    "priority": false,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": []
+  },
+  {
+    "title": "Загородный отель на выходные",
+    "category": "travel",
+    "price": 22500,
+    "comment": "Сертификат на одну или две ночи в загородном отеле недалеко от Санкт-Петербурга.",
+    "priority": false,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": []
+  },
+  {
+    "title": "Винный шкаф на 8–18 бутылок",
+    "category": "home",
+    "price": 22500,
+    "comment": "Компактный винный холодильник. Оставить только если реально найдётся место и будет использоваться.",
+    "priority": false,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": []
+  },
+  {
+    "title": "Ледогенератор",
+    "category": "kitchen",
+    "price": 11500,
+    "comment": "Настольный ледогенератор для напитков и домашних встреч.",
+    "priority": false,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": []
+  },
+  {
+    "title": "Шнековая соковыжималка",
+    "category": "kitchen",
+    "price": 10500,
+    "comment": "Шнековая соковыжималка для фруктов и овощей.",
+    "priority": false,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": []
+  },
+  {
+    "title": "Вакууматор",
+    "category": "kitchen",
+    "price": 7500,
+    "comment": "Вакууматор для хранения продуктов и заготовок.",
+    "priority": false,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": []
+  },
+  {
+    "title": "Су-вид",
+    "category": "kitchen",
+    "price": 11000,
+    "comment": "Погружной sous-vide для точного приготовления мяса, рыбы и других продуктов.",
+    "priority": false,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": []
+  },
+  {
+    "title": "Дегидратор",
+    "category": "kitchen",
+    "price": 11000,
+    "comment": "Сушилка для фруктов, овощей, мяса и домашних снеков.",
+    "priority": false,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": []
+  },
+  {
+    "title": "Хлебопечка",
+    "category": "kitchen",
+    "price": 15000,
+    "comment": "Автоматическая хлебопечка. Оставить только если уверены, что будем пользоваться.",
+    "priority": false,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": []
+  },
+  {
+    "title": "Ninja Creami",
+    "category": "kitchen",
+    "price": 25000,
+    "comment": "Машина для домашнего мороженого, сорбетов и frozen desserts.",
+    "priority": false,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": []
+  },
+  {
+    "title": "Компактный проектор XGIMI",
+    "category": "tech",
+    "price": 55000,
+    "comment": "Компактный проектор для фильмов дома и поездок.",
+    "priority": false,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": []
+  },
+  {
+    "title": "Сертификат на фотосессию для двоих",
+    "category": "experiences",
+    "price": 11500,
+    "comment": "Фотосессия уже после свадьбы, без свадебной суеты.",
+    "priority": false,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": []
+  },
+  {
+    "title": "Прогулка на катере / яхте в Санкт-Петербурге",
+    "category": "experiences",
+    "price": 14000,
+    "comment": "Прогулка для двоих по воде в Петербурге.",
+    "priority": false,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": []
+  },
+  {
+    "title": "Сертификат на мини-путешествие",
+    "category": "travel",
+    "price": 30000,
+    "comment": "Сертификат на короткую поездку или отель, который можно использовать после свадьбы.",
+    "priority": false,
+    "image": "",
+    "isVisible": false,
+    "reservationMode": "single",
+    "links": []
+  }
+]

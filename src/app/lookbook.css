@@ -1,0 +1,60 @@
+/* Lookbook controls and image viewports share one responsive geometry. */
+#top .dress-original-tabs>.page-switch{margin-bottom:42px}
+#top .dress-original-tabs>.dress-section-switch{margin-top:-15px;margin-bottom:40px}
+#top .dress-chapter .lookbook-frame{min-height:0;align-items:center;grid-template-rows:auto;gap:clamp(24px,5vw,64px)}
+#top .dress-chapter .lookbook-photo{--photo-pad:clamp(4px,min(1.5vw,1.2svh),9px);padding:var(--photo-pad);width:min(100%,calc(clamp(210px,70svh,570px)*.8 + var(--photo-pad)*2));height:auto;min-height:0;justify-self:center;align-self:start;box-sizing:border-box}
+#top .dress-chapter .lookbook-open{position:relative;display:block;width:100%;aspect-ratio:4/5;padding:0;border:0;background:#eee6d7;cursor:zoom-in;touch-action:pan-y;overflow:hidden;border-radius:0;color:inherit}
+#top .dress-chapter .lookbook-photo img{display:block;width:100%;height:100%;max-height:none;aspect-ratio:4/5;object-fit:contain;transform:none}
+#top .dress-chapter .lookbook-description{min-height:var(--look-description-height,0);padding:12px 0;align-self:center}
+.look-status{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#647553;color:#fff9e9;box-shadow:0 2px 8px #28341d24;pointer-events:none}
+.look-status--avoid{background:#ad746a}.look-status svg{width:20px;height:20px}
+#top .material-card{margin:0;min-height:0;height:auto}
+#top .material-card:focus-visible{outline:2px solid #aa8c4c;outline-offset:4px}
+#top .material-hint{display:grid;gap:4px;line-height:1.4;max-height:calc(100% - 16px);overflow:auto}
+#top .material-hint strong{font:500 17px/1.15 var(--font-editorial,'Cormorant Garamond'),serif}
+#top .material-hint span{font:400 11px/1.4 Montserrat,sans-serif}
+/* Existing invitation tabs, with only a restrained blurred backing added. */
+.dress-floating{position:fixed;z-index:35;top:calc(env(safe-area-inset-top,0px) + 10px);left:50%;right:auto;bottom:auto;width:max-content;max-width:calc(100vw - 24px);padding:5px 12px 10px;background:rgba(10,10,10,.65);backdrop-filter:blur(14px);border:0;border-radius:5px;box-shadow:none;visibility:hidden;opacity:0;transform:translate(-50%,-8px);transition:opacity 220ms ease,transform 220ms ease,visibility 220ms}
+.dress-floating.is-visible{visibility:visible;opacity:1;transform:translate(-50%,0)}
+#top .dress-floating .page-switch{margin:0;gap:40px}
+#top .dress-floating .dress-section-switch{margin:4px 0 0;gap:30px}
+/* Keep the original tab geometry; lift only ink luminance on the dark backing. */
+#top .dress-floating .page-switch button{color:#d9d2c0}
+#top .dress-floating .page-switch button[aria-pressed=true]{color:#f0dda8;border-color:#ae925b}
+#top .dress-floating .page-switch button[aria-pressed=true]::after{background:transparent;color:#ae925b}
+#top .dress-floating .page-switch button:hover{color:#fff1c8}
+#top .dress-floating .page-switch button:focus-visible{outline:2px solid #f0dda8;outline-offset:3px}
+.lookbook-dialog button{min-width:44px;min-height:44px;border:0;background:none;color:inherit;cursor:pointer}
+.lookbook-dialog button:focus-visible{outline:2px solid #e7d198;outline-offset:-3px;border-radius:14px}
+/* Native dialog supplies focus containment and makes the page inert. */
+.lookbook-dialog{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:clamp(12px,3vw,42px);border:0;background:#22271ee8;color:#f7efdb;overflow:auto;overscroll-behavior:contain}
+.lookbook-dialog::backdrop{background:#22271ee8;backdrop-filter:blur(12px)}
+.lookbook-dialog-sheet{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,320px);align-items:center;gap:clamp(20px,4vw,60px);max-width:1150px;min-height:100%;margin:auto}
+.lookbook-dialog-photo{position:relative;width:min(100%,calc((100svh - 84px)*.8));justify-self:center;aspect-ratio:4/5;touch-action:pan-y}
+.lookbook-dialog-photo img{display:block;width:100%;height:100%;object-fit:contain}
+.lookbook-dialog-copy{padding:26px 24px;background:#fff8e70a;border:1px solid #f7ebce1c;border-radius:6px;backdrop-filter:blur(12px)}
+.lookbook-dialog-copy .chapter-kicker{color:#dbc78e;font-size:10px}
+.lookbook-dialog-copy h2{font:500 clamp(28px,3vw,42px)/1.1 'Cormorant Garamond',serif;margin:18px 0}
+.lookbook-dialog-copy>p:not(.chapter-kicker){font:400 14px/1.7 Montserrat,sans-serif;overflow-wrap:anywhere}
+.lookbook-dialog-close{position:fixed;right:max(12px,env(safe-area-inset-right));top:max(8px,env(safe-area-inset-top));font:300 34px/1 Montserrat,sans-serif;z-index:2}
+.lookbook-dialog-controls{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:24px;font:400 12px/1.4 Montserrat,sans-serif}
+.lookbook-dialog button:disabled{opacity:.25;cursor:default}
+@media(max-width:700px){
+ #top .dress-original-tabs>.page-switch{margin-bottom:24px}
+ #top .dress-original-tabs>.dress-section-switch{margin-top:0;margin-bottom:26px}
+ #top .dress-chapter .lookbook-frame{grid-template-columns:1fr;grid-template-rows:auto auto;gap:0;min-height:0}
+ #top .dress-chapter .lookbook-description{padding:18px 0 0}
+ #top .dress-chapter .lookbook-stage>.dress-gallery-controls{top:calc(var(--look-photo-height) - 12px);left:50%;transform:translate(-50%,-100%);margin:0;z-index:4}
+ #top .material-hint{display:none}
+ #top .dress-floating .page-switch{gap:30px}
+ .lookbook-dialog{padding:48px 12px max(20px,env(safe-area-inset-bottom))}
+ .lookbook-dialog-sheet{display:flex;flex-direction:column;gap:16px;min-height:0}
+ .lookbook-dialog-photo{width:min(100%,calc(66svh*.8));flex-shrink:0}
+ .lookbook-dialog-copy{width:min(100%,440px);padding:18px 20px;box-sizing:border-box}
+ .lookbook-dialog-copy h2{margin:10px 0;font-size:30px}
+ .lookbook-dialog-copy>p:not(.chapter-kicker){font-size:13px;line-height:1.65}
+ .lookbook-dialog-controls{margin-top:14px}
+}
+@media(hover:none){#top .material-hint{display:none}}
+@media(prefers-reduced-motion:reduce){.dress-floating{transition:none}.dress-floating,.dress-floating.is-visible{transform:translateX(-50%)}}
+.lookbook-dialog-status{display:flex;gap:12px;align-items:center}.lookbook-dialog-status .look-status{position:static;flex-shrink:0}.lookbook-dialog-status .chapter-kicker{line-height:1.5}

@@ -1,0 +1,35 @@
+/* Edge cases found in the independent responsive audit. No global clipping. */
+#top .schedule-spread li>div{min-width:0}
+#top .schedule-spread h3,#rsvp-title{overflow-wrap:anywhere}
+#top .wedding-date-section .date-large{white-space:normal}
+.date-large>span{display:inline-block;white-space:nowrap}
+@media(max-width:340px){#top .wedding-date-section .date-large{font-size:clamp(46px,calc(20vw - 10px),54px)}}
+.question-trigger>span:first-child{min-width:0;overflow-wrap:anywhere}
+#top .questions-heading{min-width:0;max-width:100%}
+#top .questions-heading h2,#top .venue-name{overflow-wrap:anywhere}
+#top .questions-composition{grid-template-columns:minmax(0,.9fr) minmax(0,1.35fr)}
+#top .portrait-names>span{max-width:100%;white-space:normal;overflow-wrap:anywhere;min-width:0}
+#top .dress-original-tabs .page-switch button{min-width:0;overflow-wrap:anywhere}
+@media(max-width:900px){#top .questions-composition{grid-template-columns:minmax(0,1fr)}}
+
+/* A short landscape screen can scroll the letter rather than crop its action.
+   Keep the normal scene and airplane choreography at all other sizes. */
+@media(max-height:500px){
+ .opening{min-height:600px;height:600px}
+ .opening .envelope-stage{width:min(90vw,430px);height:390px;top:54%;--letter-height:390px;--letter-rest:-86px}
+ .opening .letter-rig{top:95px}
+ .opening .letter-content{padding:35px 20px 16px}
+ .opening .letter-content p{font-size:18px;line-height:1.45;max-width:245px;margin:18px auto 6px}
+ .opening .letter-names{font-size:52px;line-height:1;margin-top:22px}
+ .opening .letter-date{font-size:10px;margin:15px 0}
+ .opening .letter-content .botanical-button{min-width:195px;min-height:48px;font-size:11px;margin-top:20px;padding:12px 25px}
+ .opening .letter-callout{font-size:16px;margin-top:8px}
+}
+
+/* The browser exposes notch insets only with viewport-fit=cover. */
+.opening{padding-left:max(4vw,env(safe-area-inset-left));padding-right:max(4vw,env(safe-area-inset-right))}
+.venue-lightbox-close{top:calc(12px + env(safe-area-inset-top));right:calc(24px + env(safe-area-inset-right))}
+.venue-lightbox-controls{bottom:calc(16px + env(safe-area-inset-bottom))}
+.lookbook-dialog{padding-top:max(clamp(12px,3vw,42px),env(safe-area-inset-top));padding-bottom:max(clamp(12px,3vw,42px),env(safe-area-inset-bottom))}
+#top .return-transfer-options label{min-height:44px;align-items:center;margin-top:8px}
+#top .return-transfer-options input:focus-visible{outline:2px solid #846b3b;outline-offset:4px}

@@ -2,7 +2,7 @@ import {transaction} from '../db/index.mjs';
 import {parseAllowedUserIds} from '../telegram/access.mjs';
 import {validateRsvp,InputError} from './validation.mjs';
 import {cookieHeader,requestToken,hash,newSession,sessionAge,csrfFor,equalSecret,trustedOrigin,limitedJson} from './session.mjs';
-import {activeSession,ownRsvps,saveRsvp,publicRsvp,allowRate} from './repository.mjs';
+import {SessionLimitError,activeSession,ownRsvps,saveRsvp,publicRsvp,allowRate} from './repository.mjs';
 const reply=(body,status=200,headers={})=>Response.json(body,{status,headers:{'Cache-Control':'no-store',...headers}});
 export async function getRsvp(request,source){
   try{
@@ -41,5 +41,5 @@ export async function postRsvp(request,source){
     if(result.expired)return reply({error:'Сессия истекла. Обнови страницу.'},403);
     if(result.limited)return reply({error:'Слишком много запросов. Попробуй позже.'},429);
     return reply({rsvp:publicRsvp(result.rsvp),rsvps:result.rsvps,created:result.created},result.created?201:200);
-  }catch{return reply({error:'Не удалось сохранить ответ. Попробуй ещё раз.'},503);}
+  }catch(error){if(error instanceof SessionLimitError)return reply({error:'В этой сессии уже сохранено 5 ответов.'},409);return reply({error:'Не удалось сохранить ответ. Попробуй ещё раз.'},503);}
 }

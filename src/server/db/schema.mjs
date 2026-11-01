@@ -1,5 +1,6 @@
 import {pgTable, text, timestamp, uuid, boolean, integer, bigint, jsonb, uniqueIndex, index, primaryKey, check} from 'drizzle-orm/pg-core';
 import {sql} from 'drizzle-orm';
+export * from './wishlist-schema.mjs';
 const time = name => timestamp(name, {withTimezone:true});
 export const sessions = pgTable('guest_sessions', {
   id:text('id').primaryKey(), createdAt:time('created_at').notNull().defaultNow(), expiresAt:time('expires_at').notNull(),
@@ -7,13 +8,22 @@ export const sessions = pgTable('guest_sessions', {
 export const rsvps = pgTable('rsvps', {
   id:uuid('id').primaryKey(), sessionId:text('session_id').notNull().references(()=>sessions.id,{onDelete:'cascade'}),
   submissionKey:uuid('submission_key').notNull().defaultRandom(),guestName:text('guest_name').notNull(), attendance:text('attendance').notNull(), who:text('who').notNull().default(''),
+  congratulationChoice:text('congratulation_choice'),congratulationCompanion:text('congratulation_companion'),
+  returnTransfer:text('return_transfer'),
+  venueRulesAccepted:boolean('venue_rules_accepted'),venueRulesAcceptedAt:time('venue_rules_accepted_at'),venueRulesVersion:text('venue_rules_version'),
   hotAppetizer:text('hot_appetizer_choice'),mainCourse:text('main_course_choice'),food:text('food').notNull().default(''),musicRequest:text('music_request'),alcoholDrinks:text('alcohol_drinks').array().notNull().default(sql`'{}'`),alcoholOther:text('alcohol_other').notNull().default(''),softDrinks:text('soft_drinks').array().notNull().default(sql`'{}'`),softOther:text('soft_other').notNull().default(''),transfer:text('transfer'),overnight:text('overnight'),
   dressCode:boolean('dress_code').notNull().default(false),createdAt:time('created_at').notNull().defaultNow(),updatedAt:time('updated_at').notNull().defaultNow(),
 }, table=>[uniqueIndex('rsvp_session_submission_unique').on(table.sessionId,table.submissionKey),index('rsvp_session_idx').on(table.sessionId),index('rsvps_attendance_created_idx').on(table.attendance,table.createdAt,table.id),index('rsvps_created_idx').on(table.createdAt,table.id),
+  check('rsvp_venue_consent_shape',sql`(${table.venueRulesAccepted} IS NULL AND ${table.venueRulesAcceptedAt} IS NULL AND ${table.venueRulesVersion} IS NULL) OR (${table.venueRulesAccepted} IS FALSE AND ${table.venueRulesAcceptedAt} IS NULL AND ${table.venueRulesVersion} IS NULL) OR (${table.venueRulesAccepted} IS TRUE AND ${table.attendance}='yes' AND ${table.venueRulesAcceptedAt} IS NOT NULL AND ${table.venueRulesVersion} IS NOT NULL AND char_length(btrim(${table.venueRulesVersion})) BETWEEN 1 AND 80)`),
   // Migration 006 uses NOT VALID so historical answers are retained unchanged.
+  check('rsvp_return_transfer_values',sql`${table.returnTransfer} IS NULL OR ${table.returnTransfer} IN ('needed','not_needed')`),
+  check('rsvp_no_return_transfer',sql`${table.attendance}='yes' OR ${table.returnTransfer} IS NULL`),
   check('rsvp_text_limits_v2',sql`char_length(${table.guestName}) BETWEEN 1 AND 80 AND char_length(${table.who})<=120 AND char_length(${table.food})<=300 AND (${table.musicRequest} IS NULL OR char_length(${table.musicRequest})<=300) AND char_length(${table.alcoholOther})<=80 AND char_length(${table.softOther})<=80`),
   check('rsvp_going_required_v2',sql`${table.attendance}='no' OR (char_length(btrim(${table.who}))>0 AND cardinality(${table.alcoholDrinks})>0 AND cardinality(${table.softDrinks})>0)`),
   check('rsvp_music_length',sql`${table.musicRequest} IS NULL OR char_length(${table.musicRequest})<=1000`),
+  check('rsvp_congratulation_values',sql`${table.congratulationChoice} IS NULL OR ${table.congratulationChoice} IN ('public','private','public_with_someone')`),
+  check('rsvp_congratulation_companion',sql`(${table.congratulationChoice} IS NOT DISTINCT FROM 'public_with_someone' AND ${table.congratulationCompanion} IS NOT NULL AND char_length(btrim(${table.congratulationCompanion})) BETWEEN 1 AND 120) OR (${table.congratulationChoice} IS DISTINCT FROM 'public_with_someone' AND ${table.congratulationCompanion} IS NULL)`),
+  check('rsvp_no_congratulation',sql`${table.attendance}='yes' OR (${table.congratulationChoice} IS NULL AND ${table.congratulationCompanion} IS NULL)`),
   check('rsvp_hot_appetizer_values',sql`${table.hotAppetizer} IS NULL OR ${table.hotAppetizer} IN ('hot_meat','hot_fish')`),
   check('rsvp_main_course_values',sql`${table.mainCourse} IS NULL OR ${table.mainCourse} IN ('main_meat','main_fish')`),
   check('rsvp_no_menu',sql`${table.attendance}='yes' OR (${table.hotAppetizer} IS NULL AND ${table.mainCourse} IS NULL)`),

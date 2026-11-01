@@ -1,8 +1,9 @@
+import {wedding} from "./wedding.mjs";
 export const invitation = {
   names: { bride: "Anya", groom: "Maxim" },
-  date: "17.07.2027",
-  dateISO: "2027-07-17",
-  time: "16:00",
+  date: wedding.date,
+  dateISO: wedding.dateISO,
+  time: wedding.time,
   hero: { bride: "АННА", groom: "МАКСИМ", src: "/images/couple.jpg", alt: "Временная фотография: жених и невеста целуются, сидя рядом" },
   opening: {
     sealedHint: "Посмотри, вдруг там что-то важное.",

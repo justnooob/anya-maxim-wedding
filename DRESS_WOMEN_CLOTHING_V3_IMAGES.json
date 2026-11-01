@@ -1,0 +1,106 @@
+{
+  "generator": "built-in imagegen",
+  "referenceImage": "public/images/dress-lookbook-v2/women-clothes-sage.webp",
+  "notes": "Reference is scene/camera only. Six approved different silhouettes and five anti-colours; women clothing only.",
+  "assets": [
+    {
+      "id": "sage-ballgown",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-24625e85-1b46-4abd-86f3-5a3ffd539a54.png",
+      "prompt": "Use case: photorealistic-natural. One editorial fashion photograph for a wedding dress-code guide. Reference image is ONLY for atelier interior, mannequin, camera angle/distance and soft natural window daylight; DO NOT copy the reference dress silhouette. Keep same cream luxury atelier, left window, botanical artwork, brass mannequin stand, pale stone floor and camera at same distance. Portrait 4:5, full outfit visible, premium real cloth, no people, no logos, no text, no collage. Replace the old dress ENTIRELY with the following distinct dress: APPROVED. Very light WARM muted pistachio-olive sage, dusty yellow-olive undertone, visibly green not ivory, approximately #B2B995. SILHOUETTE: airy full ball gown with broad gathered skirt and structured strapless bodice; layered lightweight chiffon, soft matte finish. It must not be a fitted draped slip dress. Color is more important than cut; faithfully show specified hue and temperature under neutral soft daylight. Use ivory/beige shoes, small quiet accessories; the dress is the focus. Clearly different silhouette from original reference.",
+      "approved": true,
+      "title": "Воздушный тёплый sage",
+      "description": "Светлый шалфейный с жёлто-оливковым подтоном остаётся внутри нашей гаммы. Воздушный шифон и пышный силуэт подходят: фасон свободный.",
+      "file": "public/images/dress-women-clothing-v3/sage-ballgown.webp"
+    },
+    {
+      "id": "eucalyptus-embroidered",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-4a7eddc3-749f-4b8f-b3e6-bd96abf1d8d7.png",
+      "prompt": "Use case: photorealistic-natural. One editorial fashion photograph for a wedding dress-code guide. Reference image is ONLY for atelier interior, mannequin, camera angle/distance and soft natural window daylight; DO NOT copy the reference dress silhouette. Keep same cream luxury atelier, left window, botanical artwork, brass mannequin stand, pale stone floor and camera at same distance. Portrait 4:5, full outfit visible, premium real cloth, no people, no logos, no text, no collage. Replace the old dress ENTIRELY with the following distinct dress: APPROVED. Light WARM dusty eucalyptus-sage, muted yellow-olive green approximately #9CA787, never mint/cyan. SILHOUETTE: romantic tea-length midi dress in layered tulle, delicate same-tone floral embroidery, short sheer puff sleeves, softly flared skirt. Distinct from ball gown and slip. Fabric clearly green, not white. Color is more important than cut; faithfully show specified hue and temperature under neutral soft daylight. Use ivory/beige shoes, small quiet accessories; the dress is the focus. Clearly different silhouette from original reference.",
+      "approved": true,
+      "title": "Эвкалиптовый и вышивка",
+      "description": "Приглушённый эвкалиптовый остаётся тёплым, без мятного или голубого отлива. Тюль и нежная вышивка допустимы, как и романтичный силуэт.",
+      "file": "public/images/dress-women-clothing-v3/eucalyptus-embroidered.webp"
+    },
+    {
+      "id": "olive-short",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-61741d6f-4d96-466e-9f7b-c3614412aabf.png",
+      "prompt": "Use case: photorealistic-natural. One editorial fashion photograph for a wedding dress-code guide. Reference image is ONLY for atelier interior, mannequin, camera angle/distance and soft natural window daylight; DO NOT copy the reference dress silhouette. Keep same cream luxury atelier, left window, botanical artwork, brass mannequin stand, pale stone floor and camera at same distance. Portrait 4:5, full outfit visible, premium real cloth, no people, no logos, no text, no collage. Replace the old dress ENTIRELY with the following distinct dress: APPROVED. Medium warm muted true olive approximately #7E875C, low-medium saturation, no lime/neon/broccoli. SILHOUETTE: short evening dress ending above knees, elegant sculptural A-line skirt, boat neckline, sleeveless, fine textured matte evening jacquard. Intentionally short, not midi or long. Color is more important than cut; faithfully show specified hue and temperature under neutral soft daylight. Use ivory/beige shoes, small quiet accessories; the dress is the focus. Clearly different silhouette from original reference.",
+      "approved": true,
+      "title": "Оливковый, короткий вечерний",
+      "description": "Средний оливковый с мягким тёплым подтоном попадает в диапазон. Короткая длина и спокойная фактурная ткань тоже подходят.",
+      "file": "public/images/dress-women-clothing-v3/olive-short.webp"
+    },
+    {
+      "id": "deep-olive-slip",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-dc8fabbe-485f-4d81-a5f2-ed24586e585c.png",
+      "prompt": "Use case: photorealistic-natural. One editorial fashion photograph for a wedding dress-code guide. Reference image is ONLY for atelier interior, mannequin, camera angle/distance and soft natural window daylight; DO NOT copy the reference dress silhouette. Keep same cream luxury atelier, left window, botanical artwork, brass mannequin stand, pale stone floor and camera at same distance. Portrait 4:5, full outfit visible, premium real cloth, no people, no logos, no text, no collage. Replace the old dress ENTIRELY with the following distinct dress: APPROVED darkest boundary. Deep WARM muted olive approximately #606941 with yellow-olive undertone, not near-black, not forest or emerald, not cold blue-green. SILHOUETTE: long minimalist slim bias-cut silk slip dress, thin straps, smooth unembellished fabric, no draped side brooch, no ruffles, no gathered waist. Subtle textile satin sheen. Color is more important than cut; faithfully show specified hue and temperature under neutral soft daylight. Use ivory/beige shoes, small quiet accessories; the dress is the focus. Clearly different silhouette from original reference.",
+      "approved": true,
+      "title": "Глубокий тёплый olive",
+      "description": "Глубокий olive остаётся тёплым и приглушённым. Это тёмная граница гаммы; гладкий шёлк и облегающий силуэт подходят.",
+      "file": "public/images/dress-women-clothing-v3/deep-olive-slip.webp"
+    },
+    {
+      "id": "butter-column",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-66890fe0-0032-4582-8d21-9801ca8dd3f0.png",
+      "prompt": "Use case: photorealistic-natural. One editorial fashion photograph for a wedding dress-code guide. Reference image is ONLY for atelier interior, mannequin, camera angle/distance and soft natural window daylight; DO NOT copy the reference dress silhouette. Keep same cream luxury atelier, left window, botanical artwork, brass mannequin stand, pale stone floor and camera at same distance. Portrait 4:5, full outfit visible, premium real cloth, no people, no logos, no text, no collage. Replace the old dress ENTIRELY with the following distinct dress: APPROVED light boundary. Clearly warm pale BUTTER YELLOW approximately #ECD794, visibly yellow-cream even in highlights. NEVER near-white/ivory/milk/beige. SILHOUETTE: minimalist full-length straight column gown with wide straps, square neckline and clean vertical seams, matte satin. Warm soft creamy yellow, no metallic foil. Color is more important than cut; faithfully show specified hue and temperature under neutral soft daylight. Use ivory/beige shoes, small quiet accessories; the dress is the focus. Clearly different silhouette from original reference.",
+      "approved": true,
+      "title": "Светлое сливочное масло",
+      "description": "Даже самая светлая точка заметно жёлто-сливочная, а не почти белая. Лаконичный силуэт и матовый атлас сохраняют тёплое вечернее ощущение.",
+      "file": "public/images/dress-women-clothing-v3/butter-column.webp"
+    },
+    {
+      "id": "warm-gold-asymmetric",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-36ca7e2e-07d9-4ae7-b23c-58c239a4dadf.png",
+      "prompt": "Use case: photorealistic-natural. One editorial fashion photograph for a wedding dress-code guide. Reference image is ONLY for atelier interior, mannequin, camera angle/distance and soft natural window daylight; DO NOT copy the reference dress silhouette. Keep same cream luxury atelier, left window, botanical artwork, brass mannequin stand, pale stone floor and camera at same distance. Portrait 4:5, full outfit visible, premium real cloth, no people, no logos, no text, no collage. Replace the old dress ENTIRELY with the following distinct dress: APPROVED rich warm gold boundary. Rich muted WARM GOLD approximately #BDA052, distinctly yellow golden, not bronze, orange, brass or copper. SILHOUETTE: fitted asymmetric one-shoulder evening gown with architectural diagonal folds, high-low hem revealing one ankle. Rich satin with soft woven golden sheen, not shiny foil/sequins. Color is more important than cut; faithfully show specified hue and temperature under neutral soft daylight. Use ivory/beige shoes, small quiet accessories; the dress is the focus. Clearly different silhouette from original reference.",
+      "approved": true,
+      "title": "Насыщенное тёплое золото",
+      "description": "Более насыщенное мягкое золото тоже входит в диапазон. Тканевый блеск подходит, если цвет не уходит в бронзу, оранжевый или медь.",
+      "file": "public/images/dress-women-clothing-v3/warm-gold-asymmetric.webp"
+    },
+    {
+      "id": "mint-tulle",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-45c73796-c5fa-431a-ab4c-df7d199a753e.png",
+      "prompt": "Use case: photorealistic-natural. One editorial fashion photograph for a wedding dress-code guide. Reference image is ONLY for atelier interior, mannequin, camera angle/distance and soft natural window daylight; DO NOT copy the reference dress silhouette. Keep same cream luxury atelier, left window, botanical artwork, brass mannequin stand, pale stone floor and camera at same distance. Portrait 4:5, full outfit visible, premium real cloth, no people, no logos, no text, no collage. Replace the old dress ENTIRELY with the following distinct dress: ANTI-EXAMPLE, beautiful realistic dress wrong COLOR only. Clearly COOL blue-based mint/seafoam approximately #A5D3CA. SILHOUETTE: romantic layered tulle ankle-length gown, delicate off-shoulder neckline, airy flowing skirt. High quality evening fabric. Not warm olive or sage. Color is more important than cut; faithfully show specified hue and temperature under neutral soft daylight. Use ivory/beige shoes, small quiet accessories; the dress is the focus. Clearly different silhouette from original reference.",
+      "approved": false,
+      "title": "Слишком холодная мята",
+      "description": "Фасон и воздушный тюль подходят, но оттенок уходит в холодный mint. Нам нужен тёплый оливковый подтон.",
+      "file": "public/images/dress-women-clothing-v3/mint-tulle.webp"
+    },
+    {
+      "id": "emerald-fitted",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-d94b161e-b0e2-4d5c-99ce-1680f1036289.png",
+      "prompt": "Use case: photorealistic-natural. One editorial fashion photograph for a wedding dress-code guide. Reference image is ONLY for atelier interior, mannequin, camera angle/distance and soft natural window daylight; DO NOT copy the reference dress silhouette. Keep same cream luxury atelier, left window, botanical artwork, brass mannequin stand, pale stone floor and camera at same distance. Portrait 4:5, full outfit visible, premium real cloth, no people, no logos, no text, no collage. Replace the old dress ENTIRELY with the following distinct dress: ANTI-EXAMPLE, beautiful realistic dress wrong COLOR only. Deep COOL saturated emerald approximately #165A4C, blue-green undertone, visibly colder/darker than warm olive. SILHOUETTE: fitted full-length evening dress with long sleeves and clean sweetheart neckline, velvet fabric with restrained soft sheen. Not slip or tulle. Color is more important than cut; faithfully show specified hue and temperature under neutral soft daylight. Use ivory/beige shoes, small quiet accessories; the dress is the focus. Clearly different silhouette from original reference.",
+      "approved": false,
+      "title": "Холодный глубокий изумруд",
+      "description": "Само вечернее платье подходит по настроению. Но изумруд слишком тёмный, насыщенный и холодный для тёплой оливковой гаммы.",
+      "file": "public/images/dress-women-clothing-v3/emerald-fitted.webp"
+    },
+    {
+      "id": "chartreuse-midi",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-5d3e86f7-a2e1-4d8d-8829-4e25087caaf1.png",
+      "prompt": "Use case: photorealistic-natural. One editorial fashion photograph for a wedding dress-code guide. Reference image is ONLY for atelier interior, mannequin, camera angle/distance and soft natural window daylight; DO NOT copy the reference dress silhouette. Keep same cream luxury atelier, left window, botanical artwork, brass mannequin stand, pale stone floor and camera at same distance. Portrait 4:5, full outfit visible, premium real cloth, no people, no logos, no text, no collage. Replace the old dress ENTIRELY with the following distinct dress: ANTI-EXAMPLE, beautiful realistic dress wrong COLOR only. Distinct sharp CHARTREUSE yellow-green approximately #ADB934, vivid yellow-green with sour broccoli/chartreuse character, not calm muted olive. SILHOUETTE: elegant knee-to-midcalf midi dress, asymmetric wrap neckline, pleated structured skirt, short cap sleeves, fine matte satin. Color is more important than cut; faithfully show specified hue and temperature under neutral soft daylight. Use ivory/beige shoes, small quiet accessories; the dress is the focus. Clearly different silhouette from original reference.",
+      "approved": false,
+      "title": "Резкий жёлто-зелёный",
+      "description": "Длина и крой не мешают образу. Проблема в резком chartreuse: слишком много жёлто-зелёной насыщенности вместо спокойного оливкового.",
+      "file": "public/images/dress-women-clothing-v3/chartreuse-midi.webp"
+    },
+    {
+      "id": "ivory-short",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-297860a8-9824-44b9-b9f4-0dfd33eb1adc.png",
+      "prompt": "Use case: photorealistic-natural. One editorial fashion photograph for a wedding dress-code guide. Reference image is ONLY for atelier interior, mannequin, camera angle/distance and soft natural window daylight; DO NOT copy the reference dress silhouette. Keep same cream luxury atelier, left window, botanical artwork, brass mannequin stand, pale stone floor and camera at same distance. Portrait 4:5, full outfit visible, premium real cloth, no people, no logos, no text, no collage. Replace the old dress ENTIRELY with the following distinct dress: ANTI-EXAMPLE, beautiful realistic dress wrong COLOR only. Almost WHITE champagne/ivory approximately #F5F0E4, light enough to read as white, not butter yellow. SILHOUETTE: short elegant evening dress with sculptural puffed skirt and fitted corset bodice, silk organza, delicate warm ivory. No bridal veil or train. Not a long gown. Color is more important than cut; faithfully show specified hue and temperature under neutral soft daylight. Use ivory/beige shoes, small quiet accessories; the dress is the focus. Clearly different silhouette from original reference.",
+      "approved": false,
+      "title": "Почти белый champagne",
+      "description": "Само платье подходит, но цвет визуально приближается к белому. Наша светлая граница должна оставаться заметно жёлто-сливочной.",
+      "file": "public/images/dress-women-clothing-v3/ivory-short.webp"
+    },
+    {
+      "id": "silver-champagne",
+      "path": "C:\\Users\\maks1\\.codex\\generated_images\\01a11158-5c58-73e3-8d0e-9a7566318598\\exec-da0f66b1-c564-4240-bb48-8eca5e9828a6.png",
+      "prompt": "Use case: photorealistic-natural. One editorial fashion photograph for a wedding dress-code guide. Reference image is ONLY for atelier interior, mannequin, camera angle/distance and soft natural window daylight; DO NOT copy the reference dress silhouette. Keep same cream luxury atelier, left window, botanical artwork, brass mannequin stand, pale stone floor and camera at same distance. Portrait 4:5, full outfit visible, premium real cloth, no people, no logos, no text, no collage. Replace the old dress ENTIRELY with the following distinct dress: ANTI-EXAMPLE, beautiful realistic dress wrong COLOR only. COOL pale silver-champagne/silver-gold approximately #CECCBE, distinctly cool grey metallic undertone, not warm butter or gold. SILHOUETTE: elegant full-length halter-neck fluid evening gown with open shoulders, fine satin with subtle cool silvery sheen, no foil. Not straight square-neck or one-shoulder. Color is more important than cut; faithfully show specified hue and temperature under neutral soft daylight. Use ivory/beige shoes, small quiet accessories; the dress is the focus. Clearly different silhouette from original reference.",
+      "approved": false,
+      "title": "Холодный серебристый champagne",
+      "description": "К вечернему силуэту вопросов нет. Оттенку не хватает тёплого сливочно-золотистого подтона, он уходит в холодное серебро.",
+      "file": "public/images/dress-women-clothing-v3/silver-champagne.webp"
+    }
+  ]
+}

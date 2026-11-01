@@ -1,6 +1,6 @@
 import {defineConfig} from 'playwright/test';
 export default defineConfig({
- testDir:'./tests/browser',fullyParallel:false,workers:1,retries:0,timeout:60000,
+ testDir:'./tests/browser',fullyParallel:false,workers:1,retries:0,timeout:60000,globalTeardown:'./tests/helpers/browser-teardown.mjs',
  outputDir:'test-results',reporter:[['list'],['html',{open:'never'}]],
  snapshotPathTemplate:'{testDir}/__screenshots__/{projectName}/{platform}/{arg}{ext}',
  expect:{timeout:10000,toHaveScreenshot:{animations:'disabled',caret:'hide',maxDiffPixels:100,threshold:0.15}},

@@ -6,7 +6,6 @@
 }
 #top .chapter-heading>p {font-size:var(--invite-body);line-height:1.75;}
 #top .venue-address {font-size:var(--invite-faq);line-height:1.8;max-width:390px;}
-#top .venue-arrival {font-size:var(--invite-label);line-height:1.75;}
 #top .dress-guidance p,#top .dress-note {font-size:var(--invite-detail);line-height:1.8;}
 #top .guest-print p {font-size:var(--invite-small);line-height:1.75;}
 #top .question-answer {font-size:var(--invite-faq);line-height:1.8;}
@@ -35,8 +34,7 @@
 #top .venue-incoming-photo {animation:invite-frame-in 720ms var(--invite-ease) both;}
 #top .venue-outgoing-photo {animation:invite-frame-out 720ms var(--invite-ease) both;}
 @keyframes invite-frame-in {from{transform:translateX(calc(var(--frame-direction)*100%)) scale(1.025)}to{transform:translateX(0) scale(1)}}
-@keyframes invite-frame-out {from{transform:translateX(0) scale(1)}to{transform:translateX(calc(var(--frame-direction)*-100%)) scale(1.015)}}
-#top .venue-gallery-controls button,#top .dress-gallery-controls button {transition:background 220ms,color 220ms,translate 220ms var(--invite-ease);}
+@keyframes invite-frame-out {from{transform:translateX(0) scale(1)}to{transform:translateX(calc(var(--frame-direction)*-100%)) scale(1.015)}}#top .dress-gallery-controls button {transition:background 220ms,color 220ms,translate 220ms var(--invite-ease);}
 #top .page-switch button {transition:color 240ms,border-color 240ms;}
 #top .look-photo {transition:filter 300ms var(--invite-ease);}
 #top .dress-catalogue figure:not([data-active=true]) .look-photo {filter:saturate(.88);}
@@ -64,11 +62,9 @@
 #top .question-trigger[aria-expanded=true] .question-sign {rotate:180deg;}
 #top .question-panel,#top .question-panel[data-open=true] {transition-duration:460ms,260ms,0s;}
 #top .foil-button {transition:filter 220ms,box-shadow 220ms,translate 180ms var(--invite-ease);}
-#top .foil-button:active:not(:disabled) {translate:0 1px;filter:brightness(.98);}
-#top .venue-gallery-controls button:active,#top .dress-gallery-controls button:active:not(:disabled) {translate:0 1px;}
+#top .foil-button:active:not(:disabled) {translate:0 1px;filter:brightness(.98);}#top .dress-gallery-controls button:active:not(:disabled) {translate:0 1px;}
 @media(hover:hover) and (pointer:fine) {
  #top .guest-print.motion-visible:hover,#top .guest-print:not(.motion-ready):hover {scale:1.02;box-shadow:0 1px 2px #76634218,0 15px 24px -18px #453c2670;}
- #top .venue-gallery-controls button:hover {background:#e4d3a21a;color:#e4d3a2;}
  #top .dress-gallery-controls button:hover:not(:disabled) {background:#b49a6110;color:#8e733f;}
  #top .page-switch button:hover {color:#8e733f;}
  #top .question-trigger:hover {background:#b49a6108;}
@@ -101,84 +97,13 @@
  #top .venue-outgoing-photo {display:none;}
  #top .motion-ready,#top .motion-ready.motion-visible,#top .motion-ready:focus-within {opacity:var(--motion-opacity,1);translate:none;scale:none;rotate:none;transition:none;}
  #top .schedule-spread::before {scale:1 1;transition:none;}
- #top .guest-print,#top .foil-button,#top .question-panel,#top .question-panel[data-open=true],#top .question-sign,#top .question-trigger,#top .dress-progress>span,#top .look-photo,#top .venue-gallery-controls button,#top .dress-gallery-controls button {transition:none;}
- #top .guest-print:hover,#top .foil-button:active,#top .venue-gallery-controls button:active,#top .dress-gallery-controls button:active {scale:none;translate:none;}
+ #top .guest-print,#top .foil-button,#top .question-panel,#top .question-panel[data-open=true],#top .question-sign,#top .question-trigger,#top .dress-progress>span,#top .look-photo,#top .dress-gallery-controls button {transition:none;}
+ #top .guest-print:hover,#top .foil-button:active,#top .dress-gallery-controls button:active {scale:none;translate:none;}
 }
-/* Motion direction: composition first. No universal travelling reveal. */
-#top .motion-ready {opacity:1;translate:none;scale:1;rotate:none;transition:none;}
-#top .motion-ready.motion-visible,#top .motion-ready:focus-within {translate:none;rotate:none;}
-#top :is(.chapter-heading,.questions-heading).motion-ready {opacity:0;transition:opacity 480ms var(--invite-ease);}
-#top :is(.chapter-heading,.questions-heading).motion-visible {opacity:1;}
-/* Date: two sides unfold, then the quiet time signature. */
-#top .wedding-date-section.motion-ready .date-large {clip-path:inset(0 100% 0 0);transition:clip-path 750ms var(--invite-ease);}
-#top .wedding-date-section.motion-visible .date-large {clip-path:inset(0);}
-#top .wedding-date-section.motion-ready .date-invitation {opacity:0;transition:opacity 500ms var(--invite-ease);}
-#top .wedding-date-section.motion-visible .date-invitation {opacity:1;}
-#top .wedding-date-section.motion-ready .date-start {opacity:0;clip-path:inset(0 100% 0 0);transition:clip-path 650ms var(--invite-ease) 200ms,opacity 450ms ease 350ms;}
-#top .wedding-date-section.motion-visible .date-start {opacity:1;clip-path:inset(0);}
-#top .wedding-calendar.motion-ready {opacity:.15;translate:26px 0;transition:translate 650ms var(--invite-ease) 100ms,opacity 500ms ease 100ms;}
-#top .wedding-calendar.motion-visible,#top .wedding-calendar:focus-within {opacity:1;translate:none;}
-/* Venue: photograph leads, copy arrives as one quiet panel. */
-#top .venue-chapter.motion-ready .venue-gallery {clip-path:polygon(0 0,0 0,0 100%,0 100%);scale:1.03;transition:clip-path 800ms var(--invite-ease),scale 800ms var(--invite-ease);}
-#top .venue-chapter.motion-visible .venue-gallery {clip-path:polygon(0 0,100% 0,100% 100%,0 100%);scale:1;}
-#top .venue-chapter.motion-ready .venue-copy {opacity:0;transition:opacity 550ms ease 250ms;}
-#top .venue-chapter.motion-visible .venue-copy,#top .venue-chapter:focus-within :is(.venue-copy,.venue-gallery) {opacity:1;clip-path:inset(0);scale:1;}
-/* Album: existing printed rotations remain untouched. Only three small directions. */
-#top .guest-album.motion-ready .guest-print {opacity:0;translate:-12px 0;transition:opacity 450ms ease,translate 600ms var(--invite-ease),scale 220ms var(--invite-ease),box-shadow 220ms;}
-#top .guest-album.motion-ready .guest-print:nth-child(3n+2) {translate:0 10px;transition-delay:70ms;}
-#top .guest-album.motion-ready .guest-print:nth-child(3n) {translate:12px 0;transition-delay:140ms;}
-#top .guest-album.motion-visible .guest-print,#top .guest-album:focus-within .guest-print {opacity:1;translate:none;}
-/* Lookbook: palette, primary photograph, neighbours, one lower composition. */
-#top .dress-chapter.motion-ready :is(.chapter-heading,.page-switch) {opacity:0;transition:opacity 450ms ease;}
-#top .dress-chapter.motion-ready .dress-palette>span {opacity:0;scale:.96;transition:opacity 450ms ease,scale 450ms var(--invite-ease);}
-#top .dress-chapter.motion-ready .dress-palette>span:nth-child(2) {transition-delay:80ms;}
-#top .dress-chapter.motion-ready .look-photo {clip-path:inset(0 0 100% 0);scale:.985;transition:clip-path 750ms var(--invite-ease) 120ms,scale 650ms var(--invite-ease) 120ms,filter 300ms;}
-#top .dress-chapter.motion-ready figure:first-child .look-photo {transition-delay:0ms;}
-#top .dress-chapter.motion-ready :is(.dress-guidance,.dress-note) {opacity:0;transition:opacity 500ms ease 220ms;}
-#top .dress-chapter.motion-visible :is(.chapter-heading,.page-switch,.dress-palette>span,.dress-guidance,.dress-note) {opacity:1;scale:1;}
-#top .dress-chapter.motion-visible .look-photo,#top .dress-chapter:focus-within .look-photo {clip-path:inset(0);scale:1;}
-#top .dress-chapter:focus-within :is(.page-switch,.dress-guidance,.dress-note,.dress-palette>span) {opacity:1;}
-/* Program: line reaches each marker as its event enters the reading window. */
-#top .schedule-spread.timeline-ready::before {scale:1 var(--line-progress,0);transition:scale 850ms var(--invite-ease);}
-#top .schedule-spread li.motion-ready {opacity:1;translate:none;}
-#top .schedule-spread li.motion-ready::before {scale:0 1;transition:scale 200ms ease 180ms;}
-#top .schedule-spread li.motion-ready .schedule-time {clip-path:inset(0 100% 0 0);transition:clip-path 600ms var(--invite-ease) 120ms;}
-#top .schedule-spread li.motion-ready>div {opacity:0;translate:10px 0;transition:opacity 450ms ease 200ms,translate 550ms var(--invite-ease) 200ms;}
-#top .schedule-spread li.motion-visible::before {scale:1;}
-#top .schedule-spread li.motion-visible .schedule-time {clip-path:inset(0);}
-#top .schedule-spread li.motion-visible>div {opacity:1;translate:none;}
-/* FAQ rows stay present. Interaction carries the rhythm. */
-#top .question-item {position:relative;}
-#top .question-item::after {content:'';position:absolute;left:0;bottom:0;width:100%;height:1px;background:#ad905660;scale:0 1;transform-origin:left;transition:scale 240ms ease;pointer-events:none;}
-#top .question-item:has([aria-expanded=true])::after,#top .question-item:focus-within::after {scale:1;}
-/* RSVP is a single sheet; fields have no stagger. */
-#top .rsvp-paper.motion-ready {opacity:0;scale:.985;translate:0 4px;transition:opacity 500ms ease,scale 650ms var(--invite-ease),translate 650ms var(--invite-ease);}
-#top .rsvp-paper.motion-visible,#top .rsvp-paper:focus-within {opacity:1;scale:1;translate:none;}
-/* Botanical materials: broad masks, small accents and quiet background washes. */
-#top .watercolor.motion-ready {opacity:var(--motion-opacity,1);translate:none;rotate:none;scale:1;clip-path:inset(100% 0 0 0);transition:clip-path 800ms var(--invite-ease);}
-#top :is(.venue-watercolor-secondary,.guest-watercolor-top,.rsvp-watercolor).motion-ready {clip-path:none;opacity:0;scale:.97;transition:opacity 550ms ease 180ms,scale 550ms var(--invite-ease) 180ms;}
-#top :is(.questions-watercolor,.schedule-watercolor).motion-ready {clip-path:none;opacity:calc(var(--motion-opacity,.15)*.65);transition:opacity 600ms ease;}
-#top .watercolor.motion-visible {clip-path:inset(0);opacity:var(--motion-opacity,1);scale:1;}
-@media(max-width:700px) {
- #top .wedding-calendar.motion-ready {translate:12px 0;transition-duration:500ms;transition-delay:60ms;}
- #top .wedding-calendar.motion-visible {translate:none;}
- #top .guest-album.motion-ready .guest-print {translate:-5px 0;transition-duration:400ms,480ms,220ms,220ms;}
- #top .guest-album.motion-ready .guest-print:nth-child(3n+2) {translate:0 5px;transition-delay:40ms;}
- #top .guest-album.motion-ready .guest-print:nth-child(3n) {translate:5px 0;transition-delay:80ms;}
- #top .guest-album.motion-visible .guest-print {translate:none;}
- #top .venue-chapter.motion-ready .venue-gallery,#top .dress-chapter.motion-ready .look-photo {transition-duration:650ms;}
- #top .venue-chapter.motion-ready .venue-copy {transition-duration:450ms;transition-delay:180ms;}
- #top .schedule-spread li.motion-ready>div {translate:5px 0;transition-duration:400ms,450ms;transition-delay:120ms;}
- #top .schedule-spread li.motion-visible>div {translate:none;}
- #top .rsvp-paper.motion-ready {translate:0 2px;transition-duration:450ms,520ms,520ms;}
- #top .rsvp-paper.motion-visible {translate:none;}
-}
-@media(prefers-reduced-motion:reduce) {
- #top .motion-ready,#top .motion-ready * {clip-path:none!important;translate:none!important;scale:1!important;transition:none!important;}
- #top .motion-ready,#top .motion-ready :is(.date-invitation,.date-start,.venue-copy,.guest-print,.chapter-heading,.page-switch,.dress-palette>span,.dress-guidance,.dress-note),#top .schedule-spread li.motion-ready>div {opacity:1!important;}
- #top .watercolor.motion-ready {opacity:var(--motion-opacity,1)!important;}
- #top .schedule-spread.timeline-ready::before,#top .schedule-spread li::before {scale:1;transition:none;}
-}
+/* Scroll choreography lives in scroll-motion.css. Accordion interaction is independent. */
+#top .question-item{position:relative}
+#top .question-item::after{content:'';position:absolute;left:0;bottom:0;width:100%;height:1px;background:#ad905660;scale:0 1;transform-origin:left;transition:scale 240ms ease;pointer-events:none}
+#top .question-item:has([aria-expanded=true])::after,#top .question-item:focus-within::after{scale:1}
 /* The album placement replaces its former container fade-up. */
 #top .guest-album.page-enter {animation:none;}
 /* Data-driven fashion lookbook, within the same paper chapter. */
@@ -235,3 +160,181 @@
  #top .dress-chapter .lookbook-photo {clip-path:none;transition:none;}
  #top .dress-chapter .lookbook-guidance {opacity:1;transition:none;}
 }
+/* Dress Code: two related colour families, rather than exact colour samples. */
+#top .dress-chapter .palette-title{margin-bottom:18px}
+#top .palette-intro{max-width:720px;margin:0 auto 38px;text-align:center;font-size:var(--invite-detail);line-height:1.85;overflow-wrap:anywhere}
+#top .dress-palette-families{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px;max-width:960px;margin-bottom:28px}
+#top .dress-palette .palette-family{gap:9px;padding:24px 0 20px;border-top:1px solid #ad90564d;border-bottom:1px solid #ad905633}
+#top .dress-palette .palette-family-title{font:29px/1.2 'Cormorant Garamond',serif}
+#top .dress-palette .palette-family>small{max-width:280px;color:#77765e;font-size:12px;line-height:1.7}
+#top .palette-fan{display:flex;justify-content:center;align-items:center;width:min(100%,310px);height:156px;padding:14px 10px 10px}
+#top .dress-palette .palette-fan i{display:block;flex:1 1 60px;max-width:66px;min-width:0;width:auto;height:94px;background:var(--shade);border:5px solid #faf6ec;border-bottom-width:14px;box-shadow:0 4px 10px #454b351a,inset 0 0 0 1px #645d3d13;transform:rotate(calc((var(--shade-order) - 2)*6deg));margin-left:-13px;border-radius:1px}
+#top .dress-palette .palette-fan i:first-child{margin-left:0}
+#top .dress-palette .palette-fan .palette-main{height:116px;flex-basis:74px;max-width:78px;z-index:1}
+#top .palette-family-hint{font-style:italic}
+#top .dress-accessory-palette{display:flex;justify-content:center;align-items:center;gap:20px;flex-wrap:wrap;margin:0 auto 44px;color:#77765e;font-size:12px;line-height:1.6}
+#top .dress-accessory-palette>span{display:flex;gap:8px;align-items:center}
+#top .dress-accessory-palette>span:first-child{font:23px 'Cormorant Garamond',serif;color:#555b41}
+#top .dress-accessory-palette i{display:block;width:20px;height:20px;border-radius:50%;border:1px solid #a7987345;box-shadow:inset 0 1px 2px #ffffff80}
+#top .dress-accessory-palette>span:last-child i{background:linear-gradient(135deg,#987537,#ddc991 50%,#a18447)}
+#top .dress-family-explanation{grid-column:1 / -1;max-width:840px}
+#top .dress-outfit-notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 56px;margin:-24px 0 64px}
+#top .dress-outfit-notes>div{padding:18px 0;border-top:1px solid #ad905633;min-width:0}
+#top .dress-outfit-notes dt{font:26px/1.2 'Cormorant Garamond',serif;margin-bottom:12px}
+#top .dress-outfit-notes dd{margin:0;font-size:var(--invite-detail);line-height:1.8;overflow-wrap:anywhere}
+#top #dress-avoid{border-top:1px solid #ad905640;padding-top:46px}
+#top #dress-avoid>h3{color:#77745a;max-width:750px}
+#top #dress-avoid .lookbook-photo{background:#d9d7c544}
+/* Preserve the full outfit and footwear in every generated 4:5 lookbook image. */
+#top .dress-chapter .lookbook-photo img{object-fit:contain;background:#eee6d7}
+@media(max-width:700px){
+ #top .dress-palette-families{grid-template-columns:1fr;gap:24px;margin-bottom:28px}
+ #top .palette-intro{text-align:left;margin-bottom:26px}
+ #top .dress-palette .palette-family-title{font-size:28px}
+ #top .palette-fan{height:148px;max-width:285px}
+ #top .dress-accessory-palette{gap:12px 18px;justify-content:flex-start}
+ #top .dress-accessory-palette>span:first-child{width:100%}
+ #top .dress-outfit-notes{grid-template-columns:1fr;gap:0;margin-top:-12px;margin-bottom:40px}
+ #top .lookbook-description{min-height:300px}
+ #top #dress-avoid>h3{font-size:31px}
+}
+@media(max-width:700px){
+ #top .dress-chapter .lookbook-photo img{height:auto;aspect-ratio:4/5}
+ #top .dress-chapter .lookbook-frame{min-height:0;grid-template-rows:auto minmax(360px,auto)}
+ #top .dress-chapter .lookbook-description{min-height:360px}
+}
+/* Local guest guidance pass. Scoped to changed sections; opening/Hero remain untouched. */
+#top .dress-help{max-width:690px;margin:0 auto 36px;padding:18px 24px;border-left:1px solid #b49a61;font-size:15px;line-height:1.85;background:#fffaf040}
+#top .dress-help a,#top .paper-checkbox a{color:#95763d;text-decoration:underline;text-decoration-color:#b49a6160;text-underline-offset:4px;transition:color .2s,text-decoration-color .2s}
+#top .dress-help a:hover,#top .paper-checkbox a:hover{color:#705222;text-decoration-color:currentColor}
+#top .dress-section-switch{gap:30px;margin-top:-15px;margin-bottom:40px}#top .dress-section-switch button{font-size:23px}
+#top .dress-chapter .lookbook-guidance{grid-template-columns:1fr;gap:24px;min-height:255px}#top .dress-outfit-notes{min-height:180px}
+#top .venue-panorama{display:block;position:relative;min-height:840px;background:#e6e2d6;color:#3d4931;isolation:isolate;padding:0}
+#top .venue-panorama .venue-gallery{position:absolute;inset:0;min-height:0;overflow:hidden}
+#top .venue-photo-open{position:absolute;inset:0;border:0;padding:0;background:#d8d5c8;cursor:zoom-in;touch-action:pan-y;width:100%;height:100%;color:#fff9ea}
+#top .venue-panorama .venue-frames{position:absolute;inset:0;display:block;transform:none;animation:none}
+#top .venue-panorama .venue-frames img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.88)}
+#top .venue-panorama .venue-incoming-photo{animation:venue-dissolve 1400ms ease both}
+#top .venue-panorama .venue-outgoing-photo{animation:none}
+@keyframes venue-dissolve{from{opacity:0;transform:scale(1.025)}to{opacity:1;transform:scale(1)}}
+#top .venue-panorama .venue-copy{position:relative;float:right;width:min(510px,42%);margin:80px 6vw 80px 0;padding:48px 42px;background:#f8f4e9e8;backdrop-filter:blur(7px);border:1px solid #fff8df80;border-radius:26px;box-shadow:0 14px 48px #292e2524;min-height:0}
+#top .venue-panorama .venue-copy h2{font-size:clamp(44px,4.5vw,68px)}#top .venue-panorama .venue-name{color:#82703e;font-size:34px}
+#top .venue-lightbox{position:fixed;inset:0;width:100vw;max-width:none;height:100dvh;max-height:none;padding:64px 70px 80px;border:0;margin:0;background:#20291ff5;color:#f8f4eb;overflow:hidden}
+#top .venue-lightbox::backdrop{background:#20291f}
+#top .venue-lightbox-photo{width:100%;height:100%;display:flex;align-items:center;justify-content:center;touch-action:pan-y}
+#top .venue-lightbox-photo img{width:100%;height:100%;object-fit:contain;filter:none}
+#top .venue-lightbox-close{position:absolute;right:24px;top:12px;min-height:44px;background:none;border:0;color:inherit;font:14px Montserrat,sans-serif;cursor:pointer;padding:12px}
+#top .venue-lightbox-controls{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:28px;align-items:center;font:14px Montserrat,sans-serif}
+#top .venue-lightbox-controls button{background:none;border:1px solid #c4ad6c80;color:inherit;font-size:25px;min-width:50px;min-height:44px;cursor:pointer}
+#top .venue-agreement>span{font-weight:500}
+@media(max-width:767px){
+ #top .dress-help{padding:12px 16px;font-size:14px}#top .dress-chapter .lookbook-guidance{min-height:430px}#top .dress-outfit-notes{min-height:380px}
+ #top .venue-panorama{min-height:0;padding-top:420px;padding-bottom:32px}
+ #top .venue-panorama .venue-gallery{height:440px;bottom:auto}
+ #top .venue-panorama .venue-copy{float:none;width:auto;min-height:0;margin:0 20px;padding:30px 25px;border-radius:20px;background:#f8f4ebf2}
+ #top .venue-panorama .venue-copy h2{font-size:48px}#top .venue-panorama .venue-copy .chapter-kicker{font-size:10px}
+ #top .venue-lightbox{padding:65px 12px 85px}
+}
+@media(prefers-reduced-motion:reduce){#top .venue-panorama .venue-incoming-photo{animation:none}}
+#top .dress-chapter .lookbook-guidance{min-height:330px;align-content:start}
+#top .palette-family-title{min-height:2.5em}
+@media(max-width:767px){#top .dress-chapter .lookbook-guidance{min-height:600px}#top .palette-family-title{min-height:2.5em}}
+#top .dress-palette .palette-family>small:not(.palette-family-hint){min-height:3.4em}
+@media(min-width:768px){#top .venue-lightbox-controls{inset:0;transform:none;pointer-events:none;display:block}#top .venue-lightbox-controls>span{position:absolute;bottom:28px;left:50%;transform:translateX(-50%)}#top .venue-lightbox-controls button{position:absolute;top:50%;transform:translateY(-50%);pointer-events:auto}#top .venue-lightbox-controls button:first-child{left:12px}#top .venue-lightbox-controls button:last-child{right:12px}}
+/* Only glyph/font changes: keep the approved Hero geometry and entrance. */
+#top .portrait-names .portrait-ampersand{font-family:'Royal Kaynin','Cormorant Garamond',serif;font-style:normal}
+#top .wedding-date-section .date-large{display:block;width:max-content;max-width:100%;box-sizing:border-box;padding:.12em .28em .25em;font-family:'Bad Script',cursive;font-style:normal;font-weight:400;font-size:clamp(56px,6.4vw,100px);line-height:1.6;letter-spacing:.005em;-webkit-text-stroke:.2px currentColor;white-space:nowrap;overflow:visible;flex-shrink:0}
+/* Ink overhang needs space inside the reveal box as well as at its final mask. */
+#top .wedding-date-section.motion-visible .date-large{clip-path:inset(-.3em -.3em)}
+@media(max-width:700px){#top .wedding-date-section .date-large{order:1;align-self:center;font-size:clamp(54px,15vw,72px);margin:-8px auto 16px;position:relative;z-index:1}#top .wedding-date-section .wedding-calendar{order:2}#top .wedding-date-section .date-start{order:3}}
+#top .guest-print figcaption h3,#top .guest-print figcaption p{overflow-wrap:anywhere}
+#top .congratulations-choice label{min-height:44px;align-items:center}
+#top .congratulations-choice label span{overflow-wrap:anywhere}
+#top .companion-field .form-error{display:block;margin-top:10px}
+#top .schedule-spread::before{bottom:var(--schedule-tail,30px)}
+@media(max-width:700px){#top .guest-print .guest-name-long{overflow-wrap:normal;word-break:normal;hyphens:none}#top .guest-print .guest-name-tail{display:block;font-size:clamp(16px,4.6vw,22px);line-height:1.3}#top .schedule-spread li:last-child .schedule-time{font-size:34px}}
+
+/* Local material/spacing refinement. Geometry and choreography stay intact. */
+.opening .opening-top span.opening-signature{color:var(--ink)}
+@media(max-width:600px){
+ /* Anchor the seal's centre to the flap closure, not its top edge. */
+ .opening .envelope-stage .seal{top:54%;translate:-50% -50%}
+}
+#top .venue-panorama .venue-copy{background:#303b2af2;color:#faf6eb;border-color:#cbb57c66;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){#top .venue-panorama .venue-copy{background:#303b2ac9}}
+#top .venue-panorama .venue-copy :is(h2,.venue-address){color:#faf6eb}
+#top .venue-panorama .venue-copy :is(.chapter-kicker,.venue-name){color:#e1cb94}
+@media(max-width:700px){
+ #top .dress-chapter{padding-top:52px;padding-bottom:48px}
+ #top .dress-chapter .chapter-heading{margin-bottom:24px}
+ #top .dress-chapter .chapter-heading>p{margin-bottom:0}
+ #top .dress-help{margin-bottom:24px}
+ #top .dress-chapter>.page-switch{margin-bottom:24px}
+ #top .dress-chapter>.dress-section-switch{margin-top:0;margin-bottom:26px}
+ #top .dress-chapter .palette-intro{margin-bottom:20px}
+ #top .dress-chapter .lookbook-guidance{min-height:var(--dress-guidance-height,0px);gap:20px;padding-top:24px;margin-bottom:36px}
+ #top .dress-chapter .lookbook{margin-bottom:40px}
+ #top .dress-chapter .lookbook>h3{margin-bottom:20px}
+ #top .dress-chapter .dress-gallery-controls{margin-bottom:20px}
+ #top #dress-avoid{padding-top:30px}
+}
+/* Keep the desktop controls' former margin collapse after moving them into the stage. */
+@media(min-width:701px){#top .lookbook-stage>.dress-gallery-controls{margin-bottom:0}}
+@media(max-width:700px){
+ #top .dress-chapter .lookbook-stage{position:relative;container-type:inline-size}
+ #top .dress-chapter .lookbook-frame{grid-template-rows:auto auto}
+ #top .dress-chapter .lookbook-description{min-height:var(--look-description-height,0px);padding:18px 0 0}
+ #top .dress-chapter .lookbook-description .chapter-kicker{margin-bottom:8px}
+ #top .dress-chapter .lookbook-description h4{margin:8px 0 12px}
+ #top .dress-chapter .lookbook-placeholder{height:auto;aspect-ratio:4/5}
+ #top .dress-chapter .dress-gallery-controls{position:absolute;z-index:3;left:50%;top:calc((100cqw - 18px)*1.25 + 6px);transform:translate(-50%,-100%);margin:0;gap:14px;padding:4px 8px;width:max-content;max-width:calc(100% - 38px);border:1px solid #f8f3df80;border-radius:7px;background:#f8f4e9e8;color:#3d4931;box-shadow:0 2px 12px #303b2a15}
+ #top .dress-chapter .dress-gallery-controls button{min-width:44px;min-height:44px;color:inherit}
+ #top .dress-chapter .dress-gallery-controls .gallery-counter{min-width:62px;text-align:center;font-size:13px;font-variant-numeric:tabular-nums}
+ @supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){#top .dress-chapter .dress-gallery-controls{background:#f8f4e9ba;-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px)}}
+}
+/* Shared paper notices and guidance spanning both palette groups. */
+#top .dress-notices{max-width:690px;margin:0 auto 36px;display:grid;gap:12px}
+#top .dress-notices .dress-help{width:100%;max-width:none;margin:0}
+#top .dress-notices .dress-help--primary{font-size:16px;font-weight:600;line-height:1.7}
+#top .dress-chapter .lookbook-guidance{width:100%;max-width:80ch;margin-inline:auto}
+#top .dress-chapter .lookbook-guidance>p,#top .dress-chapter .lookbook-guidance>div{width:100%;max-width:none}
+@media(max-width:700px){
+ #top .dress-notices{gap:10px;margin-bottom:24px}
+ #top .dress-notices .dress-help--primary{font-size:15px;line-height:1.65}
+}
+/* One shared caption belongs to both palettes, rather than to either column. */
+#top .dress-chapter .dress-palette{margin-bottom:14px}
+#top .dress-palette-hint{width:100%;max-width:80ch;margin:0 auto 28px;text-align:center;color:#77765e;font-size:12px;line-height:1.7;overflow-wrap:anywhere}
+/* Material series: two semantic trios, kept separate from the outfit carousels. */
+#top .dress-chapter .lookbook-guidance{min-height:var(--dress-guidance-height,0px);margin-bottom:32px;gap:12px}
+#top .dress-jacket-emphasis{font-weight:700}
+#top .dress-black-warning{font-size:15px;font-weight:600;line-height:1.7;color:#4e5638;margin:0}
+#top .dress-materials{margin:0 0 56px}
+#top .dress-materials>h3{font:36px/1.2 'Cormorant Garamond',serif;margin:0 0 24px}
+#top .material-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:56px}
+#top .material-group{min-width:0;border-top:1px solid #ad905633;padding-top:20px}
+#top .material-group>h4{font:27px/1.2 'Cormorant Garamond',serif;font-weight:400;min-height:2.4em;margin:0 0 14px}
+#top .material-items{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;outline-offset:5px}
+#top .material-card{min-width:0;margin:0;outline-offset:5px}
+#top .material-photo{position:relative;padding:5px;background:#eee4cf60;aspect-ratio:1;overflow:hidden}
+#top .material-photo img{display:block;width:100%;height:100%;aspect-ratio:1;object-fit:cover}
+#top .material-hint{position:absolute;inset:auto 8px 8px;padding:8px;background:#f6f0deed;color:#4e5638;font:11px/1.5 Montserrat,sans-serif;opacity:0;transition:opacity 180ms ease;pointer-events:none}
+#top .material-card:hover .material-hint,#top .material-card:focus-visible .material-hint{opacity:1}
+#top .material-notes{max-width:80ch;min-height:var(--material-notes-height,0px);margin:22px auto 0;display:grid;align-content:start;gap:10px}
+#top .material-notes>p{font-size:var(--invite-detail);line-height:1.8;margin:0;overflow-wrap:anywhere}
+#top .material-notes>.dress-black-warning{font-weight:600}
+@media(max-width:900px){#top .material-columns{grid-template-columns:1fr;gap:24px}#top .material-group>h4{min-height:0}}
+@media(max-width:700px){
+ #top .dress-materials{margin-bottom:36px}
+ #top .dress-materials>h3{font-size:32px;margin-bottom:20px}
+ #top .material-group{padding-top:16px}
+ #top .material-group>h4{font-size:26px;margin-bottom:14px}
+ #top .material-items{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:#b6a27366 transparent;padding-bottom:4px}
+ #top .material-card{flex:0 0 min(74%,260px);scroll-snap-align:start}
+ #top .material-hint{display:none}
+ #top .dress-chapter .lookbook-guidance{margin-bottom:24px}
+ #top .dress-black-warning{font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){#top .material-hint{transition:none}}
+@media(max-width:900px){#top .material-group>h4{min-height:2.4em}}
+@media(hover:none){#top .material-hint{display:none}}

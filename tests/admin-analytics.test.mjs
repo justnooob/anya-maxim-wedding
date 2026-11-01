@@ -8,9 +8,9 @@ import {miniAppRequest} from '../src/server/telegram/mini-app.mjs';
 const env={TELEGRAM_BOT_TOKEN:['123456','synthetic'.repeat(4)].join(':'),TELEGRAM_ALLOWED_USER_IDS:'123'};
 function signed(){const p=new URLSearchParams({auth_date:String(Math.floor(Date.now()/1000)),user:JSON.stringify({id:123})});const key=createHmac('sha256','WebAppData').update(env.TELEGRAM_BOT_TOKEN).digest();p.set('hash',createHmac('sha256',key).update([...p.entries()].sort(([a],[b])=>a<b?-1:1).map(([k,v])=>k+'='+v).join('\n')).digest('hex'));return p.toString();}
 const rows=[
- {id:'1',guest_name:'Сергей Иванов',attendance:'yes',who:'Друг',transfer:'kupchino',music_request:'ABBA\nQueen',food:'Без орехов',alcohol_drinks:['red_wine','other'],alcohol_other:'Сидр',soft_drinks:['tonic','other'],soft_other:'Чай'},
- {id:'2',guest_name:'Анна Петрова',attendance:'yes',who:'Сестра',transfer:'pavlovsk',music_request:'  ',food:'',alcohol_drinks:['red_wine','white_wine'],soft_drinks:['cola']},
- {id:'3',guest_name:'Борис Иванов',attendance:'yes',who:'Брат',transfer:'self',music_request:null,food:'Вегетарианец',alcohol_drinks:['none'],soft_drinks:['none']},
+ {id:'1',guest_name:'Сергей Иванов',attendance:'yes',congratulationChoice:'public',who:'Друг',transfer:'kupchino',music_request:'ABBA\nQueen',food:'Без орехов',alcohol_drinks:['red_wine','other'],alcohol_other:'Сидр',soft_drinks:['tonic','other'],soft_other:'Чай'},
+ {id:'2',guest_name:'Анна Петрова',attendance:'yes',congratulationChoice:'public',who:'Сестра',transfer:'pavlovsk',music_request:'  ',food:'',alcohol_drinks:['red_wine','white_wine'],soft_drinks:['cola']},
+ {id:'3',guest_name:'Борис Иванов',attendance:'yes',congratulationChoice:'public',who:'Брат',transfer:'self',music_request:null,food:'Вегетарианец',alcohol_drinks:['none'],soft_drinks:['none']},
  {id:'4',guest_name:'Не придёт',attendance:'no',music_request:'irrelevant',food:'irrelevant',alcohol_drinks:['red_wine'],soft_drinks:[]},
 ];
 test('analytics groups transfers, non-empty music/diet, distinct drink votes and custom choices',()=>{

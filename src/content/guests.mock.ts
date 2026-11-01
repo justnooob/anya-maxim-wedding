@@ -1,20 +1,126 @@
-export type MockGuest = { id: string; group: "family" | "friends"; name: string; description: string; image: string };
+export type MockGuest = { id: string; group: "family" | "friends"; name: string; description: string; image: string; portraitPosition?: string; realPortrait?: boolean };
 const family = [
- ["Елена", "Мама невесты. Проверит, все ли поели."], ["Андрей", "Папа невесты. Танцует, когда никто не ждёт."],
- ["Ольга", "Мама жениха. Улыбкой собирает всех вместе."], ["Сергей", "Папа жениха. За хорошие тосты отвечает."],
- ["Нина", "Бабушка. Главный эксперт по семейному счастью."], ["Виктор", "Дедушка. Историй хватит до самого утра."],
- ["Катя", "Сестра невесты. И главный союзник."], ["Дима", "Брат жениха. С детства за одну команду."],
- ["Татьяна", "Тётя. Всегда знает, как сделать уютнее."], ["Алексей", "Дядя. Приезжает с шутками и хорошим настроением."],
- ["Соня", "Двоюродная сестра. Первая выйдет танцевать."],
+ [
+  "Ольга",
+  "Мама жениха"
+ ],
+ [
+  "Владислав",
+  "Папа жениха"
+ ],
+ [
+  "Дарья",
+  "Мама невесты"
+ ],
+ [
+  "Вячеслав",
+  "Папа невесты"
+ ],
+ [
+  "Лидия Васильевна",
+  "Бабушка жениха"
+ ],
+ [
+  "Сергей Иванович",
+  "Дедушка жениха"
+ ],
+ [
+  "Галина Николаевна",
+  "Бабушка жениха"
+ ],
+ [
+  "Галина Ивановна",
+  "Бабушка невесты"
+ ],
+ [
+  "Надежда Константиновна",
+  "Бабушка невесты"
+ ],
+ [
+  "Анатолий",
+  "Отчим невесты"
+ ],
+ [
+  "Ангелина",
+  "Сестра невесты"
+ ],
+ [
+  "Олег",
+  "Дядя жениха"
+ ],
+ [
+  "Наталья",
+  "Тетя жениха"
+ ],
+ [
+  "Екатерина",
+  "Двоюродная сестра жениха"
+ ],
+ [
+  "Мария",
+  "Тетя невесты"
+ ]
 ];
 const friends = [
- ["Маша", "Подруга невесты. Знает слишком много."], ["Илья", "Друг жениха. У любой истории есть его версия."],
- ["Лера", "Подруга. Соберёт лучший плейлист вечера."], ["Никита", "Друг. Поможет даже с тем, о чём не просили."],
- ["Алиса", "Подруга. В кадре всегда получается красиво."], ["Паша", "Друг. Тот самый человек с машиной."],
- ["Даша", "Подруга. Смех слышно раньше, чем её видно."], ["Кирилл", "Друг. Настроен победить на танцполе."],
- ["Полина", "Подруга. Помнит все наши приключения."], ["Рома", "Друг. Мастер спонтанных планов."],
- ["Женя", "Друг семьи. Уже почти родственник."],
+ [
+  "Виктория",
+  "Свидетельница"
+ ],
+ [
+  "Сергей",
+  "Свидетель"
+ ],
+ [
+  "Карина",
+  "Подруга"
+ ],
+ [
+  "Денис",
+  "Друг"
+ ],
+ [
+  "Илья",
+  "Друг"
+ ],
+ [
+  "Александра",
+  "Подруга"
+ ],
+ [
+  "Андрей",
+  "Друг"
+ ],
+ [
+  "Асель",
+  "Подруга"
+ ],
+ [
+  "Даниил",
+  "Друг"
+ ],
+ [
+  "Ирина",
+  "Подруга"
+ ],
+ [
+  "Анастасия",
+  "Подруга"
+ ]
 ];
-const familyPortraits = [16, 1, 17, 3, 20, 7, 14, 4, 19, 8, 11];
-const friendPortraits = [6, 2, 9, 23, 10, 24, 13, 25, 18, 5, 12];
-export const mockGuests: MockGuest[] = [...family.map((g, i) => ({ id: "family-" + i, group: "family" as const, name: g[0], description: g[1], image: "/images/guest-" + familyPortraits[i] + ".jpg" })), ...friends.map((g, i) => ({ id: "friends-" + i, group: "friends" as const, name: g[0], description: g[1], image: "/images/guest-" + friendPortraits[i] + ".jpg" }))];
+const friendPortraits = ["viktoria","sergey","karina","denis","ilya","alexandra","andrey","asel","daniil","irina","anastasia"];
+// Placement only: preserve each friend's stable ID and assigned portrait.
+const friendOrder = [0,1,2,3,5,4,6,7,9,8,10];
+// Approved portraits, keyed by stable guest ID; unprovided portraits stay unchanged.
+const approvedPortraits: Record<string, string> = {
+ "family-13":"ekaterina",
+ "family-3":"vyacheslav", "family-2":"darya", "family-7":"galina-ivanovna", "family-10":"angelina",
+ "family-0":"olga", "family-1":"vladislav", "family-6":"galina-nikolaevna",
+ "family-5":"sergey-ivanovich", "family-12":"natalya", "family-4":"lidia-vasilyevna",
+ "family-11":"oleg", "family-14":"maria", "family-8":"nadezhda-konstantinovna", "family-9":"anatoly",
+};
+export const mockGuests: MockGuest[] = [...family.map((g, i) => {
+ const id="family-"+i, portrait=approvedPortraits[id];
+ return {id,group:"family" as const,name:g[0],description:g[1],
+  image:`/images/guests/${portrait}.webp`,
+  realPortrait:!!portrait,portraitPosition:portrait?"50% 50%":undefined};
+}), ...friendOrder.map(i => ({ id: "friends-" + i, group: "friends" as const, name: friends[i][0], description: friends[i][1], image: `/images/guests/friends/${friendPortraits[i]}.webp`,realPortrait:true,portraitPosition:"50% 50%" }))];

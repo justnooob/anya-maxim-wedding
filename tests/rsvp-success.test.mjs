@@ -9,7 +9,7 @@ for(const attendance of ['yes','no'])test('RSVP '+attendance+' success removes i
  assert.match(html,/aria-labelledby="rsvp-success-title"/);
  assert.match(html,/id="rsvp-success-title"/);
  if(attendance==='yes')assert.match(html,/Если появятся вопросы, обязательно пиши Ане или Максиму/);
- else assert.match(html,/Не придёт/);
+ else assert.match(html,/Не приду/);
  assert.match(html,/Добавить ещё гостя/);
  assert.doesNotMatch(html,/Оставили для тебя место в нашей истории/);
  assert.doesNotMatch(renderRsvp({attendance,sent:true,error:'Offline'}),/Обновить статус ответа/);
