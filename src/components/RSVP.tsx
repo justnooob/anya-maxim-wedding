@@ -121,7 +121,7 @@ export function RSVP() {
       if(target.matches('input,textarea'))target.setAttribute('aria-invalid','true');
       const note=document.createElement('small');note.className='field-error-message';note.textContent=message;note.setAttribute('role','status');group.append(note);
     }
-  },[showIssues,issues];
+  },[showIssues,issues]);
   function revealIssues(){
     setShowIssues(true);setError('Проверь выделенные поля выше.');
     requestAnimationFrame(()=>requestAnimationFrame(()=>{
