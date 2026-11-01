@@ -25,13 +25,13 @@ test('strange input remains plain trimmed text and control characters/whitespace
  for(const guestName of ['', '   ','\n\t','A\u0000'])assert.throws(()=>validateRsvp({...yes,guestName}),InputError);
  const html=renderRsvp({name:'<script>alert(1)</script> 😀'});assert.ok(html.includes('&lt;script&gt;'));assert.ok(!html.includes('<script>'));
 });
-test('attendance state machine: initial disabled, optional values, going requirements and no hidden payload',()=>{
+test('attendance state machine: initial validation, optional values, going requirements and no hidden payload',()=>{
  assert.equal(rsvpReady({...yes,attendance:null}),false);assert.ok(rsvpReady(yes));assert.ok(rsvpReady({...yes,musicRequest:'ABBA'}));
  for(const patch of [{who:''},{alcoholDrinks:[]},{softDrinks:[]},{transfer:null},{dressCode:false},{alcoholDrinks:['other'],alcoholOther:' '},{softDrinks:['other'],softOther:' '}]){assert.equal(rsvpReady({...yes,...patch}),false);assert.throws(()=>validateRsvp({...yes,...patch}),InputError);}
  const declined=attendancePayload({...yes,attendance:'no',musicRequest:'ignored',alcoholOther:'ignored'});
  assert.deepEqual(declined,{guestName:'Гость Иванов',attendance:'no'});assert.ok(rsvpReady(declined));assert.equal(validateRsvp(declined).musicRequest,null);
  assert.equal(rsvpReady({...declined,attendance:'yes',congratulationChoice:'public',who:'',food:'',musicRequest:'',alcoholDrinks:[],softDrinks:[]}),false);
- const initial=renderRsvp({sent:false,attendance:null});assert.match(initial,/type="submit" disabled/);assert.ok(initial.includes('0 / 300'));
+ const initial=renderRsvp({sent:false,attendance:null});assert.match(initial,/type="submit"/);assert.doesNotMatch(initial,/type="submit" disabled/);assert.ok(initial.includes('0 / 300'));
 });
 test('network handling maps all failures to calm copy and cancels a hung request',async()=>{
  for(const status of [400,401,403,404,429,500]){assert.ok(requestMessage(status));assert.doesNotMatch(requestMessage(status),/stack|fetch|SQL|token/i);}
