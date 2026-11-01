@@ -24,7 +24,7 @@ export function validateRsvp(input){
     return {selected:choices.filter(id=>values.includes(id)),other:values.includes('other')?str(kind+'Other',true):''};
   };
   const guestName=str('guestName',true).replace(/\s+/g,' ');
-  if(!validGuestName(guestName))throw new InputError('Укажи имя и фамилию.');
+  if(!validGuestName(guestName))throw new InputError('Укажи имя (не больше 80 символов).');
   if(!['yes','no'].includes(input.attendance))throw new InputError();
   if(input.attendance==='no')return {...submission,guestName,attendance:'no',who:'',food:'',transfer:null,returnTransfer:null,overnight:null,dressCode:false,dressCodeConfirmed:false,venueRulesAccepted:false,alcoholDrinks:[],alcoholOther:'',softDrinks:[],softOther:'',musicRequest:null,hotAppetizer:null,mainCourse:null};
   if(input.venueRulesAccepted!==true)throw new InputError(venueConsentError);
