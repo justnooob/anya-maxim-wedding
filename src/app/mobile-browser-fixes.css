@@ -1,0 +1,82 @@
+/* Mobile browser compatibility fixes. Keep desktop and letter-opening stages unchanged. */
+@media (max-width: 600px) {
+  /* Browser chrome changes the available viewport height on iOS. Reserve
+     enough vertical space for the full heading + sealed envelope + bottom hint. */
+  .opening.opening--sealed {
+    height: auto;
+    min-height: max(720px, 100svh);
+  }
+  .opening.opening--sealed .opening-title {
+    margin-top: clamp(18px, 4svh, 42px);
+    padding-inline: 8px;
+  }
+  .opening.opening--sealed .opening-title h1 {
+    font-size: clamp(27px, 7.5vw, 32px);
+    line-height: 1.14;
+    max-width: min(84vw, 320px);
+    margin-top: 8px;
+  }
+  .opening.opening--sealed .envelope-stage {
+    top: 60%;
+    width: min(88vw, 390px);
+  }
+}
+@media (max-width: 360px) {
+  .opening.opening--sealed .opening-title h1 {
+    font-size: 25px;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 700px) {
+  /* The calendar ink was cream-on-paper in some mobile browsers. Keep the
+     parchment texture, but render it over a solid olive backing for contrast. */
+  #top .wedding-date-section {
+    background-color: #4f5b47;
+    background-image: var(--stationery-texture), linear-gradient(165deg, #ffffff0b, #0000000c);
+    background-size: auto, 100% 100%;
+    background-blend-mode: soft-light, normal;
+    color: #f7f1df;
+  }
+  #top .wedding-date-section .wedding-calendar {
+    color: inherit;
+  }
+
+  /* IntersectionObserver can miss entrance transitions when mobile browsers
+     restore a previously scrolled page or resize the visual viewport. The date
+     and calendar are essential content: keep them readable even without reveal. */
+  #top .wedding-date-section.motion-ready .date-invitation,
+  #top .wedding-date-section.motion-ready .date-large > span,
+  #top .wedding-date-section.motion-ready .date-start,
+  #top .wedding-calendar.motion-ready,
+  #top .wedding-calendar.motion-ready :is(.calendar-ornament, caption, thead, tbody),
+  #top .calendar-reminder.motion-ready,
+  #top .wedding-countdown.motion-ready :is(.countdown-heading, .countdown-number, .countdown-unit) {
+    opacity: 1;
+    translate: none;
+    scale: 1;
+    clip-path: none;
+    transition: none;
+  }
+  #top .wedding-calendar.motion-ready .calendar-leaves {
+    opacity: .24;
+  }
+
+  /* The panoramic photo is full-bleed, so its olive information panel should
+     also meet both sides of the viewport, with no inset rounded card. */
+  #top .venue-panorama {
+    padding-bottom: 0;
+  }
+  #top .venue-panorama .venue-copy {
+    float: none;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 46px max(24px, 6vw) 58px;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+    background: #303b2a;
+  }
+}
