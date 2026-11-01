@@ -34,7 +34,6 @@ export function RSVP() {
   const [busy, setBusy] = useState(false);
   const [csrf, setCsrf] = useState("");
   const [error, setError] = useState("");
-  const [showIssues,setShowIssues]=useState(false);
   const [food,setFood]=useState('');
   const [musicRequest,setMusicRequest]=useState('');
   const [saved,setSaved]=useState<SavedGuest[]>([]);
@@ -47,6 +46,7 @@ export function RSVP() {
   const [companionTouched,setCompanionTouched]=useState(false);
   const [pdfBusy,setPdfBusy]=useState(false);
   const [pdfError,setPdfError]=useState('');
+  const [showIssues,setShowIssues]=useState(false);
   const draftRestored=useRef(false);
   const adding=useRef(false);
   const submissionKey=useRef<string>("");
