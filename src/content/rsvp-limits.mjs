@@ -7,7 +7,7 @@ export const fieldLabels=Object.freeze({guestName:'Имя',who:'Кто вы',foo
 export function cleanText(value){return value.trim().normalize('NFC');}
 export function textLength(value){return [...cleanText(value)].length;}
 export function withinLimit(key,value){return typeof value==='string'&&textLength(value)<=rsvpLimits[key];}
-export function validGuestName(value){return typeof value==='string'&&cleanText(value).split(/\s+/).filter(Boolean).length>=2&&withinLimit('guestName',value);}
+export function validGuestName(value){return typeof value==='string'&&cleanText(value).length>0&&withinLimit('guestName',value);}
 export function rsvpReady(data){
  if(!validGuestName(data.guestName)||!['yes','no'].includes(data.attendance))return false;
  if(data.attendance==='no')return true;
