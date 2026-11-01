@@ -106,9 +106,9 @@ export function RSVP() {
     const timer = setInterval(() => { void refresh(); }, 30000);
     return () => clearInterval(timer);
   }, [sent, refresh]);
-  const payload=attendancePayload({...congratulationFields(congratulationChoice,congratulationCompanion),guestName:name,attendance,who,hotAppetizer,mainCourse,food,musicRequest,transfer:transfer||null,returnTransfer:returnTransfer||null,dressCode:dress,dressCodeConfirmed:dress,venueRulesAccepted:venueRules,alcoholDrinks,alcoholOther,softDrinks,softOther});
+  const payload=useMemo(()=>attendancePayload({...congratulationFields(congratulationChoice,congratulationCompanion),guestName:name,attendance,who,hotAppetizer,mainCourse,food,musicRequest,transfer:transfer||null,returnTransfer:returnTransfer||null,dressCode:dress,dressCodeConfirmed:dress,venueRulesAccepted:venueRules,alcoholDrinks,alcoholOther,softDrinks,softOther}),[name,attendance,who,hotAppetizer,mainCourse,food,musicRequest,transfer,returnTransfer,dress,venueRules,alcoholDrinks,alcoholOther,softDrinks,softOther,congratulationChoice,congratulationCompanion]);
   const valid=rsvpReady({...payload,food,musicRequest});
-  const issues=useMemo(()=>rsvpFieldIssues({...payload,food,musicRequest}),[name,attendance,who,hotAppetizer,mainCourse,food,musicRequest,transfer,returnTransfer,dress,venueRules,alcoholDrinks,alcoholOther,softDrinks,softOther,congratulationChoice,congratulationCompanion]);
+  const issues=useMemo(()=>rsvpFieldIssues({...payload,food,musicRequest}),[payload,food,musicRequest]);
   useEffect(()=>{
     const form=formRef.current;if(!form||!showIssues)return;
     const markers:Record<string,string>={guestName:'[name=guestName]',attendance:'.attendance-choice',who:'[name=who]',congratulationChoice:'.congratulations-choice',congratulationCompanion:'[name=congratulationCompanion]',hotAppetizer:'[name=hotAppetizer]',mainCourse:'[name=mainCourse]',food:'[name=food]',alcoholDrinks:'.drink-options',alcoholOther:'[name=alcoholOther]',softDrinks:'.drink-options + .drink-options',softOther:'[name=softOther]',transfer:'[name=transfer]',returnTransfer:'.return-transfer-options',musicRequest:'[name=musicRequest]',dress:'[name=dressCode]',venueRules:'[name=venueRules]'};
