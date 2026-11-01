@@ -112,7 +112,7 @@ export function RSVP() {
   const issue=(key:string)=>showIssues?issues[key as keyof typeof issues]:undefined;
   useEffect(()=>{
     const form=formRef.current;if(!form||!showIssues)return;
-    const markers:Record<string,string>={guestName:'[name=guestName]',attendance:'.attendance-choice',who:'[name=who]',congratulationChoice:'.congratulations-choice',congratulationCompanion:'[name=congratulationCompanion]',hotAppetizer:'[name=hotAppetizer]',mainCourse:'[name=mainCourse]',food:'[name=food]',alcoholDrinks:'.drink-options:first-of-type',alcoholOther:'[name=alcoholOther]',softDrinks:'.drink-options:nth-of-type(2)',softOther:'[name=softOther]',transfer:'[name=transfer]',returnTransfer:'.return-transfer-options',musicRequest:'[name=musicRequest]',dress:'[name=dressCode]',venueRules:'[name=venueRules]'};
+    const markers:Record<string,string>={guestName:'[name=guestName]',attendance:'.attendance-choice',who:'[name=who]',congratulationChoice:'.congratulations-choice',congratulationCompanion:'[name=congratulationCompanion]',hotAppetizer:'[name=hotAppetizer]',mainCourse:'[name=mainCourse]',food:'[name=food]',alcoholDrinks:'.drink-options',alcoholOther:'[name=alcoholOther]',softDrinks:'.drink-options + .drink-options',softOther:'[name=softOther]',transfer:'[name=transfer]',returnTransfer:'.return-transfer-options',musicRequest:'[name=musicRequest]',dress:'[name=dressCode]',venueRules:'[name=venueRules]'};
     form.querySelectorAll<HTMLElement>('[data-field-error]').forEach(el=>{el.removeAttribute('data-field-error');el.removeAttribute('aria-invalid');});
     form.querySelectorAll<HTMLElement>('.field-error-message').forEach(el=>el.remove());
     for(const [key,message] of Object.entries(issues)){
@@ -174,7 +174,7 @@ export function RSVP() {
         <button className="foil-button ticket-download" type="button" disabled={pdfBusy} onClick={()=>void downloadTicket()}>{pdfBusy?"Готовим приглашение…":guestSessionCopy.download}<span aria-hidden="true">↓</span></button>{pdfError&&<p className="form-error" role="alert">{pdfError}</p>}
         {saved.length<MAX_SESSION_GUESTS?<><p className="quiet-note">{copy.additionalGuestHint}</p><button className="paper-link" type="button" onClick={addGuest}>{copy.addGuest}</button></>:<p className="quiet-note">{guestSessionCopy.limit}</p>}
 
-      </div> : <form ref={formRef} onSubmit={submit} aria-busy={busy}>
+      </div> : <form ref={formRef} onSubmit={submit} noValidate aria-busy={busy}>
         {saved.length>0&&<button className="paper-link cancel-guest" type="button" disabled={busy} onClick={cancelAdding}>{guestSessionCopy.cancel}</button>}
         <p className="quiet-note required-hint">{copy.requiredHint}</p>
         <label className="writing-field"><span>{copy.name}<RequiredMark /></span><input name="guestName" maxLength={80} placeholder="Как к тебе обращаться" disabled={busy} autoComplete="name" value={name} onChange={event => setName(event.target.value)} aria-invalid={name.length>0&&!validGuestName(name)} aria-describedby="name-limit" required /><small id="name-limit" className="quiet-note">Не больше 80 символов</small></label>
