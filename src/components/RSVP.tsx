@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { publicSections as content } from "@/content/public-sections";
 import { invitation } from "@/content/invitation";
 import { RequiredMark } from "./RequiredMark";
@@ -108,8 +108,7 @@ export function RSVP() {
   }, [sent, refresh]);
   const payload=attendancePayload({...congratulationFields(congratulationChoice,congratulationCompanion),guestName:name,attendance,who,hotAppetizer,mainCourse,food,musicRequest,transfer:transfer||null,returnTransfer:returnTransfer||null,dressCode:dress,dressCodeConfirmed:dress,venueRulesAccepted:venueRules,alcoholDrinks,alcoholOther,softDrinks,softOther});
   const valid=rsvpReady({...payload,food,musicRequest});
-  const issues=rsvpFieldIssues({...payload,food,musicRequest});
-  const issue=(key:string)=>showIssues?issues[key as keyof typeof issues]:undefined;
+  const issues=useMemo(()=>rsvpFieldIssues({...payload,food,musicRequest}),[name,attendance,who,hotAppetizer,mainCourse,food,musicRequest,transfer,returnTransfer,dress,venueRules,alcoholDrinks,alcoholOther,softDrinks,softOther,congratulationChoice,congratulationCompanion]);
   useEffect(()=>{
     const form=formRef.current;if(!form||!showIssues)return;
     const markers:Record<string,string>={guestName:'[name=guestName]',attendance:'.attendance-choice',who:'[name=who]',congratulationChoice:'.congratulations-choice',congratulationCompanion:'[name=congratulationCompanion]',hotAppetizer:'[name=hotAppetizer]',mainCourse:'[name=mainCourse]',food:'[name=food]',alcoholDrinks:'.drink-options',alcoholOther:'[name=alcoholOther]',softDrinks:'.drink-options + .drink-options',softOther:'[name=softOther]',transfer:'[name=transfer]',returnTransfer:'.return-transfer-options',musicRequest:'[name=musicRequest]',dress:'[name=dressCode]',venueRules:'[name=venueRules]'};
@@ -122,7 +121,7 @@ export function RSVP() {
       if(target.matches('input,textarea'))target.setAttribute('aria-invalid','true');
       const note=document.createElement('small');note.className='field-error-message';note.textContent=message;note.setAttribute('role','status');group.append(note);
     }
-  },[showIssues,issues.guestName,issues.attendance,issues.who,issues.congratulationChoice,issues.congratulationCompanion,issues.hotAppetizer,issues.mainCourse,issues.food,issues.alcoholDrinks,issues.alcoholOther,issues.softDrinks,issues.softOther,issues.transfer,issues.returnTransfer,issues.musicRequest,issues.dress,issues.venueRules]);
+  },[showIssues,issues];
   function revealIssues(){
     setShowIssues(true);setError('Проверь выделенные поля выше.');
     requestAnimationFrame(()=>requestAnimationFrame(()=>{
