@@ -41,7 +41,7 @@ test('full names, optional overnight and all exact transfer values validate on b
  for(const transfer of ['self','kupchino','pavlovsk']){assert.ok(rsvpReady({...yes,transfer}));assert.equal(validateRsvp({...yes,transfer}).transfer,transfer);assert.equal(validateRsvp({...yes,transfer}).overnight,null);}
  for(const transfer of ['needed','unknown',null])assert.throws(()=>validateRsvp({...yes,transfer}),InputError);
  for(const guestName of ['Анна Иванова','Анна-Мария Иванова',"Anne O'Connor",'Анна Мария Иванова']){assert.ok(rsvpReady({...yes,guestName,transfer:'self'}));assert.equal(validateRsvp({guestName,attendance:'no'}).guestName,guestName);}
- for(const guestName of ['Анна','  Анна  ','']){assert.equal(rsvpReady({...yes,guestName,transfer:'self'}),false);assert.throws(()=>validateRsvp({guestName,attendance:'no'}),InputError);}
+ for(const guestName of ['Анна','  Анна  ']){assert.equal(rsvpReady({...yes,guestName,transfer:'self'}),true);assert.equal(validateRsvp({guestName,attendance:'no'}).guestName,guestName.trim());}\n  for(const guestName of ['', '  ']){assert.equal(rsvpReady({...yes,guestName,transfer:'self'}),false);assert.throws(()=>validateRsvp({guestName,attendance:'no'}),InputError);}
 });
 
 test('migration 008 preserves legacy overnight, removes only capacity and retains unique submission key',async()=>{
