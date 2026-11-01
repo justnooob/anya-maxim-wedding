@@ -80,3 +80,37 @@
     background: #303b2a;
   }
 }
+
+/* RSVP validation: clear, local feedback, without showing errors until submit. */
+#rsvp [data-field-error="true"] > span:first-child,
+#rsvp [data-field-error="true"] > legend {
+  color: #922b40;
+  font-weight: 650;
+}
+#rsvp .writing-field[data-field-error="true"] input,
+#rsvp .writing-field[data-field-error="true"] textarea {
+  border-bottom: 2px solid #a73549;
+  background: #a7354909;
+  box-shadow: 0 2px 0 #a7354922;
+}
+#rsvp .paper-options[data-field-error="true"] input,
+#rsvp .paper-checkbox[data-field-error="true"] input,
+#rsvp .attendance-choice[data-field-error="true"] button {
+  border-color: #a73549;
+}
+#rsvp .field-error-message {
+  display: block;
+  color: #922b40;
+  font: 500 13px/1.5 Montserrat,sans-serif;
+  margin: 8px 0 4px;
+}
+#rsvp .paper-checkbox[data-field-error="true"] {
+  flex-wrap: wrap;
+}
+#rsvp .paper-checkbox[data-field-error="true"] .field-error-message {
+  flex-basis: 100%;
+  padding-left: 29px;
+}
+#rsvp [data-field-error="true"] {
+  scroll-margin-top: 18svh;
+}
