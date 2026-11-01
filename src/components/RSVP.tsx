@@ -7,6 +7,7 @@ import { DrinkChoices } from "./DrinkChoices";
 import { Watercolor } from "./Watercolor";
 
 import {rsvpReady,attendancePayload,withinLimit,validGuestName} from '@/content/rsvp-limits.mjs';
+import {rsvpFieldIssues} from '@/content/rsvp-field-issues.mjs';
 import {boundedJson,requestMessage} from '@/client/requests.mjs';
 import {banquetMenu,menuHint} from '@/content/menu.mjs';
 import {congratulations,congratulationReady,congratulationFields,companionLimit} from '@/content/congratulations.mjs';
@@ -33,6 +34,7 @@ export function RSVP() {
   const [busy, setBusy] = useState(false);
   const [csrf, setCsrf] = useState("");
   const [error, setError] = useState("");
+  const [showIssues,setShowIssues]=useState(false);
   const [food,setFood]=useState('');
   const [musicRequest,setMusicRequest]=useState('');
   const [saved,setSaved]=useState<SavedGuest[]>([]);
@@ -50,7 +52,7 @@ export function RSVP() {
   const submissionKey=useRef<string>("");
   const lastSavedCount=useRef(0);
   const requestVersion=useRef(0);
-  const clearFields=useCallback(()=>{setHotAppetizer('');setMainCourse('');setName('');setAttendance(null);setWho('');setFood('');setMusicRequest('');setTransfer('');setReturnTransfer('');setReturnTransferTouched(false);setAlcoholDrinks([]);setAlcoholOther('');setSoftDrinks([]);setSoftOther('');setDress(false);setVenueRules(false);setCongratulationChoice('');setCongratulationCompanion('');setCompanionTouched(false);setError('');},[]);
+  const clearFields=useCallback(()=>{setHotAppetizer('');setMainCourse('');setName('');setAttendance(null);setWho('');setFood('');setMusicRequest('');setTransfer('');setReturnTransfer('');setReturnTransferTouched(false);setAlcoholDrinks([]);setAlcoholOther('');setSoftDrinks([]);setSoftOther('');setDress(false);setVenueRules(false);setCongratulationChoice('');setCongratulationCompanion('');setCompanionTouched(false);setError('');setShowIssues(false);},[]);
   useEffect(()=>{
     if(draftRestored.current)return;draftRestored.current=true;
     try{const draft=parseDraft(sessionStorage.getItem(DRAFT_KEY)||sessionStorage.getItem(LEGACY_DRAFT_KEY));if(draft){
@@ -106,12 +108,36 @@ export function RSVP() {
   }, [sent, refresh]);
   const payload=attendancePayload({...congratulationFields(congratulationChoice,congratulationCompanion),guestName:name,attendance,who,hotAppetizer,mainCourse,food,musicRequest,transfer:transfer||null,returnTransfer:returnTransfer||null,dressCode:dress,dressCodeConfirmed:dress,venueRulesAccepted:venueRules,alcoholDrinks,alcoholOther,softDrinks,softOther});
   const valid=rsvpReady({...payload,food,musicRequest});
+  const issues=rsvpFieldIssues({...payload,food,musicRequest});
+  const issue=(key:string)=>showIssues?issues[key as keyof typeof issues]:undefined;
+  useEffect(()=>{
+    const form=formRef.current;if(!form||!showIssues)return;
+    const markers:Record<string,string>={guestName:'[name=guestName]',attendance:'.attendance-choice',who:'[name=who]',congratulationChoice:'.congratulations-choice',congratulationCompanion:'[name=congratulationCompanion]',hotAppetizer:'[name=hotAppetizer]',mainCourse:'[name=mainCourse]',food:'[name=food]',alcoholDrinks:'.drink-options:first-of-type',alcoholOther:'[name=alcoholOther]',softDrinks:'.drink-options:nth-of-type(2)',softOther:'[name=softOther]',transfer:'[name=transfer]',returnTransfer:'.return-transfer-options',musicRequest:'[name=musicRequest]',dress:'[name=dressCode]',venueRules:'[name=venueRules]'};
+    form.querySelectorAll<HTMLElement>('[data-field-error]').forEach(el=>{el.removeAttribute('data-field-error');el.removeAttribute('aria-invalid');});
+    form.querySelectorAll<HTMLElement>('.field-error-message').forEach(el=>el.remove());
+    for(const [key,message] of Object.entries(issues)){
+      const target=form.querySelector<HTMLElement>(markers[key]);if(!target)continue;
+      const group=target.closest<HTMLElement>('.writing-field,.paper-options,.paper-checkbox,.attendance-choice')||target;
+      group.dataset.fieldError='true';
+      if(target.matches('input,textarea'))target.setAttribute('aria-invalid','true');
+      const note=document.createElement('small');note.className='field-error-message';note.textContent=message;note.setAttribute('role','status');group.append(note);
+    }
+  },[showIssues,issues.guestName,issues.attendance,issues.who,issues.congratulationChoice,issues.congratulationCompanion,issues.hotAppetizer,issues.mainCourse,issues.food,issues.alcoholDrinks,issues.alcoholOther,issues.softDrinks,issues.softOther,issues.transfer,issues.returnTransfer,issues.musicRequest,issues.dress,issues.venueRules]);
+  function revealIssues(){
+    setShowIssues(true);setError('Проверь выделенные поля выше.');
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      const first=formRef.current?.querySelector<HTMLElement>('[data-field-error="true"]');
+      first?.scrollIntoView({behavior:'smooth',block:'center'});
+      first?.querySelector<HTMLElement>('input,textarea,button')?.focus({preventScroll:true});
+    }));
+  }
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if(submitting.current)return;
-    if (!valid || sent || busy || !csrf) { setError(copy.validation); return; }
+    if (!valid) { revealIssues(); return; }
+    if(sent||busy||!csrf){setError(copy.unavailable);return;}
     submitting.current=true;requestVersion.current++;
-    setBusy(true); setError("");
+    setBusy(true); setError("");setShowIssues(false);
     try {
       const {response,result} = await boundedJson("/api/rsvp", {
         method: "POST", credentials: "same-origin",
@@ -151,7 +177,7 @@ export function RSVP() {
       </div> : <form ref={formRef} onSubmit={submit} aria-busy={busy}>
         {saved.length>0&&<button className="paper-link cancel-guest" type="button" disabled={busy} onClick={cancelAdding}>{guestSessionCopy.cancel}</button>}
         <p className="quiet-note required-hint">{copy.requiredHint}</p>
-        <label className="writing-field"><span>{copy.name}<RequiredMark /></span><input name="guestName" placeholder={copy.namePlaceholder} disabled={busy} autoComplete="name" value={name} onChange={event => setName(event.target.value)} aria-invalid={name.length>0&&!validGuestName(name)} aria-describedby="name-limit" required /><small id="name-limit" className="quiet-note">Имя и фамилия, не больше 80 символов</small></label>
+        <label className="writing-field"><span>{copy.name}<RequiredMark /></span><input name="guestName" maxLength={80} placeholder="Как к тебе обращаться" disabled={busy} autoComplete="name" value={name} onChange={event => setName(event.target.value)} aria-invalid={name.length>0&&!validGuestName(name)} aria-describedby="name-limit" required /><small id="name-limit" className="quiet-note">Не больше 80 символов</small></label>
         <fieldset className="attendance-choice"><legend>{copy.attendance}<RequiredMark /></legend><div className="attendance-buttons"><button type="button" disabled={busy} aria-pressed={attendance === "yes"} onClick={() => setAttendance("yes")}>{copy.yes}</button><button type="button" disabled={busy} aria-pressed={attendance === "no"} onClick={() => setAttendance("no")}>{copy.no}</button></div></fieldset>
         {attendance !== "no" && <fieldset className="rsvp-details page-enter" disabled={attendance !== "yes" || busy}><legend className="sr-only">{copy.details}</legend>
           <label className="writing-field"><span>{copy.who}<RequiredMark /></span><input name="who" placeholder={copy.whoPlaceholder} aria-invalid={!withinLimit("who",who)} value={who} onChange={event=>setWho(event.target.value)} required={attendance === "yes"} aria-describedby="who-limit" /><small id="who-limit" className="quiet-note">Не больше 120 символов</small></label>
@@ -174,7 +200,7 @@ export function RSVP() {
         </fieldset>}
         {attendance === null && <p className="quiet-note">{copy.pending}</p>}
         {attendance === "no" && <p className="rsvp-no-note page-enter">{copy.noNote}</p>}
-        <button className="foil-button" type="submit" disabled={!valid || busy || !csrf}>{busy ? copy.sending : copy.submit}<span aria-hidden="true">→</span></button>
+        <button className="foil-button" type="submit" disabled={busy}>{busy ? copy.sending : copy.submit}<span aria-hidden="true">→</span></button>
         <p className="quiet-note rsvp-demo">{copy.privacy}</p>
       </form>}
       {error && !sent && <div role="alert"><p className="form-error">{error}</p><button className="paper-link" type="button" disabled={busy} onClick={() => { void refresh(); }}>{copy.refresh}</button></div>}
