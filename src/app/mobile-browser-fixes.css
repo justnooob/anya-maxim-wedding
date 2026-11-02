@@ -29,18 +29,8 @@
 }
 
 @media (max-width: 700px) {
-  /* The calendar ink was cream-on-paper in some mobile browsers. Keep the
-     parchment texture, but render it over a solid olive backing for contrast. */
-  #top .wedding-date-section {
-    background-color: #4f5b47;
-    background-image: var(--stationery-texture), linear-gradient(165deg, #ffffff0b, #0000000c);
-    background-size: auto, 100% 100%;
-    background-blend-mode: soft-light, normal;
-    color: #f7f1df;
-  }
-  #top .wedding-date-section .wedding-calendar {
-    color: inherit;
-  }
+  /* Preserve the original dark olive background and paper texture from
+     editorial.css; only correct mobile scene visibility below. */
 
   /* IntersectionObserver can miss entrance transitions when mobile browsers
      restore a previously scrolled page or resize the visual viewport. The date
