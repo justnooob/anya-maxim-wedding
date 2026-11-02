@@ -51,7 +51,19 @@ export function InvitationExperience() {
     {opening === null && <div className="boot" aria-label="Загрузка приглашения">А & М</div>}
     {opening === true && <OpeningScene onComplete={complete} />}
     <main id="top" ref={mainRef} tabIndex={-1} hidden={opening !== false} inert={opening !== false} className="invitation">
-      <Hero /><DateSection /><VenueSection /><DressCode /><GuestList /><Schedule /><WishlistTeaser /><Questions /><RSVP />
+      <Hero />
+      <DateSection />
+      <VenueSection />
+      <DressCode />
+      <div className="section-blend section-blend--paper-stone" aria-hidden="true" />
+      <GuestList />
+      <div className="section-blend section-blend--stone-olive" aria-hidden="true" />
+      <Schedule />
+      <div className="section-blend section-blend--olive-paper" aria-hidden="true" />
+      <WishlistTeaser />
+      <Questions />
+      <div className="section-blend section-blend--paper-rsvp" aria-hidden="true" />
+      <RSVP />
       <footer className="footer"><button onClick={() => {setOpening(true); window.scrollTo({top: 0, behavior: "instant"});}}>Открыть письмо ещё раз ↗</button></footer>
     </main>
     <noscript><p className="noscript">Аня & Максим · {content.date} · Начало в {content.time}. Для интерактивного приглашения включите JavaScript.</p></noscript>
