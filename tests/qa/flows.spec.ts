@@ -15,7 +15,7 @@ for(const attendance of ['yes','no'])test('RSVP '+attendance+' slow double click
  if(attendance==='yes')await going(page);else{await page.locator('input[name=guestName]').fill('Тестовый Гость');await page.getByRole('button',{name:'Не приду',exact:true}).click();}
  await expect(submit(page)).toBeEnabled();await request.get('/qa/config?delay=1200');
  await submit(page).dblclick({noWaitAfter:true});await expect(page.locator('#rsvp form')).toHaveAttribute('aria-busy','true');await expect(page.locator('#rsvp button[type=submit]')).toBeDisabled();
- await expect(page.locator('#rsvp-success-title')).toHaveText('Ответ сохранён. Спасибо!');expect((await(await request.get('/qa/count')).json()).total).toBe(2);
+ await expect(page.locator('#rsvp-success-title')).toHaveText('Спасибо, мы всё сохранили!');expect((await(await request.get('/qa/count')).json()).total).toBe(2);
  await expect(page.locator('#rsvp-title')).toHaveCount(0);await page.locator('#rsvp').screenshot({path:'qa-artifacts/success-'+attendance+'.png'});
  await page.getByRole('button',{name:'Добавить ещё гостя',exact:true}).click();await expect(page.locator('input[name=guestName]')).toHaveValue('');await expect(page.locator('#rsvp input:checked')).toHaveCount(0);await expect(submit(page)).toBeEnabled();
  await page.locator('input[name=guestName]').fill('Второй Гость');await page.getByRole('button',{name:'Не приду',exact:true}).click();await submit(page).click();await expect(page.locator('.rsvp-confirmation')).toContainText('2 гостей');await page.reload();await expect(page.locator('.rsvp-confirmation')).toContainText('2 гостей');expect((await(await request.get('/qa/count')).json()).total).toBe(3);
