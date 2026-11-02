@@ -13,6 +13,15 @@ for(const state of [
  await expect(page.locator('#date')).toHaveScreenshot('countdown-'+state.name+'.png');
  const expected=calendarCountdown(state.time??fixed,target);await expect(page.locator('.countdown-number')).toHaveText(['months','days','hours','minutes','seconds'].map(key=>String(expected[key as keyof Omit<typeof expected,'finished'>]).padStart(2,'0')));if(expected.finished)await expect(page.locator('.countdown-heading')).toHaveText('Всё. По нулям.');
 });
+test('mobile date background remains deep olive with no opaque writing paper',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.goto('/');
+ const styles=await page.locator('#date').evaluate(el=>{const css=getComputedStyle(el);return{color:css.backgroundColor,images:css.backgroundImage,text:css.color};});
+ expect(styles.color).toBe('rgb(48, 59, 42)');
+ expect(styles.images).not.toContain('writing-paper');
+ expect(styles.text).toBe('rgb(241, 239, 220)');
+ await expect(page.locator('.wedding-calendar caption')).toBeVisible();
+});
 for(const timezoneId of ['Europe/Moscow','Europe/Berlin','Asia/Tokyo','America/New_York'])test('browser countdown timezone '+timezoneId,async({browser})=>{
  const context=await browser.newContext({timezoneId});const page=await context.newPage();await page.emulateMedia({reducedMotion:'reduce'});await page.clock.setFixedTime(new Date(fixed));await page.addInitScript(()=>sessionStorage.setItem('anya-maxim-opening-v1','yes'));await page.goto('http://localhost:3310/');await expect(page.locator('.wedding-countdown')).toHaveAttribute('data-ready','true');const expected=calendarCountdown(fixed,target);await expect(page.locator('.countdown-number')).toHaveText([expected.months,expected.days,expected.hours,expected.minutes,expected.seconds].map(value=>String(value).padStart(2,'0')));await context.close();
 });
