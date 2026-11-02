@@ -64,6 +64,7 @@ export function InvitationExperience() {
       <Questions />
       <div className="section-blend section-blend--paper-rsvp" aria-hidden="true" />
       <RSVP />
+      <div className="section-blend section-blend--rsvp-stone" aria-hidden="true" />
       <footer className="footer"><button onClick={() => {setOpening(true); window.scrollTo({top: 0, behavior: "instant"});}}>Открыть письмо ещё раз ↗</button></footer>
     </main>
     <noscript><p className="noscript">Аня & Максим · {content.date} · Начало в {content.time}. Для интерактивного приглашения включите JavaScript.</p></noscript>
