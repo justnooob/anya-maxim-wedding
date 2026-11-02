@@ -1,0 +1,111 @@
+/* Invitation-only finishing touches: keyboard-friendly wax seal and paper blends. */
+
+/* Focusing the open control on mount must not draw a rectangle around the envelope.
+   The seal itself provides the affordance, and remains a native keyboard button. */
+.opening--sealed .envelope-open:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+.opening--sealed .envelope-open:focus-visible .seal {
+  filter: drop-shadow(0 0 7px #ad90568c) drop-shadow(1px 4px 3px #44251d40);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .opening--sealed .envelope-open .seal img {
+    transform-origin: 50% 48%;
+    animation: invitation-seal-rock 4.2s ease-in-out 1.5s infinite;
+    will-change: transform;
+  }
+}
+@keyframes invitation-seal-rock {
+  0%, 18%, 82%, 100% { transform: rotate(0deg); }
+  32% { transform: rotate(-5deg); }
+  48% { transform: rotate(4deg); }
+  64% { transform: rotate(-2.5deg); }
+}
+
+@media (max-width: 600px) {
+  /* Place the heading closer to the visible envelope without moving the
+     envelope/letter choreography or making the heading collide with the flap. */
+  .opening.opening--sealed .opening-title {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: clamp(130px, 25svh, 218px);
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .opening.opening--sealed .opening-title h1 {
+    max-width: min(84vw, 330px);
+    margin: 8px auto 0;
+    font-size: clamp(27px, 7.5vw, 33px);
+    line-height: 1.14;
+  }
+}
+@media (max-width: 600px) and (max-height: 650px) {
+  .opening.opening--sealed .opening-title {
+    top: clamp(110px, 20svh, 148px);
+  }
+}
+
+/* Short strips live between chapters rather than covering headings or cards.
+   Each strip is decorative and never receives pointer events or focus. */
+#top .section-blend {
+  width: 100%;
+  height: clamp(44px, 5vw, 68px);
+  flex: 0 0 auto;
+  pointer-events: none;
+  background: linear-gradient(180deg, var(--blend-from), var(--blend-to));
+}
+#top .section-blend--olive-paper {
+  --blend-from: #303b2a;
+  --blend-to: #f8f4eb;
+}
+#top .section-blend--paper-stone {
+  --blend-from: #f8f4eb;
+  --blend-to: #d7d4c9;
+}
+#top .section-blend--stone-olive {
+  --blend-from: #d7d4c9;
+  --blend-to: #303b2a;
+}
+#top .section-blend--paper-rsvp {
+  --blend-from: #f8f4eb;
+  --blend-to: #ede9df;
+}
+#top .section-blend--rsvp-stone {
+  --blend-from: #ede9df;
+  --blend-to: #d7d4c9;
+}
+
+/* Give the standalone wishlist invitation the same soft paper backing as the
+   FAQ immediately after it, instead of exposing the parent's default canvas. */
+#top .wishlist-teaser {
+  max-width: none;
+  box-sizing: border-box;
+  background: #f8f4eb;
+}
+
+/* The venue begins with a photograph. Fade the previous chapter's shade
+   over just its top edge, rather than adding an artificial solid-colour stripe
+   before the image. The overlay does not block the photo or its controls. */
+#top .venue-panorama::before {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: clamp(56px, 7vw, 92px);
+  pointer-events: none;
+  background: linear-gradient(180deg, #d7d4c9, #d7d4c900);
+}
+@media (max-width: 700px) {
+  #top .section-blend {
+    height: clamp(38px, 7vw, 52px);
+  }
+  #top .venue-panorama::before {
+    background: linear-gradient(180deg, #303b2a, #303b2a00);
+  }
+}
