@@ -50,7 +50,6 @@
   #top .wedding-date-section.motion-ready .date-start,
   #top .wedding-calendar.motion-ready,
   #top .wedding-calendar.motion-ready :is(.calendar-ornament, caption, thead, tbody),
-  #top .calendar-reminder.motion-ready,
   #top .wedding-countdown.motion-ready :is(.countdown-heading, .countdown-number, .countdown-unit) {
     opacity: 1;
     translate: none;
