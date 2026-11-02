@@ -32,7 +32,7 @@ for(const attendance of ['yes','no'])test('RSVP '+attendance+' slow double click
  await expect(page.locator('#rsvp-success-title')).toHaveText('Спасибо, мы всё сохранили!');expect((await(await request.get('/qa/count')).json()).total).toBe(2);
  await expect(page.locator('#rsvp-title')).toHaveCount(0);await page.locator('#rsvp').screenshot({path:'qa-artifacts/success-'+attendance+'.png'});
  await page.getByRole('button',{name:'Добавить ещё гостя',exact:true}).click();await expect(page.locator('input[name=guestName]')).toHaveValue('');await expect(page.locator('#rsvp input:checked')).toHaveCount(0);await expect(submit(page)).toBeEnabled();
- await page.locator('input[name=guestName]').fill('Второй Гость');await page.getByRole('button',{name:'Не приду',exact:true}).click();await submit(page).click();await expect(page.locator('.rsvp-confirmation')).toContainText('2 гостей');await page.reload();await expect(page.locator('.rsvp-confirmation')).toContainText('2 гостей');expect((await(await request.get('/qa/count')).json()).total).toBe(3);
+ await page.locator('input[name=guestName]').fill('Второй Гость');await page.getByRole('button',{name:'Не приду',exact:true}).click();await submit(page).click();await expect(page.locator('.saved-guest')).toHaveCount(2);await expect(page.locator('.saved-guest').last()).toContainText('Второй Гость');await page.reload();await expect(page.locator('.saved-guest')).toHaveCount(2);await expect(page.locator('.saved-guest').last()).toContainText('Второй Гость');expect((await(await request.get('/qa/count')).json()).total).toBe(3);
 });
 test('fragment destinations survive a reload after hidden intro hydration',async({page})=>{
  await page.addInitScript(()=>{
