@@ -29,8 +29,17 @@
 }
 
 @media (max-width: 700px) {
-  /* Preserve the original dark olive background and paper texture from
-     editorial.css; only correct mobile scene visibility below. */
+  /* Mobile date has a full-bleed olive backing. The opaque writing-paper
+     image in editorial.css otherwise covers it in some browsers. Keep only
+     the translucent grain so both ink and calendar remain readable. */
+  #top .wedding-date-section {
+    background-color: #303b2a;
+    background-image: var(--stationery-texture);
+    background-size: 240px 240px;
+    background-repeat: repeat;
+    background-blend-mode: normal;
+    color: #f1efdc;
+  }
 
   /* IntersectionObserver can miss entrance transitions when mobile browsers
      restore a previously scrolled page or resize the visual viewport. The date
