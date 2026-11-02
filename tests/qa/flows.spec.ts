@@ -10,6 +10,20 @@ async function going(page:Page,omit=''){
  await page.locator('input[name=dressCode]').check();await page.locator('input[name=venueRules]').check();
 }
 for(const missing of ['congratulationChoice','hotAppetizer','mainCourse','alcoholDrinks','softDrinks','transfer','returnTransfer'])test('RSVP prevents missing '+missing,async({page})=>{await going(page,missing);await expect(submit(page)).toBeEnabled();});
+test('RSVP reports missing fields inline and accepts a single-word name',async({page})=>{
+ await page.locator('input[name=guestName]').fill('Аня');
+ await page.getByRole('button',{name:'Приду',exact:true}).click();
+ await submit(page).click();
+ await expect(page.locator('[data-field-error="true"]')).not.toHaveCount(0);
+ await expect(page.locator('[name=who]')).toHaveAttribute('aria-invalid','true');
+ await expect(page.locator('.writing-field').filter({has:page.locator('[name=who]')})).toContainText('Заполни это поле.');
+ await page.locator('input[name=who]').fill('Подруга');
+ await expect(page.locator('.writing-field').filter({has:page.locator('[name=who]')})).not.toHaveAttribute('data-field-error','true');
+ await going(page);
+ await page.locator('input[name=guestName]').fill('Аня');
+ await submit(page).click();
+ await expect(page.locator('#rsvp-success-title')).toBeVisible();
+});
 for(const attendance of ['yes','no'])test('RSVP '+attendance+' slow double click, clean next guest and restored success',async({page,request})=>{
  await page.setViewportSize({width:390,height:844});
  if(attendance==='yes')await going(page);else{await page.locator('input[name=guestName]').fill('Тестовый Гость');await page.getByRole('button',{name:'Не приду',exact:true}).click();}
