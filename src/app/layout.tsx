@@ -16,6 +16,7 @@ import "./qa-hardening.css";
 import "./countdown.css";
 import "./scroll-motion.css";
 import "./mobile-browser-fixes.css";
+import "./invitation-finishing.css";
 export const viewport: Viewport = {width:'device-width',initialScale:1,viewportFit:'cover'};
 export const metadata: Metadata = {
   metadataBase: new URL(PUBLIC_ORIGIN),
