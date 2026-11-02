@@ -49,8 +49,7 @@
   #top .wedding-date-section.motion-ready .date-large > span,
   #top .wedding-date-section.motion-ready .date-start,
   #top .wedding-calendar.motion-ready,
-  #top .wedding-calendar.motion-ready :is(.calendar-ornament, caption, thead, tbody),
-  #top .wedding-countdown.motion-ready :is(.countdown-heading, .countdown-number, .countdown-unit) {
+  #top .wedding-calendar.motion-ready :is(.calendar-ornament, caption, thead, tbody) {
     opacity: 1;
     translate: none;
     scale: 1;
