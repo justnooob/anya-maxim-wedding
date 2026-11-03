@@ -32,7 +32,6 @@ export function GuestList() {
       <div className="page-switch family-switch" role="group" aria-label="Сторона семьи">{(["groom","bride"] as const).map(id=><button key={id} type="button" aria-label={familySides[id].label} aria-pressed={side===id} aria-controls={"relatives-"+id} onClick={()=>setSide(id)}>{familySides[id].label}</button>)}</div>
       <div className="family-spread" id="guest-album" data-family-side={side} onPointerDown={start} onPointerUp={end} onPointerCancel={()=>{gesture.current=null;}}>
         {(["groom","bride"] as const).map(id=><section className="family-side" id={"relatives-"+id} key={id} data-active={side===id} aria-labelledby={"family-title-"+id} aria-hidden={compact&&side!==id?true:undefined} inert={compact&&side!==id}>
-          <div className="family-anchor-card">{guestCard({...familySides[id].couple,group:'family'},0)}</div>
           <h3 className="family-side-title" id={"family-title-"+id}>{familySides[id].title}</h3>
           <div className="guest-album page-enter">{familySides[id].guestIds.map((guestId,index)=>guestCard(mockGuests.find(guest=>guest.id===guestId)!,index))}</div>
         </section>)}
