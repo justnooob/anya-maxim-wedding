@@ -115,3 +115,23 @@
     background: linear-gradient(180deg, #303b2a, #303b2a00);
   }
 }
+
+
+/* The only new transition around the venue: olive information panel -> paper
+   dress-code chapter. Leave photo -> information panel untouched. */
+#top .section-blend--venue-dress {
+  display: none;
+}
+@media (max-width: 700px) {
+  #top .section-blend--venue-dress {
+    display: block;
+    height: clamp(48px, 8vw, 64px);
+    background-color: #f8f4eb;
+    background-image:
+      linear-gradient(180deg, #303b2a 0%, #303b2ae6 20%, #303b2a80 54%, #303b2a24 82%, transparent 100%),
+      var(--writing-paper);
+    background-position: center, center;
+    background-size: 100% 100%, 500px auto;
+    background-repeat: no-repeat, repeat;
+  }
+}
