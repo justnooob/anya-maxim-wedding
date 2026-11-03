@@ -55,34 +55,50 @@
   }
 }
 
-/* Short strips live between chapters rather than covering headings or cards.
-   Each strip is decorative and never receives pointer events or focus. */
+/* Fade the REAL neighbouring surfaces into one another. The former flat
+   colour gradients ended in dark bands because the olive chapters carry an
+   additional translucent paper texture. Masking the source surface over the
+   destination preserves both textures and removes the artificial dark strip. */
 #top .section-blend {
+  --blend-source: #303b2a;
+  --blend-destination: #f8f4eb;
+  position: relative;
   width: 100%;
   height: clamp(44px, 5vw, 68px);
   flex: 0 0 auto;
+  overflow: hidden;
   pointer-events: none;
-  background: linear-gradient(180deg, var(--blend-from), var(--blend-to));
+  isolation: isolate;
+  background: var(--blend-destination);
+}
+#top .section-blend::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--blend-source);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
 }
 #top .section-blend--olive-paper {
-  --blend-from: #303b2a;
-  --blend-to: #f8f4eb;
+  --blend-source: var(--stationery-texture), #303b2a;
+  --blend-destination: #f8f4eb;
 }
 #top .section-blend--paper-stone {
-  --blend-from: #f8f4eb;
-  --blend-to: #d7d4c9;
+  --blend-source: var(--writing-paper) center / 500px auto, #f8f4eb;
+  --blend-destination: #d7d4c9;
 }
 #top .section-blend--stone-olive {
-  --blend-from: #d7d4c9;
-  --blend-to: #303b2a;
+  --blend-source: #d7d4c9;
+  --blend-destination: var(--stationery-texture), #303b2a;
 }
 #top .section-blend--paper-rsvp {
-  --blend-from: #f8f4eb;
-  --blend-to: #ede9df;
+  --blend-source: var(--writing-paper) center / 650px auto, #f8f4eb;
+  --blend-destination: #ede9df;
 }
 #top .section-blend--rsvp-stone {
-  --blend-from: #ede9df;
-  --blend-to: #d7d4c9;
+  --blend-source: #ede9df;
+  --blend-destination: #d7d4c9;
 }
 
 /* Give the standalone wishlist invitation the same soft paper backing as the
@@ -117,21 +133,33 @@
 }
 
 
-/* The only new transition around the venue: olive information panel -> paper
-   dress-code chapter. Leave photo -> information panel untouched. */
-#top .section-blend--venue-dress {
-  display: none;
-}
+/* The photo-to-venue-panel edge is unchanged. Only the transition from the
+   bottom of that olive panel to the dress-code paper exists on mobile. */
+#top .section-blend--venue-dress { display: none; }
 @media (max-width: 700px) {
   #top .section-blend--venue-dress {
     display: block;
     height: clamp(48px, 8vw, 64px);
-    background-color: #f8f4eb;
-    background-image:
-      linear-gradient(180deg, #303b2a 0%, #303b2ae6 20%, #303b2a80 54%, #303b2a24 82%, transparent 100%),
-      var(--writing-paper);
-    background-position: center, center;
-    background-size: 100% 100%, 500px auto;
-    background-repeat: no-repeat, repeat;
+    --blend-source: #303b2a;
+    --blend-destination: var(--writing-paper) center / 500px auto, #f8f4eb;
+  }
+
+  /* This inherited 1px gold border and large floating-card shadow caused
+     the visible yellow seam and dark stripe below the full-bleed panel. */
+  #top .venue-panorama .venue-copy {
+    border-bottom: 0;
+    box-shadow: none;
+  }
+
+  /* Hero ends in flat olive, while the date starts with textured olive.
+     Blend the first few pixels inside the date instead of creating a band. */
+  #top .wedding-date-section::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 60px;
+    background: linear-gradient(to bottom, #303b2a, #303b2a00);
+    pointer-events: none;
+    z-index: 0;
   }
 }
