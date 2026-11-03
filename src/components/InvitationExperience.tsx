@@ -54,6 +54,7 @@ export function InvitationExperience() {
       <Hero />
       <DateSection />
       <VenueSection />
+      <div className="section-blend section-blend--venue-dress" aria-hidden="true" />
       <DressCode />
       <div className="section-blend section-blend--paper-stone" aria-hidden="true" />
       <GuestList />
