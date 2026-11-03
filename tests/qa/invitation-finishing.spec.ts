@@ -45,7 +45,7 @@ test('venue to dress transition appears only on mobile without touching the phot
  await page.goto('/');
  const venue=page.locator('#venue');
  const blend=page.locator('#top > .section-blend--venue-dress');
- const dress=page.locator('#dress');
+ const dress=page.locator('#dress-code');
  await expect(blend).toBeVisible();
  await expect(blend).toHaveAttribute('aria-hidden','true');
  await expect(blend).toHaveCSS('pointer-events','none');
@@ -54,7 +54,7 @@ test('venue to dress transition appears only on mobile without touching the phot
   return {width:rect.width,viewport:document.documentElement.clientWidth,height:rect.height,background:style.backgroundImage,previous:el.previousElementSibling?.id,next:el.nextElementSibling?.id};
  });
  expect(geometry.previous).toBe('venue');
- expect(geometry.next).toBe('dress');
+ expect(geometry.next).toBe('dress-code');
  expect(Math.abs(geometry.width-geometry.viewport)).toBeLessThanOrEqual(1);
  expect(geometry.height).toBeGreaterThanOrEqual(48);
  expect(geometry.height).toBeLessThanOrEqual(64);
