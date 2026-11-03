@@ -28,7 +28,7 @@ test('colour blends are decorative and consecutive chapters stay readable',async
  await page.addInitScript(()=>sessionStorage.setItem('anya-maxim-opening-v1','yes'));
  await page.goto('/');
  const blends=page.locator('main.invitation>.section-blend');
- await expect(blends).toHaveCount(5);
+ await expect(blends).toHaveCount(6);
  for(const blend of await blends.all()){
   await expect(blend).toHaveAttribute('aria-hidden','true');
   await expect(blend).toHaveCSS('pointer-events','none');
@@ -37,4 +37,31 @@ test('colour blends are decorative and consecutive chapters stay readable',async
  }
  await expect(page.locator('#date')).toBeVisible();
  await expect(page.locator('#questions')).toBeVisible();
+});
+
+test('venue to dress transition appears only on mobile without touching the photo',async({page})=>{
+ await page.addInitScript(()=>sessionStorage.setItem('anya-maxim-opening-v1','yes'));
+ await page.setViewportSize({width:390,height:844});
+ await page.goto('/');
+ const venue=page.locator('#venue');
+ const blend=page.locator('#top > .section-blend--venue-dress');
+ const dress=page.locator('#dress');
+ await expect(blend).toBeVisible();
+ await expect(blend).toHaveAttribute('aria-hidden','true');
+ await expect(blend).toHaveCSS('pointer-events','none');
+ const geometry=await blend.evaluate(el=>{
+  const rect=el.getBoundingClientRect(),style=getComputedStyle(el);
+  return {width:rect.width,viewport:document.documentElement.clientWidth,height:rect.height,background:style.backgroundImage,previous:el.previousElementSibling?.id,next:el.nextElementSibling?.id};
+ });
+ expect(geometry.previous).toBe('venue');
+ expect(geometry.next).toBe('dress');
+ expect(Math.abs(geometry.width-geometry.viewport)).toBeLessThanOrEqual(1);
+ expect(geometry.height).toBeGreaterThanOrEqual(48);
+ expect(geometry.height).toBeLessThanOrEqual(64);
+ expect(geometry.background).toContain('linear-gradient');
+ await expect(venue.locator('.venue-gallery')).toBeVisible();
+ await expect(dress).toBeVisible();
+
+ await page.setViewportSize({width:1440,height:900});
+ await expect(blend).toBeHidden();
 });
