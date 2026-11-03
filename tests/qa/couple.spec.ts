@@ -1,16 +1,62 @@
 import {test,expect} from 'playwright/test';
 import {inspectLayout} from '../helpers/ui-audit.mjs';
-for(const width of [280,320,375,390,430,768,1000,1001,1024,1440,1920])test('couple anchors and family switching '+width,async({page,request},info)=>{
- await request.post('/qa/reset');await page.setViewportSize({width,height:900});await page.emulateMedia({reducedMotion:'reduce'});await page.addInitScript(()=>sessionStorage.setItem('anya-maxim-opening-v1','yes'));await page.goto('/');
+
+for(const width of [280,320,375,390,430,768,1000,1001,1024,1440,1920])test('family sides show only relatives and preserve switching '+width,async({page,request},info)=>{
+ await request.post('/qa/reset');
+ await page.setViewportSize({width,height:900});
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await page.addInitScript(()=>sessionStorage.setItem('anya-maxim-opening-v1','yes'));
+ await page.goto('/');
+
  const groom=page.locator('#relatives-groom'),bride=page.locator('#relatives-bride'),album=page.locator('.family-spread');
- for(const [panel,name,role]of [[groom,'Максим','Жених'],[bride,'Аня','Невеста']]as const){await expect(panel.locator('.family-anchor-card h3')).toHaveText(name);await expect(panel.locator('.family-anchor-card p')).toHaveText(role);await expect(panel.locator('.guest-album .guest-print')).toHaveCount(name==='Максим'?8:7);await panel.locator('.family-anchor-card img').evaluate(async img=>{const el=img as HTMLImageElement;el.loading='eager';await el.decode();});}
- await page.locator('#guests').scrollIntoViewIfNeeded();await expect(page.locator('.dress-floating')).toHaveAttribute('aria-hidden','true');await expect(page.locator('.dress-floating')).toHaveCSS('opacity','0');
- const centered=async(panel:typeof groom)=>{const card=(await panel.locator('.family-anchor-card').boundingBox())!,parent=(await panel.boundingBox())!,title=(await panel.locator('.family-side-title').boundingBox())!,relatives=(await panel.locator('.guest-album').boundingBox())!;expect(Math.abs(card.x+card.width/2-parent.x-parent.width/2)).toBeLessThan(1);expect(card.y+card.height).toBeLessThan(title.y);expect(title.y+title.height).toBeLessThan(relatives.y);await expect(panel.locator('.family-side-title')).toBeVisible();expect(await panel.evaluate(el=>[...el.children].map(n=>[...n.classList].filter(c=>!c.startsWith('motion-')).join(' ')))).toEqual(['family-anchor-card','family-side-title','guest-album page-enter']);const angle=await panel.locator('.family-anchor-card>.guest-print').evaluate(el=>{const matrix=new DOMMatrix(getComputedStyle(el).transform);return Math.atan2(matrix.b,matrix.a)*180/Math.PI;});expect(angle).toBeCloseTo(panel===groom?-2:2,1);};
- await centered(groom);
- if(width<=1000){await expect(bride).toBeHidden();await page.getByRole('button',{name:'Невесты',exact:true}).click();await expect(bride).toBeVisible();await expect(groom).toHaveAttribute('inert','');await centered(bride);const before=(await album.boundingBox())!.height;await page.getByRole('button',{name:'Жениха',exact:true}).press('Enter');expect(Math.abs((await album.boundingBox())!.height-before)).toBeLessThan(1);await expect(groom).toBeVisible();}
- else{await expect(groom).toBeVisible();await expect(bride).toBeVisible();await centered(bride);const g=(await groom.locator('.family-anchor-card').boundingBox())!,b=(await bride.locator('.family-anchor-card').boundingBox())!;expect(Math.abs(g.y-b.y)).toBeLessThan(1);}
- await page.locator('#guests').evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));await expect(page.locator('.dress-floating')).toHaveCSS('opacity','0');
- await page.locator('#guests').screenshot({path:'qa-artifacts/couple-'+width+'.png',animations:'disabled'});await expect(page.getByRole('button',{name:/Родные/})).toContainText('15');
- await page.getByRole('button',{name:/Друзья/}).click();await expect(page.locator('.family-anchor-card')).toHaveCount(0);await expect(page.locator('.guest-album .guest-print')).toHaveCount(11);await page.getByRole('button',{name:/Родные/}).click();await expect(page.locator('.family-anchor-card')).toHaveCount(2);
- expect((await page.evaluate(inspectLayout)).documentOverflow).toBe(0);await page.screenshot({path:info.outputPath('after-switch.png')});
+ for(const [panel,title,count]of [[groom,'Со стороны жениха',8],[bride,'Со стороны невесты',7]] as const){
+  await expect(panel.locator('.family-anchor-card')).toHaveCount(0);
+  await expect(panel.locator('.family-side-title')).toHaveText(title);
+  await expect(panel.locator('.guest-album .guest-print')).toHaveCount(count);
+  expect(await panel.evaluate(el=>[...el.children].map(n=>[...n.classList].filter(c=>!c.startsWith('motion-')).join(' ')))).toEqual(['family-side-title','guest-album page-enter']);
+ }
+ await page.locator('#guests').scrollIntoViewIfNeeded();
+ await expect(page.locator('.dress-floating')).toHaveAttribute('aria-hidden','true');
+ await expect(page.locator('.dress-floating')).toHaveCSS('opacity','0');
+
+ const layout=async(panel:typeof groom)=>{
+  const parent=(await panel.boundingBox())!,title=(await panel.locator('.family-side-title').boundingBox())!,relatives=(await panel.locator('.guest-album').boundingBox())!;
+  expect(title.y).toBeGreaterThanOrEqual(parent.y-1);
+  expect(title.y+title.height).toBeLessThan(relatives.y);
+  expect(Math.abs(title.x+title.width/2-parent.x-parent.width/2)).toBeLessThan(1);
+  await expect(panel.locator('.family-side-title')).toBeVisible();
+ };
+
+ await layout(groom);
+ if(width<=1000){
+  await expect(bride).toBeHidden();
+  await page.getByRole('button',{name:'Невесты',exact:true}).click();
+  await expect(bride).toBeVisible();
+  await expect(groom).toHaveAttribute('inert','');
+  await layout(bride);
+  const before=(await album.boundingBox())!.height;
+  await page.getByRole('button',{name:'Жениха',exact:true}).press('Enter');
+  expect(Math.abs((await album.boundingBox())!.height-before)).toBeLessThan(1);
+  await expect(groom).toBeVisible();
+ }else{
+  await expect(groom).toBeVisible();
+  await expect(bride).toBeVisible();
+  await layout(bride);
+  const g=(await groom.locator('.family-side-title').boundingBox())!,b=(await bride.locator('.family-side-title').boundingBox())!;
+  expect(Math.abs(g.y-b.y)).toBeLessThan(1);
+ }
+ await page.locator('#guests').evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));
+ await expect(page.locator('.dress-floating')).toHaveCSS('opacity','0');
+ await page.locator('#guests').screenshot({path:'qa-artifacts/family-'+width+'.png',animations:'disabled'});
+ await expect(page.getByRole('button',{name:/Родные/})).toContainText('15');
+
+ await page.getByRole('button',{name:/Друзья/}).click();
+ await expect(page.locator('.family-side')).toHaveCount(0);
+ await expect(page.locator('.guest-album .guest-print')).toHaveCount(11);
+ await page.getByRole('button',{name:/Родные/}).click();
+ await expect(page.locator('.family-side')).toHaveCount(2);
+ await expect(page.locator('.family-anchor-card')).toHaveCount(0);
+
+ expect((await page.evaluate(inspectLayout)).documentOverflow).toBe(0);
+ await page.screenshot({path:info.outputPath('after-switch.png')});
 });
