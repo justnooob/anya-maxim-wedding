@@ -8,7 +8,7 @@ import {itemInput} from '../src/server/wishlist/validation.mjs';
 
 const apply=process.argv.includes('--apply');
 const definitions=JSON.parse(await readFile(new URL('../src/server/wishlist/approved-2026-11-04.json',import.meta.url),'utf8'));
-if(definitions.length!==16||new Set(definitions.map(x=>x.seedKey)).size!==16)throw new Error('Approved gift count/provenance mismatch');
+if(definitions.length!==19||new Set(definitions.map(x=>x.seedKey)).size!==19)throw new Error('Approved gift count/provenance mismatch');
 for(const d of definitions){
  if(d.isVisible!==false||!d.seedKey?.startsWith('approved-nov-2026:'))throw new Error('Only unpublished approved drafts can be imported');
  itemInput(d);
@@ -31,7 +31,7 @@ try{
   return outcome;
  },source);
  console.log(JSON.stringify(result,null,2));
- console.log(apply?'Drafts created. Add confirmed images and enable visibility manually in Telegram Mini App.':'Dry-run only. No data was changed. Append --apply after reviewing the 16 items.');
+ console.log(apply?'Drafts created. Add confirmed images and enable visibility manually in Telegram Mini App.':'Dry-run only. No data was changed. Append --apply after reviewing all 19 items.');
 }catch(error){
  console.error('Wishlist import failed. Transaction was rolled back. '+(error instanceof Error?error.message:String(error)));
  process.exitCode=1;
