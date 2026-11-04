@@ -1,15 +1,11 @@
 // Organizer-only command. No startup/deploy integration.
-import {readFile,stat} from 'node:fs/promises';
-import {resolve,sep} from 'node:path';
+import {readFile} from 'node:fs/promises';
+import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {database,transaction} from '../src/server/db/index.mjs';
 import {importApproved,validateApproved} from '../src/server/wishlist/approved-import.mjs';
-const imageRoot=resolve('public/images/wishlist-v2/approved-2026-11-04');
-export async function verifyApprovedAsset(def){
- if(!/^\/images\/wishlist-v2\/approved-2026-11-04\/[a-z0-9-]+\.webp$/.test(def.image))return false;
- const file=resolve('public'+def.image);if(!file.startsWith(imageRoot+sep))return false;
- try{return (await stat(file)).size>1000&&(await readFile(file)).subarray(8,12).toString()==='WEBP';}catch{return false;}
-}
+export {verifyApprovedAsset} from '../src/server/wishlist/approved-assets.mjs';
+import {verifyApprovedAsset} from '../src/server/wishlist/approved-assets.mjs';
 async function main(){
  let source;
  try{
