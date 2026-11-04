@@ -11,7 +11,7 @@ test('selected gifts are exactly 16 unpublished, uniquely identified drafts',()=
  for(const gift of gifts){
   assert.equal(gift.isVisible,false);
   assert.equal(gift.reservationMode,'single');
-  assert.match(gift.seedKey,/^approved-nov-2026:\\d{2}$/);
+  assert.match(gift.seedKey,/^approved-nov-2026:\d{2}$/);
   assert.ok(['home','cozy','tech','kitchen'].includes(gift.category));
   const data=itemInput(gift);
   assert.equal(data.title,gift.title);
