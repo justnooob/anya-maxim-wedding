@@ -5,11 +5,15 @@ import {createHash} from 'node:crypto';
 import {MEOW_ASSETS} from '../src/client/motya.mjs';
 import {familySides} from '../src/content/family-sides.mjs';
 
-test('approved couple portraits belong to the correct family sides and remain separate from relatives',async()=>{
- for(const [side,name,role]of [['groom','Максим','Жених'],['bride','Аня','Невеста']]){
-  const {couple,guestIds}=familySides[side];assert.equal(couple.name,name);assert.equal(couple.description,role);assert.ok(!guestIds.includes(couple.id));assert.equal(couple.realPortrait,true);assert.ok(!couple.image.includes('placeholder'));
-  const bytes=await readFile(new URL('../public'+couple.image,import.meta.url));assert.equal(bytes.toString('ascii',8,12),'WEBP');assert.ok(bytes.length<200000);
+test('family sides preserve the approved relatives-only composition without featured couple cards',()=>{
+ const ids=[];
+ for(const side of ['groom','bride']){
+  assert.equal(familySides[side].couple,undefined);
+  assert.ok(familySides[side].guestIds.length>0);
+  assert.ok(familySides[side].guestIds.every(id=>/^family-\d+$/.test(id)));
+  ids.push(...familySides[side].guestIds);
  }
+ assert.equal(ids.length,15);assert.equal(new Set(ids).size,15);
 });
 
 test('Motya uses three distinct supplied local recordings and no synthesized audio',async()=>{

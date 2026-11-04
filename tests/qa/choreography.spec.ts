@@ -1,7 +1,7 @@
 import {test,expect,type Page,type Locator} from 'playwright/test';
 import fs from 'node:fs';
 import {inspectLayout} from '../helpers/ui-audit.mjs';
-const roots=['#date','.wedding-calendar','.calendar-reminder','.wedding-countdown','#venue','.venue-copy','.dress-chapter>.chapter-heading','.dress-notices','.dress-original-tabs','.palette-family','.material-group','#dress-allowed','.lookbook-description','.family-anchor-card','.schedule-spread li','.questions-heading','.question-item','#rsvp>.chapter-heading'];
+const roots=['#date','.wedding-calendar','.calendar-reminder','.wedding-countdown','#venue','.venue-copy','.dress-chapter>.chapter-heading','.dress-notices','.dress-original-tabs','.palette-family','.material-group','#dress-allowed','.lookbook-description','.schedule-spread li','.questions-heading','.question-item','#rsvp>.chapter-heading'];
 async function frames(page:Page){await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));}
 async function finish(el:Locator){await el.evaluate(async node=>{await Promise.all(node.getAnimations({subtree:true}).filter(a=>a.effect?.getComputedTiming().iterations!==Infinity).map(a=>a.finished.catch(()=>{})));});}
 test.beforeEach(async({page,request})=>{await request.post('/qa/reset');await page.emulateMedia({reducedMotion:'no-preference'});await page.clock.setFixedTime(new Date('2026-10-29T09:00:00Z'));await page.addInitScript(()=>sessionStorage.setItem('anya-maxim-opening-v1','yes'));});

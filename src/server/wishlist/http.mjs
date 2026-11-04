@@ -37,8 +37,9 @@ export async function wishlistAdminRequest(request,{source,env=process.env}={}){
   if(request.method==='GET')return reply(await transaction(client=>wishlistData(client,null,true),source));
   if(request.method!=='POST')return reply({error:'Метод не поддерживается.'},405);
   let input;try{input=await limitedJson(request,32768);}catch{throw new WishlistError('Проверь данные подарка.');}
-  if(!input||!['save','move','visibility','archive','cancel','privacy'].includes(input.action))throw new WishlistError('Некорректное действие.');
-  if(input.action==='save'){input.data=itemInput(input.data);if(input.id&&(!uuid(input.id)||!Number.isSafeInteger(input.version)))throw new WishlistError('Обнови подарок.');}
+  if(!input||!['save','replace','review','move','visibility','archive','cancel','privacy'].includes(input.action))throw new WishlistError('Некорректное действие.');
+  if(input.action==='save'||input.action==='replace'){
+   if(input.action==='replace'&&!uuid(input.id))throw new WishlistError('Выбери подарок для замены.');input.data=itemInput(input.data);if(input.id&&(!uuid(input.id)||!Number.isSafeInteger(input.version)))throw new WishlistError('Обнови подарок.');}
   else if(input.action!=='privacy'&&!uuid(input.id))throw new WishlistError('Некорректный подарок.');
   if(input.action==='cancel'&&!uuid(input.reservationId))throw new WishlistError('Некорректная бронь.');
   const result=await transaction(async client=>{const savedId=await adminMutation(client,input);return {...await wishlistData(client,null,true),savedId};},source);return reply(result);
