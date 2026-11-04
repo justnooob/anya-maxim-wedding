@@ -10,9 +10,10 @@ for(const width of [280,320,375,390,430,768,1024,1440,1920])test('approved Wishl
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.route('**/api/wishlist',route=>route.fulfill({json:{items,categories,csrf:'synthetic-preview'}}));
  await page.goto('/wishlist');await expect(page.locator('.gift-print')).toHaveCount(19);
- for(const card of await page.locator('.gift-print').all()){
+ for(const [index,card] of (await page.locator('.gift-print').all()).entries()){
   await card.scrollIntoViewIfNeeded();const img=card.locator('.gift-image img');
   if(await img.count()){await expect(img).toBeVisible();await expect.poll(()=>img.evaluate(el=>(el as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);}
+  if([375,1440].includes(width)&&[3,6,15,17].includes(index))await card.screenshot({path:info.outputPath('final-card-'+(index+1)+'-'+width+'.png')});
  }
  expect(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth)).toBeLessThanOrEqual(1);expect(errors).toEqual([]);
  await page.getByLabel('Категория',{exact:true}).selectOption('kitchen');await expect(page.locator('.gift-print')).toHaveCount(items.filter(x=>x.category==='kitchen').length);

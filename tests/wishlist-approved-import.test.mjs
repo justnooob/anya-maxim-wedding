@@ -40,7 +40,7 @@ test('unreviewed, mismatched or missing local assets cannot be imported',async()
 test('normalized direct URLs and model aliases match renamed archived products conservatively',()=>{
  assert.equal(productUrl('https://www.ozon.ru/product/old-name-12345/?from=search'),productUrl('https://ozon.ru/product/new-name-12345/'));
  assert.equal(productUrl('https://hoff.ru/product/?articul=1&tracking=2'),'hoff.ru/product?articul=1');assert.equal(productUrl('javascript:x'),null);
- const row={id:randomUUID(),title:'Мой G735',archived_at:new Date(),links:[]};assert.equal(approvedMatch(original[6],[row]),row);
+ const row={id:randomUUID(),title:'Мой G733',archived_at:new Date(),links:[]};assert.equal(approvedMatch(original[6],[row]),row);
  const sameLink={title:'Название организатора',links:[{url:original[16].links[0].url+'?utm_source=test'}]};assert.equal(approvedMatch(original[16],[sameLink]),sameLink);
 });
 test('runtime startup cannot automatically import this batch',()=>{

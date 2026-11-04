@@ -41,7 +41,7 @@
     "isVisible": false,
     "links": [
       {
-        "label": "",
+        "label": "Hoff",
         "url": "https://hoff.ru/catalog/tovary_dlya_doma/tekstil/dekorativnye_podushki/dekorativnye_podushki/dekorativnaya_podushka_peloso_id10660819/?articul=80632862"
       }
     ],
@@ -73,7 +73,7 @@
     "isVisible": false,
     "links": [
       {
-        "label": "",
+        "label": "Hoff",
         "url": "https://hoff.ru/catalog/gostinaya/mebel_dlya_gostinykh/vitriny_i_bufety/shkaf_s_vitrinoy_skagen_id8847341/?articul=80541760"
       }
     ],
@@ -99,23 +99,23 @@
     "category": "cozy",
     "price": 10999,
     "comment": "Большой светлый ковёр бежево-золотых оттенков для гостиной, короткий ворс 7 мм.",
-    "image": "/images/wishlist-v2/approved-2026-11-04/gift-04.webp",
+    "image": "/images/wishlist-v2/approved-2026-11-04/gift-04-v2.webp",
     "priority": false,
     "reservationMode": "single",
     "isVisible": false,
     "links": [
       {
-        "label": "",
+        "label": "Hoff",
         "url": "https://hoff.ru/catalog/tovary_dlya_doma/kovry/vostochnye_kovry/kovyer_atlantik_hali_springs_id8557657/?articul=80521310"
       }
     ],
     "modelIdentity": "HOFF Springs",
     "review": {
       "model": "verified",
-      "image": "pending",
+      "image": "verified",
       "links": "verified",
       "checkedAt": "2026-11-04",
-      "note": "Оттенки и общий характер рисунка сохранены, но генерация изменила расположение орнамента. Изображение требует исправления; импорт заблокирован.",
+      "note": "Точный исходный орнамент HOFF сохранён при контролируемом композитинге: вырезка реального ковра на сгенерированный дубовый пол. Сам ковёр не перерисовывался.",
       "price": "verified",
       "sources": [
         "https://hoff.ru/catalog/tovary_dlya_doma/kovry/vostochnye_kovry/kovyer_atlantik_hali_springs_id8557657/?articul=80521310"
@@ -167,63 +167,66 @@
     "seedKey": "approved-nov-2026:06",
     "title": "Govee Flow Plus Light Bars (пара для телевизора)",
     "category": "tech",
-    "price": 10000,
-    "comment": "Пара чёрных RGB-светильников Flow Plus H6056. Поддержка Алисы напрямую не подтверждена. Официальная ссылка Govee EU, доставку в Россию и наличие нужной комплектации необходимо уточнить.",
+    "price": 8312,
+    "comment": "Две чёрные световые панели Govee Flow Plus H6056 для ТВ-зоны. Управление через Govee Home по Wi-Fi и Bluetooth, разноцветное RGBICWW-свечение. Прямая поддержка Алисы не заявляется.",
     "image": "/images/wishlist-v2/approved-2026-11-04/gift-06.webp",
     "priority": false,
     "reservationMode": "single",
     "isVisible": false,
     "links": [
       {
-        "label": "Govee EU",
-        "url": "https://eu.govee.com/products/govee-rgbicww-wifi-bluetooth-flow-plus-light-bars"
+        "label": "Ozon",
+        "url": "https://www.ozon.ru/product/govee-flow-plus-umnye-nastolnye-rgb-svetovye-paneli-svetovye-bary-s-wi-fi-i-bluetooth-3463367523/"
       }
     ],
     "modelIdentity": "Govee Flow Plus",
     "review": {
       "model": "verified",
       "image": "verified",
-      "links": "pending",
+      "links": "verified",
       "checkedAt": "2026-11-04",
-      "note": "Старая ссылка Ikonivo возвращает 404. Официальная карточка H6056 подтверждена; нужен доступный российский продавец либо подтверждение доставки.",
-      "price": "estimate",
+      "note": "Точная Flow Plus найдена на Ozon, артикул 3463367523, доступна к заказу. Цена без банковской скидки 8312 ₽ в индексированной карточке. Геометрия сверена с официальным H6056; замена модели не нужна.",
+      "price": "indexed",
       "sources": [
         "https://ikonivo.com/en/products/govee-rgbicww-wifi-bluetooth-flow-plus-dikey-aydinlatma",
-        "https://eu.govee.com/products/govee-rgbicww-wifi-bluetooth-flow-plus-light-bars"
+        "https://eu.govee.com/products/govee-rgbicww-wifi-bluetooth-flow-plus-light-bars",
+        "https://www.ozon.ru/product/govee-flow-plus-umnye-nastolnye-rgb-svetovye-paneli-svetovye-bary-s-wi-fi-i-bluetooth-3463367523/"
       ]
     }
   },
   {
     "seedKey": "approved-nov-2026:07",
-    "title": "Белая беспроводная гарнитура Logitech G735 Aurora",
+    "title": "Logitech G733 LIGHTSPEED, белая гарнитура",
     "category": "tech",
-    "price": 20000,
-    "comment": "Белые полноразмерные наушники с микрофоном, беспроводное подключение LIGHTSPEED и Bluetooth.",
-    "image": "/images/wishlist-v2/approved-2026-11-04/gift-07.webp",
+    "price": 9075,
+    "comment": "Белая игровая гарнитура G733 LIGHTSPEED: тканевое подвесное оголовье, съёмный микрофон и USB-приёмник. Беспроводное подключение по радиоканалу, не Bluetooth.",
+    "image": "/images/wishlist-v2/approved-2026-11-04/gift-07-v2.webp",
     "priority": false,
     "reservationMode": "single",
     "isVisible": false,
     "links": [
       {
-        "label": "e2e4",
-        "url": "https://moscow.e2e4online.ru/catalog/item/besprovodnaya-garnitura-logitech-g735-belyy-981--1289909/"
+        "label": "Ozon",
+        "url": "https://www.ozon.ru/product/logitech-g-g733-lightspeed-usb-type-c-radiokanal-igrovye-besprovodnye-naushniki-s-mikrofonom-belye-947721500/"
       }
     ],
-    "modelIdentity": "Logitech G735",
+    "modelIdentity": "Logitech G733 LIGHTSPEED",
     "review": {
       "model": "verified",
       "image": "verified",
-      "links": "pending",
+      "links": "verified",
       "checkedAt": "2026-11-04",
-      "note": "Белая G735 и геометрия подтверждены Logitech. В e2e4 и Techbuy нет в продаже, на официальном сайте также недоступна; нужна доступная точная карточка.",
-      "price": "estimate",
+      "note": "Адекватная доступная карточка G735 на Ozon/WB не найдена. Согласованная альтернатива G733 White 981-000883, Ozon 947721500, продавец Ozon Россия. Фото сверено с этой карточкой: подвесная лента, угловатые чашки, RGB, USB-приёмник. Цена 9075 ₽ без спецкарты.",
+      "price": "indexed",
       "sources": [
         "https://www.ozon.ru/search/?text=Logitech%20G735%20Aurora%20White",
-        "https://moscow.e2e4online.ru/catalog/item/besprovodnaya-garnitura-logitech-g735-belyy-981--1289909/"
+        "https://moscow.e2e4online.ru/catalog/item/besprovodnaya-garnitura-logitech-g735-belyy-981--1289909/",
+        "https://www.ozon.ru/product/logitech-g-g733-lightspeed-usb-type-c-radiokanal-igrovye-besprovodnye-naushniki-s-mikrofonom-belye-947721500/"
       ]
     },
     "identityAliases": [
-      "G735"
+      "G733",
+      "981-000883"
     ]
   },
   {
@@ -260,7 +263,7 @@
     "title": "Парная ключница Qualy Duo Sparrow, коричневый / белый / голубой",
     "category": "home",
     "price": 1592,
-    "comment": "Домик с двумя отдельными брелоками-птичками: белым и голубым. Вместе они дополняют общую композицию. ABS-пластик, артикул QL10124-BN-WH-BU. Предлагаемая замена одиночной Moose.",
+    "comment": "Домик с двумя съёмными брелоками-птичками: белым и голубым. Вместе они дополняют общую композицию. Артикул QL10124-BN-WH-BU.",
     "image": "/images/wishlist-v2/approved-2026-11-04/gift-09.webp",
     "priority": false,
     "reservationMode": "single",
@@ -273,11 +276,11 @@
     ],
     "modelIdentity": "Qualy Duo Sparrow",
     "review": {
-      "model": "pending",
+      "model": "verified",
       "image": "verified",
       "links": "verified",
       "checkedAt": "2026-11-04",
-      "note": "Реальная парная альтернатива Moose, два брелока и наличие подтверждены карточкой. Требует финального согласования замены организатором.",
+      "note": "Qualy Duo Sparrow явно согласована владельцем вместо одиночной Moose. Цвета и два отдельных брелока сверены с Homedorf.",
       "price": "verified",
       "sources": [
         "https://mrphy.sg/products/moose-key-holder",
@@ -301,7 +304,7 @@
     "isVisible": false,
     "links": [
       {
-        "label": "",
+        "label": "ru.dreametech.com",
         "url": "https://ru.dreametech.com/product/robot-pylesos-l40-ultra-ae/"
       }
     ],
@@ -366,7 +369,7 @@
     "isVisible": false,
     "links": [
       {
-        "label": "",
+        "label": "alice.yandex.ru",
         "url": "https://alice.yandex.ru/store/products/radar-sensor-100572"
       }
     ],
@@ -395,7 +398,7 @@
     "isVisible": false,
     "links": [
       {
-        "label": "",
+        "label": "Xiaomi",
         "url": "https://www.mi.com/ru/product/mi-computer-monitor-light-bar/"
       }
     ],
@@ -487,34 +490,36 @@
   },
   {
     "seedKey": "approved-nov-2026:16",
-    "title": "Караоке JBL Cinema KTV450 с 2 микрофонами, HDMI ARC",
+    "title": "Jonsen PRO 2.1, караоке с 2 микрофонами",
     "category": "tech",
-    "price": 64000,
-    "comment": "Полный ТВ-комплект: саундбар, сабвуфер, два беспроводных микрофона и HDMI ARC. Уточнить HDMI ARC на телевизоре и пошлину.",
-    "image": "",
+    "price": 29990,
+    "comment": "Домашняя караоке-система в деревянном корпусе с двумя беспроводными микрофонами. Звук с телевизора подключается по оптическому кабелю или AUX. Оригинальный комплект в официальном магазине производителя.",
+    "image": "/images/wishlist-v2/approved-2026-11-04/gift-16-v2.webp",
     "priority": false,
     "reservationMode": "single",
     "isVisible": false,
     "links": [
       {
-        "label": "",
-        "url": "https://www.ozon.ru/product/jbl-cinema-ktv450-saundbar-dlya-televizora-s-karaoke-2-mikrofona-sabvufer-440-vt-hdmi-arc-bluetooth-5319771908/"
+        "label": "Jonsen: официальный магазин",
+        "url": "https://jonsen.pro/"
       }
     ],
-    "modelIdentity": "JBL Cinema KTV450",
+    "modelIdentity": "Jonsen PRO 2.1",
     "review": {
-      "model": "pending",
-      "image": "pending",
-      "links": "pending",
+      "model": "verified",
+      "image": "verified",
+      "links": "verified",
       "checkedAt": "2026-11-04",
-      "note": "Ozon подтверждает название и комплект в индексе. Достоверное доступное фото именно KTV450 получить не удалось. Результаты изображений подменяют KTV350/SB450; генерация похожих колонок не выполнялась.",
-      "price": "estimate",
+      "note": "JBL KTV450 на Ozon найден, но фото точного комплекта получить и сверить не удалось; прямое открытие нестабильно. Выбрана разрешённая замена по назначению: Jonsen PRO 2.1, 2 микрофона, оптический вход ТВ. Официальная покупка 29990 ₽; маркетплейс не выбран из-за предупреждения производителя о копиях. Комплектность сверена по фото передней/задней панелей и микрофонов. HDMI ARC не переносится от JBL.",
+      "price": "verified",
       "sources": [
-        "https://www.ozon.ru/product/jbl-cinema-ktv450-saundbar-dlya-televizora-s-karaoke-2-mikrofona-sabvufer-440-vt-hdmi-arc-bluetooth-5319771908/"
+        "https://www.ozon.ru/product/jbl-cinema-ktv450-saundbar-dlya-televizora-s-karaoke-2-mikrofona-sabvufer-440-vt-hdmi-arc-bluetooth-5319771908/",
+        "https://jonsen.pro/"
       ]
     },
     "identityAliases": [
-      "KTV450"
+      "Jonsen PRO",
+      "JonsenPro21"
     ]
   },
   {
@@ -557,40 +562,42 @@
   },
   {
     "seedKey": "approved-nov-2026:18",
-    "title": "PETKIT Eversweet 3 Pro UVC / питьевой фонтан для кота",
+    "title": "Фонтан Pet Flat FD013 Aqua Pro Max, белый",
     "category": "home",
-    "price": 6990,
-    "comment": "Белый питьевой фонтан с фильтрацией и UVC-насосом, баком из нержавеющей стали и приложением PETKIT по Bluetooth. Работает от сети. Нужна именно версия 3 Pro UVC; фильтр периодически меняется.",
-    "image": "/images/wishlist-v2/approved-2026-11-04/gift-18.webp",
+    "price": 5999,
+    "comment": "Фонтан Pet Flat FD013 с чашей из нержавеющей стали, фильтрацией, УФ-очисткой, датчиком движения и Wi-Fi-приложением. Объём 2,5 л. Съёмный резервуар стоит на док-станции, фильтры нужно периодически менять.",
+    "image": "/images/wishlist-v2/approved-2026-11-04/gift-18-v2.webp",
     "priority": false,
     "reservationMode": "single",
     "isVisible": false,
     "links": [
       {
-        "label": "Технопарк СПб",
-        "url": "https://spb.technopark.ru/aksessuar-dlya-zhivotnyh-petkit-eversweet-3-pro-uvc/"
+        "label": "Pet Flat: официальный магазин",
+        "url": "https://petflatpro.ru/catalog/poilki/aqua-pro-max/"
       },
       {
-        "label": "PETKIT Россия",
-        "url": "https://petkit.com.ru/products/umnyiy-pitevoiy-fontan-dlya-jivotnyh-s-sistemoiy-filtracii-eversweet-pro-uvc-1-100097"
+        "label": "Ozon",
+        "url": "https://www.ozon.ru/product/avtomaticheskaya-poilka-fontan-dlya-koshek-i-sobak-s-datchikom-dvizheniya-i-upravleniem-cherez-4742013927/"
       }
     ],
-    "modelIdentity": "PETKIT Eversweet 3 Pro UVC",
+    "modelIdentity": "Pet Flat FD013",
     "review": {
       "model": "verified",
       "image": "verified",
-      "links": "pending",
+      "links": "verified",
       "checkedAt": "2026-11-04",
-      "note": "Точная версия 3 PRO UVC подтверждена дистрибьютором, но в официальном магазине нет в наличии. Технопарк блокирует прямую проверку, доступность перед импортом не подтверждена.",
+      "note": "PETKIT заменён на Pet Flat по прямому предпочтению владельца: кормушка той же марки. FD013 проверен у производителя и на Ozon 4742013927 (Smart Pet Systems), в наличии. Официальная цена 5999 ₽, на Ozon 7629 ₽ без спецкарты. Объём 2,5 л сверён с производителем, не перенесён от FD009. Фото сверено с корпусом, металлическим носиком, зажимами и Wi-Fi-доком.",
       "price": "verified",
       "sources": [
         "https://spb.technopark.ru/aksessuar-dlya-zhivotnyh-petkit-eversweet-3-pro-uvc/",
-        "https://petkit.com.ru/products/umnyiy-pitevoiy-fontan-dlya-jivotnyh-s-sistemoiy-filtracii-eversweet-pro-uvc-1-100097"
+        "https://petkit.com.ru/products/umnyiy-pitevoiy-fontan-dlya-jivotnyh-s-sistemoiy-filtracii-eversweet-pro-uvc-1-100097",
+        "https://petflatpro.ru/catalog/poilki/aqua-pro-max/",
+        "https://www.ozon.ru/product/avtomaticheskaya-poilka-fontan-dlya-koshek-i-sobak-s-datchikom-dvizheniya-i-upravleniem-cherez-4742013927/"
       ]
     },
     "identityAliases": [
-      "Eversweet 3 Pro",
-      "pkes4_uvc"
+      "FD013",
+      "Aqua Pro Max"
     ]
   },
   {
