@@ -270,5 +270,68 @@
         "url": "https://www.ozon.ru/product/jbl-cinema-ktv450-saundbar-dlya-televizora-s-karaoke-2-mikrofona-sabvufer-440-vt-hdmi-arc-bluetooth-5319771908/"
       }
     ]
+  },
+  {
+    "seedKey": "approved-nov-2026:17",
+    "title": "Bosch GSR 12V-30 Professional 06019G9000 — шуруповёрт с 2 АКБ",
+    "category": "home",
+    "price": 17933,
+    "comment": "Аккумуляторная бесщёточная дрель-шуруповёрт 12 В, до 30 Н·м. Нужна именно комплектация 06019G9000: два аккумулятора 2 А·ч, зарядка и кейс. Для сборки мебели и домашнего ремонта.",
+    "image": "https://www.inserv.lv/storage/products/large/66/662fd2b8-f861-4b1d-9c98-bd363a01096b.jpg",
+    "priority": false,
+    "reservationMode": "single",
+    "isVisible": false,
+    "links": [
+      {
+        "label": "Яндекс Маркет",
+        "url": "https://m.integration.vs.market.yandex.net/card/drel-shurupovert-bosch-gsr-12v-30-2ach-s-dvumya-akkumulyatorami-06019g9000/103207817836"
+      },
+      {
+        "label": "Мегамаркет",
+        "url": "https://megamarket.ru/catalog/details/akkumulyatornaya-drel-shurupovert-bosch-gsr-12v-30-professional-2-akb-zu-06019g9000-600011047559_34438/"
+      }
+    ]
+  },
+  {
+    "seedKey": "approved-nov-2026:18",
+    "title": "PETKIT Eversweet 3 Pro UVC — питьевой фонтан для кота",
+    "category": "home",
+    "price": 6290,
+    "comment": "Белый питьевой фонтан с фильтрацией и UVC-насосом, баком из нержавеющей стали и приложением PETKIT по Bluetooth. Работает от сети. Нужна именно версия 3 Pro UVC; фильтр периодически меняется.",
+    "image": "https://www.vetopia.com.hk/cdn/shop/files/Petkit-Eversweet3Pro-UVC_app.webp?v=1732161514",
+    "priority": false,
+    "reservationMode": "single",
+    "isVisible": false,
+    "links": [
+      {
+        "label": "Технопарк СПб",
+        "url": "https://spb.technopark.ru/aksessuar-dlya-zhivotnyh-petkit-eversweet-3-pro-uvc/"
+      },
+      {
+        "label": "PETKIT Россия",
+        "url": "https://petkit.com.ru/products/umnyiy-pitevoiy-fontan-dlya-jivotnyh-s-sistemoiy-filtracii-eversweet-pro-uvc-1-100097"
+      }
+    ]
+  },
+  {
+    "seedKey": "approved-nov-2026:19",
+    "title": "Samsung Portable SSD T7 Shield 2 ТБ, чёрный",
+    "category": "tech",
+    "price": 54950,
+    "comment": "Внешний SSD объёмом 2 ТБ для фото, видео и резервных копий. Версия T7 Shield MU-PE2T0S/WW, USB-C 3.2 Gen 2, до 1050 МБ/с чтение и 1000 МБ/с запись, корпус IP65.",
+    "image": "https://store974.com/cdn/shop/products/NewProject-2022-08-16T094837.351.jpg?v=1660632548",
+    "priority": false,
+    "reservationMode": "single",
+    "isVisible": false,
+    "links": [
+      {
+        "label": "Регард",
+        "url": "https://www.regard.ru/product/458798/vnesnii-nakopitel-ssd-2tb-samsung-t7-shield-mu-pe2t0s"
+      },
+      {
+        "label": "DNS",
+        "url": "https://www.dns-shop.ru/product/f5dff0a1e6feed20/2000-gb-vnesnij-ssd-samsung-t7-shield-mu-pe2t0sww/"
+      }
+    ]
   }
 ]
