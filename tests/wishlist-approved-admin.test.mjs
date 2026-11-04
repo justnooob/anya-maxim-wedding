@@ -88,3 +88,15 @@ test('archived/renamed or existing products are skipped; blocked assets block ap
   assert.equal(blocked.data.outcome.skipped,19);
  }finally{await f.close();}
 });
+
+test('unverified images block the entire Telegram import, including an explicit apply attempt',async()=>{
+ const f=await fixture();try{
+  const blocked=await call(f.source,{action:'preview'},signed(),{verifyAsset:async()=>false});
+  assert.equal(blocked.status,200);
+  assert.equal(blocked.data.outcome.blocked,19);
+  assert.equal(blocked.data.canApply,false);
+  const attempt=await call(f.source,{action:'apply',previewId:blocked.data.previewId,confirm:'IMPORT_19_HIDDEN_DRAFTS'},signed(),{verifyAsset:async()=>false});
+  assert.equal(attempt.status,409);
+  assert.equal((await f.db.query('SELECT count(*)::int n FROM wishlist_items')).rows[0].n,0);
+ }finally{await f.close();}
+});
