@@ -4,8 +4,8 @@ import {readFile} from 'node:fs/promises';
 import {itemInput} from '../src/server/wishlist/validation.mjs';
 
 const gifts=JSON.parse(await readFile(new URL('../src/server/wishlist/approved-2026-11-04.json',import.meta.url),'utf8'));
-test('selected gifts are exactly 16 unpublished, uniquely identified drafts',()=>{
- assert.equal(gifts.length,16);
+test('selected gifts are exactly 19 unpublished, uniquely identified drafts',()=>{
+ assert.equal(gifts.length,19);
  assert.equal(new Set(gifts.map(x=>x.seedKey)).size,16);
  assert.equal(new Set(gifts.map(x=>x.title.toLowerCase())).size,16);
  for(const gift of gifts){
@@ -29,4 +29,21 @@ test('one kitchen TV only, matched karaoke, three glass types and owner-approved
  assert.ok(titles.some(x=>x.includes('mi computer monitor')));
  assert.ok(titles.some(x=>x.includes('beurer fm 60')));
  assert.ok(titles.some(x=>x.includes('dreame l40 ultra ae')));
+});
+
+test('latest selection has exactly three gifts and excludes the feeder',()=>{
+ const last=gifts.slice(-3);
+ assert.deepEqual(last.map(x=>x.seedKey),[
+  'approved-nov-2026:17','approved-nov-2026:18','approved-nov-2026:19'
+ ]);
+ assert.match(last[0].title,/Bosch GSR 12V-30.*06019G9000/);
+ assert.match(last[1].title,/PETKIT Eversweet 3 Pro UVC/);
+ assert.match(last[2].title,/Samsung.*T7 Shield 2 ТБ/);
+ assert.ok(!gifts.some(x=>/Fresh Element Solo|автокормушк/i.test(x.title)));
+ for(const item of last){
+  assert.equal(item.isVisible,false);
+  assert.match(item.image,/^https:\/\//);
+  assert.equal(item.links.length,2);
+  assert.ok(item.links.every(x=>x.url.startsWith('https://')));
+ }
 });
