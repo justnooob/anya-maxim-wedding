@@ -1,4 +1,20 @@
 import {test,expect} from 'playwright/test';
+for(const width of [375,430,1440])test('organizer wishlist returns to reviewed row after back/edit/filter removal '+width,async({page,request})=>{
+ await request.post('/qa/wishlist-fixtures');await page.setViewportSize({width,height:812});await page.goto('/telegram');await page.getByRole('button',{name:'Вишлист ↗'}).click();
+ await page.getByRole('button',{name:'Проверить импорт 19 подарков',exact:true}).click();await page.getByRole('checkbox',{name:'Проверил список.'}).check();await page.getByRole('button',{name:'Добавить 19 скрытых подарков'}).click();
+ await expect(page.locator('.wishlist-admin-row')).toHaveCount(19);await page.getByLabel('Статус подарка').selectOption('pending');await expect(page.getByLabel('Статус подарка')).toHaveValue('pending');
+ const row=page.locator('.wishlist-admin-row').nth(10);const id=await row.getAttribute('data-wishlist-id');
+ await row.evaluate(el=>el.scrollIntoView({block:'center',behavior:'instant'}));const top=(await row.boundingBox())!.y;
+ const target=()=>page.locator(`[data-wishlist-id="${id}"]`);
+ const open=()=>target().locator('.wishlist-admin-open').click();
+ const back=()=>page.getByRole('button',{name:'← К подаркам',exact:true}).click();
+ const restored=async()=>{await expect(page.getByLabel('Статус подарка')).toHaveValue('pending');await expect(target()).toBeInViewport();await expect.poll(async()=>Math.abs((await target().boundingBox())!.y-top)).toBeLessThan(4);await expect(target().locator('.wishlist-admin-open')).toBeFocused();};
+ await open();await expect(page.locator('.wishlist-admin-detail .organizer-back')).toBeInViewport();await back();await restored();
+ await open();await page.getByRole('button',{name:'Редактировать подарок',exact:true}).click();await back();await restored();
+ await open();await page.getByRole('button',{name:'Редактировать подарок',exact:true}).click();await page.getByRole('textbox',{name:'Комментарий',exact:true}).fill('Обновлено для проверки возврата');await page.getByRole('button',{name:'Сохранить подарок',exact:true}).click();await restored();
+ const nextId=await page.locator('.wishlist-admin-row').nth(11).getAttribute('data-wishlist-id');await open();await page.getByRole('button',{name:'Одобрить',exact:true}).click();await expect(page.getByRole('button',{name:'Опубликовать',exact:true})).toBeEnabled();await back();
+ await expect(page.locator('.wishlist-admin-row')).toHaveCount(18);const next=page.locator(`[data-wishlist-id="${nextId}"]`);await expect(next).toBeInViewport();await expect.poll(async()=>Math.abs((await next.boundingBox())!.y-top)).toBeLessThan(4);await expect(next.locator('.wishlist-admin-open')).toBeFocused();
+});
 for(const width of [375,768,1440])test('organizer import/review/edit/replace and public isolation '+width,async({page,request},info)=>{
  await request.post('/qa/wishlist-fixtures');await page.setViewportSize({width,height:900});await page.goto('/telegram');await page.getByRole('button',{name:'Вишлист ↗'}).click();
  await page.getByRole('button',{name:'Проверить импорт 19 подарков',exact:true}).click();await expect(page.getByRole('button',{name:'Добавить 19 скрытых подарков'})).toBeDisabled();await page.getByRole('checkbox',{name:'Проверил список.'}).check();
