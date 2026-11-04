@@ -275,7 +275,7 @@
     "seedKey": "approved-nov-2026:17",
     "title": "Bosch GSR 12V-30 Professional 06019G9000 — шуруповёрт с 2 АКБ",
     "category": "home",
-    "price": 17933,
+    "price": 16900,
     "comment": "Аккумуляторная бесщёточная дрель-шуруповёрт 12 В, до 30 Н·м. Нужна именно комплектация 06019G9000: два аккумулятора 2 А·ч, зарядка и кейс. Для сборки мебели и домашнего ремонта.",
     "image": "https://www.inserv.lv/storage/products/large/66/662fd2b8-f861-4b1d-9c98-bd363a01096b.jpg",
     "priority": false,
@@ -283,8 +283,8 @@
     "isVisible": false,
     "links": [
       {
-        "label": "Яндекс Маркет",
-        "url": "https://m.integration.vs.market.yandex.net/card/drel-shurupovert-bosch-gsr-12v-30-2ach-s-dvumya-akkumulyatorami-06019g9000/103207817836"
+        "label": "Proftools",
+        "url": "https://www.proftools.ru/catalog/elektroinstrument/akkumulyatory/sistema_12_v/38463/"
       },
       {
         "label": "Мегамаркет",
