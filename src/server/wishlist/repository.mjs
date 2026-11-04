@@ -4,7 +4,7 @@ import {WishlistError} from './validation.mjs';
 export async function wishlistData(client,sessionId=null,admin=false){
  const settings=(await client.query('SELECT * FROM wishlist_settings WHERE id=1')).rows[0];
  const categories=(await client.query('SELECT id,title FROM wishlist_categories ORDER BY sort_order,id')).rows;
- const rows=(await client.query('SELECT * FROM wishlist_items WHERE archived_at IS NULL'+(admin?' ORDER BY sort_order,id':' AND is_visible ORDER BY priority DESC,sort_order,id'))).rows;
+ const rows=(await client.query('SELECT * FROM wishlist_items WHERE archived_at IS NULL'+(admin?' ORDER BY sort_order,id':" AND is_visible AND (review_status IS NULL OR review_status='approved') ORDER BY priority DESC,sort_order,id"))).rows;
  const ids=rows.map(row=>row.id);
  const links=ids.length?(await client.query('SELECT * FROM wishlist_links WHERE wishlist_item_id=ANY($1::uuid[]) ORDER BY sort_order,id',[ids])).rows:[];
  const reservations=ids.length?(await client.query("SELECT * FROM wishlist_reservations WHERE wishlist_item_id=ANY($1::uuid[]) AND status='active' ORDER BY reserved_at,id",[ids])).rows:[];
@@ -14,14 +14,14 @@ export async function wishlistData(client,sessionId=null,admin=false){
   const item={id:row.id,title:row.title,comment:row.comment,category:row.category,price:row.price,currency:row.currency,image:row.image,priority:row.priority,reservationMode:row.reservation_mode,
    links:links.filter(link=>link.wishlist_item_id===row.id).map(link=>({label:resolvedStoreLabel(link.label,link.url),url:link.url})),reserved:active.length>0,available:row.reservation_mode==='multiple'||active.length===0,own:!!own};
   if(settings.show_reserver_names&&active.length)item.reserverNames=active.map(r=>r.reserver_name);
-  if(admin)Object.assign(item,{version:row.version,isVisible:row.is_visible,sortOrder:row.sort_order,reservations:active.map(r=>({id:r.id,name:r.reserver_name,reservedAt:r.reserved_at}))});
+  if(admin)Object.assign(item,{version:row.version,isVisible:row.is_visible,sortOrder:row.sort_order,reviewStatus:row.review_status,productModel:row.product_model,batch:row.seed_key?.startsWith('approved-nov-2026:')?'approved-nov-2026':null,reservations:active.map(r=>({id:r.id,name:r.reserver_name,reservedAt:r.reserved_at}))});
   return item;
  });
  return {categories,items,...(admin?{showReserverNames:settings.show_reserver_names,stats:{total:items.length,free:items.filter(i=>!i.reserved).length,reserved:items.filter(i=>i.reserved).length,priority:items.filter(i=>i.priority).length}}:{})};
 }
 async function lockedItem(client,id){const row=(await client.query('SELECT * FROM wishlist_items WHERE id=$1 AND archived_at IS NULL FOR UPDATE',[id])).rows[0];if(!row)throw new WishlistError('Этот подарок больше недоступен.',404);return row;}
 export async function reserveItem(client,id,sessionId,name){
- const item=await lockedItem(client,id);if(!item.is_visible)throw new WishlistError('Этот подарок больше недоступен.',404);
+ const item=await lockedItem(client,id);if(!item.is_visible||(item.review_status&&item.review_status!=='approved'))throw new WishlistError('Этот подарок больше недоступен.',404);
  const active=(await client.query("SELECT anonymous_session_id FROM wishlist_reservations WHERE wishlist_item_id=$1 AND status='active'",[id])).rows;
  if(active.some(r=>r.anonymous_session_id===sessionId))return false;
  if(item.reservation_mode==='single'&&active.length)throw new WishlistError('Упс, этот подарок только что кто-то забронировал.',409);
@@ -38,17 +38,35 @@ export async function saveItem(client,id,data,version){
  const values=[data.title,data.comment,data.category,data.price,data.image,data.priority,data.reservationMode,data.isVisible];
  if(id){const item=await lockedItem(client,id);if(item.version!==version)throw new WishlistError('Подарок уже изменён. Обнови список и повтори.',409);
   if(item.reservation_mode!==data.reservationMode){const any=(await client.query('SELECT id FROM wishlist_reservations WHERE wishlist_item_id=$1 LIMIT 1',[id])).rows[0];if(any)throw new WishlistError('Способ бронирования нельзя менять после появления истории броней. Создай отдельный подарок.');}
+  const history=(await client.query('SELECT id FROM wishlist_reservations WHERE wishlist_item_id=$1 LIMIT 1',[id])).rows[0];
+  if(history&&(item.title!==data.title||item.image!==data.image||item.product_model!==(data.productModel??'')))throw new WishlistError('У подарка есть история броней. Замену товара или фото выполнять нельзя. Сохрани эту карточку скрытой и создай отдельный подарок; история останется.',409);
+  if(item.review_status){data.isVisible=false;values[7]=false;}
   await client.query('UPDATE wishlist_items SET title=$1,comment=$2,category=$3,price=$4,image=$5,priority=$6,reservation_mode=$7,is_visible=$8,updated_at=now(),version=version+1 WHERE id=$9',[...values,id]);
  }else{id=randomUUID();await client.query('INSERT INTO wishlist_items(id,title,comment,category,price,image,priority,reservation_mode,is_visible,sort_order) VALUES($9,$1,$2,$3,$4,$5,$6,$7,$8,(SELECT coalesce(max(sort_order),-1)+1 FROM wishlist_items))',[...values,id]);}
+ await client.query("UPDATE wishlist_items SET product_model=$2,review_status=CASE WHEN review_status IS NULL THEN NULL ELSE 'pending' END WHERE id=$1",[id,data.productModel??'']);
  await writeLinks(client,id,data.links);return id;
 }
 export async function adminMutation(client,input){
  // Serialize admin edits/order/settings, while reservations lock only their item.
  await client.query('SELECT id FROM wishlist_settings WHERE id=1 FOR UPDATE');
  if(input.action==='privacy'){if(typeof input.showReserverNames!=='boolean')throw new WishlistError('Проверь настройку приватности.');await client.query('UPDATE wishlist_settings SET show_reserver_names=$1 WHERE id=1',[input.showReserverNames]);return;}
+ if(input.action==='replace'){
+  const item=await lockedItem(client,input.id);
+  if(item.version!==input.version)throw new WishlistError('Подарок уже изменён. Обнови список.',409);
+  const history=(await client.query('SELECT id FROM wishlist_reservations WHERE wishlist_item_id=$1 LIMIT 1',[item.id])).rows[0];
+  if(history)throw new WishlistError('У подарка есть история броней. Замена заблокирована. Скрой старую карточку и создай отдельный подарок; история сохранится.',409);
+  const id=await saveItem(client,item.id,{...input.data,isVisible:false},input.version);
+  await client.query("UPDATE wishlist_items SET review_status='pending' WHERE id=$1",[id]);return id;
+ }
  if(input.action==='save')return saveItem(client,input.id||null,input.data,input.version);
  const item=await lockedItem(client,input.id);
- if(input.action==='visibility'){if(typeof input.isVisible!=='boolean')throw new WishlistError('Проверь видимость.');await client.query('UPDATE wishlist_items SET is_visible=$2,version=version+1,updated_at=now() WHERE id=$1',[item.id,input.isVisible]);return;}
+ if((input.version!==undefined||item.review_status||input.action==='review')&&item.version!==input.version)throw new WishlistError('Подарок уже изменён. Обнови список и повтори.',409);
+ if(input.action==='review'){
+  if(!['pending','approved','rejected'].includes(input.status))throw new WishlistError('Некорректный статус.');
+  if(input.status==='rejected'&&(await client.query("SELECT id FROM wishlist_reservations WHERE wishlist_item_id=$1 AND status='active' LIMIT 1",[item.id])).rows[0])throw new WishlistError('Подарок забронирован. Сначала скрой карточку и свяжись с гостем; бронь не изменена.',409);
+  await client.query('UPDATE wishlist_items SET review_status=$2,is_visible=false,version=version+1,updated_at=now() WHERE id=$1',[item.id,input.status]);return;
+ }
+ if(input.action==='visibility'){if(input.isVisible&&item.review_status&&item.review_status!=='approved')throw new WishlistError('Сначала одобри подарок.',409);if(typeof input.isVisible!=='boolean')throw new WishlistError('Проверь видимость.');await client.query('UPDATE wishlist_items SET is_visible=$2,version=version+1,updated_at=now() WHERE id=$1',[item.id,input.isVisible]);return;}
  if(input.action==='move'){
   if(![-1,1].includes(input.direction))throw new WishlistError('Некорректный порядок.');
   const rows=(await client.query('SELECT id FROM wishlist_items WHERE archived_at IS NULL ORDER BY sort_order,id FOR UPDATE')).rows;

@@ -37,13 +37,13 @@ test('latest selection has exactly three gifts and excludes the feeder',()=>{
   'approved-nov-2026:17','approved-nov-2026:18','approved-nov-2026:19'
  ]);
  assert.match(last[0].title,/Bosch GSR 12V-30.*06019G9000/);
- assert.match(last[1].title,/Pet Flat FD013/);
+ assert.match(last[1].title,/Pet Flat FD009/);
  assert.match(last[2].title,/Samsung.*T7 Shield 2 ТБ/);
  assert.ok(!gifts.some(x=>/Fresh Element Solo|автокормушк/i.test(x.title)));
  for(const item of last){
   assert.equal(item.isVisible,false);
   assert.ok(item.review);
-  assert.equal(item.links.length,2);
+  assert.ok(item.links.length>=1);
   assert.ok(item.links.every(x=>x.url.startsWith('https://')));
  }
 });
@@ -51,12 +51,12 @@ test('latest selection has exactly three gifts and excludes the feeder',()=>{
 test('final model approvals have complete local assets and do not inherit replaced model features',()=>{
  for(const gift of gifts){
   for(const field of ['model','image','links'])assert.equal(gift.review[field],'verified',gift.seedKey+':'+field);
-  assert.match(gift.image,/^\/images\/wishlist-v2\/approved-2026-11-04\/gift-\d{2}(?:-v2)?\.webp$/);
+  assert.match(gift.image,/^\/images\/wishlist-v2\/approved-2026-11-04\/gift-\d{2}(?:-v2|-fd009)?\.webp$/);
  }
  assert.match(gifts[2].title,/Скаген/);assert.match(gifts[8].title,/Qualy Duo Sparrow/);
  assert.match(gifts[6].title,/G733 LIGHTSPEED/);assert.ok(!gifts[6].identityAliases.includes('G735'));
  assert.match(gifts[15].comment,/оптическому/);assert.match(gifts[15].review.note,/HDMI ARC не переносится/);
- assert.match(gifts[17].comment,/2,5 л/);assert.ok(!gifts[17].comment.includes('Bluetooth'));
- assert.equal(gifts[17].links[1].url.includes('4742013927'),true);
+ assert.match(gifts[17].comment,/3,2 л/);assert.ok(!gifts[17].comment.includes('Bluetooth'));
+ assert.equal(gifts[17].links[0].url.includes('2031204978'),true);
  assert.equal(new Set(gifts.map(gift=>gift.image)).size,19);
 });

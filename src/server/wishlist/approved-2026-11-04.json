@@ -562,42 +562,38 @@
   },
   {
     "seedKey": "approved-nov-2026:18",
-    "title": "Фонтан Pet Flat FD013 Aqua Pro Max, белый",
+    "title": "Фонтан Pet Flat FD009, белый, 3,2 л",
     "category": "home",
-    "price": 5999,
-    "comment": "Фонтан Pet Flat FD013 с чашей из нержавеющей стали, фильтрацией, УФ-очисткой, датчиком движения и Wi-Fi-приложением. Объём 2,5 л. Съёмный резервуар стоит на док-станции, фильтры нужно периодически менять.",
-    "image": "/images/wishlist-v2/approved-2026-11-04/gift-18-v2.webp",
+    "price": 4650,
+    "comment": "Аккумуляторная поилка-фонтан Pet Flat FD009 на 3,2 л с датчиком движения, стальной чашей и индикатором уровня воды. Три режима подачи воды. Сменные фильтры нужно периодически менять.",
+    "image": "/images/wishlist-v2/approved-2026-11-04/gift-18-fd009.webp",
     "priority": false,
     "reservationMode": "single",
     "isVisible": false,
     "links": [
       {
-        "label": "Pet Flat: официальный магазин",
-        "url": "https://petflatpro.ru/catalog/poilki/aqua-pro-max/"
-      },
-      {
         "label": "Ozon",
-        "url": "https://www.ozon.ru/product/avtomaticheskaya-poilka-fontan-dlya-koshek-i-sobak-s-datchikom-dvizheniya-i-upravleniem-cherez-4742013927/"
+        "url": "https://www.ozon.ru/product/avtomaticheskaya-poilka-fontan-dlya-koshek-i-sobak-besprovodnaya-avtopoilka-3-2-l-s-datchikom-2031204978/"
       }
     ],
-    "modelIdentity": "Pet Flat FD013",
+    "modelIdentity": "Pet Flat FD009",
     "review": {
       "model": "verified",
       "image": "verified",
       "links": "verified",
       "checkedAt": "2026-11-04",
-      "note": "PETKIT заменён на Pet Flat по прямому предпочтению владельца: кормушка той же марки. FD013 проверен у производителя и на Ozon 4742013927 (Smart Pet Systems), в наличии. Официальная цена 5999 ₽, на Ozon 7629 ₽ без спецкарты. Объём 2,5 л сверён с производителем, не перенесён от FD009. Фото сверено с корпусом, металлическим носиком, зажимами и Wi-Fi-доком.",
-      "price": "verified",
+      "note": "FD009, 3,2 л, белый, выбран по прямой ссылке владельца Ozon 2031204978. Новое фото сверено с белой задней башней, носиком, датчиком движения, стальной чашей и вертикальным окном уровня воды. FD013 полностью заменён; Wi-Fi и УФ не заявляются. Цена 4650 ₽ без банковской скидки.",
+      "price": "indexed",
       "sources": [
         "https://spb.technopark.ru/aksessuar-dlya-zhivotnyh-petkit-eversweet-3-pro-uvc/",
         "https://petkit.com.ru/products/umnyiy-pitevoiy-fontan-dlya-jivotnyh-s-sistemoiy-filtracii-eversweet-pro-uvc-1-100097",
         "https://petflatpro.ru/catalog/poilki/aqua-pro-max/",
-        "https://www.ozon.ru/product/avtomaticheskaya-poilka-fontan-dlya-koshek-i-sobak-s-datchikom-dvizheniya-i-upravleniem-cherez-4742013927/"
+        "https://www.ozon.ru/product/avtomaticheskaya-poilka-fontan-dlya-koshek-i-sobak-s-datchikom-dvizheniya-i-upravleniem-cherez-4742013927/",
+        "https://www.ozon.ru/product/avtomaticheskaya-poilka-fontan-dlya-koshek-i-sobak-besprovodnaya-avtopoilka-3-2-l-s-datchikom-2031204978/"
       ]
     },
     "identityAliases": [
-      "FD013",
-      "Aqua Pro Max"
+      "FD009"
     ]
   },
   {

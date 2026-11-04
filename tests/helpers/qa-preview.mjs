@@ -1,3 +1,7 @@
+import {readFileSync} from 'node:fs';
+import {approvedImportAdminRequest} from '../../src/server/wishlist/approved-admin.mjs';
+import {verifyApprovedAsset} from '../../src/server/wishlist/approved-assets.mjs';
+const approvedDefinitions=JSON.parse(readFileSync('src/server/wishlist/approved-2026-11-04.json','utf8'));
 // Isolated local QA harness: real components/API handlers, in-memory PostgreSQL,
 // synthetic Telegram authentication. Never loads .env.local or contacts Telegram.
 import {createServer} from 'node:http';
@@ -68,7 +72,7 @@ const server=createServer(async(req,res)=>{try{
   const chunks=[];for await(const chunk of req)chunks.push(chunk);const body=Buffer.concat(chunks);
   if(delay&&req.method==='POST')await new Promise(resolve=>setTimeout(resolve,delay));
   let reply;if(status&&req.method==='POST')reply=Response.json({error:'Technical details must never appear in UI'},{status});
-  else {const request=new Request(url,{method:req.method,headers:req.headers,...(body.length?{body}:{})});reply=url.pathname==='/api/rsvp/invitation'?await downloadInvitation(request,source):url.pathname==='/api/rsvp'?(req.method==='GET'?await getRsvp(request,source):await postRsvp(request,source)):url.pathname==='/api/telegram/mini-app'?await miniAppRequest(request,{source,env}):url.pathname==='/api/wishlist'?await wishlistRequest(request,{source}):url.pathname==='/api/telegram/wishlist'?await wishlistAdminRequest(request,{source,env}):new Response(null,{status:404});}
+  else {const request=new Request(url,{method:req.method,headers:req.headers,...(body.length?{body}:{})});reply=url.pathname==='/api/rsvp/invitation'?await downloadInvitation(request,source):url.pathname==='/api/rsvp'?(req.method==='GET'?await getRsvp(request,source):await postRsvp(request,source)):url.pathname==='/api/telegram/mini-app'?await miniAppRequest(request,{source,env}):url.pathname==='/api/wishlist'?await wishlistRequest(request,{source}):url.pathname==='/api/telegram/wishlist/approved-import'?await approvedImportAdminRequest(request,{source,env,definitions:approvedDefinitions,verifyAsset:verifyApprovedAsset}):url.pathname==='/api/telegram/wishlist'?await wishlistAdminRequest(request,{source,env}):new Response(null,{status:404});}
   res.writeHead(reply.status,Object.fromEntries(reply.headers));res.end(Buffer.from(await reply.arrayBuffer()));return;
  }
  const upstream=await fetch(new URL(req.url,'http://127.0.0.1:'+upstreamPort),{headers:{'accept-encoding':'identity'}});

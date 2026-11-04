@@ -1,7 +1,7 @@
 // One-time, organizer-initiated import of the approved 19-gift batch.
 // Only signed Telegram Mini App organizers may preview and explicitly apply.
 // Never invoked from startup, migrations, public API or automatic deployments.
-import {createHash} from 'node:crypto';
+import {approvedPreview} from './approved-server.mjs';
 import {miniAppUser} from '../telegram/mini-app.mjs';
 import {limitedJson} from '../rsvp/session.mjs';
 import {transaction} from '../db/index.mjs';
@@ -9,8 +9,11 @@ import {importApproved} from './approved-import.mjs';
 import {WishlistError} from './validation.mjs';
 
 const reply=(value,status=200)=>Response.json(value,{status,headers:{'Cache-Control':'private, no-store','Vary':'X-Telegram-Init-Data'}});
-const planId=(outcome,definitions)=>createHash('sha256').update(JSON.stringify({items:outcome.items.map(({seedKey,status})=>[seedKey,status]),definitions:definitions.map(({seedKey,title,price,image,links})=>({seedKey,title,price,image,links}))})).digest('hex');
 
+/**
+ * @param {Request} request
+ * @param {{source?: object, env?: NodeJS.ProcessEnv, definitions?: object[], verifyAsset?: (definition: object) => Promise<boolean>}} options
+ */
 export async function approvedImportAdminRequest(request,{source,env=process.env,definitions,verifyAsset}={}){
  try{miniAppUser(request.headers.get('x-telegram-init-data'),env);}
  catch{return reply({error:'Импорт доступен только организаторам через Telegram.'},403);}
@@ -21,9 +24,7 @@ export async function approvedImportAdminRequest(request,{source,env=process.env
  if(input.action==='apply'&&(input.confirm!=='IMPORT_19_HIDDEN_DRAFTS'||typeof input.previewId!=='string'||!/^[a-f0-9]{64}$/.test(input.previewId)))return reply({error:'Сначала проверь состав импорта и подтверди действие.'},400);
  try{
   const result=await transaction(async client=>{
-   const before=await importApproved(client,definitions,{apply:false,verifyAsset});
-   const previewId=planId(before,definitions);
-   const canApply=before.blocked===0&&before.items.some(item=>item.status==='WOULD CREATE HIDDEN DRAFT');
+   const {outcome:before,previewId,canApply}=await approvedPreview(client,definitions,verifyAsset);
    if(input.action==='preview')return {outcome:before,previewId,canApply};
    if(previewId!==input.previewId)throw new WishlistError('Список подарков изменился. Обнови предпросмотр перед импортом.',409);
    if(before.blocked)throw new WishlistError('Некоторые товары не прошли проверку. Импорт заблокирован.',409);

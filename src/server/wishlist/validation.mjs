@@ -20,5 +20,6 @@ export function itemInput(input){
  const image=input.image?safeUrl(input.image,{image:true}):'';
  if(!Array.isArray(input.links)||input.links.length>8)throw new WishlistError('Можно добавить до 8 магазинов.');
  const links=input.links.map(link=>{const url=safeUrl(typeof link?.url==='string'?link.url.trim():link?.url);return {label:text(resolvedStoreLabel(link?.label,url),60,'Магазин',true),url};});
- return {title,comment,category,price,image,priority:input.priority,isVisible:input.isVisible,reservationMode:input.reservationMode,links};
+ const productModel=text(input.productModel??'',240,'Модель и характеристики');
+ return {title,comment,category,price,image,productModel,priority:input.priority,isVisible:input.isVisible,reservationMode:input.reservationMode,links};
 }
