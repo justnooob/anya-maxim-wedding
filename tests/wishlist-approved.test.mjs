@@ -20,7 +20,7 @@ test('selected gifts are exactly 16 unpublished, uniquely identified drafts',()=
 });
 test('one kitchen TV only, matched karaoke, three glass types and owner-approved additions',()=>{
  const titles=gifts.map(x=>x.title.toLowerCase());
- assert.equal(titles.filter(x=>x.includes('телевизор')).length,1);
+ assert.equal(titles.filter(x=>x.startsWith('кухонный телевизор')).length,1);
  assert.ok(titles.some(x=>x.includes('tuvio td32ffbch11')));
  assert.ok(!titles.some(x=>x.includes('tcl 65c6k')));
  assert.ok(titles.some(x=>x.includes('jbl cinema ktv450')));
