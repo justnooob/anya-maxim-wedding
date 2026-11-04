@@ -9,7 +9,7 @@ import {importApproved} from './approved-import.mjs';
 import {WishlistError} from './validation.mjs';
 
 const reply=(value,status=200)=>Response.json(value,{status,headers:{'Cache-Control':'private, no-store','Vary':'X-Telegram-Init-Data'}});
-const planId=outcome=>createHash('sha256').update(JSON.stringify(outcome.items.map(({seedKey,status})=>[seedKey,status]))).digest('hex');
+const planId=(outcome,definitions)=>createHash('sha256').update(JSON.stringify({items:outcome.items.map(({seedKey,status})=>[seedKey,status]),definitions:definitions.map(({seedKey,title,price,image,links})=>({seedKey,title,price,image,links}))})).digest('hex');
 
 export async function approvedImportAdminRequest(request,{source,env=process.env,definitions,verifyAsset}={}){
  try{miniAppUser(request.headers.get('x-telegram-init-data'),env);}
@@ -22,7 +22,7 @@ export async function approvedImportAdminRequest(request,{source,env=process.env
  try{
   const result=await transaction(async client=>{
    const before=await importApproved(client,definitions,{apply:false,verifyAsset});
-   const previewId=planId(before);
+   const previewId=planId(before,definitions);
    const canApply=before.blocked===0&&before.items.some(item=>item.status==='WOULD CREATE HIDDEN DRAFT');
    if(input.action==='preview')return {outcome:before,previewId,canApply};
    if(previewId!==input.previewId)throw new WishlistError('Список подарков изменился. Обнови предпросмотр перед импортом.',409);
