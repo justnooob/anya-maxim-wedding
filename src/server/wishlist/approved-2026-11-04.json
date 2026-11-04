@@ -1,0 +1,274 @@
+[
+  {
+    "seedKey": "approved-nov-2026:01",
+    "title": "Dyson Supersonic Nural HD16",
+    "category": "tech",
+    "price": 39000,
+    "comment": "Фен с интеллектуальной регулировкой нагрева. Выбирать оригинальную версию с пятью насадками и гарантией.",
+    "image": "https://tehnomag.com/upload/catalog/product/9400/dyson-supersonic-nural-hd16-ceramic-pink-rose-gold_68c821ada95bf.jpg",
+    "priority": false,
+    "reservationMode": "single",
+    "isVisible": false,
+    "links": [
+      {
+        "label": "",
+        "url": "https://www.dns-shop.ru/search/?q=Dyson%20Supersonic%20Nural%20HD16"
+      }
+    ]
+  },
+  {
+    "seedKey": "approved-nov-2026:02",
+    "title": "Комплект из 4 бежевых подушек HOFF Peloso 40 × 40",
+    "category": "cozy",
+    "price": 2400,
+    "comment": "Четыре мягкие декоративные подушки из искусственного меха, бежевые, со съёмными чехлами.",
+    "image": "",
+    "priority": false,
+    "reservationMode": "single",
+    "isVisible": false,
+    "links": [
+      {
+        "label": "",
+        "url": "https://hoff.ru/catalog/tovary_dlya_doma/tekstil/dekorativnye_podushki/dekorativnye_podushki/dekorativnaya_podushka_peloso_id10660819/?articul=80632862"
+      }
+    ]
+  },
+  {
+    "seedKey": "approved-nov-2026:03",
+    "title": "Белый шкаф-витрина HOFF Скаген 78 × 190 × 35 см",
+    "category": "home",
+    "price": 19999,
+    "comment": "Белая витрина для посуды. Перед покупкой обязательно проверить, что нижняя часть непрозрачная и закрытая: это наше пожелание.",
+    "image": "",
+    "priority": false,
+    "reservationMode": "single",
+    "isVisible": false,
+    "links": [
+      {
+        "label": "",
+        "url": "https://hoff.ru/catalog/gostinaya/mebel_dlya_gostinykh/vitriny_i_bufety/shkaf_s_vitrinoy_skagen_id8847341/?articul=80541760"
+      }
+    ]
+  },
+  {
+    "seedKey": "approved-nov-2026:04",
+    "title": "Светлый ковёр HOFF Springs 200 × 290 см",
+    "category": "cozy",
+    "price": 9999,
+    "comment": "Большой светлый ковёр бежево-золотых оттенков для гостиной, короткий ворс 7 мм.",
+    "image": "",
+    "priority": false,
+    "reservationMode": "single",
+    "isVisible": false,
+    "links": [
+      {
+        "label": "",
+        "url": "https://hoff.ru/catalog/tovary_dlya_doma/kovry/vostochnye_kovry/kovyer_atlantik_hali_springs_id8557657/?articul=80521310"
+      }
+    ]
+  },
+  {
+    "seedKey": "approved-nov-2026:05",
+    "title": "Два комплекта умной LED-ленты Яндекс с Алисой по 5 м",
+    "category": "tech",
+    "price": 11140,
+    "comment": "Два отдельных комплекта по 5 м. В каждом: основная лента 3 м и два удлинителя по 1 м; у каждого комплекта собственный контроллер Matter.",
+    "image": "https://voiceapp.ru/wp-content/uploads/2024/05/umnaya-svetodiodnaya-lenta-yandeksa-s-alisoy-i-matter-tsvetnaya.jpg",
+    "priority": false,
+    "reservationMode": "single",
+    "isVisible": false,
+    "links": [
+      {
+        "label": "",
+        "url": "https://alice.yandex.ru/store/"
+      }
+    ]
+  },
+  {
+    "seedKey": "approved-nov-2026:06",
+    "title": "Govee Flow Plus Light Bars (пара для телевизора)",
+    "category": "tech",
+    "price": 10000,
+    "comment": "Две RGB-палки для атмосферной подсветки телевизора. Поддержка Алисы напрямую НЕ подтверждена; уточнять до покупки.",
+    "image": "https://ikonivo.com/cdn/shop/files/1cea27891c18402a99a2d9f5dc4c7e6d.jpg?v=1715001798",
+    "priority": false,
+    "reservationMode": "single",
+    "isVisible": false,
+    "links": [
+      {
+        "label": "",
+        "url": "https://ikonivo.com/en/products/govee-rgbicww-wifi-bluetooth-flow-plus-dikey-aydinlatma"
+      }
+    ]
+  },
+  {
+    "seedKey": "approved-nov-2026:07",
+    "title": "Белая беспроводная гарнитура Logitech G735 Aurora",
+    "category": "tech",
+    "price": 20000,
+    "comment": "Белые полноразмерные наушники с микрофоном, беспроводное подключение LIGHTSPEED и Bluetooth.",
+    "image": "https://s3.us-east-1.amazonaws.com/product-image-bucket-nz-prod-us/414077-Product-0-I-638917018331079982.jpg",
+    "priority": false,
+    "reservationMode": "single",
+    "isVisible": false,
+    "links": [
+      {
+        "label": "",
+        "url": "https://www.ozon.ru/search/?text=Logitech%20G735%20Aurora%20White"
+      }
+    ]
+  },
+  {
+    "seedKey": "approved-nov-2026:08",
+    "title": "Чайный сервиз EVIO Roma, 15 предметов",
+    "category": "kitchen",
+    "price": 3999,
+    "comment": "Сервиз из фарфора на шесть персон, пригоден для посудомоечной машины.",
+    "image": "",
+    "priority": false,
+    "reservationMode": "single",
+    "isVisible": false,
+    "links": [
+      {
+        "label": "",
+        "url": "https://hoff.ru/catalog/tovary_dlya_doma/posuda/servirovka_stola/chay_i_kofe/chaynye_servizy/?brands=evio"
+      }
+    ]
+  },
+  {
+    "seedKey": "approved-nov-2026:09",
+    "title": "Парная настенная ключница Moose",
+    "category": "home",
+    "price": 2699,
+    "comment": "Декоративная настенная ключница. Перед покупкой уточнить наличие ДВУХ парных брелоков, дополняющих общую композицию.",
+    "image": "https://mrphy.sg/cdn/shop/files/QL10154-BK-Moose-key-holder-web-02.jpg?v=1762422120&width=1500",
+    "priority": false,
+    "reservationMode": "single",
+    "isVisible": false,
+    "links": [
+      {
+        "label": "",
+        "url": "https://mrphy.sg/products/moose-key-holder"
+      }
+    ]
+  },
+  {
+    "seedKey": "approved-nov-2026:10",
+    "title": "Моющий робот-пылесос Dreame L40 Ultra AE с Алисой",
+    "category": "tech",
+    "price": 69990,
+    "comment": "Робот для сухой и влажной уборки со станцией мойки и сушки швабр. Выбирать российскую версию с официальной поддержкой Алисы.",
+    "image": "https://www.dreametech.jp/cdn/shop/files/L40_Ultra_AE_1200x1200.png?v=1760197909",
+    "priority": false,
+    "reservationMode": "single",
+    "isVisible": false,
+    "links": [
+      {
+        "label": "",
+        "url": "https://ru.dreametech.com/product/robot-pylesos-l40-ultra-ae/"
+      }
+    ]
+  },
+  {
+    "seedKey": "approved-nov-2026:11",
+    "title": "Кухонный телевизор Tuvio TD32FFBCH11, 32″ Full HD",
+    "category": "tech",
+    "price": 17000,
+    "comment": "Компактный телевизор для кухни с YaOS и Алисой через пульт. Большой телевизор НЕ добавляем.",
+    "image": "",
+    "priority": false,
+    "reservationMode": "single",
+    "isVisible": false,
+    "links": [
+      {
+        "label": "",
+        "url": "https://www.ozon.ru/search/?text=Tuvio%20TD32FFBCH11"
+      }
+    ]
+  },
+  {
+    "seedKey": "approved-nov-2026:12",
+    "title": "Радарный датчик присутствия Яндекс Matter",
+    "category": "tech",
+    "price": 3490,
+    "comment": "Автоматизирует свет и сценарии умного дома по присутствию человека в разных зонах комнаты.",
+    "image": "",
+    "priority": false,
+    "reservationMode": "single",
+    "isVisible": false,
+    "links": [
+      {
+        "label": "",
+        "url": "https://alice.yandex.ru/store/products/radar-sensor-100572"
+      }
+    ]
+  },
+  {
+    "seedKey": "approved-nov-2026:13",
+    "title": "Подсветка монитора Xiaomi Mi Computer Monitor Light Bar",
+    "category": "tech",
+    "price": 5000,
+    "comment": "Лампа на монитор с беспроводным пультом, без бликов на экране; не RGB-подсветка телевизора.",
+    "image": "",
+    "priority": false,
+    "reservationMode": "single",
+    "isVisible": false,
+    "links": [
+      {
+        "label": "",
+        "url": "https://www.mi.com/ru/product/mi-computer-monitor-light-bar/"
+      }
+    ]
+  },
+  {
+    "seedKey": "approved-nov-2026:14",
+    "title": "Массажёр для ног Beurer FM 60",
+    "category": "home",
+    "price": 10500,
+    "comment": "Домашний массажёр шиацу с подогревом и двумя режимами интенсивности.",
+    "image": "",
+    "priority": false,
+    "reservationMode": "single",
+    "isVisible": false,
+    "links": [
+      {
+        "label": "",
+        "url": "https://www.ozon.ru/search/?text=Beurer%20FM%2060"
+      }
+    ]
+  },
+  {
+    "seedKey": "approved-nov-2026:15",
+    "title": "Комплект бокалов Bohemia: 2 вино + 2 коньяк + 2 шампанское",
+    "category": "home",
+    "price": 2200,
+    "comment": "Шесть разных бокалов из трёх пар Bohemia: для вина, бренди/коньяка и шампанского. Не обычный набор из шести одинаковых бокалов.",
+    "image": "",
+    "priority": false,
+    "reservationMode": "single",
+    "isVisible": false,
+    "links": [
+      {
+        "label": "",
+        "url": "https://dombutik.ru/bar-i-hrustal/bokaly-2.html"
+      }
+    ]
+  },
+  {
+    "seedKey": "approved-nov-2026:16",
+    "title": "Караоке JBL Cinema KTV450 с 2 микрофонами, HDMI ARC",
+    "category": "tech",
+    "price": 64000,
+    "comment": "Полный ТВ-комплект: саундбар, сабвуфер, два беспроводных микрофона и HDMI ARC. Уточнить HDMI ARC на телевизоре и пошлину.",
+    "image": "",
+    "priority": false,
+    "reservationMode": "single",
+    "isVisible": false,
+    "links": [
+      {
+        "label": "",
+        "url": "https://www.ozon.ru/product/jbl-cinema-ktv450-saundbar-dlya-televizora-s-karaoke-2-mikrofona-sabvufer-440-vt-hdmi-arc-bluetooth-5319771908/"
+      }
+    ]
+  }
+]
