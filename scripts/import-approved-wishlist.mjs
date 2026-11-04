@@ -1,38 +1,27 @@
-// Explicit organizer-only CLI import. Nothing here runs at deploy time.
-// Dry-run by default; --apply creates only missing, hidden drafts and leaves
-// archived/deleted items, existing edits, links, order, and reservations intact.
-import {readFile} from 'node:fs/promises';
+// Organizer-only command. No startup/deploy integration.
+import {readFile,stat} from 'node:fs/promises';
+import {resolve,sep} from 'node:path';
+import {pathToFileURL} from 'node:url';
 import {database,transaction} from '../src/server/db/index.mjs';
-import {saveItem} from '../src/server/wishlist/repository.mjs';
-import {itemInput} from '../src/server/wishlist/validation.mjs';
-
-const apply=process.argv.includes('--apply');
-const definitions=JSON.parse(await readFile(new URL('../src/server/wishlist/approved-2026-11-04.json',import.meta.url),'utf8'));
-if(definitions.length!==19||new Set(definitions.map(x=>x.seedKey)).size!==19)throw new Error('Approved gift count/provenance mismatch');
-for(const d of definitions){
- if(d.isVisible!==false||!d.seedKey?.startsWith('approved-nov-2026:'))throw new Error('Only unpublished approved drafts can be imported');
- itemInput(d);
+import {importApproved,validateApproved} from '../src/server/wishlist/approved-import.mjs';
+const imageRoot=resolve('public/images/wishlist-v2/approved-2026-11-04');
+export async function verifyApprovedAsset(def){
+ if(!/^\/images\/wishlist-v2\/approved-2026-11-04\/[a-z0-9-]+\.webp$/.test(def.image))return false;
+ const file=resolve('public'+def.image);if(!file.startsWith(imageRoot+sep))return false;
+ try{return (await stat(file)).size>1000&&(await readFile(file)).subarray(8,12).toString()==='WEBP';}catch{return false;}
 }
-let source;
-try{
- source=database();
- const result=await transaction(async client=>{
-  // Matches admin writes and serializes imports without locking public readers.
-  await client.query('SELECT id FROM wishlist_settings WHERE id=1 FOR UPDATE');
-  const outcome={mode:apply?'APPLY':'DRY RUN',created:0,skipped:0,items:[]};
-  for(const def of definitions){
-   const match=(await client.query('SELECT id,title,seed_key,archived_at,is_visible FROM wishlist_items WHERE seed_key=$1 OR lower(btrim(title))=lower(btrim($2)) LIMIT 1',[def.seedKey,def.title])).rows[0];
-   if(match){outcome.skipped++;outcome.items.push({title:def.title,status:match.archived_at?'SKIP ARCHIVED':'SKIP ALREADY EXISTS'});continue;}
-   if(!apply){outcome.items.push({title:def.title,status:'WOULD CREATE HIDDEN DRAFT'});continue;}
-   const id=await saveItem(client,null,itemInput(def));
-   await client.query('UPDATE wishlist_items SET seed_key=$2 WHERE id=$1',[id,def.seedKey]);
-   outcome.created++;outcome.items.push({title:def.title,status:'CREATED HIDDEN DRAFT'});
-  }
-  return outcome;
- },source);
- console.log(JSON.stringify(result,null,2));
- console.log(apply?'Drafts created. Add confirmed images and enable visibility manually in Telegram Mini App.':'Dry-run only. No data was changed. Append --apply after reviewing all 19 items.');
-}catch(error){
- console.error('Wishlist import failed. Transaction was rolled back. '+(error instanceof Error?error.message:String(error)));
- process.exitCode=1;
-}finally{if(source)await source.end();}
+async function main(){
+ let source;
+ try{
+  const definitions=JSON.parse(await readFile(new URL('../src/server/wishlist/approved-2026-11-04.json',import.meta.url),'utf8'));
+  validateApproved(definitions);source=database();const apply=process.argv.includes('--apply');
+  const outcome=await transaction(client=>importApproved(client,definitions,{apply,verifyAsset:verifyApprovedAsset}),source);
+  console.log(JSON.stringify(outcome,null,2));
+  console.log(apply?'Only verified missing hidden drafts were created. Existing items and reservations were not changed.':'Dry-run only. No data changed. Review skips/blocks before explicitly using --apply.');
+ }catch(error){
+  // Never echo raw pg/network errors: they may contain credentials.
+  const code=typeof error?.code==='string'&&/^[A-Z0-9_]{2,30}$/.test(error.code)?error.code:'UNAVAILABLE';
+  console.error('Wishlist import failed ('+code+'). No batch changes committed. Check configuration and review report; sensitive details hidden.');process.exitCode=1;
+ }finally{if(source)await source.end();}
+}
+if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href)await main();

@@ -6,8 +6,8 @@ import {itemInput} from '../src/server/wishlist/validation.mjs';
 const gifts=JSON.parse(await readFile(new URL('../src/server/wishlist/approved-2026-11-04.json',import.meta.url),'utf8'));
 test('selected gifts are exactly 19 unpublished, uniquely identified drafts',()=>{
  assert.equal(gifts.length,19);
- assert.equal(new Set(gifts.map(x=>x.seedKey)).size,16);
- assert.equal(new Set(gifts.map(x=>x.title.toLowerCase())).size,16);
+ assert.equal(new Set(gifts.map(x=>x.seedKey)).size,19);
+ assert.equal(new Set(gifts.map(x=>x.title.toLowerCase())).size,19);
  for(const gift of gifts){
   assert.equal(gift.isVisible,false);
   assert.equal(gift.reservationMode,'single');
@@ -42,7 +42,7 @@ test('latest selection has exactly three gifts and excludes the feeder',()=>{
  assert.ok(!gifts.some(x=>/Fresh Element Solo|автокормушк/i.test(x.title)));
  for(const item of last){
   assert.equal(item.isVisible,false);
-  assert.match(item.image,/^https:\/\//);
+  assert.ok(item.review);
   assert.equal(item.links.length,2);
   assert.ok(item.links.every(x=>x.url.startsWith('https://')));
  }
