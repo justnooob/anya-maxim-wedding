@@ -59,7 +59,7 @@
       "proposed": {
         "title": "Ridberg Discover, белые чемоданы L + M + S",
         "productModel": "Ridberg Discover L+M+S White/Black; 3 чемодана",
-        "price": null,
+        "price": 10102,
         "comment": "Комплект из трёх белых чемоданов Ridberg Discover L, M и S с чёрными деталями и съёмными колёсами.",
         "image": "/images/wishlist-v2/revisions-2026-11-05/ridberg.webp",
         "links": [
@@ -70,9 +70,9 @@
         ]
       },
       "verification": {
-        "status": "needs-ozon-price",
+        "status": "ready-for-manual-review",
         "shortUrl": "https://ozon.ru/t/ye8TUvP",
-        "priceNote": "Цена Ozon не подтверждена: не заменять текущую цену нулём или догадкой.",
+        "priceNote": "10 102 ₽ по данным организатора.",
         "imageNote": "Новый WebP сверён с референсом точной модели.",
         "source": "https://www.icover.ru/catalog/product/komplekt_chemodanov_ridberg_discover_l_m_s_white_black_/"
       },
@@ -133,11 +133,11 @@
         "observedReserved": null
       },
       "proposed": {
-        "title": null,
-        "productModel": null,
-        "price": null,
-        "comment": null,
-        "image": null,
+        "title": "Белая цифровая фоторамка, 10,1″",
+        "productModel": "Ozon 5792470559, 10,1″, белый корпус",
+        "price": 5389,
+        "comment": "Белая цифровая фоторамка с экраном 10,1″ для наших любимых фотографий.",
+        "image": "/images/wishlist-v2/revisions-2026-11-05/frame-white.webp",
         "links": [
           {
             "label": "Ozon",
@@ -146,10 +146,10 @@
         ]
       },
       "verification": {
-        "status": "blocked-exact-model-and-reference",
+        "status": "ready-for-manual-review",
         "shortUrl": "https://ozon.ru/t/CrqzLNj",
-        "priceNote": "Цена Ozon не подтверждена: не заменять текущую цену нулём или догадкой.",
-        "imageNote": "Нет подтверждённого референса; не применять замену.",
+        "priceNote": "5 389 ₽ и диагональ 10,1″ по данным организатора.",
+        "imageNote": "Иллюстрация по согласованию с организатором: белый корпус на прежнем фото. Модель продавца отдельно не подтверждена.",
         "source": "https://www.ozon.ru/product/tsifrovaya-fotoramka-akrilovaya-elektronnaya-foto-i-video-ramka-5792470559/"
       },
       "safety": "Открыть существующую карточку в Mini App, проверить статус и всю историю броней. При брони не подменять модель. Не добавлять подарок, не восстанавливать архив, не менять видимость автоматически."
