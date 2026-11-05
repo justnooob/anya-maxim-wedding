@@ -1,0 +1,29 @@
+@font-face{font-family:'Great Vibes';src:url('/fonts/great-vibes-regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+#top .wedding-date-section .date-large{font-family:'Great Vibes',cursive;font-size:clamp(64px,7.4vw,116px);font-weight:400;line-height:1.55;letter-spacing:.025em;white-space:nowrap;padding:.1em .18em .15em;-webkit-text-stroke:0}
+#top .countdown-number{font-family:'Great Vibes',cursive;font-weight:400;line-height:1.45;letter-spacing:.025em;min-width:2.3ch;padding-inline:.08em}
+@media(max-width:700px){#top .wedding-date-section .date-large{font-size:clamp(54px,16vw,78px)}}
+@media(max-width:340px){#top .wedding-date-section .date-large{font-size:clamp(48px,16vw,54px)}}
+@media(prefers-reduced-motion:no-preference){
+ #top .question-panel,#top .question-panel[data-open=true]{transition-duration:520ms,240ms,0s;transition-timing-function:cubic-bezier(.4,0,.2,1),ease,linear}
+ #top .question-panel{transition-delay:0s,0s,520ms}
+ #top .question-panel[data-open=true]{transition-delay:0s,0s,0s}
+}
+/* A question is a group: far between questions, near within one answer. */
+#rsvp .rsvp-paper{--question-gap:36px;--question-label-gap:12px;--answer-gap:6px}
+#rsvp .writing-field,#rsvp .rsvp-paper fieldset{margin:0 0 var(--question-gap)}
+#rsvp .writing-field>span,#rsvp .rsvp-paper legend{margin-bottom:var(--question-label-gap)}
+#rsvp .paper-options{margin-top:0!important}
+#rsvp .paper-options label{margin-top:var(--answer-gap);padding-block:6px;min-height:44px}
+#rsvp .paper-options legend+label{margin-top:0}
+#rsvp .paper-options .quiet-note{margin:0 0 var(--question-label-gap)}
+#rsvp .writing-field .quiet-note{display:block;margin:6px 0 0}
+#rsvp .attendance-buttons{margin-top:0;gap:10px}
+#rsvp .rsvp-details{margin-bottom:0}
+#rsvp .rsvp-food-block{margin:0 0 var(--question-gap);padding:var(--question-gap) 0 0}
+#rsvp .rsvp-food-block .writing-field{margin-bottom:var(--question-gap)}
+#rsvp .paper-checkbox{margin-top:var(--answer-gap);padding-block:6px;min-height:44px}
+#rsvp .drink-options .drink-other{margin:var(--question-label-gap) 0 0}
+#rsvp .drink-options .drink-options-grid{row-gap:0}
+#rsvp .drink-hint{margin-top:var(--question-label-gap)}
+#rsvp .rsvp-no-note{font:400 18px/1.7 Montserrat,sans-serif;margin:24px 0 var(--question-gap)}
+@media(max-width:700px){#rsvp .rsvp-paper{--question-gap:30px;--question-label-gap:10px;--answer-gap:4px}#rsvp .rsvp-no-note{font-size:17px}}

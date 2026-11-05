@@ -39,7 +39,7 @@ export function VenueSection(){
     <span className="venue-frames" key={index}>{previous!==null&&previous!==index&&<img className="venue-outgoing-photo" src={venue.images[previous].src} alt="" aria-hidden="true" draggable={false}/>}<img className={'venue-current-photo'+(previous!==null&&previous!==index?' venue-incoming-photo':'')} src={photo.src} alt={photo.alt} loading="lazy" draggable={false}/></span>
    </button>
   </div>
-  <div className="venue-copy"><span className="chapter-kicker">{venue.eyebrow}</span><h2 id="venue-title">{venue.title}</h2><p className="venue-name">{venue.name}</p><p className="venue-address">{venue.address}</p><a className="foil-button" href={venue.mapUrl} target="_blank" rel="noopener noreferrer"><span>{venue.mapLabel}</span><span aria-hidden="true">→</span></a></div>
+  <div className="venue-copy"><h2 id="venue-title">{venue.title}</h2><p className="venue-name">{venue.name}</p><p className="venue-address">{venue.address}</p><a className="foil-button" href={venue.mapUrl} target="_blank" rel="noopener noreferrer"><span>{venue.mapLabel}</span><span aria-hidden="true">→</span></a></div>
   <dialog className="venue-lightbox" ref={dialog} data-closing={closing} aria-label={venue.galleryLabel} onKeyDown={keys} onCancel={event=>{event.preventDefault();requestClose();}} onClick={event=>{if(event.target===event.currentTarget)requestClose();}}>
    <button type="button" className="venue-lightbox-close" aria-label={venue.closeGallery} onClick={requestClose}>{venue.closeGallery} ×</button>
    <div className="venue-lightbox-photo" onPointerDown={start} onPointerUp={end} onPointerCancel={()=>{gesture.current=null;}}><img src={photo.src} alt={photo.alt} draggable={false}/></div>

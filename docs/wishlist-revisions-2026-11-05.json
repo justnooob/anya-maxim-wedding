@@ -1,0 +1,272 @@
+{
+  "purpose": "Ручные правки существующих записей, не импорт и не seed",
+  "databaseChanged": false,
+  "items": [
+    {
+      "operation": "update-existing-only",
+      "match": {
+        "seedKey": "approved-nov-2026:07",
+        "publicId": null,
+        "oldTitle": "Logitech G733 LIGHTSPEED, белая гарнитура",
+        "oldImage": "/images/wishlist-v2/approved-2026-11-04/gift-07-v2.webp",
+        "oldLinks": [
+          {
+            "label": "Ozon",
+            "url": "https://www.ozon.ru/product/logitech-g-g733-lightspeed-usb-type-c-radiokanal-igrovye-besprovodnye-naushniki-s-mikrofonom-belye-947721500/"
+          }
+        ],
+        "publiclyObserved": false,
+        "observedReserved": null
+      },
+      "proposed": {
+        "title": "MCHOSE V9 Turbo+, белый/золотой",
+        "productModel": "MCHOSE V9 Turbo+; белый/золотой; док-станция",
+        "price": 8957,
+        "comment": "Беспроводные полноразмерные наушники MCHOSE V9 Turbo+ в бело-золотом цвете, с микрофоном и магнитной зарядной док-станцией. Подключение Bluetooth и радиоканал.",
+        "image": "/images/wishlist-v2/revisions-2026-11-05/mchose.webp",
+        "links": [
+          {
+            "label": "Ozon",
+            "url": "https://www.ozon.ru/product/naushniki-igrovye-besprovodnye-mchose-v9-turbo-c-mikrofonom-i-zaryadnoy-dok-stantsiey-3878746307/"
+          }
+        ]
+      },
+      "verification": {
+        "status": "verified",
+        "shortUrl": "https://ozon.ru/t/IYWw3qq",
+        "priceNote": "Ориентировочная цена без специальной банковской скидки, видимая в индексированной карточке Ozon; перепроверить перед сохранением.",
+        "imageNote": "Новый WebP сверён с референсом точной модели.",
+        "source": "https://www.ozon.ru/product/naushniki-igrovye-besprovodnye-mchose-v9-turbo-c-mikrofonom-i-zaryadnoy-dok-stantsiey-3878746307/"
+      },
+      "safety": "Открыть существующую карточку в Mini App, проверить статус и всю историю броней. При брони не подменять модель. Не добавлять подарок, не восстанавливать архив, не менять видимость автоматически."
+    },
+    {
+      "operation": "update-existing-only",
+      "match": {
+        "seedKey": "initial-v1:21",
+        "publicId": "703510ab-89d3-44ec-a27c-2730c804f102",
+        "oldTitle": "Ridberg Discover, чемоданы L + M + S",
+        "oldImage": "/images/wishlist-v2/gift-21.webp",
+        "oldLinks": [
+          {
+            "label": "Ozon",
+            "url": "https://www.ozon.ru/product/komplekt-chemodanov-so-semnymi-kolesami-ridberg-discover-l-m-s-orange-2712328135/"
+          }
+        ],
+        "publiclyObserved": true,
+        "observedReserved": false
+      },
+      "proposed": {
+        "title": "Ridberg Discover, белые чемоданы L + M + S",
+        "productModel": "Ridberg Discover L+M+S White/Black; 3 чемодана",
+        "price": 10102,
+        "comment": "Комплект из трёх белых чемоданов Ridberg Discover L, M и S с чёрными деталями и съёмными колёсами.",
+        "image": "/images/wishlist-v2/revisions-2026-11-05/ridberg.webp",
+        "links": [
+          {
+            "label": "Ozon",
+            "url": "https://www.ozon.ru/product/komplekt-chemodanov-so-semnymi-kolesami-ridberg-discover-l-m-s-white-black-2712329109/"
+          }
+        ]
+      },
+      "verification": {
+        "status": "ready-for-manual-review",
+        "shortUrl": "https://ozon.ru/t/ye8TUvP",
+        "priceNote": "10 102 ₽ по данным организатора.",
+        "imageNote": "Новый WebP сверён с референсом точной модели.",
+        "source": "https://www.icover.ru/catalog/product/komplekt_chemodanov_ridberg_discover_l_m_s_white_black_/"
+      },
+      "safety": "Открыть существующую карточку в Mini App, проверить статус и всю историю броней. При брони не подменять модель. Не добавлять подарок, не восстанавливать архив, не менять видимость автоматически."
+    },
+    {
+      "operation": "update-existing-only",
+      "match": {
+        "seedKey": "initial-v1:04",
+        "publicId": "68763e22-8969-4be5-9619-5cacf43f124c",
+        "oldTitle": "Tefal IXEO Power QT2020E0",
+        "oldImage": "/images/wishlist-v2/gift-4.webp",
+        "oldLinks": [
+          {
+            "label": "Ozon",
+            "url": "https://www.ozon.ru/product/parovaya-gladilnaya-sistema-tefal-ixeo-power-qt2020e0-598218481/"
+          }
+        ],
+        "publiclyObserved": true,
+        "observedReserved": false
+      },
+      "proposed": {
+        "title": "Tefal IXEO Vision QT1811E0, белая",
+        "productModel": "Tefal IXEO Vision QT1811E0; белый; 2200 Вт; 1,2 л",
+        "price": 35000,
+        "comment": "Белая паровая гладильная система Tefal IXEO Vision QT1811E0 с регулируемой доской, утюгом и резервуаром 1,2 л. Мощность 2200 Вт, постоянный пар 80 г/мин, паровой удар до 200 г/мин.",
+        "image": "/images/wishlist-v2/revisions-2026-11-05/tefal.webp",
+        "links": [
+          {
+            "label": "Ozon",
+            "url": "https://www.ozon.ru/product/parovaya-gladilnaya-sistema-tefal-ixeo-vision-qt1811e0-3064077356/"
+          }
+        ]
+      },
+      "verification": {
+        "status": "verified",
+        "shortUrl": "https://ozon.ru/t/wE3P7Up",
+        "priceNote": "Ориентировочная цена без специальной банковской скидки, видимая в индексированной карточке Ozon; перепроверить перед сохранением.",
+        "imageNote": "Новый WebP сверён с референсом точной модели.",
+        "source": "https://www.ozon.ru/product/parovaya-gladilnaya-sistema-tefal-ixeo-vision-qt1811e0-3064077356/"
+      },
+      "safety": "Открыть существующую карточку в Mini App, проверить статус и всю историю броней. При брони не подменять модель. Не добавлять подарок, не восстанавливать архив, не менять видимость автоматически."
+    },
+    {
+      "operation": "update-existing-only",
+      "match": {
+        "seedKey": "initial-v1:08",
+        "publicId": null,
+        "oldTitle": "Frameo BX-101, 10.1\"",
+        "oldImage": "/images/wishlist-v2/gift-8.webp",
+        "oldLinks": [
+          {
+            "label": "",
+            "url": "https://www.ozon.ru/product/sensornyy-zhk-ekran-a-klassa-tsifrovaya-fotoramka-frameo-bx-101-10-1-dyuymovaya-smart-wifi-1936701558/"
+          }
+        ],
+        "publiclyObserved": false,
+        "observedReserved": null
+      },
+      "proposed": {
+        "title": "Белая цифровая фоторамка, 10,1″",
+        "productModel": "Ozon 5792470559, 10,1″, белый корпус",
+        "price": 5389,
+        "comment": "Белая цифровая фоторамка с экраном 10,1″ для наших любимых фотографий.",
+        "image": "/images/wishlist-v2/revisions-2026-11-05/frame-white.webp",
+        "links": [
+          {
+            "label": "Ozon",
+            "url": "https://www.ozon.ru/product/tsifrovaya-fotoramka-akrilovaya-elektronnaya-foto-i-video-ramka-5792470559/"
+          }
+        ]
+      },
+      "verification": {
+        "status": "ready-for-manual-review",
+        "shortUrl": "https://ozon.ru/t/CrqzLNj",
+        "priceNote": "5 389 ₽ и диагональ 10,1″ по данным организатора.",
+        "imageNote": "Иллюстрация по согласованию с организатором: белый корпус на прежнем фото. Модель продавца отдельно не подтверждена.",
+        "source": "https://www.ozon.ru/product/tsifrovaya-fotoramka-akrilovaya-elektronnaya-foto-i-video-ramka-5792470559/"
+      },
+      "safety": "Открыть существующую карточку в Mini App, проверить статус и всю историю броней. При брони не подменять модель. Не добавлять подарок, не восстанавливать архив, не менять видимость автоматически."
+    },
+    {
+      "operation": "update-existing-only",
+      "match": {
+        "seedKey": "initial-v1:01",
+        "publicId": null,
+        "oldTitle": "DeLonghi Magnifica Evo ECAM290.61.B",
+        "oldImage": "/images/wishlist-v2/gift-1.webp",
+        "oldLinks": [
+          {
+            "label": "",
+            "url": "https://www.ozon.ru/product/kofemashina-delonghi-magnifica-evo-ecam290-61-b-1450vt-chernyy-1637472422/"
+          }
+        ],
+        "publiclyObserved": false,
+        "observedReserved": null
+      },
+      "proposed": {
+        "title": "DeLonghi Magnifica Evo ECAM290.61.B",
+        "productModel": "DeLonghi ECAM290.61.B; чёрная",
+        "price": 43693,
+        "comment": "Чёрная автоматическая кофемашина DeLonghi Magnifica Evo ECAM290.61.B, 1450 Вт, 15 бар, 13 степеней помола и автоматическая молочная система. Модель по новой ссылке сохранена.",
+        "image": null,
+        "links": [
+          {
+            "label": "Ozon",
+            "url": "https://www.ozon.ru/product/kofemashina-avtomaticheskaya-zernovaya-delonghi-ecam290-61-b-1450-vt-15-bar-13-stepeney-pomola-1067024681/"
+          }
+        ]
+      },
+      "verification": {
+        "status": "verified",
+        "shortUrl": "https://ozon.ru/t/zLpV2I5",
+        "priceNote": "Ориентировочная цена без специальной банковской скидки, видимая в индексированной карточке Ozon; перепроверить перед сохранением.",
+        "imageNote": "Сохранить текущую фотографию; новая не требуется.",
+        "source": "https://www.ozon.ru/product/kofemashina-avtomaticheskaya-zernovaya-delonghi-ecam290-61-b-1450-vt-15-bar-13-stepeney-pomola-1067024681/"
+      },
+      "safety": "Открыть существующую карточку в Mini App, проверить статус и всю историю броней. При брони не подменять модель. Не добавлять подарок, не восстанавливать архив, не менять видимость автоматически."
+    },
+    {
+      "operation": "update-existing-only",
+      "match": {
+        "seedKey": "initial-v1:03",
+        "publicId": "9c89f385-a2c6-4e9a-b015-0485fbe5684e",
+        "oldTitle": "Kärcher SC 3 Deluxe",
+        "oldImage": "/images/wishlist-v2/gift-3.webp",
+        "oldLinks": [
+          {
+            "label": "Ozon",
+            "url": "https://www.ozon.ru/product/paroochistitel-karcher-sc-3-deluxe-1-513-430-0-s-nasadkami-dlya-doma-kerher-1351946433/"
+          }
+        ],
+        "publiclyObserved": true,
+        "observedReserved": false
+      },
+      "proposed": {
+        "title": "Kärcher SC 3 Deluxe, белый/чёрный",
+        "productModel": "Kärcher SC 3 Deluxe 1.513-430.0; белый/чёрный",
+        "price": 22858,
+        "comment": "Напольный пароочиститель Kärcher SC 3 Deluxe 1.513-430.0 в бело-чёрном корпусе. Мощность 1900 Вт, давление 3,5 бар, резервуар 1 л. Шланг, удлинительные трубки и напольная насадка; остальные насадки сверяйте по комплектации магазина.",
+        "image": "/images/wishlist-v2/revisions-2026-11-05/karcher.webp",
+        "links": [
+          {
+            "label": "Ozon",
+            "url": "https://www.ozon.ru/product/paroochistitel-karcher-sc-3-deluxe-1-513-430-0-s-nasadkami-dlya-doma-kerher-1351946433/"
+          }
+        ]
+      },
+      "verification": {
+        "status": "verified",
+        "shortUrl": null,
+        "priceNote": "Ориентировочная цена без специальной банковской скидки, видимая в индексированной карточке Ozon; перепроверить перед сохранением.",
+        "imageNote": "Новый WebP сверён с референсом точной модели.",
+        "source": "https://www.ozon.ru/product/paroochistitel-karcher-sc-3-deluxe-1-513-430-0-s-nasadkami-dlya-doma-kerher-1351946433/"
+      },
+      "safety": "Открыть существующую карточку в Mini App, проверить статус и всю историю броней. При брони не подменять модель. Не добавлять подарок, не восстанавливать архив, не менять видимость автоматически."
+    },
+    {
+      "operation": "update-existing-only",
+      "match": {
+        "seedKey": "initial-v1:10",
+        "publicId": "74ad2289-779a-4ebf-a953-7cc27681cf25",
+        "oldTitle": "Canon SELPHY CP1500",
+        "oldImage": "/images/wishlist-v2/gift-10.webp",
+        "oldLinks": [
+          {
+            "label": "Ozon",
+            "url": "https://www.ozon.ru/product/canon-printer-struynyy-selphy-cp1500-russkaya-versiya-rarantiya-12-mesyatsev-chernyy-3450473905/"
+          }
+        ],
+        "publiclyObserved": true,
+        "observedReserved": false
+      },
+      "proposed": {
+        "title": "Canon SELPHY CP1500, белый",
+        "productModel": "Canon SELPHY CP1500; белый; комплект продавца с USB-кабелем",
+        "price": 19411,
+        "comment": "Белый сублимационный фотопринтер Canon SELPHY CP1500 с откидным экраном, Wi-Fi и AirPrint. В названии комплекта продавца указан кабель USB. Бумагу и картридж нужно проверить в комплектации.",
+        "image": "/images/wishlist-v2/revisions-2026-11-05/canon.webp",
+        "links": [
+          {
+            "label": "Ozon",
+            "url": "https://www.ozon.ru/product/canon-printer-struynyy-selphy-cp1500-fotoprinter-russkaya-versiya-kabel-usb-belyy-3450450885/"
+          }
+        ]
+      },
+      "verification": {
+        "status": "verified",
+        "shortUrl": "https://ozon.ru/t/pHYsX4i",
+        "priceNote": "Ориентировочная цена без специальной банковской скидки, видимая в индексированной карточке Ozon; перепроверить перед сохранением.",
+        "imageNote": "Новый WebP сверён с референсом точной модели.",
+        "source": "https://www.ozon.ru/product/canon-printer-struynyy-selphy-cp1500-fotoprinter-russkaya-versiya-kabel-usb-belyy-3450450885/"
+      },
+      "safety": "Открыть существующую карточку в Mini App, проверить статус и всю историю броней. При брони не подменять модель. Не добавлять подарок, не восстанавливать архив, не менять видимость автоматически."
+    }
+  ]
+}
