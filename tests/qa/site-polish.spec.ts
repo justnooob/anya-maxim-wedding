@@ -1,0 +1,23 @@
+import fs from 'node:fs';
+import {test,expect} from 'playwright/test';
+test('six release gift images are directly accessible as WebP', async ({request}) => {
+ for (const name of ['canon', 'frame-white', 'karcher', 'mchose', 'ridberg', 'tefal']) {
+  const response = await request.get('/images/wishlist-v2/revisions-2026-11-05/' + name + '.webp');
+  expect(response.status()).toBe(200);
+  expect(response.headers()['content-type']).toContain('image/webp');
+  expect((await response.body()).subarray(8, 12).toString()).toBe('WEBP');
+ }
+});
+for(const width of [320,375,390,430,768,1024,1440])test('site copy, typography, RSVP grouping and animated FAQ '+width,async({page,request},info)=>{
+ await request.post('/qa/reset');await page.setViewportSize({width,height:900});await page.emulateMedia({reducedMotion:'reduce'});await page.addInitScript(()=>sessionStorage.setItem('anya-maxim-opening-v1','yes'));await page.goto('/');await page.evaluate(()=>document.fonts.ready);
+ const date=page.locator('.date-large');await date.scrollIntoViewIfNeeded();await expect(date).toHaveText('17.07.2027');expect(await date.evaluate(el=>getComputedStyle(el).fontFamily)).toContain('Great Vibes');expect((await request.get('/fonts/great-vibes-regular.ttf')).status()).toBe(200);
+ const bounds=await date.evaluate(el=>{const r=el.getBoundingClientRect();return{left:r.left,right:r.right,width:innerWidth,scroll:document.documentElement.scrollWidth};});expect(bounds.left).toBeGreaterThanOrEqual(0);expect(bounds.right).toBeLessThanOrEqual(width+1);expect(bounds.scroll).toBeLessThanOrEqual(width+1);
+ await page.locator('#date').screenshot({path:info.outputPath('date-'+width+'.png')});const numbers=page.locator('.countdown-number');expect(await numbers.first().evaluate(el=>getComputedStyle(el).fontFamily)).toContain('Great Vibes');for(const value of ['88','00','17']){await numbers.evaluateAll((els,value)=>els.forEach(el=>el.textContent=value),value);expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);}if([375,1440].includes(width))for(const id of ['venue','schedule'])await page.locator('#'+id).screenshot({path:info.outputPath(id+'-'+width+'.png')});
+ await expect(page.locator('#venue .chapter-kicker')).toHaveCount(0);await expect(page.locator('#guests .chapter-heading')).toContainText('Если вы себя здесь видите, то вы избранный');await expect(page.locator('#schedule')).toContainText('Не плакать запрещаем');await expect(page.locator('.schedule-note')).toHaveCount(0);
+ await page.locator('#rsvp').getByRole('button',{name:'Приду',exact:true}).click();const group=page.locator('.congratulations-choice');await group.scrollIntoViewIfNeeded();expect(await group.evaluate(el=>parseFloat(getComputedStyle(el).marginBottom))).toBeGreaterThan(24);expect(await group.locator('label').nth(1).evaluate(el=>parseFloat(getComputedStyle(el).marginTop))).toBeLessThan(10);
+ await page.locator('.rsvp-paper').screenshot({path:info.outputPath('rsvp-going-'+width+'.png')});await page.locator('#rsvp').getByRole('button',{name:'Не приду',exact:true}).click();await expect(page.locator('.rsvp-no-note')).toHaveText('Очень зря, многое упускаете');expect(await page.locator('.rsvp-no-note').evaluate(el=>getComputedStyle(el).fontFamily)).toContain('Montserrat');
+ await page.emulateMedia({reducedMotion:'no-preference'});await page.locator('#question-transfer-to').click();await expect(page.locator('#question-transfer-to')).toHaveAttribute('aria-expanded','true');await page.waitForTimeout(1000);
+ const next=page.locator('#question-transfer-back');await next.evaluate(el=>el.scrollIntoView({block:'center',behavior:'instant'}));await page.waitForTimeout(100);
+ const samples=page.evaluate(async()=>{const el=document.getElementById('question-transfer-back')!;const rows=[];for(let start=performance.now();performance.now()-start<1250;){rows.push({t:performance.now(),top:el.getBoundingClientRect().top,y:scrollY,open:document.querySelectorAll('.question-trigger[aria-expanded=true]').length});await new Promise(r=>requestAnimationFrame(()=>setTimeout(r,0)));}return rows;});await next.click();const frames=await samples;fs.writeFileSync(info.outputPath('faq-frames.json'),JSON.stringify(frames));expect(Math.max(...frames.map(r=>r.top))-Math.min(...frames.map(r=>r.top))).toBeLessThan(4);expect(Math.max(...frames.map(r=>r.open))).toBeLessThanOrEqual(1);expect(Math.max(...frames.slice(1).map((r,i)=>Math.abs(r.y-frames[i].y)*16.7/Math.max(1,r.t-frames[i].t)))).toBeLessThan(90);await expect(next).toBeFocused();await expect(next).toHaveAttribute('aria-expanded','true');await next.press('Enter');await expect(next).toHaveAttribute('aria-expanded','false');
+
+});
