@@ -33,3 +33,19 @@
 
 @media(min-width:601px) and (max-width:1000px){.wishlist-filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .gift-shops a{min-height:44px}
+
+.gift-image-action{display:block;align-self:start;width:100%;min-width:0;margin:0 0 24px;padding:0;border:0;background:none;cursor:pointer}
+.gift-image-action .gift-image{display:block;margin:0}
+.gift-links-dialog{border-radius:22px}
+.gift-links-dialog h2{margin:12px 0 24px}
+.gift-links-list{display:grid;gap:10px;list-style:none;padding:0;margin:0}
+.gift-links-list a{display:flex;align-items:center;justify-content:center;min-height:48px}
+@media(max-width:600px){
+ .gift-image-action{margin-bottom:22px}
+ .gift-links-dialog{inset:auto 0 0;margin:0;width:100%;max-width:none;min-height:min(48dvh,360px);max-height:85dvh;border-radius:24px 24px 0 0;padding-bottom:max(28px,env(safe-area-inset-bottom))}
+ .gift-links-dialog::before{content:'';position:absolute;top:12px;left:50%;translate:-50% 0;width:36px;height:4px;border-radius:10px;background:#b49a6180}
+}
+@media(max-width:600px) and (prefers-reduced-motion:no-preference){
+ .gift-links-dialog[open]{animation:gift-sheet-enter 260ms cubic-bezier(.2,.75,.25,1) both}
+}
+@keyframes gift-sheet-enter{from{transform:translateY(100%)}to{transform:translateY(0)}}
