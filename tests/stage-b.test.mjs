@@ -13,7 +13,7 @@ import {drinkChoices,toggleDrink,describeDrinks} from '../src/content/drinks.mjs
 import {drainOutbox,notificationText} from '../src/server/telegram/outbox.mjs';
 import {getRsvp,postRsvp} from '../src/server/rsvp/http.mjs';
 import {webhook} from '../src/server/telegram/webhook.mjs';
-const yes={returnTransfer:'not_needed',guestName:'Анна Иванова',attendance:'yes',congratulationChoice:'public',hotAppetizer:'hot_meat',mainCourse:'main_fish',who:'Подруга',food:'Орехи',transfer:'kupchino',overnight:'stay',venueRulesAccepted:true,dressCode:true,alcoholDrinks:['none'],softDrinks:['none']};
+const yes={returnTransfer:'not_needed',guestName:'Анна Иванова',attendance:'yes',partyInterest:'yes',congratulationChoice:'public',hotAppetizer:'hot_meat',mainCourse:'main_fish',who:'Подруга',food:'Орехи',transfer:'kupchino',overnight:'stay',venueRulesAccepted:true,dressCode:true,alcoholDrinks:['none'],softDrinks:['none']};
 const no={guestName:'Максим Иванов',attendance:'no'};
 async function fixture(){
   if(process.env.TEST_POSTGRES==='1'){
