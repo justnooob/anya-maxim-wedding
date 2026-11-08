@@ -1,6 +1,7 @@
 import {congratulationReady,validCongratulation,companionLimit,congratulations} from './congratulations.mjs';
 import {validMenuChoice} from './menu.mjs';
 import {validReturnTransfer} from './return-transfer.mjs';
+import {partyInterest,validPartyInterest} from './party-interest.mjs';
 import {rsvpLimits,withinLimit,validGuestName} from './rsvp-limits.mjs';
 
 // Form feedback is derived from the current answers, not stored separately.
@@ -12,6 +13,7 @@ export function rsvpFieldIssues(data){
   if(!['yes','no'].includes(data.attendance))issues.attendance='Выбери один из вариантов.';
   if(data.attendance!=='yes')return issues;
   if(!data.who?.trim()||!withinLimit('who',data.who))issues.who=data.who?.trim()?'Не больше 120 символов.':'Заполни это поле.';
+  if(!validPartyInterest(data.partyInterest))issues.partyInterest=partyInterest.error;
   if(!validCongratulation(data.congratulationChoice))issues.congratulationChoice='Выбери вариант поздравления.';
   else if(!congratulationReady(data.congratulationChoice,data.congratulationCompanion))
     issues.congratulationCompanion=congratulations.companionError;
