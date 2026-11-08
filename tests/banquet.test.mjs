@@ -9,7 +9,7 @@ import {formatGuestList} from '../src/content/admin-copy.mjs';
 import {adminAnalytics,guestQuery} from '../src/server/telegram/analytics.mjs';
 import {rsvpDetail} from '../src/server/rsvp/detail.mjs';
 import {saveRsvp} from '../src/server/rsvp/repository.mjs';
-const yes={returnTransfer:'not_needed',guestName:'Сергей Иванов',attendance:'yes',congratulationChoice:'public',who:'Друг',food:'Без орехов',musicRequest:'',transfer:'self',venueRulesAccepted:true,dressCode:true,alcoholDrinks:['red_wine','white_wine'],softDrinks:['none'],alcoholOther:'',softOther:'',hotAppetizer:'hot_meat',mainCourse:'main_fish'};
+const yes={returnTransfer:'not_needed',guestName:'Сергей Иванов',attendance:'yes',partyInterest:'yes',congratulationChoice:'public',who:'Друг',food:'Без орехов',musicRequest:'',transfer:'self',venueRulesAccepted:true,dressCode:true,alcoholDrinks:['red_wine','white_wine'],softDrinks:['none'],alcoholOther:'',softOther:'',hotAppetizer:'hot_meat',mainCourse:'main_fish'};
 test('new GOING requires exactly one valid choice for each course on client and server',()=>{
  assert.ok(rsvpReady(yes));assert.equal(validateRsvp(yes).mainCourse,'main_fish');
  for(const patch of [{hotAppetizer:undefined},{mainCourse:undefined},{hotAppetizer:null},{mainCourse:''},{hotAppetizer:'main_meat'},{mainCourse:'hot_fish'},{hotAppetizer:['hot_meat','hot_fish']},{mainCourse:['main_meat']},{mainCourse:'invalid'}]){assert.equal(rsvpReady({...yes,...patch}),false);assert.throws(()=>validateRsvp({...yes,...patch}),InputError);}
