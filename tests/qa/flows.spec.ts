@@ -79,13 +79,21 @@ function assertOrder(names:string[],sequence:string[]){
  expect(names.slice(i,i+sequence.length)).toEqual(sequence);
 }
 
-test('party choice is mandatory for going, saved independently from the previous guest',async({page})=>{
- await going(page);
- await page.locator('input[name=partyInterest]').first().uncheck({force:true}).catch(()=>{});
- // Clearing radio choice through the app's native change event tests the incomplete RSVP.
- await page.locator('input[name=partyInterest][value=yes]').evaluate((el:HTMLInputElement)=>{el.checked=false;el.dispatchEvent(new Event('change',{bubbles:true}));});
+test('party choice is required, restorable and independent for each guest',async({page})=>{
+ await going(page,'partyInterest');
+ await submit(page).click();
+ await expect(page.locator('.party-interest-choice')).toHaveAttribute('data-field-error','true');
+ await page.locator('input[name=partyInterest][value=yes]').check();
+ await expect(page.locator('.party-interest-choice')).not.toHaveAttribute('data-field-error','true');
+ await page.reload();
+ await expect(page.locator('input[name=partyInterest][value=yes]')).toBeChecked();
+ await submit(page).click();
+ await expect(page.locator('#rsvp-success-title')).toBeVisible();
+ await page.getByRole('button',{name:'Добавить ещё гостя',exact:true}).click();
+ await expect(page.locator('input[name=partyInterest]:checked')).toHaveCount(0);
+ await page.locator('input[name=guestName]').fill('Второй Гость');
  await page.getByRole('button',{name:'Не приду',exact:true}).click();
  await expect(page.locator('.party-interest-choice')).toHaveCount(0);
- await page.getByRole('button',{name:'Приду',exact:true}).click();
- await expect(page.locator('.party-interest-choice')).toBeVisible();
+ await submit(page).click();
+ await expect(page.locator('.saved-guest')).toHaveCount(2);
 });
