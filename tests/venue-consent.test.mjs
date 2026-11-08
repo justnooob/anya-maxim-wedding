@@ -8,7 +8,7 @@ import {rsvpReady} from '../src/content/rsvp-limits.mjs';
 import {VENUE_RULES_VERSION} from '../src/content/venue-consent.mjs';
 import {saveRsvp} from '../src/server/rsvp/repository.mjs';
 import {rsvpDetail} from '../src/server/rsvp/detail.mjs';
-const yes={guestName:'Тестовый Гость',attendance:'yes',who:'Друг',food:'',musicRequest:'',congratulationChoice:'public',hotAppetizer:'hot_meat',mainCourse:'main_fish',transfer:'self',returnTransfer:'needed',dressCodeConfirmed:true,venueRulesAccepted:true,alcoholDrinks:['none'],softDrinks:['none'],alcoholOther:'',softOther:''};
+const yes={guestName:'Тестовый Гость',attendance:'yes',partyInterest:'yes',who:'Друг',food:'',musicRequest:'',congratulationChoice:'public',hotAppetizer:'hot_meat',mainCourse:'main_fish',transfer:'self',returnTransfer:'needed',dressCodeConfirmed:true,venueRulesAccepted:true,alcoholDrinks:['none'],softDrinks:['none'],alcoholOther:'',softOther:''};
 test('venue consent is a strict separate boolean, mandatory in client/server for GOING',()=>{
  assert.ok(rsvpReady(yes));const result=validateRsvp(yes);assert.equal(result.venueRulesAccepted,true);assert.equal(result.dressCodeConfirmed,true);
  for(const value of [undefined,null,false,0,1,'true',[],{}]){assert.equal(rsvpReady({...yes,venueRulesAccepted:value}),false);assert.throws(()=>validateRsvp({...yes,venueRulesAccepted:value}),InputError);}
