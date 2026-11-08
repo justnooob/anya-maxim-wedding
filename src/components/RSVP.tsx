@@ -8,6 +8,7 @@ import { Watercolor } from "./Watercolor";
 
 import {rsvpReady,attendancePayload,withinLimit,validGuestName} from '@/content/rsvp-limits.mjs';
 import {rsvpFieldIssues} from '@/content/rsvp-field-issues.mjs';
+import {partyInterest as partyInterestCopy} from '@/content/party-interest.mjs';
 import {boundedJson,requestMessage} from '@/client/requests.mjs';
 import {banquetMenu,menuHint} from '@/content/menu.mjs';
 import {congratulations,congratulationReady,congratulationFields,companionLimit} from '@/content/congratulations.mjs';
@@ -22,6 +23,7 @@ export function RSVP() {
   const [attendance, setAttendance] = useState<"yes" | "no" | null>(null);
   const [name, setName] = useState("");
   const [who, setWho] = useState("");
+  const [partyInterest,setPartyInterest]=useState<""|"yes"|"no">("");
   const [transfer, setTransfer] = useState<TransferChoice|"">("");
   const [returnTransfer,setReturnTransfer]=useState('');
   const [returnTransferTouched,setReturnTransferTouched]=useState(false);
@@ -52,13 +54,13 @@ export function RSVP() {
   const submissionKey=useRef<string>("");
   const lastSavedCount=useRef(0);
   const requestVersion=useRef(0);
-  const clearFields=useCallback(()=>{setHotAppetizer('');setMainCourse('');setName('');setAttendance(null);setWho('');setFood('');setMusicRequest('');setTransfer('');setReturnTransfer('');setReturnTransferTouched(false);setAlcoholDrinks([]);setAlcoholOther('');setSoftDrinks([]);setSoftOther('');setDress(false);setVenueRules(false);setCongratulationChoice('');setCongratulationCompanion('');setCompanionTouched(false);setError('');setShowIssues(false);},[]);
+  const clearFields=useCallback(()=>{setHotAppetizer('');setMainCourse('');setName('');setAttendance(null);setWho('');setPartyInterest('');setFood('');setMusicRequest('');setTransfer('');setReturnTransfer('');setReturnTransferTouched(false);setAlcoholDrinks([]);setAlcoholOther('');setSoftDrinks([]);setSoftOther('');setDress(false);setVenueRules(false);setCongratulationChoice('');setCongratulationCompanion('');setCompanionTouched(false);setError('');setShowIssues(false);},[]);
   useEffect(()=>{
     if(draftRestored.current)return;draftRestored.current=true;
     try{const draft=parseDraft(sessionStorage.getItem(DRAFT_KEY)||sessionStorage.getItem(LEGACY_DRAFT_KEY));if(draft){
       if(draft.name.trim())adding.current=true;
       setCongratulationChoice(draft.congratulationChoice);setCongratulationCompanion(draft.congratulationCompanion);
-      setName(draft.name);setAttendance(draft.attendance);setWho(draft.who);setFood(draft.food);setMusicRequest(draft.musicRequest);
+      setName(draft.name);setAttendance(draft.attendance);setWho(draft.who);setPartyInterest(draft.partyInterest);setFood(draft.food);setMusicRequest(draft.musicRequest);
       setTransfer(draft.transfer);setReturnTransfer(draft.returnTransfer);setAlcoholDrinks(draft.alcoholDrinks);setAlcoholOther(draft.alcoholOther);setSoftDrinks(draft.softDrinks);setSoftOther(draft.softOther);
       setHotAppetizer(draft.hotAppetizer);setMainCourse(draft.mainCourse);setDress(draft.dress);setVenueRules(draft.venueRules);
     }else sessionStorage.removeItem(DRAFT_KEY);}catch{}
@@ -68,9 +70,9 @@ export function RSVP() {
   useEffect(()=>{
     if(!draftLoaded)return;
     try{if(sent){sessionStorage.removeItem(DRAFT_KEY);return;}
-      sessionStorage.setItem(DRAFT_KEY,JSON.stringify({version:2,fields:{congratulationChoice,congratulationCompanion,name,attendance,who,food,musicRequest,transfer,returnTransfer,alcoholDrinks,alcoholOther,softDrinks,softOther,hotAppetizer,mainCourse,dress,venueRules}}));
+      sessionStorage.setItem(DRAFT_KEY,JSON.stringify({version:2,fields:{congratulationChoice,congratulationCompanion,name,attendance,who,partyInterest,food,musicRequest,transfer,returnTransfer,alcoholDrinks,alcoholOther,softDrinks,softOther,hotAppetizer,mainCourse,dress,venueRules}}));
     }catch{/* Storage may be disabled; the form remains usable. */}
-  },[draftLoaded,sent,name,attendance,who,food,musicRequest,transfer,returnTransfer,alcoholDrinks,alcoholOther,softDrinks,softOther,hotAppetizer,mainCourse,dress,venueRules,congratulationChoice,congratulationCompanion]);
+  },[draftLoaded,sent,name,attendance,who,partyInterest,food,musicRequest,transfer,returnTransfer,alcoholDrinks,alcoholOther,softDrinks,softOther,hotAppetizer,mainCourse,dress,venueRules,congratulationChoice,congratulationCompanion]);
   const submitting=useRef(false);
   const successRef = useRef<HTMLDivElement>(null);
   const formRef=useRef<HTMLFormElement>(null);
@@ -106,12 +108,12 @@ export function RSVP() {
     const timer = setInterval(() => { void refresh(); }, 30000);
     return () => clearInterval(timer);
   }, [sent, refresh]);
-  const payload=useMemo(()=>attendancePayload({...congratulationFields(congratulationChoice,congratulationCompanion),guestName:name,attendance,who,hotAppetizer,mainCourse,food,musicRequest,transfer:transfer||null,returnTransfer:returnTransfer||null,dressCode:dress,dressCodeConfirmed:dress,venueRulesAccepted:venueRules,alcoholDrinks,alcoholOther,softDrinks,softOther}),[name,attendance,who,hotAppetizer,mainCourse,food,musicRequest,transfer,returnTransfer,dress,venueRules,alcoholDrinks,alcoholOther,softDrinks,softOther,congratulationChoice,congratulationCompanion]);
+  const payload=useMemo(()=>attendancePayload({...congratulationFields(congratulationChoice,congratulationCompanion),guestName:name,attendance,who,partyInterest,hotAppetizer,mainCourse,food,musicRequest,transfer:transfer||null,returnTransfer:returnTransfer||null,dressCode:dress,dressCodeConfirmed:dress,venueRulesAccepted:venueRules,alcoholDrinks,alcoholOther,softDrinks,softOther}),[name,attendance,who,partyInterest,hotAppetizer,mainCourse,food,musicRequest,transfer,returnTransfer,dress,venueRules,alcoholDrinks,alcoholOther,softDrinks,softOther,congratulationChoice,congratulationCompanion]);
   const valid=rsvpReady({...payload,food,musicRequest});
   const issues=useMemo(()=>rsvpFieldIssues({...payload,food,musicRequest}),[payload,food,musicRequest]);
   useEffect(()=>{
     const form=formRef.current;if(!form||!showIssues)return;
-    const markers:Record<string,string>={guestName:'[name=guestName]',attendance:'.attendance-choice',who:'[name=who]',congratulationChoice:'.congratulations-choice',congratulationCompanion:'[name=congratulationCompanion]',hotAppetizer:'[name=hotAppetizer]',mainCourse:'[name=mainCourse]',food:'[name=food]',alcoholDrinks:'.drink-options',alcoholOther:'[name=alcoholOther]',softDrinks:'.drink-options + .drink-options',softOther:'[name=softOther]',transfer:'[name=transfer]',returnTransfer:'.return-transfer-options',musicRequest:'[name=musicRequest]',dress:'[name=dressCode]',venueRules:'[name=venueRules]'};
+    const markers:Record<string,string>={guestName:'[name=guestName]',attendance:'.attendance-choice',who:'[name=who]',partyInterest:'.party-interest-choice',congratulationChoice:'.congratulations-choice',congratulationCompanion:'[name=congratulationCompanion]',hotAppetizer:'[name=hotAppetizer]',mainCourse:'[name=mainCourse]',food:'[name=food]',alcoholDrinks:'.drink-options',alcoholOther:'[name=alcoholOther]',softDrinks:'.drink-options + .drink-options',softOther:'[name=softOther]',transfer:'[name=transfer]',returnTransfer:'.return-transfer-options',musicRequest:'[name=musicRequest]',dress:'[name=dressCode]',venueRules:'[name=venueRules]'};
     form.querySelectorAll<HTMLElement>('[data-field-error]').forEach(el=>{el.removeAttribute('data-field-error');el.removeAttribute('aria-invalid');});
     form.querySelectorAll<HTMLElement>('.field-error-message').forEach(el=>el.remove());
     for(const [key,message] of Object.entries(issues)){
@@ -180,6 +182,7 @@ export function RSVP() {
         <fieldset className="attendance-choice"><legend>{copy.attendance}<RequiredMark /></legend><div className="attendance-buttons"><button type="button" disabled={busy} aria-pressed={attendance === "yes"} onClick={() => setAttendance("yes")}>{copy.yes}</button><button type="button" disabled={busy} aria-pressed={attendance === "no"} onClick={() => setAttendance("no")}>{copy.no}</button></div></fieldset>
         {attendance !== "no" && <fieldset className="rsvp-details page-enter" disabled={attendance !== "yes" || busy}><legend className="sr-only">{copy.details}</legend>
           <label className="writing-field"><span>{copy.who}<RequiredMark /></span><input name="who" placeholder={copy.whoPlaceholder} aria-invalid={!withinLimit("who",who)} value={who} onChange={event=>setWho(event.target.value)} required={attendance === "yes"} aria-describedby="who-limit" /><small id="who-limit" className="quiet-note">Не больше 120 символов</small></label>
+          <fieldset className="paper-options party-interest-choice"><legend>{partyInterestCopy.title}<RequiredMark/></legend>{partyInterestCopy.choices.map(option=><label key={option.value}><input type="radio" name="partyInterest" value={option.value} checked={partyInterest===option.value} onChange={()=>setPartyInterest(option.value as "yes"|"no")} required={attendance==="yes"}/><span>{option.label}</span></label>)}</fieldset>
           <fieldset className="paper-options congratulations-choice"><legend>{congratulations.title}<RequiredMark/></legend>{congratulations.options.map(option=><label key={option.id}><input type="radio" name="congratulationChoice" value={option.id} checked={congratulationChoice===option.id} onChange={()=>{setCongratulationChoice(option.id);setCompanionTouched(false);}} required={attendance==='yes'}/><span>{option.label}</span></label>)}</fieldset>
           {congratulationChoice==='public_with_someone'&&<label className="writing-field companion-field page-enter"><span>{congratulations.companionLabel}<RequiredMark/></span><input name="congratulationCompanion" placeholder={congratulations.companionPlaceholder} value={congratulationCompanion} onChange={event=>setCongratulationCompanion(event.target.value)} onBlur={()=>setCompanionTouched(true)} required={attendance==='yes'} aria-invalid={companionTouched&&!congratulationReady(congratulationChoice,congratulationCompanion)} aria-describedby="companion-error companion-limit"/><small id="companion-limit" className="quiet-note">Не больше {companionLimit} символов</small>{companionTouched&&!congratulationReady(congratulationChoice,congratulationCompanion)&&<small id="companion-error" className="form-error" role="status">{congratulationCompanion.trim()?`Не больше ${companionLimit} символов.`:congratulations.companionError}</small>}</label>}
           <div className="rsvp-food-block">
