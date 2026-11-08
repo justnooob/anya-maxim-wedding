@@ -6,7 +6,7 @@ import {validateRsvp,InputError} from '../src/server/rsvp/validation.mjs';
 import {rsvpLimits,textLength,rsvpReady,attendancePayload} from '../src/content/rsvp-limits.mjs';
 import {boundedFetch,requestMessage} from '../src/client/requests.mjs';
 import {renderRsvp} from './helpers/render-rsvp.mjs';
-const yes={returnTransfer:'not_needed',guestName:'Гость Иванов',attendance:'yes',congratulationChoice:'public',hotAppetizer:'hot_meat',mainCourse:'main_fish',who:'Друг',food:'',musicRequest:'',transfer:'self',overnight:'leave',venueRulesAccepted:true,dressCode:true,alcoholDrinks:['none'],softDrinks:['none'],alcoholOther:'',softOther:''};
+const yes={returnTransfer:'not_needed',guestName:'Гость Иванов',attendance:'yes',partyInterest:'yes',congratulationChoice:'public',hotAppetizer:'hot_meat',mainCourse:'main_fish',who:'Друг',food:'',musicRequest:'',transfer:'self',overnight:'leave',venueRulesAccepted:true,dressCode:true,alcoholDrinks:['none'],softDrinks:['none'],alcoholOther:'',softOther:''};
 test('shared limits accept every exact maximum, reject maximum+1 without truncation, count Unicode consistently',()=>{
  for(const [field,max] of Object.entries(rsvpLimits)){
   const base={...yes,...(field==='alcoholOther'?{alcoholDrinks:['other']}:field==='softOther'?{softDrinks:['other']}:{})};
