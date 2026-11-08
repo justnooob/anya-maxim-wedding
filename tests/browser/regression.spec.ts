@@ -68,6 +68,7 @@ async function going(page:Page,name='Сергей Иванов 😀'){
  await page.locator('input[name=guestName]').fill(name);
  await page.getByRole('button',{name:'Приду',exact:true}).click();
  await page.locator('input[name=who]').fill('Друг семьи');
+ await page.locator('input[name=partyInterest][value=yes]').check();
  await page.locator('input[name=congratulationChoice][value=public]').check();
  await page.locator('input[name=hotAppetizer][value=hot_meat]').check();await page.locator('input[name=mainCourse][value=main_fish]').check();
  await page.locator('input[name=alcoholDrinks][value=none]').check();
