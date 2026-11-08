@@ -6,10 +6,10 @@ const submit=(page:Page)=>page.getByRole('button',{name:'Подтвердить 
 async function going(page:Page,omit=''){
  await page.locator('input[name=guestName]').fill('Тестовый Гость');await page.getByRole('button',{name:'Приду',exact:true}).click();
  await page.locator('input[name=who]').fill('Друг семьи');
- for(const [name,value] of [['congratulationChoice','public'],['hotAppetizer','hot_meat'],['mainCourse','main_fish'],['alcoholDrinks','none'],['softDrinks','cola'],['transfer','kupchino'],['returnTransfer','not_needed']])if(name!==omit)await page.locator(`input[name=${name}][value=${value}]`).check();
+ for(const [name,value] of [['partyInterest','yes'],['congratulationChoice','public'],['hotAppetizer','hot_meat'],['mainCourse','main_fish'],['alcoholDrinks','none'],['softDrinks','cola'],['transfer','kupchino'],['returnTransfer','not_needed']])if(name!==omit)await page.locator(`input[name=${name}][value=${value}]`).check();
  await page.locator('input[name=dressCode]').check();await page.locator('input[name=venueRules]').check();
 }
-for(const missing of ['congratulationChoice','hotAppetizer','mainCourse','alcoholDrinks','softDrinks','transfer','returnTransfer'])test('RSVP prevents missing '+missing,async({page})=>{await going(page,missing);await expect(submit(page)).toBeEnabled();});
+for(const missing of ['partyInterest','congratulationChoice','hotAppetizer','mainCourse','alcoholDrinks','softDrinks','transfer','returnTransfer'])test('RSVP prevents missing '+missing,async({page})=>{await going(page,missing);await expect(submit(page)).toBeEnabled();});
 test('RSVP reports missing fields inline and accepts a single-word name',async({page})=>{
  await page.locator('input[name=guestName]').fill('Аня');
  await page.getByRole('button',{name:'Приду',exact:true}).click();
@@ -63,4 +63,37 @@ test('FAQ rapid intent, keyboard, Motya action and refresh anchor',async({page})
  await page.locator('#question-flowers').press('Enter');await expect(page.locator('#question-flowers')).toHaveAttribute('aria-expanded','true');
  const motya=page.locator('#answer-flowers button');await expect(motya).toHaveCount(1);await page.evaluate(()=>sessionStorage.setItem('anya-maxim-motya-meows-v1','3'));await motya.focus();await page.keyboard.press('Enter');await expect(page.locator('.motya-toast')).toBeVisible();await page.keyboard.press('Escape');
  await page.goto('/#questions');await expect(page.locator('#questions')).toBeInViewport();await page.reload();await expect(page.locator('#questions')).toBeInViewport();
+});
+
+test('new Denis is distinct and located between Daniil and Anastasia',async({page})=>{
+ await page.getByRole('button',{name:/Друзья/}).first().click();
+ const album=page.locator('#guest-album .guest-print');
+ await expect(album).toHaveCount(12);
+ const names=await album.locator('figcaption h3').allTextContents();
+ assertOrder(names,['Даниил','Денис','Анастасия']);
+ await expect(album.filter({hasText:'Денис'})).toHaveCount(2);
+ await expect(page.locator('[data-guest-id="friends-11"] img')).toHaveAttribute('src','/images/guests/friends/denis-shoot.webp');
+});
+function assertOrder(names:string[],sequence:string[]){
+ const i=names.indexOf(sequence[0]);expect(i).toBeGreaterThanOrEqual(0);
+ expect(names.slice(i,i+sequence.length)).toEqual(sequence);
+}
+
+test('party choice is required, restorable and independent for each guest',async({page})=>{
+ await going(page,'partyInterest');
+ await submit(page).click();
+ await expect(page.locator('.party-interest-choice')).toHaveAttribute('data-field-error','true');
+ await page.locator('input[name=partyInterest][value=yes]').check();
+ await expect(page.locator('.party-interest-choice')).not.toHaveAttribute('data-field-error','true');
+ await page.reload();
+ await expect(page.locator('input[name=partyInterest][value=yes]')).toBeChecked();
+ await submit(page).click();
+ await expect(page.locator('#rsvp-success-title')).toBeVisible();
+ await page.getByRole('button',{name:'Добавить ещё гостя',exact:true}).click();
+ await expect(page.locator('input[name=partyInterest]:checked')).toHaveCount(0);
+ await page.locator('input[name=guestName]').fill('Второй Гость');
+ await page.getByRole('button',{name:'Не приду',exact:true}).click();
+ await expect(page.locator('.party-interest-choice')).toHaveCount(0);
+ await submit(page).click();
+ await expect(page.locator('.saved-guest')).toHaveCount(2);
 });

@@ -2,11 +2,13 @@ import {congratulations} from '../../content/congratulations.mjs';
 import {menuLabel} from '../../content/menu.mjs';
 import {describeDrinks} from '../../content/drinks.mjs';
 import {returnTransferCopy,returnTransferLabel} from '../../content/return-transfer.mjs';
+import {partyInterest,partyInterestLabel} from '../../content/party-interest.mjs';
 // One presentation model for Telegram details and the authenticated Mini App.
 export function rsvpDetail(row){
   const fields=[{label:'Имя',value:row.guest_name}];
   if(row.attendance==='yes'){
     fields.push({label:'Кто',value:row.who||'Не указано'},
+      {label:partyInterest.detailLabel,value:partyInterestLabel(row.party_interest)},
       {label:'Алкоголь',value:describeDrinks('alcohol',row.alcohol_drinks,row.alcohol_other)},
       {label:'Безалкогольное',value:describeDrinks('soft',row.soft_drinks,row.soft_other)},
       {label:'Трансфер',value:({needed:'Нужен (место отправления не указано)',kupchino:'Нужен трансфер от Купчино',pavlovsk:'Нужен трансфер от Павловска',self:'Доеду сам/а'})[row.transfer]||'Не указано'});

@@ -28,7 +28,7 @@ test('all fifteen approved relative portraits exist at an appropriate local medi
  for(const name of names){const file=new URL(`../public/images/guests/${name}.webp`,import.meta.url),bytes=await readFile(file);assert.equal(bytes.toString('ascii',0,4),'RIFF');assert.equal(bytes.toString('ascii',8,12),'WEBP');assert.ok((await stat(file)).size<200000);}
 });
 
-test('all eleven approved friend portraits exist as optimized local WebP files',async()=>{
- const names=['karina','asel','alexandra','irina','ilya','daniil','anastasia','viktoria','sergey','denis','andrey'];
+test('all twelve approved friend portraits exist as optimized local WebP files',async()=>{
+ const names=['karina','asel','alexandra','irina','ilya','daniil','anastasia','viktoria','sergey','denis','andrey','denis-shoot'];
  for(const name of names){const file=new URL(`../public/images/guests/friends/${name}.webp`,import.meta.url),bytes=await readFile(file);assert.equal(bytes.toString('ascii',0,4),'RIFF');assert.equal(bytes.toString('ascii',8,12),'WEBP');assert.ok((await stat(file)).size<220000);}
 });

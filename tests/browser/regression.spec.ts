@@ -68,6 +68,7 @@ async function going(page:Page,name='Сергей Иванов 😀'){
  await page.locator('input[name=guestName]').fill(name);
  await page.getByRole('button',{name:'Приду',exact:true}).click();
  await page.locator('input[name=who]').fill('Друг семьи');
+ await page.locator('input[name=partyInterest][value=yes]').check();
  await page.locator('input[name=congratulationChoice][value=public]').check();
  await page.locator('input[name=hotAppetizer][value=hot_meat]').check();await page.locator('input[name=mainCourse][value=main_fish]').check();
  await page.locator('input[name=alcoholDrinks][value=none]').check();
@@ -464,7 +465,7 @@ test('women clothing varied silhouettes and warm colour boundaries',async({page}
 test('October content, local fonts, guests and five-event program across widths',async({page},testInfo)=>{
  test.setTimeout(120000);await publicPage(page);
  const expectedFamily=['Ольга','Владислав','Лидия Васильевна','Сергей Иванович','Галина Николаевна','Олег','Наталья','Екатерина','Дарья','Вячеслав','Анатолий','Ангелина','Надежда Константиновна','Галина Ивановна','Мария'];
- const expectedFriends=['Виктория','Сергей','Карина','Денис','Александра','Илья','Андрей','Асель','Ирина','Даниил','Анастасия'];
+ const expectedFriends=['Виктория','Сергей','Карина','Денис','Александра','Илья','Андрей','Асель','Ирина','Даниил','Денис','Анастасия'];
  for(const width of [320,375,390,430,768,1000,1024,1440]){
   await page.setViewportSize({width,height:width===1440?900:932});
   expect(await page.locator('.portrait-ampersand').evaluate(el=>getComputedStyle(el).fontFamily)).toContain('Royal Kaynin');
@@ -531,8 +532,8 @@ test('approved family portrait identity and consistent frames at all review widt
   }
  }
  await expect(page.locator('[data-guest-id="family-7"]')).toContainText('Галина Ивановна');
- await page.getByRole('button',{name:/Друзья/}).click();await expect(page.locator('.guest-print--approved')).toHaveCount(11);
- const friendImages=[['friends-2','karina','Карина'],['friends-7','asel','Асель'],['friends-5','alexandra','Александра'],['friends-9','irina','Ирина'],['friends-4','ilya','Илья'],['friends-8','daniil','Даниил'],['friends-10','anastasia','Анастасия'],['friends-0','viktoria','Виктория'],['friends-1','sergey','Сергей'],['friends-3','denis','Денис'],['friends-6','andrey','Андрей']];
+ await page.getByRole('button',{name:/Друзья/}).click();await expect(page.locator('.guest-print--approved')).toHaveCount(12);
+ const friendImages=[['friends-2','karina','Карина'],['friends-7','asel','Асель'],['friends-5','alexandra','Александра'],['friends-9','irina','Ирина'],['friends-4','ilya','Илья'],['friends-8','daniil','Даниил'],['friends-11','denis-shoot','Денис'],['friends-10','anastasia','Анастасия'],['friends-0','viktoria','Виктория'],['friends-1','sergey','Сергей'],['friends-3','denis','Денис'],['friends-6','andrey','Андрей']];
  for(const width of [320,375,390,430,768,1440]){await page.setViewportSize({width,height:932});await page.locator('#guests').scrollIntoViewIfNeeded();await overflow(page);for(const[id,file,name]of friendImages){const card=page.locator('[data-guest-id="'+id+'"]');await expect(card.locator('h3')).toHaveText(name);await expect(card.locator('img')).toHaveAttribute('src','/images/guests/friends/'+file+'.webp');await card.locator('img').evaluate(async(el:HTMLImageElement)=>{el.loading='eager';await el.decode();});expect(await card.locator('.guest-photo').evaluate(el=>getComputedStyle(el).aspectRatio)).toBe('4 / 5');}}
 
  await page.getByRole('button',{name:/Родные/}).click();await expect(page.locator('.guest-album .guest-print--approved')).toHaveCount(15);await expect(page.locator('.family-anchor-card .guest-print--approved')).toHaveCount(2);

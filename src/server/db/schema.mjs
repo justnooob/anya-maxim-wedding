@@ -7,7 +7,7 @@ export const sessions = pgTable('guest_sessions', {
 }, table=>[check('session_id_shape',sql`${table.id} ~ '^[a-f0-9]{64}$'`),index('guest_sessions_expiry_idx').on(table.expiresAt)]);
 export const rsvps = pgTable('rsvps', {
   id:uuid('id').primaryKey(), sessionId:text('session_id').notNull().references(()=>sessions.id,{onDelete:'cascade'}),
-  submissionKey:uuid('submission_key').notNull().defaultRandom(),guestName:text('guest_name').notNull(), attendance:text('attendance').notNull(), who:text('who').notNull().default(''),
+  submissionKey:uuid('submission_key').notNull().defaultRandom(),guestName:text('guest_name').notNull(), attendance:text('attendance').notNull(), who:text('who').notNull().default(''),partyInterest:text('party_interest'),
   congratulationChoice:text('congratulation_choice'),congratulationCompanion:text('congratulation_companion'),
   returnTransfer:text('return_transfer'),
   venueRulesAccepted:boolean('venue_rules_accepted'),venueRulesAcceptedAt:time('venue_rules_accepted_at'),venueRulesVersion:text('venue_rules_version'),
@@ -16,6 +16,8 @@ export const rsvps = pgTable('rsvps', {
 }, table=>[uniqueIndex('rsvp_session_submission_unique').on(table.sessionId,table.submissionKey),index('rsvp_session_idx').on(table.sessionId),index('rsvps_attendance_created_idx').on(table.attendance,table.createdAt,table.id),index('rsvps_created_idx').on(table.createdAt,table.id),
   check('rsvp_venue_consent_shape',sql`(${table.venueRulesAccepted} IS NULL AND ${table.venueRulesAcceptedAt} IS NULL AND ${table.venueRulesVersion} IS NULL) OR (${table.venueRulesAccepted} IS FALSE AND ${table.venueRulesAcceptedAt} IS NULL AND ${table.venueRulesVersion} IS NULL) OR (${table.venueRulesAccepted} IS TRUE AND ${table.attendance}='yes' AND ${table.venueRulesAcceptedAt} IS NOT NULL AND ${table.venueRulesVersion} IS NOT NULL AND char_length(btrim(${table.venueRulesVersion})) BETWEEN 1 AND 80)`),
   // Migration 006 uses NOT VALID so historical answers are retained unchanged.
+  check('rsvp_party_interest_values',sql`${table.partyInterest} IS NULL OR ${table.partyInterest} IN ('yes','no')`),
+  check('rsvp_no_party_interest_when_declined',sql`${table.attendance}='yes' OR ${table.partyInterest} IS NULL`),
   check('rsvp_return_transfer_values',sql`${table.returnTransfer} IS NULL OR ${table.returnTransfer} IN ('needed','not_needed')`),
   check('rsvp_no_return_transfer',sql`${table.attendance}='yes' OR ${table.returnTransfer} IS NULL`),
   check('rsvp_text_limits_v2',sql`char_length(${table.guestName}) BETWEEN 1 AND 80 AND char_length(${table.who})<=120 AND char_length(${table.food})<=300 AND (${table.musicRequest} IS NULL OR char_length(${table.musicRequest})<=300) AND char_length(${table.alcoholOther})<=80 AND char_length(${table.softOther})<=80`),
