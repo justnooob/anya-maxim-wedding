@@ -37,7 +37,7 @@ test('five-guest session: 1, 2, 3, 5 answers, retry deduplication, deletion, res
 test('success lists all five saved guests and stops offering more',()=>{const html=renderRsvp({sent:true,saved:Array.from({length:5},(_,i)=>({guestName:'Гость '+i,attendance:'no'}))});assert.match(html,/Скачать приглашение/);assert.match(html,/5 ответов/);assert.doesNotMatch(html,/Добавить ещё гостя/);assert.equal((html.match(/class="saved-guest"/g)||[]).length,5);});
 
 test('full names, optional overnight and all exact transfer values validate on both sides',()=>{
- const yes={returnTransfer:'not_needed',guestName:'Анна Иванова',attendance:'yes',congratulationChoice:'public',hotAppetizer:'hot_meat',mainCourse:'main_fish',who:'Подруга',food:'',musicRequest:'',venueRulesAccepted:true,dressCode:true,alcoholDrinks:['none'],alcoholOther:'',softDrinks:['none'],softOther:''};
+ const yes={returnTransfer:'not_needed',guestName:'Анна Иванова',attendance:'yes',partyInterest:'yes',congratulationChoice:'public',hotAppetizer:'hot_meat',mainCourse:'main_fish',who:'Подруга',food:'',musicRequest:'',venueRulesAccepted:true,dressCode:true,alcoholDrinks:['none'],alcoholOther:'',softDrinks:['none'],softOther:''};
  for(const transfer of ['self','kupchino','pavlovsk']){assert.ok(rsvpReady({...yes,transfer}));assert.equal(validateRsvp({...yes,transfer}).transfer,transfer);assert.equal(validateRsvp({...yes,transfer}).overnight,null);}
  for(const transfer of ['needed','unknown',null])assert.throws(()=>validateRsvp({...yes,transfer}),InputError);
  for(const guestName of ['Анна Иванова','Анна-Мария Иванова',"Anne O'Connor",'Анна Мария Иванова']){assert.ok(rsvpReady({...yes,guestName,transfer:'self'}));assert.equal(validateRsvp({guestName,attendance:'no'}).guestName,guestName);}
