@@ -1,6 +1,7 @@
 import {congratulationReady,congratulations,companionLimit} from '../../content/congratulations.mjs';
 import {validMenuChoice} from '../../content/menu.mjs';
 import {validReturnTransfer,returnTransferCopy} from '../../content/return-transfer.mjs';
+import {partyInterest,validPartyInterest} from '../../content/party-interest.mjs';
 import {drinkChoices} from '../../content/drinks.mjs';
 import {rsvpLimits,fieldLabels,cleanText,textLength,validGuestName} from '../../content/rsvp-limits.mjs';
 import {venueConsentError} from '../../content/venue-consent.mjs';
@@ -26,7 +27,8 @@ export function validateRsvp(input){
   const guestName=str('guestName',true).replace(/\s+/g,' ');
   if(!validGuestName(guestName))throw new InputError('Укажи имя (не больше 80 символов).');
   if(!['yes','no'].includes(input.attendance))throw new InputError();
-  if(input.attendance==='no')return {...submission,guestName,attendance:'no',who:'',food:'',transfer:null,returnTransfer:null,overnight:null,dressCode:false,dressCodeConfirmed:false,venueRulesAccepted:false,alcoholDrinks:[],alcoholOther:'',softDrinks:[],softOther:'',musicRequest:null,hotAppetizer:null,mainCourse:null};
+  if(input.attendance==='no')return {...submission,guestName,attendance:'no',who:'',partyInterest:null,food:'',transfer:null,returnTransfer:null,overnight:null,dressCode:false,dressCodeConfirmed:false,venueRulesAccepted:false,alcoholDrinks:[],alcoholOther:'',softDrinks:[],softOther:'',musicRequest:null,hotAppetizer:null,mainCourse:null};
+  if(!validPartyInterest(input.partyInterest))throw new InputError(partyInterest.error);
   if(input.venueRulesAccepted!==true)throw new InputError(venueConsentError);
   if(!validReturnTransfer(input.returnTransfer))throw new InputError(returnTransferCopy.error);
   const dressCodeConfirmed=input.dressCodeConfirmed??input.dressCode;
@@ -36,5 +38,5 @@ export function validateRsvp(input){
   if(!congratulationReady(input.congratulationChoice,input.congratulationCompanion))throw new InputError(input.congratulationChoice==='public_with_someone'?congratulations.companionError:'Выбери вариант поздравления.');
   const congratulation={congratulationChoice:input.congratulationChoice,congratulationCompanion:input.congratulationChoice==='public_with_someone'?cleanText(input.congratulationCompanion):null};
   const alcohol=drinks('alcohol'),soft=drinks('soft');
-  return {...submission,guestName,attendance:'yes',...congratulation,hotAppetizer:input.hotAppetizer,mainCourse:input.mainCourse,who:str('who',true),food:str('food'),musicRequest:str('musicRequest')||null,transfer:input.transfer,returnTransfer:input.returnTransfer,overnight:null,dressCode:true,dressCodeConfirmed:true,venueRulesAccepted:true,alcoholDrinks:alcohol.selected,alcoholOther:alcohol.other,softDrinks:soft.selected,softOther:soft.other};
+  return {...submission,guestName,attendance:'yes',...congratulation,hotAppetizer:input.hotAppetizer,mainCourse:input.mainCourse,who:str('who',true),partyInterest:input.partyInterest,food:str('food'),musicRequest:str('musicRequest')||null,transfer:input.transfer,returnTransfer:input.returnTransfer,overnight:null,dressCode:true,dressCodeConfirmed:true,venueRulesAccepted:true,alcoholDrinks:alcohol.selected,alcoholOther:alcohol.other,softDrinks:soft.selected,softOther:soft.other};
 }
