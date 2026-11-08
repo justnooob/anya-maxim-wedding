@@ -32,6 +32,7 @@ test('additive consent migration preserves legacy rows; new consent timestamp/ve
   for(const [key,value] of Object.entries(before))assert.deepEqual(old[key],value);
   assert.equal(old.venue_rules_accepted,null);assert.equal(old.venue_rules_accepted_at,null);assert.equal(old.venue_rules_version,null);
   assert.equal(rsvpDetail(old).fields.find(f=>f.label==='Правила площадки').value,'Нет сохранённого подтверждения');
+  await db.exec(fs.readFileSync('migrations/017_party_interest.sql','utf8'));
   const client={query:(sql,args)=>db.query(sql,args)},key=randomUUID();
   const data=validateRsvp({...yes,submissionKey:key,venueRulesAcceptedAt:'1900-01-01',venueRulesVersion:'forged'});
   const saved=await saveRsvp(client,session,data,new Set());
