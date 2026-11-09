@@ -1,4 +1,5 @@
 import {PUBLIC_ORIGIN} from "@/content/wedding.mjs";
+import {YandexMetrika} from "@/components/YandexMetrika";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import "@/components/opening-scene.css";
@@ -28,5 +29,5 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 export default function RootLayout({children}: Readonly<{children: React.ReactNode}>) {
-  return <html lang="ru"><body>{children}</body></html>;
+  return <html lang="ru"><body>{children}<YandexMetrika /></body></html>;
 }
