@@ -63,7 +63,7 @@ export function TelegramAdmin(){
  function showDrill(kind:Drill['kind'],item:CountGroup){setDrill({kind,id:item.id,label:item.label});setMessage('');window.scrollTo({top:0,behavior:'instant'});}
  const countRows=(kind:Drill['kind'],items:CountGroup[])=>items.map(item=><button className="organizer-count-row" key={item.id} onClick={()=>showDrill(kind,item)}><span>{item.label}</span><strong>{item.count}</strong><span aria-hidden="true">›</span></button>);
  const fields=selected?.fields||[];const value=(label:string)=>fields.find(f=>f.label===label)?.value;
- return <main className="telegram-admin organizer" aria-busy={busy} style={{'--telegram-safe-top':safeArea.top+'px','--telegram-safe-bottom':safeArea.bottom+'px'} as React.CSSProperties}>
+ return <main className="telegram-admin organizer ym-hide-content" aria-busy={busy} style={{'--telegram-safe-top':safeArea.top+'px','--telegram-safe-bottom':safeArea.bottom+'px'} as React.CSSProperties}>
  <Script src="https://telegram.org/js/telegram-web-app.js" strategy="afterInteractive" onReady={()=>{const app=window.Telegram?.WebApp;if(!app?.initData){deny();return;}app.ready();app.expand();setSafeArea({top:(app.safeAreaInset?.top||0)+(app.contentSafeAreaInset?.top||0),bottom:(app.safeAreaInset?.bottom||0)+(app.contentSafeAreaInset?.bottom||0)});void load();}} onError={()=>deny()}/>
  <p className="organizer-brand"><span className="english-signature">Anya & Maxim</span> <span>Для организаторов</span></p>
  {message&&<p role="status" className="organizer-message">{message}</p>}
