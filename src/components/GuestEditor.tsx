@@ -94,7 +94,7 @@ export function GuestEditor({guest,busy,cancel,save}:Props){
       <p className="organizer-muted">Согласие с правилами площадки: <strong>{initial.venueRulesAccepted?'получено':'не подтверждено'}</strong>. В админке его нельзя подтверждать за гостя.</p>
     </>}
     {changeStatus&&<div className="organizer-edit-warning">
-      <p>{form.attendance==='no'?'При сохранении статуса «Не приду» остальные ответы и подтверждения будут очищены.':'Для статуса «Приду» нужно заполнить обязательные поля. Правила площадки останутся неподтверждёнными, пока гость не даст согласие сам.'}</p>
+      <p>{form.attendance==='no'?'При сохранении статуса «Не приду» остальные ответы и подтверждения будут очищены.':'Для статуса «Приду» заполни обязательные поля. Согласие с правилами площадки останется неподтверждённым; если оно необходимо, попроси гостя заполнить форму заново.'}</p>
       <label className="organizer-edit-check"><input type="checkbox" checked={confirmed} onChange={e=>setConfirmed(e.target.checked)}/><span>Подтверждаю изменение статуса</span></label>
     </div>}
     {error&&<p className="organizer-edit-error" role="alert">{error}</p>}
