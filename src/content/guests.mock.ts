@@ -109,11 +109,15 @@ const friends = [
  [
   "Денис",
   "Друг"
+ ],
+ [
+  "Александр",
+  "Друг"
  ]
 ];
-const friendPortraits = ["viktoria","sergey","karina","denis","ilya","alexandra","andrey","asel","daniil","irina","anastasia","denis-shoot"];
+const friendPortraits = ["viktoria","sergey","karina","denis","ilya","alexandra","andrey","asel","daniil","irina","anastasia","denis-shoot","alexander-shoot"];
 // Placement only: preserve each friend's stable ID and assigned portrait.
-const friendOrder = [0,1,2,3,5,4,6,7,9,8,11,10];
+const friendOrder = [0,12,1,2,5,4,6,7,9,8,11,10,3];
 // Approved portraits, keyed by stable guest ID; unprovided portraits stay unchanged.
 const approvedPortraits: Record<string, string> = {
  "family-13":"ekaterina",
