@@ -3,6 +3,7 @@ import {parseAllowedUserIds} from './access.mjs';
 import {transaction} from '../db/index.mjs';
 import {adminReply} from './admin.mjs';
 import {adminGuest,adminAnalytics,guestQuery} from './analytics.mjs';
+import {AdminRsvpEditError,updateAdminRsvp} from './edit-rsvp.mjs';
 import {limitedJson} from '../rsvp/session.mjs';
 export function miniAppUser(raw,env=process.env,now=Math.floor(Date.now()/1000)){
   if(typeof raw!=='string'||!raw||raw.length>8192||!env.TELEGRAM_BOT_TOKEN)throw new Error('Denied');
@@ -29,7 +30,7 @@ export async function miniAppRequest(request,{source,env=process.env}={}){
     const url=new URL(request.url);
     if(request.method==='GET')return await transaction(async client=>{
       const id=url.searchParams.get('id');
-      if(id){if(!uuid(id))return response({error:'Некорректный ответ.'},400);const row=(await client.query('SELECT * FROM rsvps WHERE id=$1',[id])).rows[0];return row?response({guest:adminGuest(row)}):response({error:'Ответ уже удалён.'},404);}
+      if(id){if(!uuid(id))return response({error:'Некорректный ответ.'},400);const row=(await client.query('SELECT * FROM rsvps WHERE id=$1',[id])).rows[0];return row?response({guest:adminGuest(row,true)}):response({error:'Ответ уже удалён.'},404);}
       const action=url.searchParams.get('action');
       if(action==='analytics'){
         const rows=(await client.query('SELECT * FROM rsvps ORDER BY created_at DESC,id DESC')).rows;
@@ -42,7 +43,17 @@ export async function miniAppRequest(request,{source,env=process.env}={}){
       return response({stats,guests:rows.slice(0,20).map(adminGuest),hasMore:rows.length>20});
     },source);
     if(request.method==='POST'){
-      let input;try{input=await limitedJson(request,2048);}catch{return response({error:'Некорректный запрос.'},400);}
+      let input;try{input=await limitedJson(request,8192);}catch{return response({error:'Некорректный запрос.'},400);}
+      if(input?.action==='edit'){
+        if(!uuid(input?.id))return response({error:'Некорректный ответ.'},400);
+        try{return await transaction(async client=>{
+          const row=await updateAdminRsvp(client,input);
+          return response({message:'Ответ гостя обновлён.',guest:adminGuest(row,true)});
+        },source);}catch(error){
+          if(error instanceof AdminRsvpEditError)return response({error:error.message},error.status);
+          return response({error:'Не удалось сохранить изменения. Попробуй ещё раз.'},503);
+        }
+      }
       const command=input?.action==='delete'&&uuid(input.id)?'delete:'+input.id:['confirm','cancel'].includes(input?.action)&&typeof input.token==='string'&&/^[a-f0-9]{32}$/.test(input.token)?input.action+':'+input.token:null;
       if(!command)return response({error:'Некорректное действие.'},400);
       return await transaction(async client=>{
