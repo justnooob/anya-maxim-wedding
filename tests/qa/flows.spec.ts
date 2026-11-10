@@ -65,14 +65,22 @@ test('FAQ rapid intent, keyboard, Motya action and refresh anchor',async({page})
  await page.goto('/#questions');await expect(page.locator('#questions')).toBeInViewport();await page.reload();await expect(page.locator('#questions')).toBeInViewport();
 });
 
-test('new Denis is distinct and located between Daniil and Anastasia',async({page})=>{
+test('Alexander is second, original Denis is last and second Denis stays between Daniil and Anastasia',async({page})=>{
  await page.getByRole('button',{name:/Друзья/}).first().click();
  const album=page.locator('#guest-album .guest-print');
- await expect(album).toHaveCount(12);
+ await expect(album).toHaveCount(13);
  const names=await album.locator('figcaption h3').allTextContents();
- assertOrder(names,['Даниил','Денис','Анастасия']);
+ assertOrder(names,['Виктория','Александр','Сергей','Карина']);
+  assertOrder(names,['Даниил','Денис','Анастасия']);
+  expect(names.at(-1)).toBe('Денис');
+  const ids=await album.evaluateAll(cards=>cards.map(el=>el.getAttribute('data-guest-id')));
+  expect(ids[1]).toBe('friends-12');
+  expect(ids.at(-1)).toBe('friends-3');
+  expect(ids[ids.indexOf('friends-8')+1]).toBe('friends-11');
  await expect(album.filter({hasText:'Денис'})).toHaveCount(2);
  await expect(page.locator('[data-guest-id="friends-11"] img')).toHaveAttribute('src','/images/guests/friends/denis-shoot.webp');
+  await expect(page.locator('[data-guest-id="friends-12"] img')).toHaveAttribute('src','/images/guests/friends/alexander-shoot.webp');
+  await expect(page.locator('[data-guest-id="friends-12"] figcaption p')).toHaveText('Друг');
 });
 function assertOrder(names:string[],sequence:string[]){
  const i=names.indexOf(sequence[0]);expect(i).toBeGreaterThanOrEqual(0);
