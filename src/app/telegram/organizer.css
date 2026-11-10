@@ -100,3 +100,7 @@
 .organizer-banquet-summary p{margin:14px 0 0}
 .organizer .organizer-note-button{display:block;width:100%;text-align:left;background:#faf6ec;border:1px solid #a7987340}
 .organizer-note-text{display:block;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.75;margin:10px 0 0}
+
+/* Guest-submitted music URLs: legible, tappable, and never clipped on mobile. */
+.organizer-music-link{color:#79582c!important;text-decoration:underline!important;text-underline-offset:3px;overflow-wrap:anywhere;word-break:break-word;cursor:pointer}
+.organizer-music-link:focus-visible{outline:2px solid #79582c;outline-offset:3px}
