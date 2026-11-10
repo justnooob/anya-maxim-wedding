@@ -1,12 +1,14 @@
 import {banquetMenu} from '../../content/menu.mjs';
 import {drinkChoices} from '../../content/drinks.mjs';
 import {rsvpDetail} from '../rsvp/detail.mjs';
+import {editableRsvp} from './edit-rsvp.mjs';
 const filled=value=>typeof value==='string'&&value.trim().length>0;
-export function adminGuest(row){
+export function adminGuest(row,includeEdit=false){
  const going=row.attendance==='yes';
  return {id:row.id,...rsvpDetail(row),name:row.guest_name,who:going?row.who||'':'',
   hotAppetizer:going?row.hot_appetizer_choice:null,mainCourse:going?row.main_course_choice:null,transfer:going?row.transfer:null,returnTransfer:going?row.return_transfer:null,music:going&&filled(row.music_request)?row.music_request:'',
-  diet:going&&filled(row.food)?row.food:'',createdAt:row.created_at};
+  diet:going&&filled(row.food)?row.food:'',createdAt:row.created_at,updatedAt:new Date(row.updated_at).toISOString(),
+  ...(includeEdit?{edit:editableRsvp(row)}:{})};
 }
 export function adminAnalytics(rows){
  const going=rows.filter(row=>row.attendance==='yes');
