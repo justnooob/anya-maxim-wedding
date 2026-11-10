@@ -41,7 +41,7 @@ test('admin editing accepts only known fields, controlled choices and lengths',(
   assert.throws(()=>prepareAdminRsvpEdit(oldRow,changes),AdminRsvpEditError);
  }
  assert.deepEqual(prepareAdminRsvpEdit(oldRow,{food:'Без орехов'}),{food:'Без орехов'});
- assert.deepEqual(prepareAdminRsvpEdit(oldRow,{alcoholDrinks:['red_wine','none']}),undefined);
+ assert.throws(()=>prepareAdminRsvpEdit(oldRow,{alcoholDrinks:['red_wine','none']}),AdminRsvpEditError);
 });
 test('status transitions require explicit confirmation and preserve privacy of consent',()=>{
  assert.throws(()=>prepareAdminRsvpEdit(oldRow,{attendance:'no'}),/Подтверди/);
