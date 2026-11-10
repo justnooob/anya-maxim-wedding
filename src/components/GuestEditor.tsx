@@ -52,7 +52,7 @@ export function GuestEditor({guest,busy,cancel,save}:Props){
  const [confirmed,setConfirmed]=useState(false);
  const [saving,setSaving]=useState(false);
  const [error,setError]=useState('');
- const set=<K extends keyof RsvpEdit>(key:K,value:RsvpEdit[K])=>{setForm(old=>({...old,[key]:value}));setError('');};
+ const set=<K extends keyof RsvpEdit,>(key:K,value:RsvpEdit[K])=>{setForm(old=>({...old,[key]:value}));setError('');};
  const changeStatus=form.attendance!==initial.attendance;
  const fieldsToSave=fields.filter(key=>JSON.stringify(form[key])!==JSON.stringify(initial[key])&&(
    form.attendance==='yes'||key==='guestName'||key==='attendance'));
