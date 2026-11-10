@@ -104,3 +104,25 @@
 /* Guest-submitted music URLs: legible, tappable, and never clipped on mobile. */
 .organizer-music-link{color:#79582c!important;text-decoration:underline!important;text-underline-offset:3px;overflow-wrap:anywhere;word-break:break-word;cursor:pointer}
 .organizer-music-link:focus-visible{outline:2px solid #79582c;outline-offset:3px}
+
+/* RSVP correction controls in the organizer Mini App only. */
+.organizer-edit-button{width:100%;text-align:left;color:#8f7138!important;text-decoration:underline;text-underline-offset:4px;font-size:13px!important;margin:3px 0 15px;padding:4px 0!important}
+.organizer-editor h2{margin:16px 0 8px!important}
+.organizer-edit-form{display:flex;flex-direction:column;gap:17px;margin-top:22px}
+.organizer-edit-field{display:block;color:#4a4f3f;font-size:12px;line-height:1.5;font-weight:500}
+.organizer-edit-field>input,.organizer-edit-field>select,.organizer-edit-field>textarea{display:block;width:100%;font-size:14px;font-weight:400;line-height:1.55;min-height:46px;padding:10px 12px;border:1px solid #a798735f;background:#fffdf8;border-radius:4px;color:#454b35;margin-top:7px}
+.organizer-edit-field>textarea{resize:vertical;min-height:84px;white-space:pre-wrap;overflow-wrap:anywhere}
+.organizer-edit-drinks{border:1px solid #a7987355;border-radius:4px;padding:14px;margin:0}
+.organizer-edit-drinks>legend{padding:0 6px;font-size:13px;font-weight:600;color:#8f7138}
+.organizer-edit-drink-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.organizer-edit-check{display:flex;align-items:flex-start;gap:9px;font-size:12px;line-height:1.6;cursor:pointer}
+.organizer-edit-check input[type=checkbox]{display:block;flex:0 0 18px;width:18px;min-height:18px;height:18px;margin:1px 0 0;padding:0;accent-color:#5a6245}
+.organizer-edit-drinks>.organizer-edit-field{margin-top:14px}
+.organizer-edit-warning{padding:14px;border:1px solid #b4a475;background:#f2ead7;border-radius:4px}
+.organizer-edit-warning p{font-size:12px;line-height:1.6;margin:0 0 10px}
+.organizer-edit-consent{padding:12px;border:1px solid #a7987355;border-radius:4px;background:#f3f0e6}
+.organizer-edit-error{color:#8b3941!important;font-size:12px!important;line-height:1.5;margin:0!important}
+.organizer-edit-actions{display:flex;flex-wrap:wrap;gap:12px;padding-top:4px}
+.organizer-edit-actions>button{padding:10px 16px!important;font-size:13px;flex:1 1 145px}
+.organizer-edit-actions>button:not(.organizer-primary){border:1px solid #a7987355;border-radius:4px}
+@media(max-width:370px){.organizer-edit-drink-grid{grid-template-columns:1fr}}
