@@ -6,7 +6,12 @@ const submit=(page:Page)=>page.getByRole('button',{name:'Подтвердить 
 async function going(page:Page,omit=''){
  await page.locator('input[name=guestName]').fill('Тестовый Гость');await page.getByRole('button',{name:'Приду',exact:true}).click();
  await page.locator('input[name=who]').fill('Друг семьи');
- for(const [name,value] of [['partyInterest','yes'],['congratulationChoice','public'],['hotAppetizer','hot_meat'],['mainCourse','main_fish'],['alcoholDrinks','none'],['softDrinks','cola'],['transfer','kupchino'],['returnTransfer','not_needed']])if(name!==omit)await page.locator(`input[name=${name}][value=${value}]`).check();
+ for(const [name,value] of [['partyInterest','yes'],['congratulationChoice','public'],['hotAppetizer','hot_meat'],['mainCourse','main_fish'],['alcoholDrinks','none'],['softDrinks','cola'],['transfer','kupchino'],['returnTransfer','not_needed']])if(name!==omit){
+   if(name==='hotAppetizer'||name==='mainCourse'){
+    await page.locator(`button[name=${name}][data-menu-option=${value}]`).click();
+    await page.getByRole('dialog').getByRole('button',{name:'Выбрать это блюдо'}).click();
+   }else await page.locator(`input[name=${name}][value=${value}]`).check();
+  }
  await page.locator('input[name=dressCode]').check();await page.locator('input[name=venueRules]').check();
 }
 for(const missing of ['partyInterest','congratulationChoice','hotAppetizer','mainCourse','alcoholDrinks','softDrinks','transfer','returnTransfer'])test('RSVP prevents missing '+missing,async({page})=>{await going(page,missing);await expect(submit(page)).toBeEnabled();});
@@ -44,7 +49,7 @@ test('fragment destinations survive a reload after hidden intro hydration',async
 });
 test('RSVP required controls, other drinks, limits and keyboard-sized viewport',async({page})=>{
  await expect(submit(page)).toBeEnabled();await going(page);await expect(submit(page)).toBeEnabled();
- for(const selector of ['input[name=who]','input[name=transfer]:checked','input[name=hotAppetizer]:checked','input[name=mainCourse]:checked','input[name=congratulationChoice]:checked','input[name=dressCode]','input[name=venueRules]']){
+ for(const selector of ['input[name=who]','input[name=transfer]:checked','input[name=congratulationChoice]:checked','input[name=dressCode]','input[name=venueRules]']){
   const field=page.locator(selector);if(selector.includes('who')){await field.fill('');await expect(submit(page)).toBeEnabled();await field.fill('Друг');}else if(selector.includes(':checked')){continue;}else{await field.uncheck();await expect(submit(page)).toBeEnabled();await field.check();}
  }
  await page.locator('input[name=alcoholDrinks][value=other]').check();await expect(submit(page)).toBeEnabled();await page.locator('input[name=alcoholOther]').fill('Сидр');await expect(submit(page)).toBeEnabled();
