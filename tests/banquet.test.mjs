@@ -20,7 +20,7 @@ test('menu and drink drill-down count each guest once, identify names and retain
  const rows=[{id:'1',guest_name:'Сергей Иванов',attendance:'yes',congratulationChoice:'public',hot_appetizer_choice:'hot_meat',main_course_choice:'main_fish',food:'Без орехов',alcohol_drinks:['red_wine','white_wine','red_wine'],soft_drinks:['none']},{id:'2',guest_name:'Анна Петрова',attendance:'yes',congratulationChoice:'public',hot_appetizer_choice:'hot_fish',main_course_choice:'main_meat',alcohol_drinks:['red_wine'],soft_drinks:['cola']},{id:'3',guest_name:'Старый Гость',attendance:'yes',congratulationChoice:'public',alcohol_drinks:['none'],soft_drinks:['none']},{id:'4',guest_name:'Не Придёт',attendance:'no',alcohol_drinks:['red_wine']}];
  const a=adminAnalytics(rows);assert.equal(a.food.hotAppetizer.find(g=>g.id==='hot_meat').count,1);assert.equal(a.food.mainCourse.find(g=>g.id==='main_meat').count,1);assert.equal(a.food.hotAppetizer.find(g=>g.id==='unspecified').count,1);
  assert.deepEqual(a.food.hotAppetizer[0].guests,[{id:'1',name:'Сергей Иванов'}]);assert.equal(a.drinks.alcohol.find(g=>g.id==='red_wine').count,2);assert.equal(a.drinks.alcohol.find(g=>g.id==='white_wine').count,1);assert.equal(a.drinks.soft.find(g=>g.id==='none').count,2);assert.equal(a.diet.length,1);
- assert.equal(formatGuestList(a.food.hotAppetizer[0].label,a.food.hotAppetizer[0].guests),'Мясная горячая закуска — 1 гость\nСергей Иванов');
+ assert.equal(formatGuestList(a.food.hotAppetizer[0].label,a.food.hotAppetizer[0].guests),menuLabel('hotAppetizer','hot_meat')+' — 1 гость\nСергей Иванов');
  const details=rsvpDetail(rows[0]);assert.equal(details.fields.find(f=>f.label==='Основное блюдо').value,banquetMenu.mainCourse.options.find(o=>o.id==='main_fish').label);assert.equal(menuLabel('hotAppetizer',null),'Пока не выбрано');assert.ok(!rsvpDetail(rows[3]).fields.some(f=>f.label==='Основное блюдо'));
  const q=guestQuery(new URLSearchParams({hotAppetizer:'hot_meat',mainCourse:'main_fish'}));assert.ok(q.args.includes('hot_meat'));assert.match(q.sql,/main_course_choice=\$/);assert.throws(()=>guestQuery(new URLSearchParams({hotAppetizer:'invalid'})));
 });
@@ -35,4 +35,31 @@ test('migration 009 preserves existing RSVP, stores choices and constrains canon
  await assert.rejects(db.query('UPDATE rsvps SET hot_appetizer_choice=$1 WHERE id=$2',['invalid',oldId]));
  const q=guestQuery(new URLSearchParams({hotAppetizer:'hot_meat',mainCourse:'main_fish'}));assert.equal((await db.query(q.sql,q.args)).rows.length,1);
  }finally{await db.close();}
+});
+
+test('saved meat/fish IDs retain their meanings with the new full dish names',()=>{
+ const mapping=[
+  ['hotAppetizer','hot_meat','Жульен с мясом цыпленка и грибами'],
+  ['hotAppetizer','hot_fish','Тарт с копченым лососем и цукини'],
+  ['mainCourse','main_meat','Стейк «Филе миньон» с трюфельным соусом и картофелем конфи'],
+  ['mainCourse','main_fish','Стейк из лосося со сливочным соусом с овощами гриль']
+ ];
+ for(const [kind,id,label] of mapping){
+  assert.equal(menuLabel(kind,id),label);
+  assert.ok(banquetMenu[kind].options.some(option=>option.id===id&&option.label===label));
+ }
+ assert.equal(menuLabel('hotAppetizer',null),'Пока не выбрано');
+ assert.equal(menuLabel('mainCourse',null),'Пока не выбрано');
+ const rows=[
+  {id:'1',guest_name:'Первый',attendance:'yes',hot_appetizer_choice:'hot_meat',main_course_choice:'main_fish'},
+  {id:'2',guest_name:'Второй',attendance:'yes',hot_appetizer_choice:'hot_fish',main_course_choice:'main_meat'},
+  {id:'3',guest_name:'Третий',attendance:'yes',hot_appetizer_choice:'hot_meat',main_course_choice:'main_meat'},
+  {id:'4',guest_name:'Четвёртый',attendance:'yes',hot_appetizer_choice:'hot_fish',main_course_choice:'main_fish'}
+ ];
+ const stats=adminAnalytics(rows);
+ for(const [kind,id,label] of mapping)assert.equal(stats.food[kind].find(option=>option.id===id).label,label);
+ assert.equal(stats.food.hotAppetizer.reduce((sum,item)=>sum+item.count,0),4);
+ assert.equal(stats.food.mainCourse.reduce((sum,item)=>sum+item.count,0),4);
+ assert.equal(rsvpDetail(rows[0]).fields.find(field=>field.label==='Горячая закуска').value,mapping[0][2]);
+ assert.equal(rsvpDetail(rows[0]).fields.find(field=>field.label==='Основное блюдо').value,mapping[3][2]);
 });
