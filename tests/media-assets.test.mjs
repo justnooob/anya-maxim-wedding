@@ -32,3 +32,14 @@ test('all thirteen approved friend portraits exist as optimized local WebP files
  const names=['karina','asel','alexandra','irina','ilya','daniil','anastasia','viktoria','sergey','denis','andrey','denis-shoot','alexander-shoot'];
  for(const name of names){const file=new URL(`../public/images/guests/friends/${name}.webp`,import.meta.url),bytes=await readFile(file);assert.equal(bytes.toString('ascii',0,4),'RIFF');assert.equal(bytes.toString('ascii',8,12),'WEBP');assert.ok((await stat(file)).size<220000);}
 });
+
+test('four wedding dishes each have a square card and a large WebP preview',async()=>{
+ const assets=['hot-chicken-julienne','hot-salmon-zucchini-tart','main-filet-mignon','main-grilled-salmon'];
+ for(const name of assets)for(const variant of ['card','full']){
+  const filepath=new URL(`../public/images/menu/${name}-${variant}.webp`,import.meta.url);
+  const bytes=await readFile(filepath);
+  assert.equal(bytes.toString('ascii',0,4),'RIFF');
+  assert.equal(bytes.toString('ascii',8,12),'WEBP');
+  assert.ok((await stat(filepath)).size<120000,`${name}-${variant} exceeds WebP size budget`);
+ }
+});

@@ -19,6 +19,7 @@ import "./scroll-motion.css";
 import "./mobile-browser-fixes.css";
 import "./invitation-finishing.css";
 import "./site-content-polish.css";
+import "@/components/menu-cards.css";
 export const viewport: Viewport = {width:'device-width',initialScale:1,viewportFit:'cover'};
 export const metadata: Metadata = {
   metadataBase: new URL(PUBLIC_ORIGIN),

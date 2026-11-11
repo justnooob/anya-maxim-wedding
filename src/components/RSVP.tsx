@@ -10,7 +10,7 @@ import {rsvpReady,attendancePayload,withinLimit,validGuestName} from '@/content/
 import {rsvpFieldIssues} from '@/content/rsvp-field-issues.mjs';
 import {partyInterest as partyInterestCopy} from '@/content/party-interest.mjs';
 import {boundedJson,requestMessage} from '@/client/requests.mjs';
-import {banquetMenu,menuHint} from '@/content/menu.mjs';
+import {MenuChoice} from './MenuChoice';
 import {congratulations,congratulationReady,congratulationFields,companionLimit} from '@/content/congratulations.mjs';
 import {DRAFT_KEY,LEGACY_DRAFT_KEY,parseDraft} from '@/client/rsvp-draft.mjs';
 import {TextCounter} from './TextCounter';
@@ -186,7 +186,7 @@ export function RSVP() {
           <fieldset className="paper-options congratulations-choice"><legend>{congratulations.title}<RequiredMark/></legend>{congratulations.options.map(option=><label key={option.id}><input type="radio" name="congratulationChoice" value={option.id} checked={congratulationChoice===option.id} onChange={()=>{setCongratulationChoice(option.id);setCompanionTouched(false);}} required={attendance==='yes'}/><span>{option.label}</span></label>)}</fieldset>
           {congratulationChoice==='public_with_someone'&&<label className="writing-field companion-field page-enter"><span>{congratulations.companionLabel}<RequiredMark/></span><input className="ym-disable-keys" name="congratulationCompanion" placeholder={congratulations.companionPlaceholder} value={congratulationCompanion} onChange={event=>setCongratulationCompanion(event.target.value)} onBlur={()=>setCompanionTouched(true)} required={attendance==='yes'} aria-invalid={companionTouched&&!congratulationReady(congratulationChoice,congratulationCompanion)} aria-describedby="companion-error companion-limit"/><small id="companion-limit" className="quiet-note">Не больше {companionLimit} символов</small>{companionTouched&&!congratulationReady(congratulationChoice,congratulationCompanion)&&<small id="companion-error" className="form-error" role="status">{congratulationCompanion.trim()?`Не больше ${companionLimit} символов.`:congratulations.companionError}</small>}</label>}
           <div className="rsvp-food-block">
-          {(['hotAppetizer','mainCourse'] as const).map(kind=><fieldset className="paper-options menu-choice" key={kind}><legend>{banquetMenu[kind].title}<RequiredMark /></legend><p className="quiet-note">{menuHint}</p><div>{banquetMenu[kind].options.map(option=><label key={option.id}><input type="radio" name={kind} value={option.id} checked={(kind==='hotAppetizer'?hotAppetizer:mainCourse)===option.id} onChange={()=>{(kind==='hotAppetizer'?setHotAppetizer:setMainCourse)(option.id);}} required={attendance==='yes'}/><span>{option.label}</span></label>)}</div></fieldset>)}
+           {(['hotAppetizer','mainCourse'] as const).map(kind=><MenuChoice key={kind} kind={kind} value={kind==='hotAppetizer'?hotAppetizer:mainCourse} onChange={kind==='hotAppetizer'?setHotAppetizer:setMainCourse} disabled={attendance!=='yes'||busy} required={attendance==='yes'}/>)}
           <label className="writing-field"><span>{copy.food}</span><textarea className="ym-disable-keys" name="food" placeholder={copy.foodPlaceholder} value={food} onChange={event=>setFood(event.target.value)} aria-invalid={!withinLimit("food",food)} aria-describedby="food-counter" rows={2} /><TextCounter field="food" value={food} /></label>
           </div>
           <DrinkChoices kind="alcohol" selected={alcoholDrinks} other={alcoholOther} onSelect={setAlcoholDrinks} onOther={setAlcoholOther} />
