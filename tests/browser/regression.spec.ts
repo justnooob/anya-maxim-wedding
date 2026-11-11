@@ -841,3 +841,39 @@ test('final Dress Code regenerated photographs and recommended order',async({pag
   }}await overflow(page);
  }
 });
+
+test('food menu cards open previews, select independent saved IDs and remain responsive',async({page})=>{
+ await page.setViewportSize({width:1440,height:900});await publicPage(page);
+ await page.getByRole('button',{name:'Приду',exact:true}).click();
+ const hot=page.locator('[data-menu-kind=hotAppetizer]');
+ const main=page.locator('[data-menu-kind=mainCourse]');
+ await expect(hot.locator('.menu-card')).toHaveCount(2);
+ await expect(main.locator('.menu-card')).toHaveCount(2);
+ const first=hot.locator('[data-menu-option=hot_meat]');
+ await first.click();
+ let dialog=page.getByRole('dialog');
+ await expect(dialog).toBeVisible();
+ await expect(dialog.getByRole('heading',{name:'Жульен с мясом цыпленка и грибами'})).toBeVisible();
+ await expect(dialog.locator('img')).toHaveAttribute('src',/hot-chicken-julienne-full/);
+ await page.keyboard.press('Escape');
+ await expect(dialog).toHaveCount(0);
+ await expect(first).toBeFocused();
+ await first.click();
+ await dialog.getByRole('button',{name:'Выбрать это блюдо'}).click();
+ await expect(first).toHaveAttribute('aria-pressed','true');
+ await expect(main.locator('[data-menu-option=main_fish]')).toHaveAttribute('aria-pressed','false');
+ const salmon=main.locator('[data-menu-option=main_fish]');
+ await salmon.click();
+ await page.locator('.menu-preview-backdrop').click({position:{x:2,y:2}});
+ await expect(dialog).toHaveCount(0);
+ await salmon.click();
+ await dialog.getByRole('button',{name:'Выбрать это блюдо'}).click();
+ await expect(salmon).toHaveAttribute('aria-pressed','true');
+ await expect(first).toHaveAttribute('aria-pressed','true');
+ await page.reload();
+ await expect(hot.locator('[data-menu-option=hot_meat]')).toHaveAttribute('aria-pressed','true');
+ await expect(main.locator('[data-menu-option=main_fish]')).toHaveAttribute('aria-pressed','true');
+ await page.setViewportSize({width:390,height:844});
+ await expect(hot.locator('.menu-card-grid')).toHaveCSS('grid-template-columns',/^\d+(\.\d+)?px$/);
+ await overflow(page);
+});
