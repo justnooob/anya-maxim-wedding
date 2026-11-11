@@ -855,7 +855,18 @@ test('food menu cards open previews, select independent saved IDs and remain res
  const mainMeatRadio=main.getByRole('radio',{name:/Выбрать: Стейк «Филе миньон»/});
  const mainFishRadio=main.getByRole('radio',{name:/Выбрать: Стейк из лосося/});
  await expect(hot.locator('.menu-card-check-indicator')).toHaveCount(2);
+ const checkIndicator=hot.locator('.menu-card-check-indicator').first();
+ await expect(checkIndicator).toHaveCSS('width','28px');
+ await expect(checkIndicator).toHaveCSS('height','28px');
+ const formPaper=await page.locator('.rsvp-paper').first().evaluate(el=>{
+  const computed=getComputedStyle(el);
+  return {backgroundColor:computed.backgroundColor,backgroundImage:computed.backgroundImage};
+ });
+ await expect(checkIndicator).toHaveCSS('background-color',formPaper.backgroundColor);
+ await expect(checkIndicator).toHaveCSS('background-image',formPaper.backgroundImage);
  await hotFishRadio.check();
+ await expect(checkIndicator).toHaveCSS('background-color',formPaper.backgroundColor);
+ await expect(checkIndicator).toHaveCSS('background-image',formPaper.backgroundImage);
  await expect(hotFishRadio).toBeChecked();
  await expect(hotMeatRadio).not.toBeChecked();
  await expect(page.getByRole('dialog')).toHaveCount(0);
