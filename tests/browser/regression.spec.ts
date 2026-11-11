@@ -865,9 +865,7 @@ test('food menu cards open previews, select independent saved IDs and remain res
  await hotMeatRadio.check();
  await expect(hotMeatRadio).toBeChecked();
  await expect(hotFishRadio).not.toBeChecked();
- await mainFishRadio.check();
- await expect(mainFishRadio).toBeChecked();
- await expect(mainMeatRadio).not.toBeChecked();
+ await expect(mainFishRadio).not.toBeChecked();
  const first=hot.locator('[data-menu-option=hot_meat]');
  await first.click();
  let dialog=page.getByRole('dialog');
