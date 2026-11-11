@@ -1,7 +1,12 @@
 import {test,expect,type Page} from 'playwright/test';
 import {inspectLayout} from '../helpers/ui-audit.mjs';
 test.beforeEach(async({page,request})=>{await request.post('/qa/reset');await page.emulateMedia({reducedMotion:'reduce'});await page.addInitScript(()=>sessionStorage.setItem('anya-maxim-opening-v1','yes'));await page.goto('/');});
-async function fill(page:Page,transfer:string){await page.locator('input[name=guestName]').fill('Тестовый Гость');await page.getByRole('button',{name:'Приду',exact:true}).click();await page.locator('input[name=who]').fill('Друг');for(const [name,value]of [['congratulationChoice','public'],['hotAppetizer','hot_meat'],['mainCourse','main_fish'],['alcoholDrinks','none'],['softDrinks','none'],['transfer',transfer]])await page.locator(`input[name=${name}][value=${value}]`).check();await page.locator('input[name=dressCode]').check();await page.locator('input[name=venueRules]').check();}
+async function fill(page:Page,transfer:string){await page.locator('input[name=guestName]').fill('Тестовый Гость');await page.getByRole('button',{name:'Приду',exact:true}).click();await page.locator('input[name=who]').fill('Друг');for(const [name,value]of [['partyInterest','yes'],['congratulationChoice','public'],['hotAppetizer','hot_meat'],['mainCourse','main_fish'],['alcoholDrinks','none'],['softDrinks','none'],['transfer',transfer]]){
+ if(name==='hotAppetizer'||name==='mainCourse'){
+  await page.locator(`button[name=${name}][data-menu-option=${value}]`).click();
+  await page.getByRole('dialog').getByRole('button',{name:'Выбрать это блюдо'}).click();
+ }else await page.locator(`input[name=${name}][value=${value}]`).check();
+}await page.locator('input[name=dressCode]').check();await page.locator('input[name=venueRules]').check();}
 for(const [transfer,back]of [['self','needed'],['kupchino','not_needed'],['pavlovsk','needed'],['self','not_needed']])test('return transfer '+transfer+'/'+back+' survives draft, API and Mini App detail',async({page})=>{
  await fill(page,transfer);const submit=page.locator('#rsvp button[type=submit]');await expect(submit).toBeEnabled();const field=page.locator('.return-transfer-options');await field.locator('input').first().focus();await page.keyboard.press('Tab');await expect(field).toHaveAttribute('aria-invalid','true');await expect(field.locator('.form-error')).toContainText('Выбери');
  await field.locator('input[value='+back+']').check();await expect(submit).toBeEnabled();await page.reload();await expect(page.locator('input[name=returnTransfer]:checked')).toHaveValue(back);await expect(page.locator('input[name=transfer]:checked')).toHaveValue(transfer);await expect(submit).toBeEnabled();
