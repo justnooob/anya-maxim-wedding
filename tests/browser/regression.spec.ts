@@ -849,6 +849,23 @@ test('food menu cards open previews, select independent saved IDs and remain res
  const main=page.locator('[data-menu-kind=mainCourse]');
  await expect(hot.locator('.menu-card')).toHaveCount(2);
  await expect(main.locator('.menu-card')).toHaveCount(2);
+ // The visible corner control selects directly without opening a preview.
+ const hotFishRadio=hot.getByRole('radio',{name:'Выбрать: Тарт с копченым лососем и цукини'});
+ const hotMeatRadio=hot.getByRole('radio',{name:'Выбрать: Жульен с мясом цыпленка и грибами'});
+ const mainMeatRadio=main.getByRole('radio',{name:/Выбрать: Стейк «Филе миньон»/});
+ const mainFishRadio=main.getByRole('radio',{name:/Выбрать: Стейк из лосося/});
+ await expect(hot.locator('.menu-card-check-indicator')).toHaveCount(2);
+ await hotFishRadio.check();
+ await expect(hotFishRadio).toBeChecked();
+ await expect(hotMeatRadio).not.toBeChecked();
+ await expect(page.getByRole('dialog')).toHaveCount(0);
+ await mainMeatRadio.check();
+ await expect(mainMeatRadio).toBeChecked();
+ await expect(hotFishRadio).toBeChecked();
+ await hotMeatRadio.check();
+ await expect(hotMeatRadio).toBeChecked();
+ await expect(hotFishRadio).not.toBeChecked();
+ await expect(mainFishRadio).not.toBeChecked();
  const first=hot.locator('[data-menu-option=hot_meat]');
  await first.click();
  let dialog=page.getByRole('dialog');
@@ -873,6 +890,8 @@ test('food menu cards open previews, select independent saved IDs and remain res
  await page.reload();
  await expect(hot.locator('[data-menu-option=hot_meat]')).toHaveAttribute('aria-pressed','true');
  await expect(main.locator('[data-menu-option=main_fish]')).toHaveAttribute('aria-pressed','true');
+ await expect(hotMeatRadio).toBeChecked();
+ await expect(mainFishRadio).toBeChecked();
  await page.setViewportSize({width:390,height:844});
  await expect(hot.locator('.menu-card-grid')).toHaveCSS('grid-template-columns',/^\d+(\.\d+)?px$/);
  await overflow(page);

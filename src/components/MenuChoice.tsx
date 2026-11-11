@@ -9,7 +9,7 @@ import {RequiredMark} from "./RequiredMark";
 type MenuKind="hotAppetizer"|"mainCourse";
 type Props={kind:MenuKind;value:string;onChange:(value:string)=>void;disabled?:boolean;required?:boolean};
 
-/** A menu choice is confirmed only in the preview dialog; its ID stays unchanged. */
+/** Select an option directly from its corner control or from the preview dialog. Stable IDs are retained. */
 export function MenuChoice({kind,value,onChange,disabled=false,required=false}:Props){
   const menu=banquetMenu[kind];
   const [opened,setOpened]=useState<string|null>(null);
@@ -66,15 +66,15 @@ export function MenuChoice({kind,value,onChange,disabled=false,required=false}:P
       <div className="menu-card-grid">
         {menu.options.map(item=>{
           const selected=value===item.id;
-          return <button
-            key={item.id}
+          return <div key={item.id} className="menu-card-entry">
+            <button
             className="menu-card"
             type="button"
             name={kind}
             data-menu-option={item.id}
             aria-pressed={selected}
             aria-haspopup="dialog"
-            aria-label={item.label+(selected?", выбрано":"")}
+            aria-label={"Посмотреть: "+item.label+(selected?", выбрано":"")}
             disabled={disabled}
             onClick={event=>{triggerRef.current=event.currentTarget;setOpened(item.id);}}
           >
@@ -85,7 +85,14 @@ export function MenuChoice({kind,value,onChange,disabled=false,required=false}:P
               <span className="menu-card-name">{item.label}</span>
               <span className="menu-card-hint">{selected?"✓ Выбрано":"Посмотреть блюдо"}</span>
             </span>
-          </button>;
+            </button>
+            <span className="menu-card-check-wrap">
+              <input type="radio" className="menu-card-check-input"
+                name={kind} value={item.id} checked={selected} disabled={disabled}
+                onChange={()=>onChange(item.id)} aria-label={"Выбрать: "+item.label} />
+              <span className="menu-card-check-indicator" aria-hidden="true">✓</span>
+            </span>
+          </div>;
         })}
       </div>
     </fieldset>
