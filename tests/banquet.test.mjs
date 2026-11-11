@@ -51,10 +51,10 @@ test('saved meat/fish IDs retain their meanings with the new full dish names',()
  assert.equal(menuLabel('hotAppetizer',null),'Пока не выбрано');
  assert.equal(menuLabel('mainCourse',null),'Пока не выбрано');
  const rows=[
-  {id:'1',guest_name:'Первый',attendance:'yes',hot_appetizer_choice:'hot_meat',main_course_choice:'main_fish'},
-  {id:'2',guest_name:'Второй',attendance:'yes',hot_appetizer_choice:'hot_fish',main_course_choice:'main_meat'},
-  {id:'3',guest_name:'Третий',attendance:'yes',hot_appetizer_choice:'hot_meat',main_course_choice:'main_meat'},
-  {id:'4',guest_name:'Четвёртый',attendance:'yes',hot_appetizer_choice:'hot_fish',main_course_choice:'main_fish'}
+  {id:'1',guest_name:'Первый',attendance:'yes',alcohol_drinks:['none'],soft_drinks:['none'],hot_appetizer_choice:'hot_meat',main_course_choice:'main_fish'},
+  {id:'2',guest_name:'Второй',attendance:'yes',alcohol_drinks:['none'],soft_drinks:['none'],hot_appetizer_choice:'hot_fish',main_course_choice:'main_meat'},
+  {id:'3',guest_name:'Третий',attendance:'yes',alcohol_drinks:['none'],soft_drinks:['none'],hot_appetizer_choice:'hot_meat',main_course_choice:'main_meat'},
+  {id:'4',guest_name:'Четвёртый',attendance:'yes',alcohol_drinks:['none'],soft_drinks:['none'],hot_appetizer_choice:'hot_fish',main_course_choice:'main_fish'}
  ];
  const stats=adminAnalytics(rows);
  for(const [kind,id,label] of mapping)assert.equal(stats.food[kind].find(option=>option.id===id).label,label);
