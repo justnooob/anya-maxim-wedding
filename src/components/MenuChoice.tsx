@@ -22,7 +22,9 @@ export function MenuChoice({kind,value,onChange,disabled=false,required=false}:P
   useEffect(()=>{
     if(!option)return;
     const oldOverflow=document.body.style.overflow;
+    const oldRootOverflow=document.documentElement.style.overflow;
     document.body.style.overflow="hidden";
+    document.documentElement.style.overflow="hidden";
     closeRef.current?.focus({preventScroll:true});
     const onKeyDown=(event:KeyboardEvent)=>{
       if(event.key==="Escape"){
@@ -51,6 +53,7 @@ export function MenuChoice({kind,value,onChange,disabled=false,required=false}:P
     return ()=>{
       document.removeEventListener("keydown",onKeyDown);
       document.body.style.overflow=oldOverflow;
+      document.documentElement.style.overflow=oldRootOverflow;
       const origin=triggerRef.current;
       if(origin?.isConnected)origin.focus({preventScroll:true});
     };
