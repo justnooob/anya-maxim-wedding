@@ -1,4 +1,5 @@
 "use client";
+import Image from 'next/image';
 import {createPortal} from 'react-dom';
 import {useEffect,useRef,useState} from 'react';
 import {createMeowGate,startRecordedMeow,motyaCopy} from '@/client/motya.mjs';
@@ -11,5 +12,14 @@ export function Motya(){
   const result=await gate.current.attempt();if(result!=='limit')return;
   setToast(value=>value+1);if(timer.current)clearTimeout(timer.current);timer.current=setTimeout(()=>setToast(0),5000);
  }
- return <><button type="button" className="question-link motya-link" onClick={()=>void meow()}>{motyaCopy.label}</button>{toast>0&&createPortal(<span key={toast} className="motya-toast" role="status">{motyaCopy.toast}</span>,document.body)}</>;
+ return <>
+  <button type="button" className="question-link motya-link" onClick={()=>void meow()}>{motyaCopy.label}</button>
+  {toast>0&&createPortal(
+   <span key={toast} className="motya-toast" role="status">
+    <span className="motya-toast-text">{motyaCopy.toast}</span>
+    <Image className="motya-toast-gif" src="/images/motya-lick.gif"
+     width={309} height={309} alt="" aria-hidden="true" loading="eager" unoptimized draggable={false}/>
+   </span>,document.body
+  )}
+ </>;
 }
