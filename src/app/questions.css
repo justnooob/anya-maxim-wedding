@@ -42,6 +42,22 @@ html[data-faq-reading-anchor=true]{overflow-anchor:none}
 @media(prefers-reduced-motion:reduce){.question-panel,.question-panel[data-open=true],.question-trigger,.question-link{transition:none}}
 .motya-link{display:inline;border:0;padding:0;background:none;font:inherit;font-weight:500;cursor:pointer;vertical-align:baseline}
 .motya-link:hover{color:#5f6d49;text-decoration-color:#5f6d49}.motya-link:focus-visible{color:#5f6d49;outline:2px solid #b49a61;outline-offset:4px;border-radius:2px}
-.motya-toast{position:fixed;z-index:1000;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);max-width:calc(100vw - 32px);width:max-content;padding:15px 24px;border:1px solid #b49a6160;border-radius:12px;background:var(--writing-paper) center/400px auto,#f8f4eb;box-shadow:0 8px 30px #303b2a25;color:#3d4931;font:500 14px/1.6 Montserrat,sans-serif;text-align:center;pointer-events:none;animation:motya-toast 5s ease both}
+.motya-toast{
+ position:fixed;z-index:1000;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));
+ transform:translateX(-50%);box-sizing:border-box;
+ width:min(236px,calc(100vw - 32px));max-width:calc(100vw - 32px);
+ padding:14px 16px 16px;border:1px solid #b49a6160;border-radius:12px;
+ background:var(--writing-paper) center/400px auto,#f8f4eb;
+ box-shadow:0 8px 30px #303b2a25;color:#3d4931;
+ font:500 14px/1.6 Montserrat,sans-serif;text-align:center;
+ pointer-events:none;animation:motya-toast 5s ease both;
+}
+.motya-toast-text{display:block}
+.motya-toast-gif{
+ display:block;width:100%;max-width:202px;height:auto;
+ max-height:min(202px,calc(100dvh - 140px));
+ margin:10px auto 0;border-radius:8px;object-fit:contain;
+ background:#f8f4eb;
+}
 @keyframes motya-toast{0%{opacity:0;translate:0 8px}8%,94%{opacity:1;translate:0 0}100%{opacity:0;translate:0 2px}}
 @media(prefers-reduced-motion:reduce){.motya-toast{animation:none}}
