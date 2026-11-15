@@ -496,8 +496,21 @@ test('Motya keyboard, successful play cap, overlap, session restore and five sec
  await publicPage(page);await page.locator('#question-flowers').click();const motya=page.getByRole('button',{name:'кота Моти',exact:true});await image(page,page.locator('#answer-flowers'),'motya-faq-link.png');
  await page.evaluate(()=>{(window as unknown as {motyaAudio:{fail:boolean}}).motyaAudio.fail=true;});await motya.click();await expect.poll(()=>page.evaluate(()=>sessionStorage.getItem('anya-maxim-motya-meows-v1'))).toBeNull();
  await page.evaluate(()=>{(window as unknown as {motyaAudio:{fail:boolean}}).motyaAudio.fail=false;});await motya.focus();await motya.press('Enter');await expect.poll(()=>page.evaluate(()=>sessionStorage.getItem('anya-maxim-motya-meows-v1'))).toBe('1');await motya.click();expect(await page.evaluate(()=>(window as unknown as {motyaAudio:{starts:number}}).motyaAudio.starts)).toBe(1);
- await page.waitForTimeout(1000);await motya.press('Space');await expect.poll(()=>page.evaluate(()=>sessionStorage.getItem('anya-maxim-motya-meows-v1'))).toBe('2');await page.waitForTimeout(1000);await motya.click();await expect.poll(()=>page.evaluate(()=>sessionStorage.getItem('anya-maxim-motya-meows-v1'))).toBe('3');await page.waitForTimeout(1000);await motya.click();await expect(page.locator('.motya-toast')).toHaveText('Хватит мучать Мотю');expect(await page.evaluate(()=>(window as unknown as {motyaAudio:{starts:number}}).motyaAudio.starts)).toBe(3);
- await page.setViewportSize({width:320,height:812});await overflow(page);await image(page,page.locator('.motya-toast'),'motya-toast-320.png');await page.waitForTimeout(5300);await expect(page.locator('.motya-toast')).toHaveCount(0);
+ await page.waitForTimeout(1000);await motya.press('Space');await expect.poll(()=>page.evaluate(()=>sessionStorage.getItem('anya-maxim-motya-meows-v1'))).toBe('2');await page.waitForTimeout(1000);await motya.click();await expect.poll(()=>page.evaluate(()=>sessionStorage.getItem('anya-maxim-motya-meows-v1'))).toBe('3');await page.waitForTimeout(1000);await motya.click();await expect(page.locator('.motya-toast')).toHaveText('Хватит мучать Мотю');
+  const motyaGif=page.locator('.motya-toast img');
+  await expect(motyaGif).toHaveAttribute('src','/images/motya-lick.gif');
+  await expect.poll(()=>motyaGif.evaluate(img=>(img as HTMLImageElement).complete&&(img as HTMLImageElement).naturalWidth===309)).toBe(true);
+  expect(await page.evaluate(()=>(window as unknown as {motyaAudio:{starts:number}}).motyaAudio.starts)).toBe(3);
+ await page.setViewportSize({width:320,height:812});await overflow(page);
+  const toastRect=await page.locator('.motya-toast').boundingBox();
+  const gifRect=await motyaGif.boundingBox();
+  expect(toastRect?.width).toBeLessThanOrEqual(240);
+  expect(gifRect?.width).toBeLessThanOrEqual(203);
+  expect(gifRect?.height).toBeGreaterThan(150);
+  expect(gifRect!.y).toBeGreaterThan(toastRect!.y);
+  // The old text-only toast screenshot is obsolete; verify dimensions and image loading
+  // until a new visual baseline for the animated image is recorded.
+  await page.waitForTimeout(5300);await expect(page.locator('.motya-toast')).toHaveCount(0);
  await page.reload();await page.locator('#question-flowers').click();await page.getByRole('button',{name:'кота Моти',exact:true}).press('Enter');await expect(page.locator('.motya-toast')).toBeVisible();expect(await page.evaluate(()=>(window as unknown as {motyaAudio:{starts:number}}).motyaAudio.starts)).toBe(0);
 });
 
