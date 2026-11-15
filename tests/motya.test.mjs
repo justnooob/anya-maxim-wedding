@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {createMeowGate,MEOW_SESSION_KEY} from '../src/client/motya.mjs';
 const storage=()=>{const data=new Map();return{getItem:k=>data.get(k),setItem:(k,v)=>data.set(k,v)}};
 const flush=()=>new Promise(resolve=>setImmediate(resolve));
@@ -11,3 +12,12 @@ test('Motya counts only started meows, rejects overlap, cycles three voices and 
 });
 test('Motya audio failure is silent, does not count and can retry',async()=>{const store=storage();let fail=true;const gate=createMeowGate({storage:store,start:async()=>{if(fail)throw Error('blocked');return{finished:Promise.resolve()}}});assert.equal(await gate.attempt(),'failed');assert.equal(gate.count,0);assert.equal(gate.playing,false);assert.equal(store.getItem(MEOW_SESSION_KEY),undefined);fail=false;assert.equal(await gate.attempt(),'played');assert.equal(gate.count,1);});
 test('Motya corrupt/disabled storage fails gracefully; dispose stops a live voice',async()=>{let stopped=false;const gate=createMeowGate({storage:{getItem:()=>'{corrupt',setItem:()=>{throw Error()}},start:async()=>({finished:new Promise(()=>{}),stop:()=>stopped=true})});assert.equal(gate.count,0);assert.equal(await gate.attempt(),'played');gate.dispose();assert.ok(stopped);assert.equal(await gate.attempt(),'failed');});
+
+test('Motya toast uses the supplied local square animated GIF',()=>{
+ const gif=readFileSync('public/images/motya-lick.gif');
+ assert.equal(gif.subarray(0,6).toString('ascii'),'GIF89a');
+ assert.equal(gif.readUInt16LE(6),309);
+ assert.equal(gif.readUInt16LE(8),309);
+ assert.ok(gif.includes(Buffer.from('NETSCAPE2.0')),'GIF must loop');
+ assert.ok(gif.byteLength>500_000&&gif.byteLength<700_000,'Original GIF must not be replaced with a placeholder');
+});
