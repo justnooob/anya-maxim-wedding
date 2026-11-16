@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import {randomUUID,createHmac} from 'node:crypto';
 import {PGlite} from '@electric-sql/pglite';
 import {wishlistRequest,wishlistAdminRequest} from '../src/server/wishlist/http.mjs';
+import {wishlistReservationPayload,drainOutbox} from '../src/server/telegram/outbox.mjs';
 import {wishlistCookie} from '../src/server/wishlist/session.mjs';
 import {itemInput,safeUrl,reservationName} from '../src/server/wishlist/validation.mjs';
 import {matchesPrice} from '../src/content/wishlist.mjs';
@@ -82,7 +83,7 @@ const gift=(extra={})=>({title:'Подарок',comment:'Цвет не прин�
 async function fixture(){const db=new PGlite();await db.exec(migrations.map(n=>fs.readFileSync('migrations/'+n,'utf8')).join('\n'));let tail=Promise.resolve();const source={async connect(){const previous=tail;let release;tail=new Promise(r=>release=r);await previous;return{query:async(s,a)=>{const result=await db.query(s,a);return {...result,rowCount:result.affectedRows};},release};}};return{db,source,close:()=>db.close()};}
 async function admin(source,body,auth=signed()){const response=await wishlistAdminRequest(new Request('https://example.com/api/telegram/wishlist',{method:body?'POST':'GET',headers:{'x-telegram-init-data':auth,'content-type':'application/json'},...(body?{body:JSON.stringify(body)}:{})}),{source,env});return{response,data:await response.json()};}
 async function session(source,cookie=''){const response=await wishlistRequest(new Request('http://localhost:3000/api/wishlist',{headers:{cookie}}),{source});return{cookie:response.headers.get('set-cookie')?.split(';')[0]||cookie,data:await response.json(),response};}
-async function write(source,owner,body,headers={}){const response=await wishlistRequest(new Request('http://localhost:3000/api/wishlist',{method:'POST',headers:{origin:'http://localhost:3000',cookie:owner.cookie,'content-type':'application/json','x-csrf-token':owner.data.csrf,...headers},body:JSON.stringify(body)}),{source});return{response,data:await response.json()};}
+async function write(source,owner,body,headers={},notificationEnv){const response=await wishlistRequest(new Request('http://localhost:3000/api/wishlist',{method:'POST',headers:{origin:'http://localhost:3000',cookie:owner.cookie,'content-type':'application/json','x-csrf-token':owner.data.csrf,...headers},body:JSON.stringify(body)}),{source,env:notificationEnv});return{response,data:await response.json()};}
 test('Wishlist validation rejects dangerous URLs, invalid price, name and settings',()=>{
  assert.equal(itemInput(gift()).links.length,2);assert.equal(reservationName('  Сергей  '),'Сергей');assert.equal(safeUrl('/images/test.webp',{image:true}),'/images/test.webp');
  for(const url of ['javascript:alert(1)','data:image/svg+xml,x','https://user:password@example.com','/images/../private'])assert.throws(()=>safeUrl(url));
@@ -133,3 +134,35 @@ test('Hidden and archived IDs cannot be reserved; multiple mode supports indepen
  assert.equal((await write(f.source,a,{action:'reserve',id:multi,name:'X'})).response.status,200);assert.equal((await write(f.source,b,{action:'reserve',id:multi,name:'Y'})).response.status,200);assert.equal((await write(f.source,a,{action:'reserve',id:multi,name:'X'})).response.status,200);assert.equal((await f.db.query("SELECT count(*)::int n FROM wishlist_reservations WHERE status='active'")).rows[0].n,2);
  const row=(await admin(f.source)).data.items.find(i=>i.id===multi);assert.equal((await admin(f.source,{action:'save',id:multi,version:row.version,data:gift()})).response.status,400);
 }finally{await f.close();}});
+
+test('gift booking notification is generic, queued once per new reservation and delivered through existing outbox',async()=>{
+ const f=await fixture();
+ try{
+  const id=await saveItem({query:(sql,args)=>f.db.query(sql,args)},null,gift({title:'Секретный подарок'}));
+  const owner=await session(f.source);
+  const result=await write(f.source,owner,{action:'reserve',id,name:'Имя бронирующего'},{},env);
+  assert.equal(result.response.status,200);
+  const queued=(await f.db.query('SELECT recipient,payload FROM telegram_outbox ORDER BY recipient')).rows;
+  assert.deepEqual(queued.map(r=>r.recipient),['123','456']);
+  for(const job of queued)assert.deepEqual(job.payload,{wishlistReservation:true});
+  await write(f.source,owner,{action:'reserve',id,name:'Имя бронирующего'},{},env);
+  assert.equal((await f.db.query('SELECT count(*)::int n FROM telegram_outbox')).rows[0].n,2);
+  const sent=[];
+  await drainOutbox({source:f.source,allowedIds:new Set(['123','456']),siteUrl:'https://anyaxmaxim.ru',api:async(method,payload)=>{
+   assert.equal(method,'sendMessage');
+   sent.push(payload);
+  }});
+  assert.equal(sent.length,2);
+  for(const payload of sent){
+   assert.equal(payload.text,'Забронирован новый подарок');
+   assert.equal(payload.reply_markup.inline_keyboard[0][0].web_app.url,'https://anyaxmaxim.ru/telegram');
+   assert.equal(payload.protect_content,true);
+   assert.ok(!JSON.stringify(payload).includes('Секретный подарок'));
+   assert.ok(!JSON.stringify(payload).includes('Имя бронирующего'));
+  }
+  assert.equal((await f.db.query('SELECT count(*)::int n FROM telegram_outbox')).rows[0].n,0);
+  await write(f.source,owner,{action:'cancel',id,confirm:true},{},env);
+  assert.equal((await f.db.query('SELECT count(*)::int n FROM telegram_outbox')).rows[0].n,0);
+  assert.equal(wishlistReservationPayload('https://anyaxmaxim.ru').text,'Забронирован новый подарок');
+ }finally{await f.close();}
+});
