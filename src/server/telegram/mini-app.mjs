@@ -38,12 +38,12 @@ export async function miniAppRequest(request,{source,env=process.env}={}){
       }
       if(action)return response({error:'Некорректное действие.'},400);
       let query;try{query=guestQuery(url.searchParams);}catch{return response({error:'Некорректный фильтр.'},400);}
-      const stats=(await client.query("SELECT count(*)::int total,count(*) FILTER(WHERE attendance='yes')::int going,count(*) FILTER(WHERE attendance='no')::int not_going,count(*) FILTER(WHERE transfer IN ('needed','kupchino','pavlovsk'))::int transfer,count(*) FILTER(WHERE transfer='kupchino')::int kupchino,count(*) FILTER(WHERE transfer='pavlovsk')::int pavlovsk,count(*) FILTER(WHERE attendance='yes' AND length(trim(coalesce(music_request,'')))>0)::int music,count(*) FILTER(WHERE attendance='yes' AND length(trim(coalesce(food,'')))>0)::int diet,
+      const stats=(await client.query(`SELECT count(*)::int total,count(*) FILTER(WHERE attendance='yes')::int going,count(*) FILTER(WHERE attendance='no')::int not_going,count(*) FILTER(WHERE transfer IN ('needed','kupchino','pavlovsk'))::int transfer,count(*) FILTER(WHERE transfer='kupchino')::int kupchino,count(*) FILTER(WHERE transfer='pavlovsk')::int pavlovsk,count(*) FILTER(WHERE attendance='yes' AND length(trim(coalesce(music_request,'')))>0)::int music,count(*) FILTER(WHERE attendance='yes' AND length(trim(coalesce(food,'')))>0)::int diet,
       count(*) FILTER(WHERE attendance='yes' AND party_interest='yes')::int party_wants,
       count(*) FILTER(WHERE attendance='yes' AND party_interest='yes' AND party_group='bachelor')::int party_bachelor,
       count(*) FILTER(WHERE attendance='yes' AND party_interest='yes' AND party_group='bachelorette')::int party_bachelorette,
       count(*) FILTER(WHERE attendance='yes' AND party_interest='yes' AND party_group IS NULL)::int party_unassigned
-      FROM rsvps")).rows[0];
+      FROM rsvps`)).rows[0];
       const rows=(await client.query(query.sql,query.args)).rows;
       return response({stats,guests:rows.slice(0,20).map(adminGuest),hasMore:rows.length>20});
     },source);
