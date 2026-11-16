@@ -43,7 +43,7 @@ test('migration preserves old RSVP records without invented consent and restrict
  const db=new PGlite();
  try {
   const files=fs.readdirSync('migrations').filter(name=>name.endsWith('.sql')).sort();
-  await db.exec(files.filter(name=>!name.startsWith('017')).map(name=>fs.readFileSync('migrations/'+name,'utf8')).join('\n'));
+  await db.exec(files.filter(name=>!name.startsWith('017')&&!name.startsWith('018')).map(name=>fs.readFileSync('migrations/'+name,'utf8')).join('\n'));
   const sessionId='a'.repeat(64),guestId=randomUUID();
   await db.query("INSERT INTO guest_sessions(id,expires_at) VALUES($1,now()+interval '1 year')",[sessionId]);
   await db.query("INSERT INTO rsvps(id,session_id,guest_name,attendance,who,transfer,dress_code,alcohol_drinks,soft_drinks) VALUES($1,$2,'Прежняя Гостья','yes','Подруга','self',true,ARRAY['none'],ARRAY['none'])",[guestId,sessionId]);

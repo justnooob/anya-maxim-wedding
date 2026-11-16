@@ -1,3 +1,7 @@
+import {randomUUID} from 'node:crypto';
+import {PUBLIC_ORIGIN} from '../../content/wedding.mjs';
+import {parseAllowedUserIds} from '../telegram/access.mjs';
+import {wishlistReservationPayload} from '../telegram/outbox.mjs';
 import {transaction} from '../db/index.mjs';
 import {newSession,hash,sessionAge,equalSecret,trustedOrigin,limitedJson} from '../rsvp/session.mjs';
 import {allowRate} from '../rsvp/repository.mjs';
@@ -7,7 +11,7 @@ import {wishlistData,reserveItem,cancelOwn,adminMutation} from './repository.mjs
 import {WishlistError,itemInput,reservationName,uuid} from './validation.mjs';
 const reply=(data,status=200,headers={})=>Response.json(data,{status,headers:{'Cache-Control':'private, no-store','Vary':'Cookie, X-Telegram-Init-Data',...headers}});
 const failed=error=>reply({error:error instanceof WishlistError?error.message:'Вишлист временно недоступен. Попробуй ещё раз.'},error instanceof WishlistError?error.status:503);
-export async function wishlistRequest(request,{source}={}){
+export async function wishlistRequest(request,{source,env=process.env}={}){
  try{
   if(request.method==='GET'){
    let token=wishlistToken(request),fresh=false;
@@ -26,7 +30,24 @@ export async function wishlistRequest(request,{source}={}){
   const data=await transaction(async client=>{
    const session=(await client.query('SELECT id FROM wishlist_sessions WHERE id=$1 AND expires_at>now()',[hash(token)])).rows[0];if(!session)throw new WishlistError('Сессия устарела. Обнови страницу.',403);
    if(!await allowRate(client,'wishlist-write:'+session.id,80))throw new WishlistError('Слишком много попыток. Попробуй позже.',429);
-   if(name!==null)await reserveItem(client,input.id,session.id,name);else await cancelOwn(client,input.id,session.id);
+   if(name!==null){
+    const created=await reserveItem(client,input.id,session.id,name);
+    if(created){
+      // Store complete Telegram payloads, so even an older bot worker can deliver them.
+      // Never include gift title or reserver name in this notification.
+      const recipients=parseAllowedUserIds(env.TELEGRAM_ALLOWED_USER_IDS||'');
+      if(recipients.size){
+       let payload;
+       try{payload=wishlistReservationPayload(env.PUBLIC_SITE_URL||process.env.PUBLIC_SITE_URL||PUBLIC_ORIGIN);}
+       catch{payload={text:'Забронирован новый подарок'};} // A missing URL must not block a gift booking.
+       for(const recipient of recipients){
+        await client.query('INSERT INTO telegram_outbox(id,recipient,payload) VALUES($1,$2,$3)',[
+          randomUUID(),recipient,JSON.stringify(payload)
+        ]);
+       }
+      }
+    }
+   }else await cancelOwn(client,input.id,session.id);
    return {...await wishlistData(client,session.id),csrf:wishlistCsrf(token)};
   },source);return reply(data);
  }catch(error){return failed(error);}

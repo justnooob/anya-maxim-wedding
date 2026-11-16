@@ -7,7 +7,9 @@ export function adminGuest(row,includeEdit=false){
  const going=row.attendance==='yes';
  return {id:row.id,...rsvpDetail(row),name:row.guest_name,who:going?row.who||'':'',
   hotAppetizer:going?row.hot_appetizer_choice:null,mainCourse:going?row.main_course_choice:null,transfer:going?row.transfer:null,returnTransfer:going?row.return_transfer:null,music:going&&filled(row.music_request)?row.music_request:'',
-  diet:going&&filled(row.food)?row.food:'',createdAt:row.created_at,updatedAt:row.updated_at?new Date(row.updated_at).toISOString():'',
+  diet:going&&filled(row.food)?row.food:'',partyInterest:going?(row.party_interest??null):null,
+  partyGroup:going&&row.party_interest==='yes'?(row.party_group??null):null,
+  createdAt:row.created_at,updatedAt:row.updated_at?new Date(row.updated_at).toISOString():'',
   ...(includeEdit?{edit:editableRsvp(row)}:{})};
 }
 export function adminAnalytics(rows){
@@ -40,13 +42,23 @@ export function guestQuery(params){
  const transfer=params.get('transfer')||'any',music=params.get('music')||'any',diet=params.get('diet')||'any';
  const alcohol=params.get('alcohol')||'any',soft=params.get('soft')||'any';
  const hotAppetizer=params.get('hotAppetizer')||'any',mainCourse=params.get('mainCourse')||'any';
+ const party=params.get('party')||'any';
  const offset=Number(params.get('offset')||0),search=(params.get('search')||'').trim();
- if(![[hotAppetizer,'hotAppetizer'],[mainCourse,'mainCourse']].every(([value,kind])=>value==='any'||banquetMenu[kind].options.some(o=>o.id===value))||!Object.hasOwn(filters,filter)||!Object.hasOwn(orders,sort)||!['any','self','kupchino','pavlovsk'].includes(transfer)||![music,diet].every(v=>['any','yes','no'].includes(v))||
+ if(![[hotAppetizer,'hotAppetizer'],[mainCourse,'mainCourse']].every(([value,kind])=>value==='any'||banquetMenu[kind].options.some(o=>o.id===value))||!Object.hasOwn(filters,filter)||!Object.hasOwn(orders,sort)||!['any','self','kupchino','pavlovsk'].includes(transfer)||!['any','yes','no','unanswered','bachelor','bachelorette','unassigned'].includes(party)||![music,diet].every(v=>['any','yes','no'].includes(v))||
   ![alcohol,soft].every((v,i)=>v==='any'||drinkChoices[i?'soft':'alcohol'].options.some(o=>o.id===v))||search.length>80||!Number.isSafeInteger(offset)||offset<0||offset>10000)throw new Error('Invalid filters');
  const args=[];const clauses=[filters[filter]];const bind=value=>{args.push(value);return '$'+args.length;};
  for(const [value,column] of [[hotAppetizer,'hot_appetizer_choice'],[mainCourse,'main_course_choice']])if(value!=='any')clauses.push(column+'='+bind(value));
  if(search)clauses.push('strpos(lower(guest_name),lower('+bind(search)+'))>0');
  if(transfer!=='any')clauses.push('transfer='+bind(transfer));
+ const partyClauses={
+  yes:"(attendance='yes' AND party_interest='yes')",
+  no:"(attendance='yes' AND party_interest='no')",
+  unanswered:"(attendance='yes' AND party_interest IS NULL)",
+  bachelor:"(attendance='yes' AND party_interest='yes' AND party_group='bachelor')",
+  bachelorette:"(attendance='yes' AND party_interest='yes' AND party_group='bachelorette')",
+  unassigned:"(attendance='yes' AND party_interest='yes' AND party_group IS NULL)"
+ };
+ if(party!=='any')clauses.push(partyClauses[party]);
  for(const [value,column] of [[music,'music_request'],[diet,'food']])if(value!=='any'){
   const exists="(attendance='yes' AND length(trim(coalesce("+column+",'')))>0)";
   clauses.push(value==='yes'?exists:'NOT '+exists);

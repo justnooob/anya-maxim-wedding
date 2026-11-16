@@ -9,7 +9,8 @@ const require=createRequire(import.meta.url);
 // Effects are intentionally disabled: this fixture never calls a real database or Telegram.
 export function renderRsvp({sent=true,attendance='yes',name='Сергей Иванов',error='',saved}={}){
  let stateIndex=0;
- const states={0:attendance,1:name,11:sent,14:error,17:saved??(sent?[{guestName:name,attendance}]:[])};
+ // Keep indexes aligned with RSVP.tsx useState declarations (party interest and menu fields added).
+ const states={0:attendance,1:name,12:sent,15:error,18:saved??(sent?[{guestName:name,attendance}]:[])};
  const hooks={...React,useState:initial=>{const index=stateIndex++;return [Object.hasOwn(states,index)?states[index]:initial,()=>{}];},useEffect:()=>{},useCallback:fn=>fn,useRef:()=>({current:null})};
  const cache=new Map();
  function load(filename){
