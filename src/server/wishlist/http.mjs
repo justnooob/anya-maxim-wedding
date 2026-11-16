@@ -1,4 +1,5 @@
 import {randomUUID} from 'node:crypto';
+import {PUBLIC_ORIGIN} from '../../content/wedding.mjs';
 import {parseAllowedUserIds} from '../telegram/access.mjs';
 import {wishlistReservationPayload} from '../telegram/outbox.mjs';
 import {transaction} from '../db/index.mjs';
@@ -37,7 +38,7 @@ export async function wishlistRequest(request,{source,env=process.env}={}){
       const recipients=parseAllowedUserIds(env.TELEGRAM_ALLOWED_USER_IDS||'');
       if(recipients.size){
        let payload;
-       try{payload=wishlistReservationPayload(env.PUBLIC_SITE_URL||process.env.PUBLIC_SITE_URL);}
+       try{payload=wishlistReservationPayload(env.PUBLIC_SITE_URL||process.env.PUBLIC_SITE_URL||PUBLIC_ORIGIN);}
        catch{payload={text:'Забронирован новый подарок'};} // A missing URL must not block a gift booking.
        for(const recipient of recipients){
         await client.query('INSERT INTO telegram_outbox(id,recipient,payload) VALUES($1,$2,$3)',[
