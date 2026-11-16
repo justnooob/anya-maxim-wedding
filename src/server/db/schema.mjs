@@ -7,7 +7,7 @@ export const sessions = pgTable('guest_sessions', {
 }, table=>[check('session_id_shape',sql`${table.id} ~ '^[a-f0-9]{64}$'`),index('guest_sessions_expiry_idx').on(table.expiresAt)]);
 export const rsvps = pgTable('rsvps', {
   id:uuid('id').primaryKey(), sessionId:text('session_id').notNull().references(()=>sessions.id,{onDelete:'cascade'}),
-  submissionKey:uuid('submission_key').notNull().defaultRandom(),guestName:text('guest_name').notNull(), attendance:text('attendance').notNull(), who:text('who').notNull().default(''),partyInterest:text('party_interest'),
+  submissionKey:uuid('submission_key').notNull().defaultRandom(),guestName:text('guest_name').notNull(), attendance:text('attendance').notNull(), who:text('who').notNull().default(''),partyInterest:text('party_interest'),partyGroup:text('party_group'),
   congratulationChoice:text('congratulation_choice'),congratulationCompanion:text('congratulation_companion'),
   returnTransfer:text('return_transfer'),
   venueRulesAccepted:boolean('venue_rules_accepted'),venueRulesAcceptedAt:time('venue_rules_accepted_at'),venueRulesVersion:text('venue_rules_version'),
@@ -18,6 +18,8 @@ export const rsvps = pgTable('rsvps', {
   // Migration 006 uses NOT VALID so historical answers are retained unchanged.
   check('rsvp_party_interest_values',sql`${table.partyInterest} IS NULL OR ${table.partyInterest} IN ('yes','no')`),
   check('rsvp_no_party_interest_when_declined',sql`${table.attendance}='yes' OR ${table.partyInterest} IS NULL`),
+  check('rsvp_party_group_values',sql`${table.partyGroup} IS NULL OR ${table.partyGroup} IN ('bachelor','bachelorette')`),
+  check('rsvp_party_group_requires_interest',sql`${table.partyGroup} IS NULL OR (${table.attendance}='yes' AND ${table.partyInterest} IS NOT DISTINCT FROM 'yes')`),
   check('rsvp_return_transfer_values',sql`${table.returnTransfer} IS NULL OR ${table.returnTransfer} IN ('needed','not_needed')`),
   check('rsvp_no_return_transfer',sql`${table.attendance}='yes' OR ${table.returnTransfer} IS NULL`),
   check('rsvp_text_limits_v2',sql`char_length(${table.guestName}) BETWEEN 1 AND 80 AND char_length(${table.who})<=120 AND char_length(${table.food})<=300 AND (${table.musicRequest} IS NULL OR char_length(${table.musicRequest})<=300) AND char_length(${table.alcoholOther})<=80 AND char_length(${table.softOther})<=80`),
