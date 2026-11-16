@@ -1,5 +1,6 @@
 import {randomUUID} from 'node:crypto';
 import {parseAllowedUserIds} from '../telegram/access.mjs';
+import {wishlistReservationPayload} from '../telegram/outbox.mjs';
 import {transaction} from '../db/index.mjs';
 import {newSession,hash,sessionAge,equalSecret,trustedOrigin,limitedJson} from '../rsvp/session.mjs';
 import {allowRate} from '../rsvp/repository.mjs';
@@ -31,12 +32,18 @@ export async function wishlistRequest(request,{source,env=process.env}={}){
    if(name!==null){
     const created=await reserveItem(client,input.id,session.id,name);
     if(created){
-      // Persist notifications in the same transaction; the existing worker retries delivery.
-      // Only newly created reservations notify organizers, never repeated requests.
-      for(const recipient of parseAllowedUserIds(env.TELEGRAM_ALLOWED_USER_IDS||'')){
+      // Store complete Telegram payloads, so even an older bot worker can deliver them.
+      // Never include gift title or reserver name in this notification.
+      const recipients=parseAllowedUserIds(env.TELEGRAM_ALLOWED_USER_IDS||'');
+      if(recipients.size){
+       let payload;
+       try{payload=wishlistReservationPayload(env.PUBLIC_SITE_URL||process.env.PUBLIC_SITE_URL);}
+       catch{payload={text:'Забронирован новый подарок'};} // A missing URL must not block a gift booking.
+       for(const recipient of recipients){
         await client.query('INSERT INTO telegram_outbox(id,recipient,payload) VALUES($1,$2,$3)',[
-          randomUUID(),recipient,JSON.stringify({wishlistReservation:true})
+          randomUUID(),recipient,JSON.stringify(payload)
         ]);
+       }
       }
     }
    }else await cancelOwn(client,input.id,session.id);
