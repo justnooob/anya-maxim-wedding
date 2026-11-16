@@ -24,9 +24,7 @@ export async function drainOutbox({source,api,allowedIds,signal,siteUrl}={}){
       if(!job)return false;
       if(!allowed.has(job.recipient)){await client.query('DELETE FROM telegram_outbox WHERE id=$1',[job.id]);return true;}
       let payload=job.payload;
-      if(payload.wishlistReservation){
-        payload=wishlistReservationPayload(siteUrl);
-      }else if(payload.notification){
+      if(payload.notification){
         const row=(await client.query('SELECT * FROM rsvps WHERE id=$1',[job.rsvp_id])).rows[0];
         if(!row){await client.query('DELETE FROM telegram_outbox WHERE id=$1',[job.id]);return true;}
         payload=notificationPayload(row,siteUrl);
