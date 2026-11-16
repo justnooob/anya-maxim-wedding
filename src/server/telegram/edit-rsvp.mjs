@@ -108,6 +108,8 @@ export function prepareAdminRsvpEdit(row,changes,{confirmAttendance=false}={}){
    key==='congratulationCompanion'||key==='hotAppetizer'||key==='mainCourse'||key==='returnTransfer'
     ?(after[key]||null):after[key];
  }
+ // Manual party assignment cannot survive an RSVP decline or a "no" interest answer.
+ if((after.attendance!=='yes'||after.partyInterest!=='yes')&&row.party_group)updates.party_group=null;
  // A declined RSVP cannot retain an affirmed venue-rules consent.
  if(after.attendance==='no'&&before.attendance==='yes'){
   updates.venue_rules_accepted=false;
