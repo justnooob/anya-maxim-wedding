@@ -18,9 +18,13 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci --no-audit --no-fund
-      - name: Run unit and integration tests
+      - name: Test notification and party planning changes
+        run: node --test tests/party-groups.test.mjs tests/party-interest.test.mjs tests/admin-analytics.test.mjs tests/telegram-edit-rsvp.test.mjs tests/wishlist.test.mjs
+      - name: Run all existing tests
         run: npm test
       - name: Validate TypeScript
+        if: always()
         run: npm run typecheck
       - name: Build production site
+        if: always()
         run: npm run build
