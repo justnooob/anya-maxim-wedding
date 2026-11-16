@@ -77,7 +77,7 @@ test('Seed marker rolls back with failed import and allows retry',async()=>{cons
  await f.db.query("INSERT INTO wishlist_categories(id,title) VALUES('experiences','Впечатления')");assert.equal((await seedInitialWishlist(f.source)).total,40);
 }finally{await f.close();}});
 test('Simultaneous initial seed attempts claim a single ledger entry',async()=>{const f=await fixture();try{const results=await Promise.all([seedInitialWishlist(f.source),seedInitialWishlist(f.source)]);assert.equal(results.filter(r=>r.applied).length,1);assert.equal((await f.db.query('SELECT count(*)::int n FROM wishlist_items')).rows[0].n,40);}finally{await f.close();}});
-const env={TELEGRAM_BOT_TOKEN:'synthetic-wishlist-key',TELEGRAM_ALLOWED_USER_IDS:'123,456'};
+const env={TELEGRAM_BOT_TOKEN:'synthetic-wishlist-key',TELEGRAM_ALLOWED_USER_IDS:'123,456',PUBLIC_SITE_URL:'https://anyaxmaxim.ru'};
 function signed(id=123,date=Math.floor(Date.now()/1000)){const p=new URLSearchParams({auth_date:String(date),user:JSON.stringify({id})});const key=createHmac('sha256','WebAppData').update(env.TELEGRAM_BOT_TOKEN).digest();p.set('hash',createHmac('sha256',key).update([...p.entries()].sort().map(([k,v])=>k+'='+v).join('\n')).digest('hex'));return p.toString();}
 const gift=(extra={})=>({title:'Подарок',comment:'Цвет не принципиален',category:'home',price:8000,image:'',priority:false,isVisible:true,reservationMode:'single',links:[{label:'Ozon',url:'https://example.com/ozon'},{label:'Другой магазин',url:'https://example.com/shop'}],...extra});
 async function fixture(){const db=new PGlite();await db.exec(migrations.map(n=>fs.readFileSync('migrations/'+n,'utf8')).join('\n'));let tail=Promise.resolve();const source={async connect(){const previous=tail;let release;tail=new Promise(r=>release=r);await previous;return{query:async(s,a)=>{const result=await db.query(s,a);return {...result,rowCount:result.affectedRows};},release};}};return{db,source,close:()=>db.close()};}
@@ -144,7 +144,12 @@ test('gift booking notification is generic, queued once per new reservation and 
   assert.equal(result.response.status,200);
   const queued=(await f.db.query('SELECT recipient,payload FROM telegram_outbox ORDER BY recipient')).rows;
   assert.deepEqual(queued.map(r=>r.recipient),['123','456']);
-  for(const job of queued)assert.deepEqual(job.payload,{wishlistReservation:true});
+  for(const job of queued){
+   assert.equal(job.payload.text,'Забронирован новый подарок');
+   assert.equal(job.payload.reply_markup.inline_keyboard[0][0].web_app.url,'https://anyaxmaxim.ru/telegram?view=wishlist');
+   assert.ok(!JSON.stringify(job.payload).includes('Секретный подарок'));
+   assert.ok(!JSON.stringify(job.payload).includes('Имя бронирующего'));
+  }
   await write(f.source,owner,{action:'reserve',id,name:'Имя бронирующего'},{},env);
   assert.equal((await f.db.query('SELECT count(*)::int n FROM telegram_outbox')).rows[0].n,2);
   const sent=[];
