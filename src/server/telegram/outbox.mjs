@@ -9,6 +9,12 @@ export function notificationPayload(row,siteUrl=process.env.PUBLIC_SITE_URL){
   if(site.protocol!=='https:'||site.username||site.password)throw new Error('Mini App requires HTTPS site URL');
   return {text:notificationText(row),reply_markup:{inline_keyboard:[[{text:'Открыть',web_app:{url:new URL('/telegram',site).href}}]]}};
 }
+// Gift notifications never contain gift title, price, reservation name or IDs.
+export function wishlistReservationPayload(siteUrl=process.env.PUBLIC_SITE_URL){
+  const site=new URL(siteUrl);
+  if(site.protocol!=='https:'||site.username||site.password)throw new Error('Mini App requires HTTPS site URL');
+  return {text:'Забронирован новый подарок',reply_markup:{inline_keyboard:[[{text:'Открыть',web_app:{url:new URL('/telegram',site).href}}]]}};
+}
 export async function drainOutbox({source,api,allowedIds,signal,siteUrl}={}){
   const allowed=allowedIds||parseAllowedUserIds(process.env.TELEGRAM_ALLOWED_USER_IDS||'');
   const request=api||createTelegramApi(process.env.TELEGRAM_BOT_TOKEN);
@@ -18,7 +24,9 @@ export async function drainOutbox({source,api,allowedIds,signal,siteUrl}={}){
       if(!job)return false;
       if(!allowed.has(job.recipient)){await client.query('DELETE FROM telegram_outbox WHERE id=$1',[job.id]);return true;}
       let payload=job.payload;
-      if(payload.notification){
+      if(payload.wishlistReservation){
+        payload=wishlistReservationPayload(siteUrl);
+      }else if(payload.notification){
         const row=(await client.query('SELECT * FROM rsvps WHERE id=$1',[job.rsvp_id])).rows[0];
         if(!row){await client.query('DELETE FROM telegram_outbox WHERE id=$1',[job.id]);return true;}
         payload=notificationPayload(row,siteUrl);
