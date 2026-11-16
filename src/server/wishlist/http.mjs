@@ -1,3 +1,5 @@
+import {randomUUID} from 'node:crypto';
+import {parseAllowedUserIds} from '../telegram/access.mjs';
 import {transaction} from '../db/index.mjs';
 import {newSession,hash,sessionAge,equalSecret,trustedOrigin,limitedJson} from '../rsvp/session.mjs';
 import {allowRate} from '../rsvp/repository.mjs';
@@ -7,7 +9,7 @@ import {wishlistData,reserveItem,cancelOwn,adminMutation} from './repository.mjs
 import {WishlistError,itemInput,reservationName,uuid} from './validation.mjs';
 const reply=(data,status=200,headers={})=>Response.json(data,{status,headers:{'Cache-Control':'private, no-store','Vary':'Cookie, X-Telegram-Init-Data',...headers}});
 const failed=error=>reply({error:error instanceof WishlistError?error.message:'Вишлист временно недоступен. Попробуй ещё раз.'},error instanceof WishlistError?error.status:503);
-export async function wishlistRequest(request,{source}={}){
+export async function wishlistRequest(request,{source,env=process.env}={}){
  try{
   if(request.method==='GET'){
    let token=wishlistToken(request),fresh=false;
@@ -26,7 +28,18 @@ export async function wishlistRequest(request,{source}={}){
   const data=await transaction(async client=>{
    const session=(await client.query('SELECT id FROM wishlist_sessions WHERE id=$1 AND expires_at>now()',[hash(token)])).rows[0];if(!session)throw new WishlistError('Сессия устарела. Обнови страницу.',403);
    if(!await allowRate(client,'wishlist-write:'+session.id,80))throw new WishlistError('Слишком много попыток. Попробуй позже.',429);
-   if(name!==null)await reserveItem(client,input.id,session.id,name);else await cancelOwn(client,input.id,session.id);
+   if(name!==null){
+    const created=await reserveItem(client,input.id,session.id,name);
+    if(created){
+      // Persist notifications in the same transaction; the existing worker retries delivery.
+      // Only newly created reservations notify organizers, never repeated requests.
+      for(const recipient of parseAllowedUserIds(env.TELEGRAM_ALLOWED_USER_IDS||'')){
+        await client.query('INSERT INTO telegram_outbox(id,recipient,payload) VALUES($1,$2,$3)',[
+          randomUUID(),recipient,JSON.stringify({wishlistReservation:true})
+        ]);
+      }
+    }
+   }else await cancelOwn(client,input.id,session.id);
    return {...await wishlistData(client,session.id),csrf:wishlistCsrf(token)};
   },source);return reply(data);
  }catch(error){return failed(error);}
