@@ -155,7 +155,7 @@ test('gift booking notification is generic, queued once per new reservation and 
   assert.equal(sent.length,2);
   for(const payload of sent){
    assert.equal(payload.text,'Забронирован новый подарок');
-   assert.equal(payload.reply_markup.inline_keyboard[0][0].web_app.url,'https://anyaxmaxim.ru/telegram');
+   assert.equal(payload.reply_markup.inline_keyboard[0][0].web_app.url,'https://anyaxmaxim.ru/telegram?view=wishlist');
    assert.equal(payload.protect_content,true);
    assert.ok(!JSON.stringify(payload).includes('Секретный подарок'));
    assert.ok(!JSON.stringify(payload).includes('Имя бронирующего'));
